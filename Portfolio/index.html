@@ -1,55 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/fonts/style.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <title>Administración de Empleados</title>
-</head>
-<body>
-    <h1 class="title">Proyecto de Administración de Empleados</h1>
 
-    <div>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/fonts/style.css" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Administración de Empleados</title>
+    </head>
 
-        <h2 class="subtitle">Integrantes</h2>
-        <div class="menbers">
-            <ul>
-                <li>Jorge Daniel Ortega Alburqueque</li>
-                <li>Dalton Leonel Maza Jiménez</li>
-                <li>Jhair Steeven Agila Cuenca</li>
-            </ul>
+    <body>
+        <div id="view">
+            <header>
+                <h1 class="title">Proyecto</h1>
+                <h1 class="title">Administración de Empleados</h1>
+            </header>
+
+            <div id="separator"></div>
+
+            <div id="content">
+                
+                <h2 class="subtitle">Integrantes</h2>
+                <div class="menbers">
+                    <ul>
+                        <li>Jorge Daniel Ortega Alburqueque</li>
+                        <li>Dalton Leonel Maza Jiménez</li>
+                        <li>Jhair Steeven Agila Cuenca</li>
+                    </ul>
+                </div>
+
+                <h2 class="subtitle">Requerimientos</h2>
+                
+                <ul class="admin">
+                    <h3 class="admin__title">Administración de Empleados</h3>
+                    <li>Registrar empleados en la base de datos</li>
+                    <li>Revisar la información de cualquier empleado registrado, dando la posibilidad de elegir un filtro por departamento o rol</li>
+                    <li>Modificar la información personal del empleado</li>
+                    <li>Eliminar el registro completo de un empleado</li>
+                </ul>
+
+                <ul class="admin">
+                    <h3 class="admin__title">Administración de Departamentos</h3>
+                    <li>Registrar departamentos</li>
+                    <li>Visualizar los departamentos existentes, con la posibilidad de ver un listado de los empleados que pertenecen ha dicho departamento</li>
+                    <li>Modificar Departamentos</li>
+                    <li>Eliminar departamentos</li>
+                </ul>
+
+                <ul class="admin">
+                    <h3 class="admin__title">Administración de Roles</h3>
+                    <li>El gerente podrá crear difentes roles dependiendo del personal que necesite</li>
+                    <li>El gerente podrá modificar los roles ya creados y sus atributos</li>
+                    <li>El gerente podrá ver los diferentes roles existentes y sus atributos</li>
+                    <li>El gerente podrá eliminar por completo los roles deseados</li>
+                </ul>
+            </div>
+
+            <footer>
+                <a href="https://github.com/JorgeDanielOrtega/Administracion-de-Empleados" target="_blank"><span class="icon-github"></span></a>
+            </footer>
+
         </div>
-
-        <h2 class="subtitle">Requerimientos</h2>
-        
-        <ul class="admin">
-            <li class="admin__title">Administración de Empleados</li>
-            <li>Registrar empleados en la base de datos</li>
-            <li>Revisar la información de cualquier empleado registrado, dando la posibilidad de elegir un filtro por departamento o rol</li>
-            <li>Modificar la información personal del empleado</li>
-            <li>Eliminar el registro completo de un empleado</li>
-        </ul>
-
-        <ul class="admin">
-            <li class="admin__title">Administración de Departamentos</li>
-            <li>Registrar departamentos</li>
-            <li>Visualizar los departamentos existentes, con la posibilidad de ver un listado de los empleados que pertenecen ha dicho departamento</li>
-            <li>Modificar Departamentos</li>
-            <li>Eliminar departamentos</li>
-        </ul>
-
-        <ul class="admin">
-            <li class="admin__title">Administración de Roles</li>
-            <li>El gerente podrá crear difentes roles dependiendo del personal que necesite</li>
-            <li>El gerente podrá modificar los roles ya creados y sus atributos</li>
-            <li>El gerente podrá ver los diferentes roles existentes y sus atributos</li>
-            <li>El gerente podrá eliminar por completo los roles deseados</li>
-        </ul>
-    </div>
-    <footer>
-        <a href="https://github.com/JorgeDanielOrtega/Administracion-de-Empleados" target="_blank"><span class="icon-github"></span></a>
-    </footer>
-</body>
+    </body>
 </html>
