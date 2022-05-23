@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+
+.menbers ul {
+    list-style: none;
+}
+
+.admin__title{
+    list-style: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.icon-github {
+    font-size: 35px;
+    color: black;
+}
