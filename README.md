@@ -1,13 +1,11 @@
 # Administración de Empleados
-El software tiene como objetivo facilitar la administracion de empleados de una empresa
 
-Conexion a base de datos
+## Integrantes
+- Jorge Daniel Ortega Alburqueque
+- Dalton Leonel Maza Jiménez
+- Jhair Steeven Agila Cuenca
+## Requisitos
 
-
-Requisitos
-
-- El software debe proveer una cuenta admin, el cual le pertenecera al gerente de la empresa para administrar a sus empleados
-- El software cumple con las siguiente caracteristicas:
   -    **Administración de Empleados**
           -    Registrar empleados en la base de datos
           -    Revisar la informacion de cualquier empleado registrado, dando la posibilidad de elegir un filtro por departamento o rol
@@ -24,11 +22,6 @@ Requisitos
           -    El gerente podrá ver los diferentes roles existentes y sus atributos
           -    El gerente podrá eliminar por completo los roles deseados
 
-  - Los empleados contarán con una visualización de su perfil
 
-   - **Decimos**
-        -    Los empleados podrán ver el decimo tercero, cuarto y sus fondos ...completar
-        -    El gerente podra ver los decimos de sus empleados
-        -    Los decimos podran ser modificados por el gerente(dependiendo del salario o tambien podria ser el) ? (Opcional)
 
 
