@@ -117,12 +117,13 @@ a {
 }
 
 .containerImg{
-    width: 100vw;
+    width: auto;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 50px auto;
     gap: 5px;
+    margin-left: 130px;
 }
 .containerImg-upper{
     grid-column-start: 1;
@@ -152,7 +153,7 @@ a {
 .img{
     width: 200px;
     height: 200px;
-    overflow: hidden;
+    overflow:    hidden;
     border-radius: 60%;
 }
 .img img{
