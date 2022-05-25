@@ -37,7 +37,7 @@ header{
 
 #content{
     width: 1200px;
-	height: 1100px;
+	height: auto;
     background: rgba(242, 242, 242, 0.925);
     margin: 0px auto;
     padding: 40px;
@@ -83,4 +83,54 @@ a {
 .icon-github {
     font-size: 35px;
     color: black;
+}
+
+.containerImg{
+    width: 100vw;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px auto;
+    gap: 5px;
+}
+.containerImg-upper{
+    grid-column-start: 1;
+    grid-column-end: span 3;
+    grid-row-start: 1;
+    grid-row-end: span 1;
+    text-align: center;
+}
+.containerImg-left{
+    grid-column-start: 1;
+    grid-column-end: span 1;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+}
+.containerImg-middle{
+    grid-column-start: 2;
+    grid-column-end: span 1;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+}
+.containerImg-right{
+    grid-column-start: 3;
+    grid-column-end: span 1;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+}
+.img{
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 60%;
+}
+.img img{
+    width: 100%;
+    height: auto;
+}
+.authorTitle{
+    text-align: left;
+    font-size: 20px;
+    color: rgb(154, 48, 48);
+    font-weight: bold;
 }
