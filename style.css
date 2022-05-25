@@ -14,6 +14,36 @@ body{
 	height: 1100px;
 	margin: 0px auto;
 }
+nav{
+    position: sticky;
+    top: 0px;
+    padding-left: 3.125rem;
+    width: 100%;
+    text-align: center;
+    background-color: #1874c4;
+    overflow: hidden;
+}
+
+.list__element{
+    margin: 5px 0px ;
+    display: inline-block;
+}
+
+.list__separator{
+    color: white;
+}
+
+.list__element a{
+    padding: 15px 8px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.list__element a:hover{
+    background-color: #1463a9;
+}
+
 
 header{
     height: 130px;
@@ -24,6 +54,7 @@ header{
 }
 
 .title{
+    margin-top: 0px;
     text-align: center;
     color: white;
     font-size: 40px;
