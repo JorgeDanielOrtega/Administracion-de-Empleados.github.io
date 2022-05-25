@@ -20,7 +20,7 @@ nav{
     padding-left: 3.125rem;
     width: 100%;
     text-align: center;
-    background-color: #1874c4;
+    background-color: #1976D2;
     overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ nav{
 }
 
 .list__element a:hover{
-    background-color: #1463a9;
+    background-color: #1565C0;
 }
 
 
