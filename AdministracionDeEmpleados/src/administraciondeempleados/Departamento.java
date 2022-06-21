@@ -1,5 +1,6 @@
 package administraciondeempleados;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Departamento {
@@ -11,6 +12,7 @@ public class Departamento {
     private List<Trabajador> trabajadorList;
 
     public Departamento(String nombre, int numero, int empleadosMaximos) {
+        trabajadorList = new LinkedList();
         this.nombre = nombre;
         this.numero = numero;
         this.empleadosMaximos = empleadosMaximos;
@@ -53,6 +55,11 @@ public class Departamento {
 
     public List<Trabajador> getTrabajadorList() {
         return trabajadorList;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
     
     

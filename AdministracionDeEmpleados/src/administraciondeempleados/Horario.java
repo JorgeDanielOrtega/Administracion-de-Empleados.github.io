@@ -8,4 +8,19 @@ public class Horario {
     private Date diasLaborables;
     private Float horasLaborablesSemanales;
 
+    public Horario(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public String toString() {
+        return tipo;
+    }
+    
+    
+
 }

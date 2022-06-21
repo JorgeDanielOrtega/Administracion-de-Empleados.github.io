@@ -4,11 +4,11 @@
  */
 package administraciondeempleados.gui;
 
-/**
- *
- * @author Usuario iTC
- */
+import administraciondeempleados.Empleado;
+
 public class Perfil extends javax.swing.JPanel {
+
+    private Empleado empleado;
 
     /**
      * Creates new form Perfil
@@ -16,6 +16,30 @@ public class Perfil extends javax.swing.JPanel {
     public Perfil() {
         initComponents();
 
+    }
+
+    public Perfil(Empleado empleado) {
+        this();
+        this.empleado = empleado;
+        llenarCampos();
+    }
+
+    private void llenarCampos() {
+        lbl_identificacion.setText(empleado.getCedula());
+        lbl_nombre.setText(empleado.getNombre());
+        lbl_apellido.setText(empleado.getApellido());
+        lbl_sexo.setText(String.valueOf(empleado.getSexo()));
+        lbl_ciudad.setText(empleado.getCiudad());
+        lbl_direccion.setText(empleado.getDireccion());
+        lbl_telefono.setText(empleado.getTelefono());
+        lbl_correoEmpresarial.setText(empleado.getCorreoEmpresarial());
+        lbl_correoPersonal.setText(empleado.getCorreoPersonal());
+        lbl_usuario.setText(empleado.getUsuario());
+        psw_contraseña.setText(empleado.getPassword());
+        lbl_rol.setText(empleado.getRol().getNombre());
+        lbl_puesto.setText(empleado.getPuesto().getNombre());
+        lbl_departamento.setText(empleado.getDepartamento().getNombre());
+        lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
     }
 
     /**
@@ -46,21 +70,21 @@ public class Perfil extends javax.swing.JPanel {
         btn_verAsistencias = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        lbl_nombre = new javax.swing.JLabel();
+        lbl_identificacion = new javax.swing.JLabel();
+        lbl_sexo = new javax.swing.JLabel();
+        lbl_apellido = new javax.swing.JLabel();
+        lbl_ciudad = new javax.swing.JLabel();
+        lbl_direccion = new javax.swing.JLabel();
+        lbl_telefono = new javax.swing.JLabel();
+        lbl_correoEmpresarial = new javax.swing.JLabel();
+        lbl_correoPersonal = new javax.swing.JLabel();
+        lbl_usuario = new javax.swing.JLabel();
+        lbl_puesto = new javax.swing.JLabel();
+        lbl_rol = new javax.swing.JLabel();
+        lbl_contrato = new javax.swing.JLabel();
+        lbl_departamento = new javax.swing.JLabel();
+        psw_contraseña = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -127,39 +151,39 @@ public class Perfil extends javax.swing.JPanel {
         jTextField1.setBorder(null);
         jTextField1.setFocusable(false);
 
-        jLabel12.setText("jLabel12");
+        lbl_nombre.setText("jLabel12");
 
-        jLabel17.setText("jLabel12");
+        lbl_identificacion.setText("jLabel12");
 
-        jLabel18.setText("jLabel12");
+        lbl_sexo.setText("jLabel12");
 
-        jLabel19.setText("jLabel12");
+        lbl_apellido.setText("jLabel12");
 
-        jLabel20.setText("jLabel12");
+        lbl_ciudad.setText("jLabel12");
 
-        jLabel21.setText("jLabel12");
+        lbl_direccion.setText("jLabel12");
 
-        jLabel22.setText("jLabel12");
+        lbl_telefono.setText("jLabel12");
 
-        jLabel23.setText("jLabel12");
+        lbl_correoEmpresarial.setText("jLabel12");
 
-        jLabel24.setText("jLabel12");
+        lbl_correoPersonal.setText("jLabel12");
 
-        jLabel25.setText("jLabel12");
+        lbl_usuario.setText("jLabel12");
 
-        jLabel27.setText("jLabel12");
+        lbl_puesto.setText("jLabel12");
 
-        jLabel28.setText("jLabel12");
+        lbl_rol.setText("jLabel12");
 
-        jLabel29.setText("jLabel12");
+        lbl_contrato.setText("jLabel12");
 
-        jLabel30.setText("jLabel12");
+        lbl_departamento.setText("jLabel12");
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setForeground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBorder(null);
-        jPasswordField1.setFocusable(false);
+        psw_contraseña.setBackground(new java.awt.Color(255, 255, 255));
+        psw_contraseña.setForeground(new java.awt.Color(51, 51, 51));
+        psw_contraseña.setText("jPasswordField1");
+        psw_contraseña.setBorder(null);
+        psw_contraseña.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -188,20 +212,20 @@ public class Perfil extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))
+                            .addComponent(lbl_identificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_sexo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_apellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_correoEmpresarial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_correoPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_rol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_departamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(psw_contraseña))
                         .addGap(8, 8, 8)))
                 .addGap(44, 44, 44))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -212,7 +236,7 @@ public class Perfil extends javax.swing.JPanel {
                         .addGap(299, 299, 299))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                            .addComponent(lbl_contrato, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_verHorario)
                                 .addGap(18, 18, 18)
@@ -229,63 +253,63 @@ public class Perfil extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel17))
+                    .addComponent(lbl_identificacion))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel12))
+                    .addComponent(lbl_nombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel19))
+                    .addComponent(lbl_apellido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel18))
+                    .addComponent(lbl_sexo))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel20))
+                    .addComponent(lbl_ciudad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel21))
+                    .addComponent(lbl_direccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel22))
+                    .addComponent(lbl_telefono))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel23))
+                    .addComponent(lbl_correoEmpresarial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel24))
+                    .addComponent(lbl_correoPersonal))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel25))
+                    .addComponent(lbl_usuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(psw_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel28))
+                    .addComponent(lbl_rol))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel27))
+                    .addComponent(lbl_puesto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel30))
+                    .addComponent(lbl_departamento))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel29))
+                    .addComponent(lbl_contrato))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_verHorario)
@@ -301,34 +325,34 @@ public class Perfil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_apellido;
+    private javax.swing.JLabel lbl_ciudad;
+    private javax.swing.JLabel lbl_contrato;
+    private javax.swing.JLabel lbl_correoEmpresarial;
+    private javax.swing.JLabel lbl_correoPersonal;
+    private javax.swing.JLabel lbl_departamento;
+    private javax.swing.JLabel lbl_direccion;
+    private javax.swing.JLabel lbl_identificacion;
+    private javax.swing.JLabel lbl_nombre;
+    private javax.swing.JLabel lbl_puesto;
+    private javax.swing.JLabel lbl_rol;
+    private javax.swing.JLabel lbl_sexo;
+    private javax.swing.JLabel lbl_telefono;
+    private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JPasswordField psw_contraseña;
     // End of variables declaration//GEN-END:variables
 }

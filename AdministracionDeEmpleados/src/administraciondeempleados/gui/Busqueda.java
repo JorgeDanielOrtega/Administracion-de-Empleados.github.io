@@ -4,17 +4,39 @@
  */
 package administraciondeempleados.gui;
 
+import administraciondeempleados.Empresa;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Usuario iTC
  */
 public class Busqueda extends javax.swing.JPanel {
 
+    private Empresa empresa;
+    DefaultComboBoxModel modelComboDepartamento;
+    DefaultComboBoxModel modelComboRol;
+    DefaultComboBoxModel modelComboHorario;
+
     /**
      * Creates new form Busqueda
      */
     public Busqueda() {
         initComponents();
+        modelComboDepartamento = new DefaultComboBoxModel();
+        modelComboRol = new DefaultComboBoxModel();
+        modelComboHorario = new DefaultComboBoxModel();
+    }
+
+    public Busqueda(Empresa empresa) {
+        this();
+        this.empresa = empresa;
+        modelTableBusqueda.setEmpresa(empresa);
+        modelTableBusqueda.llenarEmpleadoList();
+        modelTableBusqueda.cargarModelo();
+        cargaModeloDepartamento();
+        cargarModeloRol();
+        cargarModeloHorario();
     }
 
     /**
@@ -27,14 +49,16 @@ public class Busqueda extends javax.swing.JPanel {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        modelTableBusqueda = new administraciondeempleados.gui.ModelTableBusqueda();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        tblBusqueda = new javax.swing.JTable();
+        cmb_departamento = new javax.swing.JComboBox<>();
+        txt_busqueda = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
+        cmb_horario = new javax.swing.JComboBox<>();
+        cmb_rol = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -51,81 +75,69 @@ public class Busqueda extends javax.swing.JPanel {
         setForeground(new java.awt.Color(0, 0, 0));
         setPreferredSize(new java.awt.Dimension(1035, 460));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setForeground(new java.awt.Color(51, 51, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                { new Integer(1), "ds", "ds", "dd", "d"},
-                { new Integer(1), "dsd", "ds", "ds", "dd"},
-                {null, "d", "d", "d", "d"}
-            },
-            new String [] {
-                "Id", "Nombres y Apellidos", "Departamento", "Rol", "Horario"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+        tblBusqueda.setAutoCreateRowSorter(true);
+        tblBusqueda.setBackground(new java.awt.Color(204, 204, 204));
+        tblBusqueda.setForeground(new java.awt.Color(51, 51, 51));
+        tblBusqueda.setModel(modelTableBusqueda);
+        tblBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblBusqueda.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        tblBusqueda.setFillsViewportHeight(true);
+        tblBusqueda.setFocusable(false);
+        tblBusqueda.setName(""); // NOI18N
+        tblBusqueda.setRowSelectionAllowed(false);
+        tblBusqueda.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblBusqueda.setShowGrid(false);
+        tblBusqueda.getTableHeader().setResizingAllowed(false);
+        tblBusqueda.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblBusqueda);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        cmb_departamento.setBackground(new java.awt.Color(204, 204, 204));
+        cmb_departamento.setForeground(new java.awt.Color(51, 51, 51));
+        cmb_departamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Departamento", "Item 2", "Item 3", "Item 4" }));
+        cmb_departamento.setBorder(null);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setFocusable(false);
-        jTable1.setName(""); // NOI18N
-        jTable1.setRowSelectionAllowed(false);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowGrid(false);
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Departamento", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(null);
-
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField1.setToolTipText("");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField1.setFocusable(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_busqueda.setBackground(new java.awt.Color(204, 204, 204));
+        txt_busqueda.setForeground(new java.awt.Color(51, 51, 51));
+        txt_busqueda.setToolTipText("");
+        txt_busqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_busqueda.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        txt_busqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_busquedaActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Buscar");
-        jButton1.setFocusable(false);
+        btn_buscar.setBackground(new java.awt.Color(204, 204, 204));
+        btn_buscar.setForeground(new java.awt.Color(51, 51, 51));
+        btn_buscar.setText("Buscar");
+        btn_buscar.setFocusable(false);
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox2.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horario", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setBorder(null);
+        cmb_horario.setBackground(new java.awt.Color(204, 204, 204));
+        cmb_horario.setForeground(new java.awt.Color(51, 51, 51));
+        cmb_horario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horario", "Item 2", "Item 3", "Item 4" }));
+        cmb_horario.setBorder(null);
 
-        jComboBox3.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox3.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rol", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setBorder(null);
+        cmb_rol.setBackground(new java.awt.Color(204, 204, 204));
+        cmb_rol.setForeground(new java.awt.Color(51, 51, 51));
+        cmb_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rol", "Item 2", "Item 3", "Item 4" }));
+        cmb_rol.setBorder(null);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Realice una busqueda por el nombre del empleado, departamento, rol u horario");
+
+        jButton1.setText("Limpiar busqueda");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,52 +148,109 @@ public class Busqueda extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, 190, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmb_departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmb_rol, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmb_horario, 0, 196, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_buscar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_departamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_horario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_buscar))
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void cargaModeloDepartamento() {
+        modelComboDepartamento.addElement(null);
+        modelComboDepartamento.addAll(empresa.getDepartamentoList());
+        cmb_departamento.setModel(modelComboDepartamento);
+    }
+
+    private void cargarModeloRol() {
+        modelComboRol.addElement(null);
+        modelComboRol.addAll(empresa.getRolList());
+        cmb_rol.setModel(modelComboRol);
+    }
+
+    private void cargarModeloHorario() {
+        modelComboHorario.addElement(null);
+        modelComboHorario.addAll(empresa.getHorarioList());
+        cmb_horario.setModel(modelComboHorario);
+    }
+
+
+    private void txt_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_busquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_busquedaActionPerformed
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        boolean camposNull = true;
+        if (cmb_departamento.getSelectedItem() != null) {
+            modelTableBusqueda.filtrarEmpleados(String.valueOf(cmb_departamento.getSelectedItem()), "Departamento");
+            camposNull = false;
+        }
+        if (cmb_horario.getSelectedItem() != null) {
+            modelTableBusqueda.filtrarEmpleados(String.valueOf(cmb_horario.getSelectedItem()), "Horario");
+            camposNull = false;
+        }
+        if (cmb_rol.getSelectedItem() != null) {
+            modelTableBusqueda.filtrarEmpleados(String.valueOf(cmb_rol.getSelectedItem()), "Rol");
+            camposNull = false;
+        }
+        if (!txt_busqueda.getText().isEmpty()) {
+
+        }
+        if (!camposNull) {
+            modelTableBusqueda.cargarEmpleadosFiltrados();
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    public ModelTableBusqueda getModelTableBusqueda() {
+        return modelTableBusqueda;
+    }
+
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        modelTableBusqueda.cargarModelo();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscar;
+    private javax.swing.JComboBox<String> cmb_departamento;
+    private javax.swing.JComboBox<String> cmb_horario;
+    private javax.swing.JComboBox<String> cmb_rol;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private administraciondeempleados.gui.ModelTableBusqueda modelTableBusqueda;
+    private javax.swing.JTable tblBusqueda;
+    private javax.swing.JTextField txt_busqueda;
     // End of variables declaration//GEN-END:variables
 }
