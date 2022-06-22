@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Empresa;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Usuario iTC
- */
 public class Busqueda extends javax.swing.JPanel {
 
     private Empresa empresa;
@@ -32,11 +25,7 @@ public class Busqueda extends javax.swing.JPanel {
         this();
         this.empresa = empresa;
         modelTableBusqueda.setEmpresa(empresa);
-        modelTableBusqueda.llenarEmpleadoList();
-        modelTableBusqueda.cargarModelo();
-        cargaModeloDepartamento();
-        cargarModeloRol();
-        cargarModeloHorario();
+        cargarComponentes();
     }
 
     /**
@@ -58,7 +47,7 @@ public class Busqueda extends javax.swing.JPanel {
         cmb_horario = new javax.swing.JComboBox<>();
         cmb_rol = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_limpiarBusqueda = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -82,7 +71,6 @@ public class Busqueda extends javax.swing.JPanel {
         tblBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblBusqueda.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         tblBusqueda.setFillsViewportHeight(true);
-        tblBusqueda.setFocusable(false);
         tblBusqueda.setName(""); // NOI18N
         tblBusqueda.setRowSelectionAllowed(false);
         tblBusqueda.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -101,11 +89,6 @@ public class Busqueda extends javax.swing.JPanel {
         txt_busqueda.setToolTipText("");
         txt_busqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txt_busqueda.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        txt_busqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_busquedaActionPerformed(evt);
-            }
-        });
 
         btn_buscar.setBackground(new java.awt.Color(204, 204, 204));
         btn_buscar.setForeground(new java.awt.Color(51, 51, 51));
@@ -132,10 +115,10 @@ public class Busqueda extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Realice una busqueda por el nombre del empleado, departamento, rol u horario");
 
-        jButton1.setText("Limpiar busqueda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_limpiarBusqueda.setText("Limpiar busqueda");
+        btn_limpiarBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_limpiarBusquedaActionPerformed(evt);
             }
         });
 
@@ -162,7 +145,7 @@ public class Busqueda extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btn_limpiarBusqueda)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,7 +163,7 @@ public class Busqueda extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btn_limpiarBusqueda)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -203,10 +186,18 @@ public class Busqueda extends javax.swing.JPanel {
         cmb_horario.setModel(modelComboHorario);
     }
 
+    private void cargarComponentes() {
+        modelTableBusqueda.llenarEmpleadoList();
+        modelTableBusqueda.cargarModelo();
+        cargaModeloDepartamento();
+        cargarModeloRol();
+        cargarModeloHorario();
+    }
 
-    private void txt_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_busquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_busquedaActionPerformed
+    private String mandarComponente() {
+        String value = txt_busqueda.getText();
+        return (value.matches("-?\\d+")) ? "Id" : "Fullname";
+    }
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         boolean camposNull = true;
@@ -223,29 +214,34 @@ public class Busqueda extends javax.swing.JPanel {
             camposNull = false;
         }
         if (!txt_busqueda.getText().isEmpty()) {
-
+            modelTableBusqueda.filtrarEmpleados(txt_busqueda.getText().toLowerCase(), mandarComponente());
+            camposNull = false;
         }
+
         if (!camposNull) {
             modelTableBusqueda.cargarEmpleadosFiltrados();
+        } else {
+            JOptionPane.showMessageDialog(null, "Los filtros estan vacios",
+                    "Campos vacios", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
 
-    public ModelTableBusqueda getModelTableBusqueda() {
-        return modelTableBusqueda;
-    }
 
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_limpiarBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarBusquedaActionPerformed
+        txt_busqueda.setText("");
+        cmb_departamento.setSelectedItem(null);
+        cmb_horario.setSelectedItem(null);
+        cmb_rol.setSelectedItem(null);
         modelTableBusqueda.cargarModelo();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_limpiarBusquedaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton btn_limpiarBusqueda;
     private javax.swing.JComboBox<String> cmb_departamento;
     private javax.swing.JComboBox<String> cmb_horario;
     private javax.swing.JComboBox<String> cmb_rol;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

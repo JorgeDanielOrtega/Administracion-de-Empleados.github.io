@@ -6,7 +6,6 @@ package administraciondeempleados.gui;
 
 import administraciondeempleados.Departamento;
 
-
 /**
  *
  * @author Usuario iTC
@@ -21,10 +20,14 @@ public class DepartamentoGUi extends javax.swing.JPanel {
     public DepartamentoGUi() {
         initComponents();
     }
-    
-    public DepartamentoGUi(Departamento departamento){
+
+    public DepartamentoGUi(Departamento departamento) {
         this();
         this.departamento = departamento;
+        cargarElementos();
+    }
+
+    private void cargarElementos() {
         modelTableDepartamento.setDepartamento(departamento);
         modelTableDepartamento.cargar();
         lbl_departamento.setText("Departamento de " + departamento.getNombre());

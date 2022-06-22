@@ -4,6 +4,7 @@ import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.Empresa;
 import administraciondeempleados.Trabajador;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,6 @@ public class ModelTableBusqueda extends DefaultTableModel {
 
     private Empresa empresa;
     private List<Trabajador> trabajadorList;
-    private List<Object> componentActiveList;
     List<Trabajador> trabajadoresFilteredList;
 
     public ModelTableBusqueda() {
@@ -24,20 +24,27 @@ public class ModelTableBusqueda extends DefaultTableModel {
         addColumn("Departamento");
         addColumn("Rol");
         addColumn("Horario");
-        
+
     }
-    
-    //limpiar en el btn limpiar busqueda el o en cualquier btn la lista de trabajadores filtrados
+
+    private void sortTrabajadoresList() {
+        Collections.sort(trabajadorList, (o1, o2) -> {
+            int id1 = Integer.valueOf(((Empleado) o1).getId());
+            int id2 = Integer.valueOf(((Empleado) o2).getId());
+            return id1 - id2;
+        });
+    }
 
     public void llenarEmpleadoList() { //quizas problemas a la hora de conectar todo
         trabajadorList.clear();
         for (Departamento departamento : empresa.getDepartamentoList()) {
-            trabajadorList.addAll(departamento.getTrabajadorList()); //quizas
+            trabajadorList.addAll(departamento.getTrabajadorList());
         }
+        sortTrabajadoresList();
+        trabajadoresFilteredList.addAll(trabajadorList);
     }
 
     public void cargarModelo() {
-        //trabajadoresFilteredList.addAll(trabajadorList); //quizas
         limpiarTabla();
         for (Trabajador trabajador : trabajadorList) {
             Empleado empleado = (Empleado) trabajador;
@@ -51,7 +58,7 @@ public class ModelTableBusqueda extends DefaultTableModel {
         }
     }
 
-    public void limpiarTabla() {
+    private void limpiarTabla() {
         while (getRowCount() > 0) {
             removeRow(0);
         }
@@ -70,11 +77,10 @@ public class ModelTableBusqueda extends DefaultTableModel {
             });
         }
         trabajadoresFilteredList.clear();
-        //trabajadoresFilteredList.addAll(trabajadorList);
+        trabajadoresFilteredList.addAll(trabajadorList);
     }
 
-    public void filtrarEmpleados(String value, String component) {                
-        trabajadoresFilteredList.addAll(trabajadorList);
+    public void filtrarEmpleados(String value, String component) {
         switch (component) {
             case "Departamento" -> {
                 trabajadoresFilteredList = trabajadoresFilteredList.stream().
@@ -87,24 +93,21 @@ public class ModelTableBusqueda extends DefaultTableModel {
                         collect(Collectors.toList());
             }
             case "Horario" -> {
-                trabajadoresFilteredList = trabajadoresFilteredList.stream().
-                        filter(trabajador -> {
-                            Empleado e = (Empleado) trabajador;
-                            return e.getHorario().getTipo().equals(value);
-                        }).collect(Collectors.toList());
+                trabajadoresFilteredList = trabajadoresFilteredList.stream().filter(trabajador -> {
+                    Empleado e = (Empleado) trabajador;
+                    return e.getHorario().getTipo().equals(value);
+                }).collect(Collectors.toList());
             }
             case "Id" -> {
-                trabajadoresFilteredList = trabajadoresFilteredList.stream().
-                        filter(trabajador -> {
-                            Empleado e = (Empleado) trabajador;
-                            return e.getId().equals(value);
-                        }).collect(Collectors.toList());
+                trabajadoresFilteredList = trabajadoresFilteredList.stream().filter(trabajador -> {
+                    Empleado e = (Empleado) trabajador;
+                    return e.getId().equals(value);
+                }).collect(Collectors.toList());
             }
             case "Fullname" -> {
-                trabajadoresFilteredList = trabajadoresFilteredList.stream().
-                        filter(trabajador
-                                -> trabajador.getNombre().contains(value) || trabajador.getApellido().contains(value)
-                        ).collect(Collectors.toList());
+                trabajadoresFilteredList = trabajadoresFilteredList.stream().filter(
+                        trabajador -> trabajador.getNombre().toLowerCase().contains(value)
+                        || trabajador.getApellido().toLowerCase().contains(value)).collect(Collectors.toList());
             }
         }
     }
@@ -116,12 +119,7 @@ public class ModelTableBusqueda extends DefaultTableModel {
         });
     }
 
-    public void setComponentActiveList(List<Object> componentActiveList) {
-        this.componentActiveList = componentActiveList;
-    }
-
     public List<Trabajador> getTrabajadoresFilteredList() {
         return trabajadoresFilteredList;
     }
-
 }

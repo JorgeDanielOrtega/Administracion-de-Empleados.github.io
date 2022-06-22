@@ -32,15 +32,9 @@ public class ModelTableDepartamento extends DefaultTableModel {
         departamento.getTrabajadorList().forEach(trabajador -> {
             empleadoList.add((Empleado) trabajador);
         });
-        System.out.println("TrabajadorList");
-        for (Trabajador trabajador : departamento.getTrabajadorList()) {
-            System.out.println(trabajador);
-        }
-        System.out.println("Empleado List");
-        empleadoList.forEach(action-> System.out.println(action));
     }
 
-    public void limpiarTabla() {
+    private void limpiarTabla() {
         while (getRowCount() > 0) {
             removeRow(0);
         }

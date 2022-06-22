@@ -1,5 +1,6 @@
 package administraciondeempleados;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Empresa {
     private List<Departamento> departamentoList;
     private List<Rol> rolList;
     private List<Horario> horarioList;
+    private Calendar horaEntrada;
 
     public Empresa(String empresa, int fundacionYear, String rubro) {
         departamentoList = new LinkedList();
@@ -19,6 +21,7 @@ public class Empresa {
         this.nombre = empresa;
         this.fundacionYear = fundacionYear;
         this.rubro = rubro;
+        this.horaEntrada = Calendar.getInstance();
     }
 
     public String getNombre() {
@@ -64,5 +67,15 @@ public class Empresa {
     public void setHorarioList(List<Horario> horarioList) {
         this.horarioList = horarioList;
     }
+
+    public Calendar getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(int hora, int minuto) {
+        horaEntrada.set(Calendar.HOUR_OF_DAY, hora);
+        horaEntrada.set(Calendar.MINUTE, minuto);
+    }
+    
 
 }

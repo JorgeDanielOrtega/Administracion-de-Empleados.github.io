@@ -35,13 +35,12 @@ public class Perfil extends javax.swing.JPanel {
         lbl_correoEmpresarial.setText(empleado.getCorreoEmpresarial());
         lbl_correoPersonal.setText(empleado.getCorreoPersonal());
         lbl_usuario.setText(empleado.getUsuario());
-        psw_contraseña.setText(empleado.getPassword());
         lbl_rol.setText(empleado.getRol().getNombre());
         lbl_puesto.setText(empleado.getPuesto().getNombre());
         lbl_departamento.setText(empleado.getDepartamento().getNombre());
         lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +60,6 @@ public class Perfil extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -84,7 +82,6 @@ public class Perfil extends javax.swing.JPanel {
         lbl_rol = new javax.swing.JLabel();
         lbl_contrato = new javax.swing.JLabel();
         lbl_departamento = new javax.swing.JLabel();
-        psw_contraseña = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -119,9 +116,6 @@ public class Perfil extends javax.swing.JPanel {
 
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Usuario");
-
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Contraseña");
 
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setText("Departamento");
@@ -179,12 +173,6 @@ public class Perfil extends javax.swing.JPanel {
 
         lbl_departamento.setText("jLabel12");
 
-        psw_contraseña.setBackground(new java.awt.Color(255, 255, 255));
-        psw_contraseña.setForeground(new java.awt.Color(51, 51, 51));
-        psw_contraseña.setText("jPasswordField1");
-        psw_contraseña.setBorder(null);
-        psw_contraseña.setFocusable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,7 +192,6 @@ public class Perfil extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel11)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
@@ -224,8 +211,7 @@ public class Perfil extends javax.swing.JPanel {
                             .addComponent(lbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_rol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_departamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(psw_contraseña))
+                            .addComponent(lbl_departamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(8, 8, 8)))
                 .addGap(44, 44, 44))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -250,7 +236,7 @@ public class Perfil extends javax.swing.JPanel {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbl_identificacion))
@@ -286,15 +272,11 @@ public class Perfil extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(lbl_correoPersonal))
-                .addGap(31, 31, 31)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(lbl_usuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(psw_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(lbl_rol))
@@ -324,7 +306,6 @@ public class Perfil extends javax.swing.JPanel {
     private javax.swing.JButton btn_verHorario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -353,6 +334,5 @@ public class Perfil extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_sexo;
     private javax.swing.JLabel lbl_telefono;
     private javax.swing.JLabel lbl_usuario;
-    private javax.swing.JPasswordField psw_contraseña;
     // End of variables declaration//GEN-END:variables
 }

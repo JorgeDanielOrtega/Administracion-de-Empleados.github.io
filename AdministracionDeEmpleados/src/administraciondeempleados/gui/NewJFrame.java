@@ -11,17 +11,20 @@ import administraciondeempleados.Rol;
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empresa;
 import administraciondeempleados.Horario;
-
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario iTC
  */
 public class NewJFrame extends javax.swing.JFrame {
+
     Empresa empresa;
     Empleado empleado;
     Departamento departamento;
-
+    Calendar horaActual;
 
     /**
      * Creates new form NewJFrame
@@ -31,16 +34,17 @@ public class NewJFrame extends javax.swing.JFrame {
         empresa = new Empresa("Tienda", 1990, "Manufactura");
         empleado = new Empleado();
         departamento = new Departamento("Finanzas", 1, 40);
-        empresa.getDepartamentoList().add(departamento);    
+        empresa.getDepartamentoList().add(departamento);
         empresa.getRolList().add(new Rol("Contable"));
         empresa.getRolList().add(new Rol("Administrador"));
         empresa.getHorarioList().add(new Horario("Matutino"));
         empresa.getHorarioList().add(new Horario("Vespertino"));
+        empresa.setHoraEntrada(7, 30);
         crearEmpleados();
+        this.horaActual = Calendar.getInstance();
     }
-    
-    
-    private void crearEmpleados(){
+
+    private void crearEmpleados() {
         Empleado e1 = new Empleado();
         Empleado e2 = new Empleado();
         Empleado e3 = new Empleado();
@@ -52,7 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
         e1.setPuesto(new Puesto("empleado"));
         e1.setRol(new Rol("Administrador", e1.getPuesto(), departamento));
         e1.setHorario(new Horario("Vespertino"));
-        
+
         e2.setId("3");
         e2.setNombre("Lucia Fernanda");
         e2.setApellido("Romero Agila");
@@ -60,7 +64,7 @@ public class NewJFrame extends javax.swing.JFrame {
         e2.setPuesto(new Puesto("Supervisor"));
         e2.setRol(new Rol("Contable", e2.getPuesto(), departamento));
         e2.setHorario(new Horario("Matutino"));
-        
+
         e3.setId("4");
         e3.setNombre("Lucas Geronimo");
         e3.setApellido("Hernandez Costa");
@@ -68,7 +72,7 @@ public class NewJFrame extends javax.swing.JFrame {
         e3.setPuesto(new Puesto("Jefe"));
         e3.setRol(new Rol("Contable", e2.getPuesto(), departamento));
         e3.setHorario(new Horario("Vespertino"));
-        
+
         departamento.getTrabajadorList().add(e1);
         departamento.getTrabajadorList().add(e2);
         departamento.getTrabajadorList().add(e3);
@@ -89,6 +93,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btn_departamento = new javax.swing.JButton();
         btn_busqueda = new javax.swing.JButton();
+        btn_asistencia = new javax.swing.JButton();
+        btn_verAsistencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,6 +132,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_asistencia.setText("Asistencia");
+        btn_asistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_asistenciaActionPerformed(evt);
+            }
+        });
+
+        btn_verAsistencia.setText("Ver asistencia");
+        btn_verAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_verAsistenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,7 +157,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn_departamento, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_busqueda, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btn_busqueda, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(btn_verAsistencia))
+                        .addComponent(btn_asistencia)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -152,7 +177,11 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(btn_departamento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_busqueda)
-                        .addGap(0, 602, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_asistencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_verAsistencia)
+                        .addGap(0, 540, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -172,7 +201,6 @@ public class NewJFrame extends javax.swing.JFrame {
         empleado.setCorreoEmpresarial("correoEmpresarial@empresa.gob");
         empleado.setCorreoPersonal("jorde.d.ortega@unl.edu.ec");
         empleado.setDepartamento(departamento);
-        empleado.setPassword("Es");
         empleado.setPuesto(new Puesto("empleado"));
         empleado.setRol(new Rol("Contable", empleado.getPuesto(), empleado.getDepartamento()));
         empleado.setUsuario("Daniel21");
@@ -195,7 +223,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.removeAll();
         jPanel1.add(d);
         jPanel1.revalidate();
-        jPanel1.repaint();        
+        jPanel1.repaint();
     }//GEN-LAST:event_btn_departamentoActionPerformed
 
     private void btn_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_busquedaActionPerformed
@@ -205,8 +233,26 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.removeAll();
         jPanel1.add(b);
         jPanel1.revalidate();
-        jPanel1.repaint(); 
+        jPanel1.repaint();
     }//GEN-LAST:event_btn_busquedaActionPerformed
+
+    private void btn_asistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_asistenciaActionPerformed
+        Calendar horaEntrada = empresa.getHoraEntrada();
+        //comprobar si ya marco asistencia para que se desactive(confiemos en que todo ira bien)
+        //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
+        if (horaActual.get(Calendar.HOUR_OF_DAY) == horaActual.get(Calendar.HOUR_OF_DAY)) {
+            AsignacionAsistencia asignacionAsistencia
+                    = new AsignacionAsistencia(this, true, empleado.getAsistenciaList(), empresa.getHoraEntrada());
+            asignacionAsistencia.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "no se puede marcar asistencia todavia"); //mas tarde cambiar el mensaje
+        }
+    }//GEN-LAST:event_btn_asistenciaActionPerformed
+
+    private void btn_verAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verAsistenciaActionPerformed
+        AsistenciaGUI asistenciaGUI = new AsistenciaGUI(this, true, empleado);
+        asistenciaGUI.setVisible(true);
+    }//GEN-LAST:event_btn_verAsistenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,8 +290,10 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_asistencia;
     private javax.swing.JButton btn_busqueda;
     private javax.swing.JButton btn_departamento;
+    private javax.swing.JButton btn_verAsistencia;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

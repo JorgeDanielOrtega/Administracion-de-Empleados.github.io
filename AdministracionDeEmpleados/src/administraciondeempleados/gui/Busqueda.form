@@ -67,7 +67,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_limpiarBusqueda" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -90,7 +90,7 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="299" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_limpiarBusqueda" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -121,7 +121,6 @@
             </Property>
             <Property name="debugGraphicsOptions" type="int" value="-1"/>
             <Property name="fillsViewportHeight" type="boolean" value="true"/>
-            <Property name="focusable" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
             <Property name="rowSelectionAllowed" type="boolean" value="false"/>
             <Property name="selectionMode" type="int" value="0"/>
@@ -173,9 +172,6 @@
           <Color blue="66" green="66" red="66" type="rgb"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_busquedaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_buscar">
       <Properties>
@@ -254,12 +250,12 @@
         <Property name="text" type="java.lang.String" value="Realice una busqueda por el nombre del empleado, departamento, rol u horario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btn_limpiarBusqueda">
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar busqueda"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_limpiarBusquedaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
