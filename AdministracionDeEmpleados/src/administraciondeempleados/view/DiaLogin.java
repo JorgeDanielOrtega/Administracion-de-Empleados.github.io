@@ -1,15 +1,43 @@
-
-package view;
+package administraciondeempleados.view;
 
 import java.awt.Color;
+import administraciondeempleados.Cuenta;
+import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame {
+public class DiaLogin extends javax.swing.JDialog {
 
+    Cuenta cuenta;
+    
+    java.awt.Frame parent;
+    
     int xPos, yPos;
     
-    public Login() {
+    public DiaLogin(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
     }
+    
+    public void llenarCampos(){
+        txtUsuario.setText(cuenta.getCorreoEmpresarial());
+        txtContraseña.setText(cuenta.getContraseña());
+        //System.out.println(cuenta);
+    }
+    
+    public void obtenerCuenta(){
+        this.cuenta = new Cuenta(txtUsuario.getText(), String.valueOf(txtContraseña.getPassword()));
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,11 +58,13 @@ public class Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         lbRecuperarContraseña = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(350, 500));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(246, 246, 246));
         pnlBackground.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,7 +229,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -207,35 +237,21 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+    private void txtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseñaMouseClicked
+        if(String.valueOf(txtContraseña.getPassword()).equals("**********")){
+            txtContraseña.setForeground(Color.black);
+            txtContraseña.setText("");
+        }
+
+        if(txtUsuario.getText().isEmpty()){
+            txtUsuario.setForeground(new Color(204, 204, 204));
+            txtUsuario.setText("Nombre de usuario");
+        }
+    }//GEN-LAST:event_txtContraseñaMouseClicked
+
+    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
-    private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lbExitMouseClicked
-
-    private void lbBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMousePressed
-        xPos = evt.getX();
-        yPos = evt.getY();
-    }//GEN-LAST:event_lbBarraSuperiorMousePressed
-
-    private void lbBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        
-        this.setLocation(x - xPos, y - yPos);
-    }//GEN-LAST:event_lbBarraSuperiorMouseDragged
-
-    private void lbExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseEntered
-        pnlExit.setBackground(Color.red);
-        lbExit.setForeground(Color.white);
-    }//GEN-LAST:event_lbExitMouseEntered
-
-    private void lbExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseExited
-        pnlExit.setBackground(new Color(221,221,221));
-        lbExit.setForeground(Color.black);
-    }//GEN-LAST:event_lbExitMouseExited
+    }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
         if(txtUsuario.getText().equals("Nombre de usuario")){
@@ -249,37 +265,69 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioMouseClicked
 
-    private void txtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraseñaMouseClicked
-        if(String.valueOf(txtContraseña.getPassword()).equals("**********")){
-            txtContraseña.setForeground(Color.black);
-            txtContraseña.setText("");
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lbExitMouseClicked
+
+    private void lbExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseEntered
+        pnlExit.setBackground(Color.red);
+        lbExit.setForeground(Color.white);
+    }//GEN-LAST:event_lbExitMouseEntered
+
+    private void lbExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseExited
+        pnlExit.setBackground(new Color(221,221,221));
+        lbExit.setForeground(Color.black);
+    }//GEN-LAST:event_lbExitMouseExited
+
+    private void lbBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xPos, y - yPos);
+    }//GEN-LAST:event_lbBarraSuperiorMouseDragged
+
+    private void lbBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMousePressed
+        xPos = evt.getX();
+        yPos = evt.getY();
+    }//GEN-LAST:event_lbBarraSuperiorMousePressed
+
+    private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
+        if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
+            obtenerCuenta();
+            parent.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
         }
-        
-        if(txtUsuario.getText().isEmpty()){
-            txtUsuario.setForeground(new Color(204, 204, 204));
-            txtUsuario.setText("Nombre de usuario");
-        }
-    }//GEN-LAST:event_txtContraseñaMouseClicked
+    }//GEN-LAST:event_lbIngresarMouseClicked
 
     private void pnlBackgroundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBackgroundMouseClicked
         if(txtUsuario.getText().isEmpty()){
             txtUsuario.setForeground(new Color(204, 204, 204));
             txtUsuario.setText("Nombre de usuario");
         }
-        
+
         if(String.valueOf(txtContraseña.getPassword()).isEmpty()){
             txtContraseña.setForeground(new Color(204, 204, 204));
             txtContraseña.setText("**********");
         }
     }//GEN-LAST:event_pnlBackgroundMouseClicked
 
-    private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
-        // TODO combrobación de datos para login
-    }//GEN-LAST:event_lbIngresarMouseClicked
-
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
+            obtenerCuenta();
+            parent.setVisible(true);
+            this.dispose();
+            }else{
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+            }
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -298,20 +346,27 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                DiaLogin dialog = new DiaLogin(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
