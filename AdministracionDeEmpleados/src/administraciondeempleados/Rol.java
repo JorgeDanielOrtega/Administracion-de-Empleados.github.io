@@ -10,6 +10,7 @@ public class Rol {
     private Departamento departamento;
     private List<Trabajador> trabajadorList;
 
+<<<<<<< HEAD
     public Rol(String nombre) { //Quitar mas tarde
         this.nombre = nombre;
     }
@@ -21,6 +22,18 @@ public class Rol {
     }
 
     //TODO hacer metodo para calcular salario
+=======
+    public Rol(String nombre, Puesto puesto, Departamento departamento) {
+        this.nombre = nombre;
+        this.puesto = puesto;
+        this.departamento = departamento;
+    }
+    
+    
+    
+    //TODO hacer metodo para calcular salario
+
+>>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
     public String getNombre() {
         return nombre;
     }
@@ -52,10 +65,15 @@ public class Rol {
     public List<Trabajador> getTrabajadorList() {
         return trabajadorList;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
         return nombre;
     }
+=======
+    
+    
+>>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
 
 }

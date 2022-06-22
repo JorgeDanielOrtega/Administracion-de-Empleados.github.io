@@ -8,12 +8,17 @@ public class Contrato {
     private Double tiempoContrato;
     private Date fechaLimite;
 
+<<<<<<< HEAD
     public Contrato(Boolean tieneContrato) {
         this.tieneContrato = tieneContrato;
     }
     
     public Contrato(Boolean tieneContrato, Date fechaLimite) {
         this(tieneContrato);
+=======
+    public Contrato(Boolean tieneContrato, Date fechaLimite) {
+        this.tieneContrato = tieneContrato;
+>>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
         this.fechaLimite = fechaLimite;
     }
     

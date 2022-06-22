@@ -9,8 +9,12 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+<<<<<<< HEAD
 public class AdministracionDeEmpleados {
 
+=======
+    
+>>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
     public static void main(String[] args) {
         Calendar c = Calendar.getInstance();
         System.out.println(c.get(Calendar.DAY_OF_WEEK) - 1); //
