@@ -136,6 +136,11 @@ public class Perfil extends javax.swing.JPanel {
         btn_verAsistencias.setBackground(new java.awt.Color(204, 204, 204));
         btn_verAsistencias.setForeground(new java.awt.Color(51, 51, 51));
         btn_verAsistencias.setText("Ver Asistencias");
+        btn_verAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_verAsistenciasActionPerformed(evt);
+            }
+        });
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
@@ -299,6 +304,10 @@ public class Perfil extends javax.swing.JPanel {
                 .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_verAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verAsistenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_verAsistenciasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
