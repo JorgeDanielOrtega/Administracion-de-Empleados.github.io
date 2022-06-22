@@ -1,6 +1,6 @@
 package administraciondeempleados;
 
-<<<<<<< HEAD
+
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,35 +31,13 @@ public class Empresa {
 
     public void setNombre(String empresa) {
         this.nombre = empresa;
-=======
-import java.util.List;
-
-public class Empresa {
-    private String empresa;
-    private int fundacionYear;
-    private String rubro;
-    private List<Departamento> departamentoList;
-
-    public Empresa(String empresa, int fundacionYear, String rubro) {
-        this.empresa = empresa;
-        this.fundacionYear = fundacionYear;
-        this.rubro = rubro;
-    }
-    
-    
-    public String getEmpresa() {
-        return empresa;
-    }
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
     }
 
     public int getFundacionYear() {
         return fundacionYear;
     }
 
-<<<<<<< HEAD
+
     public String getRubro() {
         return rubro;
     }
@@ -102,13 +80,4 @@ public class Empresa {
     }
     
 
-=======
-
-    public String getRubro() {
-        return rubro;
-    }
-    public void setRubro(String rubro) {
-        this.rubro = rubro;
-    }
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
 }

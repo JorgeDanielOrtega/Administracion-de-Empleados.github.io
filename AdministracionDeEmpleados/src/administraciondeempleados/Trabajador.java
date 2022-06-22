@@ -1,16 +1,13 @@
 package administraciondeempleados;
 
-<<<<<<< HEAD
-public abstract class Trabajador extends Persona {
-=======
+
 public abstract class Trabajador extends Persona{
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
+
 
     private String correoPersonal;
     private String correoEmpresarial;
     private String usuario;
     private String password;
-<<<<<<< HEAD
     private Puesto puesto;
     private Rol rol;
     private Departamento departamento;
@@ -80,13 +77,5 @@ public abstract class Trabajador extends Persona{
     public void setContrato(Contrato contrato) {
         this.contrato = contrato;
     }
-=======
-    private String puesto;
-    private Rol rol;
-    private Departamento departamento;
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
-    
-    
-    
 
 }

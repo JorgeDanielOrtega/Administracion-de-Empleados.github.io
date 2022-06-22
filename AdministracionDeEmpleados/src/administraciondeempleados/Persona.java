@@ -1,10 +1,5 @@
 package administraciondeempleados;
 
-<<<<<<< HEAD
-=======
-import java.time.Instant;
-import java.time.LocalDate;
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
 import java.util.Date;
 
 public abstract class Persona {
@@ -12,10 +7,8 @@ public abstract class Persona {
     private String nombre;
     private String apellido;
     private String direccion;
-<<<<<<< HEAD
-=======
+
     //private String estadoCivil;
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
     private String cedula;
     private char sexo;
     private String ciudad;
@@ -23,10 +16,6 @@ public abstract class Persona {
     private Date fechaNacimiento;
     private Date birthday;
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
     public String getNombre() {
         return nombre;
     }
@@ -98,10 +87,5 @@ public abstract class Persona {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> af846cae50b562cd12306e8d3f6d4756cfa6d3c4
 
 }
