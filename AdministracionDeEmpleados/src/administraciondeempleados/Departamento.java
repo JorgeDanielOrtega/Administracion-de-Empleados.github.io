@@ -16,12 +16,17 @@ public class Departamento {
     private int vacaciones;
     private List<Trabajador> trabajadorList;
 
-    public Departamento(String nombre, int numero, int empleadosMaximos, int vacaciones) {
-
+    public Departamento(String nombre, int numero, int empleadosMaximos) {
         trabajadorList = new LinkedList();
         this.nombre = nombre;
         this.numero = numero;
         this.empleadosMaximos = empleadosMaximos;
+        this.vacaciones = vacaciones;
+        guardarFecha();
+    }
+    
+    public Departamento(String nombre, int numero, int empleadosMaximos, int vacaciones) {
+        this(nombre, numero, empleadosMaximos);
         this.vacaciones = vacaciones;
         guardarFecha();
     }

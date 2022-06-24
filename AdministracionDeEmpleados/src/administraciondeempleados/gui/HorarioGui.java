@@ -1,5 +1,6 @@
 package administraciondeempleados.gui;
 
+import administraciondeempleados.DiasLaborales;
 import administraciondeempleados.Horario;
 
 /**
@@ -114,8 +115,8 @@ public class HorarioGui extends javax.swing.JDialog {
     private void llenarDiasLaborales() {
         String  diasLaborales = "";
         lbl_diasLaborables.setText("");
-        for (String dia : horario.getDiasLaborablesList()) {
-            diasLaborales += dia;
+        for (DiasLaborales dia : horario.getDiasLaborablesList()) {
+            diasLaborales += dia.toString();
         }
         lbl_diasLaborables.setText(diasLaborales);
     }
