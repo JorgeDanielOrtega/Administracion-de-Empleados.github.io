@@ -3,17 +3,13 @@ package administraciondeempleados;
 import java.util.List;
 
 public class Puesto {
-    
+
     private String nombre;
     private List<Rol> rolList;
-
 
     public Puesto(String nombre) {
         this.nombre = nombre;
     }
-
-    
-    
 
     public String getNombre() {
         return nombre;
@@ -27,6 +23,4 @@ public class Puesto {
         return rolList;
     }
 
-    
-     
 }

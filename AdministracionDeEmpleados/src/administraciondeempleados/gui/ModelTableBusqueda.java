@@ -24,7 +24,6 @@ public class ModelTableBusqueda extends DefaultTableModel {
         addColumn("Departamento");
         addColumn("Rol");
         addColumn("Horario");
-
     }
 
     private void sortTrabajadoresList() {
