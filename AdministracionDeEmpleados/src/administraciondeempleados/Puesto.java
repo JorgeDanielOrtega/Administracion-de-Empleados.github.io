@@ -12,9 +12,6 @@ public class Puesto {
         this.nombre = nombre;
     }
 
-    
-    
-
     public String getNombre() {
         return nombre;
     }
