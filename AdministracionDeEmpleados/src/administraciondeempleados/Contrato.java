@@ -8,10 +8,16 @@ public class Contrato {
     private Double tiempoContrato;
     private Date fechaLimite;
 
-    public Contrato(Boolean tieneContrato, Date fechaLimite) {
+
+    public Contrato(Boolean tieneContrato) {
         this.tieneContrato = tieneContrato;
-        this.fechaLimite = fechaLimite;
     }
+    
+    public Contrato(Boolean tieneContrato, Date fechaLimite) {
+        this(tieneContrato);
+         this.fechaLimite = fechaLimite;
+    }
+
     
     //TODO hacer metodo para el calculo del metodo
     

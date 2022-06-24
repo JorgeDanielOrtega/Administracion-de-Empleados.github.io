@@ -6,6 +6,7 @@ import administraciondeempleados.Cuenta;
 import javax.swing.border.SoftBevelBorder;
 import administraciondeempleados.Empresa;
 import javax.swing.JOptionPane;
+import administraciondeempleados.Gerente;
 
 public class DatosEmpresa extends javax.swing.JFrame {
 
@@ -13,6 +14,7 @@ public class DatosEmpresa extends javax.swing.JFrame {
     Cuenta cuentaActual;
     SoftBevelBorder softBevelBorder;
     Empresa empresa;
+    Gerente gerente;
        
     int xPos, yPos;
     
@@ -52,13 +54,15 @@ public class DatosEmpresa extends javax.swing.JFrame {
         txtLeyendaEmpresa.setEditable(false);
     }
     
+    public void crearEmpresa(){
+        if(!txtNombreEmpresa.getText().equals("Nombre Empresa") && !txtFundacionYear.getText().equals("Año Fundacion") && !txtRubroEmpresa.getText().equals("Rubro") && !txtLeyendaEmpresa.getText().equals("Leyenda") && !txtNombreEmpresa.getText().isEmpty() && !txtFundacionYear.getText().isEmpty() && !txtRubroEmpresa.getText().isEmpty() && !txtLeyendaEmpresa.getText().isEmpty()){
+            this.empresa = gerente.crearEmpresa(txtNombreEmpresa.getText(), Integer.parseInt(txtFundacionYear.getText()), txtRubroEmpresa.getText(), txtLeyendaEmpresa.getText());
+        }
+    }
+    
     public void guardarDatos(){       
         if(empresa == null){
-            if(!txtNombreEmpresa.getText().equals("Nombre Empresa") && !txtFundacionYear.getText().equals("Año Fundacion") && !txtRubroEmpresa.getText().equals("Rubro") && !txtLeyendaEmpresa.getText().equals("Leyenda") && !txtNombreEmpresa.getText().isEmpty() && !txtFundacionYear.getText().isEmpty() && !txtRubroEmpresa.getText().isEmpty() && !txtLeyendaEmpresa.getText().isEmpty()){
-                System.out.println("w");
-                empresa = new Empresa(txtNombreEmpresa.getText(), Integer.parseInt(txtFundacionYear.getText()), txtRubroEmpresa.getText());
-                empresa.setLeyenda(txtLeyendaEmpresa.getText());
-            }
+            crearEmpresa();
         }else{
             if(txtLeyendaEmpresa.getText().equals("")){
                 txtLeyendaEmpresa.setText(empresa.getLeyenda());
@@ -183,7 +187,7 @@ public class DatosEmpresa extends javax.swing.JFrame {
         lbBarraSuperiorLayout.setHorizontalGroup(
             lbBarraSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lbBarraSuperiorLayout.createSequentialGroup()
-                .addGap(0, 990, Short.MAX_VALUE)
+                .addGap(0, 1000, Short.MAX_VALUE)
                 .addComponent(pnlExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         lbBarraSuperiorLayout.setVerticalGroup(
@@ -193,7 +197,7 @@ public class DatosEmpresa extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlBackground.add(lbBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 40));
+        pnlBackground.add(lbBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 40));
 
         lblInformacion.setBackground(new java.awt.Color(255, 255, 255));
         lblInformacion.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
@@ -273,7 +277,9 @@ public class DatosEmpresa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +290,7 @@ public class DatosEmpresa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
-        System.exit(0); //dispose()
+        System.exit(0);
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void lbExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseEntered

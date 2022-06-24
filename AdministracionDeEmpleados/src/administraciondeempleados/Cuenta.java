@@ -2,8 +2,7 @@ package administraciondeempleados;
 
 public class Cuenta {
     
-    private Trabajador trabajador;
-    
+    private Rol rol;  
     private String correoEmpresarial;
     private String contraseña;
 
@@ -12,10 +11,10 @@ public class Cuenta {
         this.contraseña = contraseña;
     }
 
-    public Cuenta(String correoEmpresarial, String contraseña, Trabajador trabajador) {
+    public Cuenta(String correoEmpresarial, String contraseña, Rol rol) {
         this.correoEmpresarial = correoEmpresarial;
         this.contraseña = contraseña;
-        this.trabajador = trabajador;
+        this.rol = rol;
     }
 
     public String getCorreoEmpresarial() {
@@ -34,9 +33,13 @@ public class Cuenta {
         this.contraseña = contraseña;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+    
     @Override
     public String toString() {
-        return "Cuenta{" + "trabajador=" + trabajador + ", correoEmpresarial=" + correoEmpresarial + ", contrase\u00f1a=" + contraseña + '}';
+        return "Cuenta{" + "Rol=" + rol + ", correoEmpresarial=" + correoEmpresarial + ", contrase\u00f1a=" + contraseña + '}';
     }
     
     
