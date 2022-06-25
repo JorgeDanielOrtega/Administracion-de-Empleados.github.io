@@ -12,9 +12,9 @@ public class Empleado extends Trabajador {
     private String id;
     private List<Asistencia> asistenciaList;
 
-    public Empleado(){
-        this.asistenciaList = new LinkedList<>();
-    }
+//    public Empleado(){
+//        //this.asistenciaList = new LinkedList<>();
+//    }
 
     public Empleado(Date entradaYear, Horario horario, String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento){
         super(correoPersonal, usuario, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
@@ -49,7 +49,5 @@ public class Empleado extends Trabajador {
 
     public String getId() {
         return id;
-    }
-    
-    
+    }        
 }

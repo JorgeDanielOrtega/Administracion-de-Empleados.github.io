@@ -4,9 +4,11 @@ import assets.colors.Palette;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Calendar;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Principal extends javax.swing.JFrame {
@@ -16,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
     private ImageIcon imageIcon;
     private Icon icon;
     private JPanel panelClicked;
+    Calendar horaActual;
 
     /**
      * Creates new form Principal
@@ -28,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel20.setText("Empleado");
         setLocationRelativeTo(null);
         panelClicked = new JPanel();
+        this.horaActual = Calendar.getInstance();
         cargarComponentes();
         mouseEvents();
     }
@@ -109,6 +113,15 @@ public class Principal extends javax.swing.JFrame {
                     jPanel9.setBackground(Palette.BUTTON_CLICK);
                     panelClicked.setBackground(Palette.BUTTON);
                     panelClicked = jPanel9;
+//                    Calendar horaEntrada = empresa.getHoraEntrada();
+//                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
+//                    if (horaActual.get(Calendar.HOUR_OF_DAY) == horaActual.get(Calendar.HOUR_OF_DAY)) {
+//                        AsignacionAsistencia asignacionAsistencia
+//                                = new AsignacionAsistencia(this, true, empleado.getAsistenciaList(), empresa.getHoraEntrada());
+//                        asignacionAsistencia.setVisible(true);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "no se puede marcar asistencia todavia"); //mas tarde cambiar el mensaje
+//                    }
                 }
                 if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
                     jPanel10.setBackground(Palette.BUTTON_CLICK);
