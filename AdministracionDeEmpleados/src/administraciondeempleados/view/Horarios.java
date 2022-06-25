@@ -12,6 +12,7 @@ public class Horarios extends javax.swing.JFrame {
     
     public Horarios() {
         initComponents();
+       
     }
 
     
@@ -19,6 +20,7 @@ public class Horarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        modelTableHorarios1 = new administraciondeempleados.view.ModelTableHorarios();
         pnlBackground = new javax.swing.JPanel();
         lbBarraSuperior = new javax.swing.JPanel();
         pnlExit = new javax.swing.JPanel();
@@ -55,7 +57,7 @@ public class Horarios extends javax.swing.JFrame {
         lbExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbExit.setText("X");
-        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lbExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbExitMouseClicked(evt);
@@ -107,17 +109,7 @@ public class Horarios extends javax.swing.JFrame {
         lblHorarios.setText("HORARIOS");
         pnlBackground.add(lblHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 180, 50));
 
-        tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tblHorarios.setModel(modelTableHorarios1);
         jScrollPane1.setViewportView(tblHorarios);
 
         pnlBackground.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 920, 280));
@@ -241,6 +233,7 @@ public class Horarios extends javax.swing.JFrame {
     private javax.swing.JPanel lbBarraSuperior;
     private javax.swing.JLabel lbExit;
     private javax.swing.JLabel lblHorarios;
+    private administraciondeempleados.view.ModelTableHorarios modelTableHorarios1;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlExit;
     private javax.swing.JTable tblHorarios;
