@@ -17,6 +17,11 @@ public class Contrato {
         this(tieneContrato);
          this.fechaLimite = fechaLimite;
     }
+    
+    public Contrato(Boolean tieneContrato, Double tiempoContrato, Date fechaLimite) {
+        this(tieneContrato, fechaLimite);
+        this.tiempoContrato = tiempoContrato;
+    }
 
     
     //TODO hacer metodo para el calculo del metodo
@@ -41,6 +46,10 @@ public class Contrato {
         this.fechaLimite = fechaLimite;
     }
     
+    @Override
+    public String toString() {
+        return "" + tieneContrato  + "  "+ tiempoContrato + '}';
+    }
     
     
 }

@@ -15,7 +15,16 @@ public class Empleado extends Trabajador {
 //    public Empleado(){
 //        //this.asistenciaList = new LinkedList<>();
 //    }
-
+    public Empleado(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
+            String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento, 
+            String correoPersonal, String correoEmpresarial, String usuario, String contrasenia,
+            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Date anioEntrada) {
+        super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento, correoPersonal,
+                correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);       
+        asistenciaList = new LinkedList<>();
+        this.entradaYear = anioEntrada;
+    }
+    
     public Empleado(Date entradaYear, Horario horario, String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento){
         super(correoPersonal, usuario, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.entradaYear = entradaYear;
@@ -43,11 +52,17 @@ public class Empleado extends Trabajador {
         return entradaYear;
     }
 
+    public void setEntradaYear(Date entradaYear) {
+        this.entradaYear = entradaYear;
+    }
+    
+
     public void setId(String id) {
         this.id = id;
     }
 
     public String getId() {
         return id;
-    }        
+    }    
+    
 }

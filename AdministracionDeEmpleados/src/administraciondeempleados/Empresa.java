@@ -18,16 +18,25 @@ public class Empresa {
     private List<Horario> horarioList;
     private Calendar horaEntrada;
 
-    public Empresa(String empresa, int fundacionYear, String rubro) {
-        departamentoList = new LinkedList();
+    public Empresa(){
+        horarioList = new LinkedList<>();
         rolList = new LinkedList();
-        horarioList = new LinkedList();
+        departamentoList = new LinkedList<>();
+    }
+    
+    public Empresa(String empresa, int fundacionYear, String rubro) {
+        this();
         this.nombre = empresa;
         this.fundacionYear = fundacionYear;
         this.rubro = rubro;
         this.horaEntrada = Calendar.getInstance();
     }
-
+    
+    public Empresa(String nombre, int fundacionYear, String fundador, String rubro){
+        this(nombre, fundacionYear, rubro);
+        this.leyenda = fundador;
+    }
+    
     public String getNombre() {
         return nombre;
     }

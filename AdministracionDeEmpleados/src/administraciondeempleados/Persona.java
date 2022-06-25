@@ -7,6 +7,7 @@ public abstract class Persona {
     private String nombre;
     private String apellido;
     private String direccion;
+    private EstadoCivil estadoCivil;
     private String cedula;
     private char sexo;
     private String ciudad;
@@ -25,6 +26,12 @@ public abstract class Persona {
         this.fechaNacimiento = fechaNacimiento;
         calculcarCumpleaños();
     }
+    
+     public Persona(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
+            char sexo, String ciudad, String telefono, Date fechaNacimiento){
+         this(nombre, apellido, direccion, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
+         this.estadoCivil = estadoCivil;
+     }
     
     private void calculcarCumpleaños(){
         Date actual = new Date();
@@ -103,6 +110,15 @@ public abstract class Persona {
         this.birthday = birthday;
     }
 
+    public EstadoCivil getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    
     @Override
     public String toString() {
         return "nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + '}';
