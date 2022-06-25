@@ -234,7 +234,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btn_asistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_asistenciaActionPerformed
         Calendar horaEntrada = empresa.getHoraEntrada();
-        //comprobar si ya marco asistencia para que se desactive(confiemos en que todo ira bien)
         //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
         if (horaActual.get(Calendar.HOUR_OF_DAY) == horaActual.get(Calendar.HOUR_OF_DAY)) {
             AsignacionAsistencia asignacionAsistencia

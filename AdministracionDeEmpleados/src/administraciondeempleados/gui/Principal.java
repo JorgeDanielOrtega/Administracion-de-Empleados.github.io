@@ -1,26 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import assets.colors.Palette;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-/**
- *
- * @author Usuario iTC
- */
 public class Principal extends javax.swing.JFrame {
 
+    private final int WIDTH_BACKGROUND = 990;
+    private final int HEIGHT_BACKGROUND = 630;
     private ImageIcon imageIcon;
     private Icon icon;
+    private JPanel panelClicked;
 
     /**
      * Creates new form Principal
@@ -31,6 +26,8 @@ public class Principal extends javax.swing.JFrame {
         pintarImagen(jLabel20, "src/assets/icons/user3.png");
         jLabel1.setText("Gerente");
         jLabel20.setText("Empleado");
+        setLocationRelativeTo(null);
+        panelClicked = new JPanel();
         cargarComponentes();
         mouseEvents();
     }
@@ -56,28 +53,73 @@ public class Principal extends javax.swing.JFrame {
         MouseListener m = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getSource() == btn_perfil) {
-                    btn_perfil.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel5) {
-                    jPanel5.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel6) {
-                    jPanel6.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel7) {
-                    jPanel7.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel8) {
-                    jPanel8.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel9) {
-                    jPanel9.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel10) {
-                    jPanel10.setBackground(Palette.BUTTON_CLICK);
-                } else if (e.getSource() == jPanel11) {
-                    jPanel11.setBackground(Palette.BUTTON_CLICK);
-                }
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
+                    btn_perfil.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = btn_perfil;
+                    Perfil p = new Perfil();
+                    p.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
+                    p.setLocation(0, 0);
+                    background.removeAll();
+                    background.add(p);
+                    background.revalidate();
+                    background.repaint();
+                }
+                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
+                    jPanel5.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel5;
+                    DepartamentoGUi depa = new DepartamentoGUi();
+                    depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
+                    depa.setLocation(0, 0);
+                    background.removeAll();
+                    background.add(depa);
+                    background.revalidate();
+                    background.repaint();
+                }
+                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
+                    jPanel6.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel6;
+                    Busqueda bus = new Busqueda();
+                    bus.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
+                    bus.setLocation(0, 0);
+                    background.removeAll();
+                    background.add(bus);
+                    background.revalidate();
+                    background.repaint();
+                }
+                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
+                    jPanel7.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel7;
+                    AsignacionAsistencia aa = new AsignacionAsistencia(null, true);
+                    aa.setVisible(true);
+                }
+                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
+                    jPanel8.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel8;
+                }
+                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
+                    jPanel9.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel9;
+                }
+                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
+                    jPanel10.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel10;
+                }
+                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
+                    jPanel11.setBackground(Palette.BUTTON_CLICK);
+                    panelClicked.setBackground(Palette.BUTTON);
+                    panelClicked = jPanel11;
+                }
             }
 
             @Override
@@ -86,28 +128,28 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (e.getSource() == btn_perfil) {
+                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
                     btn_perfil.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel5) {
+                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
                     jPanel5.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel6) {
+                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
                     jPanel6.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel7) {
+                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
                     jPanel7.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel8) {
+                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
                     jPanel8.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel9) {
+                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
                     jPanel9.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel10) {
+                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
                     jPanel10.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel11) {
+                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
                     jPanel11.setBackground(Palette.BUTTON_CLICK);
                 }
                 if (e.getSource() == head_gerente) {
@@ -120,28 +162,28 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (e.getSource() == btn_perfil) {
+                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
                     btn_perfil.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel5) {
+                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
                     jPanel5.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel6) {
+                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
                     jPanel6.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel7) {
+                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
                     jPanel7.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel8) {
+                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
                     jPanel8.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel9) {
+                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
                     jPanel9.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel10) {
+                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
                     jPanel10.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel11) {
+                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
                     jPanel11.setBackground(Palette.BUTTON);
                 }
                 if (e.getSource() == head_gerente) {
@@ -209,6 +251,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -342,7 +385,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuGerente.add(head_gerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
 
-        jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 700));
+        jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
         background.setBackground(new java.awt.Color(0, 255, 102));
 
@@ -487,10 +530,10 @@ public class Principal extends javax.swing.JFrame {
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(menuEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
 
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 990, 700));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 990, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -500,7 +543,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

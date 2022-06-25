@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Empleado;
+import administraciondeempleados.gui.AsistenciaGUI;
 
 public class Perfil extends javax.swing.JPanel {
-
+    
     private Empleado empleado;
 
     /**
@@ -15,15 +12,15 @@ public class Perfil extends javax.swing.JPanel {
      */
     public Perfil() {
         initComponents();
-
+        
     }
-
+    
     public Perfil(Empleado empleado) {
         this();
         this.empleado = empleado;
         llenarCampos();
     }
-
+    
     private void llenarCampos() {
         lbl_identificacion.setText(empleado.getCedula());
         lbl_nombre.setText(empleado.getNombre());
@@ -40,7 +37,7 @@ public class Perfil extends javax.swing.JPanel {
         lbl_departamento.setText(empleado.getDepartamento().getNombre());
         lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,6 +129,11 @@ public class Perfil extends javax.swing.JPanel {
         btn_verHorario.setBackground(new java.awt.Color(204, 204, 204));
         btn_verHorario.setForeground(new java.awt.Color(51, 51, 51));
         btn_verHorario.setText("Ver Horario");
+        btn_verHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_verHorarioActionPerformed(evt);
+            }
+        });
 
         btn_verAsistencias.setBackground(new java.awt.Color(204, 204, 204));
         btn_verAsistencias.setForeground(new java.awt.Color(51, 51, 51));
@@ -183,9 +185,19 @@ public class Perfil extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jSeparator1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(728, Short.MAX_VALUE)
+                        .addComponent(btn_verHorario)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_verAsistencias)))
+                .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -217,22 +229,15 @@ public class Perfil extends javax.swing.JPanel {
                             .addComponent(lbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_rol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_departamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(8, 8, 8)))
-                .addGap(44, 44, 44))
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(lbl_contrato, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(299, 299, 299))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_contrato, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_verHorario)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_verAsistencias)))
-                        .addGap(44, 44, 44))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(459, 459, 459))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +246,7 @@ public class Perfil extends javax.swing.JPanel {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbl_identificacion))
@@ -297,17 +302,23 @@ public class Perfil extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(lbl_contrato))
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_verHorario)
                     .addComponent(btn_verAsistencias))
-                .addGap(19, 19, 19))
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_verAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verAsistenciasActionPerformed
-        // TODO add your handling code here:
+        AsistenciaGUI asis = new AsistenciaGUI(null, true);
+        asis.setVisible(true);
     }//GEN-LAST:event_btn_verAsistenciasActionPerformed
+
+    private void btn_verHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verHorarioActionPerformed
+        HorarioGui h = new HorarioGui(null, true);
+        h.setVisible(true);
+    }//GEN-LAST:event_btn_verHorarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

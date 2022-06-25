@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
-import administraciondeempleados.Trabajador;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Usuario iTC
- */
 public class ModelTableDepartamento extends DefaultTableModel {
 
     private List<Empleado> empleadoList;
@@ -32,6 +23,7 @@ public class ModelTableDepartamento extends DefaultTableModel {
         departamento.getTrabajadorList().forEach(trabajador -> {
             empleadoList.add((Empleado) trabajador);
         });
+        
     }
 
     private void limpiarTabla() {

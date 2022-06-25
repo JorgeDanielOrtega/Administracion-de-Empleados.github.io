@@ -15,14 +15,14 @@ public class Rol {
         this.nombre = nombre;
     }
 
-    public Rol(String nombre, Puesto puesto, Departamento departamento) {
+    public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
         this(nombre);
         this.puesto = puesto;
         this.departamento = departamento;
     }
 
     //TODO hacer metodo para calcular salario
-
+    
    
 
 

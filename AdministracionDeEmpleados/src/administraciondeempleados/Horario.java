@@ -15,15 +15,15 @@ public class Horario {
     private List<Empleado> empleadoList;
     
     public Horario(String tipo) {
+        empleadoList = new LinkedList();
         diasLaborablesList = new LinkedList();
         this.tipo = tipo;
     }
     
     public Horario(String tipo, List<DiasLaborales> diasLaborables, Float horasLaborablesSemanales){
-        this.tipo = tipo;
+        this(tipo);
         this.diasLaborablesList = diasLaborables;
         this.horasLaborablesSemanales = horasLaborablesSemanales;
-        this.empleadoList = new LinkedList<>();
     }
     
     //metodos de actualizacion de dias
@@ -59,6 +59,10 @@ public class Horario {
 
     public void setHorasLaborablesSemanales(Float horasLaborablesSemanales) {
         this.horasLaborablesSemanales = horasLaborablesSemanales;
+    }
+
+    public List<Empleado> getEmpleadoList() {
+        return empleadoList;
     }
          
     @Override

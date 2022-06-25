@@ -11,10 +11,11 @@ import javax.swing.ButtonGroup;
 
 public class AsignacionAsistencia extends javax.swing.JDialog {
 
+    private final int TIMEMPO_ESPERA = 10;
     private List<Asistencia> asistenciaList;
     private Calendar horaEntrada;
     private Calendar horaActual;
-
+   
     /**
      * Creates new form AsistenciaGUI
      */
@@ -42,7 +43,7 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
 
     private void desactivarPresente() {
         boolean desactivarPresente = horaEntrada.get(Calendar.MINUTE) < horaActual.get(Calendar.MINUTE) 
-                && horaActual.get(Calendar.MINUTE) < (horaEntrada.get(Calendar.MINUTE) + 10); //guardar en una constante el intervalo de tiempo valido para marcar asistencia
+                && horaActual.get(Calendar.MINUTE) < (horaEntrada.get(Calendar.MINUTE) + TIMEMPO_ESPERA); 
         if (!desactivarPresente) {
             rbt_presente.setEnabled(false); //configurar la activacion de nuevo mas tarde
         }else{
