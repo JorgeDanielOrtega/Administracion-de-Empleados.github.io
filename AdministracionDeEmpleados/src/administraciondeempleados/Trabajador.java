@@ -11,15 +11,25 @@ public abstract class Trabajador extends Persona{
 
     private String correoPersonal;
     private String correoEmpresarial;
+    private int vacaciones;
     private String usuario;
     private String password;
+    private double horasExtra;
+    private boolean pagoPorTrasferencia;
+
+    private Departamento departamento;
+    
     private Puesto puesto;
     private Rol rol;
-    private Departamento departamento;
     private Contrato contrato;
+    private Decimo decimo;
     private List<Asistencia> asistencia;
-    private int vacaciones;
 
+    public Trabajador(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
+            char sexo, String ciudad, String telefono, Date fechaNacimiento){
+        super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
+    }
+    
     public Trabajador(String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
         super(nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.correoPersonal = correoPersonal;
@@ -32,6 +42,30 @@ public abstract class Trabajador extends Persona{
         this.contrato = contrato;
         this.vacaciones = departamento.getVacaciones();
         this.asistencia = new LinkedList<>();
+    }
+
+    
+    public Trabajador(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
+            char sexo, String ciudad, String telefono, Date fechaNacimiento, String correoPersonal,
+            String correoEmpresarial, String usuario, String contrasenia, boolean pagoPorTransferencia,
+            Rol rol, Contrato contrato) {
+        this(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
+        this.correoPersonal = correoPersonal;
+        this.correoEmpresarial = correoEmpresarial;
+        this.usuario = usuario;
+        this.password = contrasenia;
+        this.pagoPorTrasferencia = pagoPorTransferencia;
+        this.rol = rol;
+        this.contrato = contrato;
+    }
+    public Trabajador(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
+            char sexo, String ciudad, String telefono, Date fechaNacimiento,
+            String correoPersonal, String correoEmpresarial, int vacaciones, String usuario, String contrasenia,
+            double horasExtra, boolean pagoPorTransferencia, Rol rol, Contrato contrato, Decimo decimo) {
+        this(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento,
+        correoPersonal, correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);
+        this.vacaciones = vacaciones;
+        this.horasExtra = horasExtra; //AQUI PERMITIR QUE INGRESE MODIFICAR
     }
     
     public void pedirVacaciones(int numeroVacaciones){
@@ -119,6 +153,38 @@ public abstract class Trabajador extends Persona{
 
     public void setVacaciones(int vacaciones) {
         this.vacaciones = vacaciones;
+    }
+
+    public double getHorasExtra() {
+        return horasExtra;
+    }
+
+    public void setHorasExtra(double horasExtra) {
+        this.horasExtra = horasExtra;
+    }
+
+    public boolean isPagoPorTrasferencia() {
+        return pagoPorTrasferencia;
+    }
+
+    public void setPagoPorTrasferencia(boolean pagoPorTrasferencia) {
+        this.pagoPorTrasferencia = pagoPorTrasferencia;
+    }
+
+    public Decimo getDecimo() {
+        return decimo;
+    }
+
+    public void setDecimo(Decimo decimo) {
+        this.decimo = decimo;
+    }
+
+    public List<Asistencia> getAsistencia() {
+        return asistencia;
+    }
+
+    public void setAsistencia(List<Asistencia> asistencia) {
+        this.asistencia = asistencia;
     }
     
     @Override

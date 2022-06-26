@@ -1,5 +1,6 @@
 package administraciondeempleados;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Puesto {
@@ -8,6 +9,7 @@ public class Puesto {
     private List<Rol> rolList;
 
     public Puesto(String nombre) {
+        rolList = new LinkedList<>();
         this.nombre = nombre;
     }
 

@@ -9,9 +9,9 @@ import java.util.Date;
 public class Horario {
 
     private String tipo;
-    private List<DiasLaborales> diasLaborablesList;
     private Float horasLaborablesSemanales;
     
+    private List<DiasLaborales> diasLaborablesList;
     private List<Empleado> empleadoList;
     
     public Horario(String tipo) {
@@ -19,11 +19,14 @@ public class Horario {
         diasLaborablesList = new LinkedList();
         this.tipo = tipo;
     }
+    public Horario(String tipo, Float horasLaborablesSemanales){
+        this(tipo);
+        this.horasLaborablesSemanales = horasLaborablesSemanales;
+    }
     
     public Horario(String tipo, List<DiasLaborales> diasLaborables, Float horasLaborablesSemanales){
-        this(tipo);
+        this(tipo, horasLaborablesSemanales);
         this.diasLaborablesList = diasLaborables;
-        this.horasLaborablesSemanales = horasLaborablesSemanales;
     }
     
     //metodos de actualizacion de dias

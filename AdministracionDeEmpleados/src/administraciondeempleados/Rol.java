@@ -1,20 +1,34 @@
 package administraciondeempleados;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Rol {
 
     private String nombre;
     private Double salario;
-    private Puesto puesto;
     private Departamento departamento;
+    
+    private Puesto puesto;
     private List<Trabajador> trabajadorList;
 
-
+    public Rol(){
+        trabajadorList = new LinkedList<>();
+    }
+    
     public Rol(String nombre) { //Quitar mas tarde
         this.nombre = nombre;
     }
+    
+    public Rol( String nombre, double salario){
+        this(nombre);
+        this.salario = salario;
+    }
 
+     public Rol(double salario, String nombre, Puesto puesto){
+        this(nombre, salario);
+        this.puesto = puesto;
+    }
     public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
         this(nombre);
         this.puesto = puesto;
@@ -32,6 +46,10 @@ public class Rol {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Double getSalario() {
+        return salario;
     }
 
     public void setSalario(Double salario) {
