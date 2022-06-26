@@ -1,4 +1,5 @@
 package administraciondeempleados.view;
+
 import java.awt.Color;
 import administraciondeempleados.Horario;
 import administraciondeempleados.Gerente;
@@ -9,13 +10,12 @@ public class Horarios extends javax.swing.JFrame {
     DiaHorario diaHorario;
     Horario horario;
     Gerente gerente;
-    
+
     public Horarios() {
         initComponents();
-       
+        setLocationRelativeTo(this);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,7 +32,7 @@ public class Horarios extends javax.swing.JFrame {
         btnEliminarHorario = new javax.swing.JButton();
         btnEditarHorario = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1035, 450));
 
         pnlBackground.setBackground(new java.awt.Color(246, 246, 246));
@@ -160,7 +160,7 @@ public class Horarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lbExitMouseEntered
 
     private void lbExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseExited
-        pnlExit.setBackground(new Color(221,221,221));
+        pnlExit.setBackground(new Color(221, 221, 221));
         lbExit.setForeground(Color.black);
     }//GEN-LAST:event_lbExitMouseExited
 
@@ -179,7 +179,7 @@ public class Horarios extends javax.swing.JFrame {
     private void btnAgregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarHorarioMouseClicked
         diaHorario = new DiaHorario(this, true);
         diaHorario.setVisible(true);
-        if(diaHorario.getHorario() != null){
+        if (diaHorario.getHorario() != null) {
             this.horario = diaHorario.getHorario();
             gerente.crearHorario(horario.getTipo(), horario.getDiasLaborablesList(), horario.getHorasLaborablesSemanales());
             //modelTableHorarios.agregarHo

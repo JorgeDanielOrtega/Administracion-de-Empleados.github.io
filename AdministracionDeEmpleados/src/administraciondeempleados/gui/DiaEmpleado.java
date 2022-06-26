@@ -10,6 +10,7 @@ import administraciondeempleados.Contrato;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.EstadoCivil;
 import administraciondeempleados.Rol;
+import java.util.List;
 
 /**
  *
@@ -26,12 +27,19 @@ public class DiaEmpleado extends javax.swing.JDialog {
     private Contrato contratoTemporal;
     private Date dateNacimintoTemporal;
     private Date dateEntradaTemporal;
+    private List<Empleado> empleadoList;
     
     
     public DiaEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
+        setLocationRelativeTo(parent);
+    }
+    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Empleado> empleadoList) {
+        this(parent, modal);
+        this.empleadoList = empleadoList;
+        modelTableDescripcionEmpleadoo.setEmpleadoList(empleadoList);
+        modelTableDescripcionEmpleadoo.cargarModelo();
     }
 
     /**

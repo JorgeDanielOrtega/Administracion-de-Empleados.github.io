@@ -1,26 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 
-/**
- *
- * @author SONY VAIO
- */
 public class ModelTableDescripcionEmpleado extends DefaultTableModel{
     
     private List<Empleado> empleadoList;
     
     public ModelTableDescripcionEmpleado() {
-        empleadoList = new LinkedList<>();
+//        empleadoList = new LinkedList<>();
         addColumn("Nombre");
         addColumn("Apellido");
         addColumn("Direccion");
@@ -62,6 +53,29 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             empleado.getContrato(),
             empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate()
         });
+    }
+    public void cargarModelo(){
+        for (Empleado empleado : empleadoList) {
+            addRow(new Object[]{
+            empleado.getNombre(),
+            empleado.getApellido(),
+            empleado.getDireccion(),
+            empleado.getEstadoCivil(),
+            empleado.getCedula(),
+            empleado.getSexo(),
+            empleado.getCiudad(),
+            empleado.getTelefono(),
+            empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(),
+            empleado.getCorreoPersonal(),
+            empleado.getCorreoEmpresarial(),
+            empleado.getUsuario(),
+            empleado.getPassword(),
+            empleado.isPagoPorTrasferencia(),
+            empleado.getRol(),
+            empleado.getContrato(),
+            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate()
+        });
+        }
     }
     
     public void eliminarEmpleado(int fila){
@@ -113,6 +127,15 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         setValueAt(empleado.getContrato(), fila, 15);
         setValueAt(empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(), fila,16 );
     }
+
+    public List<Empleado> getEmpleadoList() {
+        return empleadoList;
+    }
+
+    public void setEmpleadoList(List<Empleado> empleadoList) {
+        this.empleadoList = empleadoList;
+    }
+    
     
     
     

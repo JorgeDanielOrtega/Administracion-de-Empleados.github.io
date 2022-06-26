@@ -1,10 +1,14 @@
 package administraciondeempleados.gui;
 
+import administraciondeempleados.Empleado;
+import administraciondeempleados.view.Horarios;
 import assets.colors.Palette;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,39 +21,43 @@ public class Principal extends javax.swing.JFrame {
     private final int HEIGHT_BACKGROUND = 630;
     private ImageIcon imageIcon;
     private Icon icon;
-    private JPanel panelClicked;
+    private JPanel buttonClicked;
+    private JPanel headClicked;
     Calendar horaActual;
+    private List<Empleado> empleadoList;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        empleadoList = new LinkedList();
         pintarImagen(jLabel1, "src/assets/icons/user3.png");
-        pintarImagen(jLabel20, "src/assets/icons/user3.png");
         jLabel1.setText("Gerente");
-        jLabel20.setText("Empleado");
         setLocationRelativeTo(null);
-        panelClicked = new JPanel();
+        buttonClicked = new JPanel();
+        headClicked = new JPanel();
         this.horaActual = Calendar.getInstance();
+        menuGerente.setVisible(true);
+        menuEmpleado.setVisible(false);
         cargarComponentes();
         mouseEvents();
     }
 
     private void cargarComponentes() {
         //Realizar una condicional para cargar los componenetes de un menu u otro
-        head_empleado.setBackground(Palette.HEAD);
-        head_gerente.setBackground(Palette.HEAD);
+        head.setBackground(Palette.HEAD);
         menuGerente.setBackground(Palette.MENU);
         menuEmpleado.setBackground(Palette.MENU);
-        btn_perfil.setBackground(Palette.BUTTON);
-        jPanel5.setBackground(Palette.BUTTON);
-        jPanel6.setBackground(Palette.BUTTON);
-        jPanel7.setBackground(Palette.BUTTON);
-        jPanel8.setBackground(Palette.BUTTON);
-        jPanel9.setBackground(Palette.BUTTON);
-        jPanel10.setBackground(Palette.BUTTON);
-        jPanel11.setBackground(Palette.BUTTON);
+        btn_empleados.setBackground(Palette.BUTTON);
+        btn_departamentos.setBackground(Palette.BUTTON);
+        btn_horarios.setBackground(Palette.BUTTON);
+
+        btn_logOut.setBackground(Palette.BUTTON);
+        btn_asistencia.setBackground(Palette.BUTTON);
+        btn_departamentoEmpleado.setBackground(Palette.BUTTON);
+        btn_buscar.setBackground(Palette.BUTTON);
+
         background.setBackground(Palette.BACKGROUND);
     }
 
@@ -61,10 +69,12 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
-                    btn_perfil.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = btn_perfil;
+                if (e.getSource() == head && buttonClicked != head) {
+                    head.setBackground(Palette.HEAD_CLICK);
+                    headClicked.setBackground(Palette.HEAD);
+                    headClicked = head;
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = new JPanel();
                     Perfil p = new Perfil();
                     p.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     p.setLocation(0, 0);
@@ -73,22 +83,10 @@ public class Principal extends javax.swing.JFrame {
                     background.revalidate();
                     background.repaint();
                 }
-                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
-                    jPanel5.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel5;
-                    DepartamentoGUi depa = new DepartamentoGUi();
-                    depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
-                    depa.setLocation(0, 0);
-                    background.removeAll();
-                    background.add(depa);
-                    background.revalidate();
-                    background.repaint();
-                }
-                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
-                    jPanel6.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel6;
+                if (e.getSource() == btn_buscar && buttonClicked != btn_buscar) {
+                    btn_buscar.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_buscar;
                     Busqueda bus = new Busqueda();
                     bus.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     bus.setLocation(0, 0);
@@ -97,22 +95,41 @@ public class Principal extends javax.swing.JFrame {
                     background.revalidate();
                     background.repaint();
                 }
-                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
-                    jPanel7.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel7;
-                    AsignacionAsistencia aa = new AsignacionAsistencia(null, true);
-                    aa.setVisible(true);
+
+                if (e.getSource() == btn_empleados && buttonClicked != btn_empleados) {
+                    btn_empleados.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_empleados;
+                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empleadoList);
+                    diaEmpleado.setVisible(true);
                 }
-                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
-                    jPanel8.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel8;
+                if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {
+                    btn_departamentos.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_departamentos;
+                    DiaDepartamento diaDepartamento = new DiaDepartamento(null, true);
+                    diaDepartamento.setVisible(true);
+
                 }
-                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
-                    jPanel9.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel9;
+                if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
+                    btn_horarios.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_horarios;
+                    Horarios horarios = new Horarios();
+                    horarios.setVisible(true);
+
+                }
+                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
+                    btn_logOut.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_logOut;
+                }
+                if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
+                    btn_asistencia.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_asistencia;
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true);
+                    asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
 //                    if (horaActual.get(Calendar.HOUR_OF_DAY) == horaActual.get(Calendar.HOUR_OF_DAY)) {
@@ -123,16 +140,19 @@ public class Principal extends javax.swing.JFrame {
 //                        JOptionPane.showMessageDialog(null, "no se puede marcar asistencia todavia"); //mas tarde cambiar el mensaje
 //                    }
                 }
-                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
-                    jPanel10.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel10;
+                if (e.getSource() == btn_departamentoEmpleado && buttonClicked != btn_departamentoEmpleado) {
+                    btn_departamentoEmpleado.setBackground(Palette.BUTTON_CLICK);
+                    buttonClicked.setBackground(Palette.BUTTON);
+                    buttonClicked = btn_departamentoEmpleado;
+                    DepartamentoGUi depa = new DepartamentoGUi();
+                    depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
+                    depa.setLocation(0, 0);
+                    background.removeAll();
+                    background.add(depa);
+                    background.revalidate();
+                    background.repaint();
                 }
-                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
-                    jPanel11.setBackground(Palette.BUTTON_CLICK);
-                    panelClicked.setBackground(Palette.BUTTON);
-                    panelClicked = jPanel11;
-                }
+
             }
 
             @Override
@@ -141,82 +161,80 @@ public class Principal extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
-                    btn_perfil.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == head && buttonClicked != head) {
+                    head.setBackground(Palette.HEAD_CLICK);
                 }
-                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
-                    jPanel5.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_buscar && buttonClicked != btn_buscar) {
+                    btn_buscar.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
-                    jPanel6.setBackground(Palette.BUTTON_CLICK);
+
+                if (e.getSource() == btn_empleados && buttonClicked != btn_empleados) {
+                    btn_empleados.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
-                    jPanel7.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {
+                    btn_departamentos.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
-                    jPanel8.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
+                    btn_horarios.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
-                    jPanel9.setBackground(Palette.BUTTON_CLICK);
+
+                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
+                    btn_logOut.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
-                    jPanel10.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
+                    btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
-                    jPanel11.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_departamentoEmpleado && buttonClicked != btn_departamentoEmpleado) {
+                    btn_departamentoEmpleado.setBackground(Palette.BUTTON_CLICK);
                 }
-                if (e.getSource() == head_gerente) {
-                    head_gerente.setBackground(Palette.HEAD_CLICK);
+
+                if (e.getSource() == head) {
+                    head.setBackground(Palette.HEAD_CLICK);
                 }
-                if (e.getSource() == head_empleado) {
-                    head_empleado.setBackground(Palette.HEAD_CLICK);
-                }
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (e.getSource() == btn_perfil && panelClicked != btn_perfil) {
-                    btn_perfil.setBackground(Palette.BUTTON);
+                if (e.getSource() == head && buttonClicked != head) {
+                    head.setBackground(Palette.HEAD);
                 }
-                if (e.getSource() == jPanel5 && panelClicked != jPanel5) {
-                    jPanel5.setBackground(Palette.BUTTON);
+
+                if (e.getSource() == btn_buscar && buttonClicked != btn_buscar) {
+                    btn_buscar.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel6 && panelClicked != jPanel6) {
-                    jPanel6.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_empleados && buttonClicked != btn_empleados) {
+                    btn_empleados.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel7 && panelClicked != jPanel7) {
-                    jPanel7.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {
+                    btn_departamentos.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel8 && panelClicked != jPanel8) {
-                    jPanel8.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
+                    btn_horarios.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel9 && panelClicked != jPanel9) {
-                    jPanel9.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
+                    btn_logOut.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel10 && panelClicked != jPanel10) {
-                    jPanel10.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
+                    btn_asistencia.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == jPanel11 && panelClicked != jPanel11) {
-                    jPanel11.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_departamentoEmpleado && buttonClicked != btn_departamentoEmpleado) {
+                    btn_departamentoEmpleado.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == head_gerente) {
-                    head_gerente.setBackground(Palette.HEAD);
-                }
-                if (e.getSource() == head_empleado) {
-                    head_empleado.setBackground(Palette.HEAD);
+
+                if (e.getSource() == head) {
+                    head.setBackground(Palette.HEAD);
                 }
             }
         };
-        btn_perfil.addMouseListener(m);
-        jPanel5.addMouseListener(m);
-        jPanel6.addMouseListener(m);
-        jPanel7.addMouseListener(m);
-        jPanel8.addMouseListener(m);
-        jPanel9.addMouseListener(m);
-        jPanel10.addMouseListener(m);
-        jPanel11.addMouseListener(m);
-        head_empleado.addMouseListener(m);
-        head_gerente.addMouseListener(m);
+        btn_empleados.addMouseListener(m);
+        btn_departamentos.addMouseListener(m);
+        btn_horarios.addMouseListener(m);
+        btn_logOut.addMouseListener(m);
+        btn_asistencia.addMouseListener(m);
+        btn_departamentoEmpleado.addMouseListener(m);
+        head.addMouseListener(m);
+        btn_buscar.addMouseListener(m);
     }
 
     private void pintarImagen(JLabel jlabel, String ruta) {
@@ -238,28 +256,24 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        menuGerente = new javax.swing.JPanel();
-        btn_perfil = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        head_gerente = new javax.swing.JPanel();
+        head = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        menuGerente = new javax.swing.JPanel();
+        btn_empleados = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btn_departamentos = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btn_horarios = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btn_buscar = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         background = new javax.swing.JPanel();
         menuEmpleado = new javax.swing.JPanel();
-        head_empleado = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        btn_departamentoEmpleado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        btn_asistencia = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        btn_logOut = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -268,135 +282,135 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        menuGerente.setBackground(new java.awt.Color(255, 0, 102));
-        menuGerente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_perfil.setBackground(new java.awt.Color(51, 51, 255));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Empleados");
-
-        javax.swing.GroupLayout btn_perfilLayout = new javax.swing.GroupLayout(btn_perfil);
-        btn_perfil.setLayout(btn_perfilLayout);
-        btn_perfilLayout.setHorizontalGroup(
-            btn_perfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_perfilLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        btn_perfilLayout.setVerticalGroup(
-            btn_perfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_perfilLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        menuGerente.add(btn_perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 270, 50));
-
-        jPanel5.setBackground(new java.awt.Color(51, 0, 204));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Departamentos");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        menuGerente.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 270, 50));
-
-        jPanel6.setBackground(new java.awt.Color(51, 255, 255));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Horarios");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        menuGerente.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 270, 50));
-
-        jPanel7.setBackground(new java.awt.Color(204, 0, 0));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("jLabel2");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-
-        menuGerente.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 270, 50));
-
-        head_gerente.setForeground(new java.awt.Color(204, 204, 204));
+        head.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(40, 15));
 
-        javax.swing.GroupLayout head_gerenteLayout = new javax.swing.GroupLayout(head_gerente);
-        head_gerente.setLayout(head_gerenteLayout);
-        head_gerenteLayout.setHorizontalGroup(
-            head_gerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(head_gerenteLayout.createSequentialGroup()
+        javax.swing.GroupLayout headLayout = new javax.swing.GroupLayout(head);
+        head.setLayout(headLayout);
+        headLayout.setHorizontalGroup(
+            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
-        head_gerenteLayout.setVerticalGroup(
-            head_gerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(head_gerenteLayout.createSequentialGroup()
+        headLayout.setVerticalGroup(
+            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        menuGerente.add(head_gerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
+        jPanel1.add(head, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
+
+        menuGerente.setBackground(new java.awt.Color(255, 0, 102));
+        menuGerente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_empleados.setBackground(new java.awt.Color(51, 51, 255));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Empleados");
+
+        javax.swing.GroupLayout btn_empleadosLayout = new javax.swing.GroupLayout(btn_empleados);
+        btn_empleados.setLayout(btn_empleadosLayout);
+        btn_empleadosLayout.setHorizontalGroup(
+            btn_empleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empleadosLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+        btn_empleadosLayout.setVerticalGroup(
+            btn_empleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empleadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuGerente.add(btn_empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 270, 50));
+
+        btn_departamentos.setBackground(new java.awt.Color(51, 0, 204));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Departamentos");
+
+        javax.swing.GroupLayout btn_departamentosLayout = new javax.swing.GroupLayout(btn_departamentos);
+        btn_departamentos.setLayout(btn_departamentosLayout);
+        btn_departamentosLayout.setHorizontalGroup(
+            btn_departamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_departamentosLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        btn_departamentosLayout.setVerticalGroup(
+            btn_departamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_departamentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuGerente.add(btn_departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 270, 50));
+
+        btn_horarios.setBackground(new java.awt.Color(51, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Horarios");
+
+        javax.swing.GroupLayout btn_horariosLayout = new javax.swing.GroupLayout(btn_horarios);
+        btn_horarios.setLayout(btn_horariosLayout);
+        btn_horariosLayout.setHorizontalGroup(
+            btn_horariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_horariosLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        btn_horariosLayout.setVerticalGroup(
+            btn_horariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_horariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuGerente.add(btn_horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 270, 50));
+
+        btn_buscar.setBackground(new java.awt.Color(204, 0, 0));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Buscar");
+
+        javax.swing.GroupLayout btn_buscarLayout = new javax.swing.GroupLayout(btn_buscar);
+        btn_buscar.setLayout(btn_buscarLayout);
+        btn_buscarLayout.setHorizontalGroup(
+            btn_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_buscarLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        btn_buscarLayout.setVerticalGroup(
+            btn_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        menuGerente.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 270, 50));
 
         jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
@@ -405,141 +419,92 @@ public class Principal extends javax.swing.JFrame {
         menuEmpleado.setBackground(new java.awt.Color(255, 0, 102));
         menuEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("jLabel1");
-        jLabel20.setPreferredSize(new java.awt.Dimension(40, 15));
-
-        javax.swing.GroupLayout head_empleadoLayout = new javax.swing.GroupLayout(head_empleado);
-        head_empleado.setLayout(head_empleadoLayout);
-        head_empleadoLayout.setHorizontalGroup(
-            head_empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(head_empleadoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-        head_empleadoLayout.setVerticalGroup(
-            head_empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(head_empleadoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        menuEmpleado.add(head_empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
-
-        jPanel11.setBackground(new java.awt.Color(102, 255, 102));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        menuEmpleado.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, -1));
-
-        jPanel10.setBackground(new java.awt.Color(153, 255, 102));
+        btn_departamentoEmpleado.setBackground(new java.awt.Color(153, 255, 102));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Departamento");
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout btn_departamentoEmpleadoLayout = new javax.swing.GroupLayout(btn_departamentoEmpleado);
+        btn_departamentoEmpleado.setLayout(btn_departamentoEmpleadoLayout);
+        btn_departamentoEmpleadoLayout.setHorizontalGroup(
+            btn_departamentoEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_departamentoEmpleadoLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(55, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        btn_departamentoEmpleadoLayout.setVerticalGroup(
+            btn_departamentoEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_departamentoEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        menuEmpleado.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, -1, -1));
+        menuEmpleado.add(btn_departamentoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
-        jPanel9.setBackground(new java.awt.Color(204, 255, 0));
+        btn_asistencia.setBackground(new java.awt.Color(204, 255, 0));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Asistencia");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout btn_asistenciaLayout = new javax.swing.GroupLayout(btn_asistencia);
+        btn_asistencia.setLayout(btn_asistenciaLayout);
+        btn_asistenciaLayout.setHorizontalGroup(
+            btn_asistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_asistenciaLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        btn_asistenciaLayout.setVerticalGroup(
+            btn_asistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_asistenciaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        menuEmpleado.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
+        menuEmpleado.add(btn_asistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
 
-        jPanel8.setBackground(new java.awt.Color(255, 0, 204));
+        btn_logOut.setBackground(new java.awt.Color(255, 0, 204));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Log out");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout btn_logOutLayout = new javax.swing.GroupLayout(btn_logOut);
+        btn_logOut.setLayout(btn_logOutLayout);
+        btn_logOutLayout.setHorizontalGroup(
+            btn_logOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        btn_logOutLayout.setVerticalGroup(
+            btn_logOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        menuEmpleado.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, -1, -1));
+        menuEmpleado.add(btn_logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addGap(53, 53, 53)
                 .addComponent(menuEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(579, Short.MAX_VALUE))
+                .addContainerGap(667, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -600,28 +565,24 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private javax.swing.JPanel btn_perfil;
+    private javax.swing.JPanel btn_asistencia;
+    private javax.swing.JPanel btn_buscar;
+    private javax.swing.JPanel btn_departamentoEmpleado;
+    private javax.swing.JPanel btn_departamentos;
+    private javax.swing.JPanel btn_empleados;
+    private javax.swing.JPanel btn_horarios;
+    private javax.swing.JPanel btn_logOut;
     private javax.swing.ButtonGroup buttonGroup;
-    private javax.swing.JPanel head_empleado;
-    private javax.swing.JPanel head_gerente;
+    private javax.swing.JPanel head;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel menuEmpleado;
     private javax.swing.JPanel menuGerente;
     // End of variables declaration//GEN-END:variables

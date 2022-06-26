@@ -1,10 +1,7 @@
 package administraciondeempleados;
 
-import administraciondeempleados.gui.Principal;
 import java.util.Date;
 import administraciondeempleados.gui.ModelTableDescripcionDepartamento;
-import administraciondeempleados.gui.ModelTableDescripcionEmpleado;
-import administraciondeempleados.gui.ModelListEstadoCivil;
 import administraciondeempleados.gui.ModelTableDescripcionRol;
 
 
@@ -17,5 +14,4 @@ public class AdministracionDeEmpleados {
         ModelTableDescripcionDepartamento d1 = new ModelTableDescripcionDepartamento();
         ModelTableDescripcionRol r1 = new ModelTableDescripcionRol();
     }
-
 }

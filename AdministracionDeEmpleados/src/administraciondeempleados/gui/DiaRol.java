@@ -22,7 +22,7 @@ public class DiaRol extends javax.swing.JDialog {
     public DiaRol(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(this);
+        setLocationRelativeTo(parent);
 
     }
 
