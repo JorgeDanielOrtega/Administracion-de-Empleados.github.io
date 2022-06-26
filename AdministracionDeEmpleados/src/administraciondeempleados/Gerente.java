@@ -2,7 +2,7 @@ package administraciondeempleados;
 
 import java.util.Date;
 import java.util.List;
-import model.AdministracionEmpleado;
+import administraciondeempleados.AdministracionEmpleado;
 
 public class Gerente extends Trabajador{
     
