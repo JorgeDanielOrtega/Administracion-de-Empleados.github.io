@@ -1,25 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package administraciondeempleados.gui;
 
 import javax.swing.JOptionPane;
 import administraciondeempleados.Departamento;
+import java.util.List;
 
-/**
- *
- * @author SONY VAIO
- */
 public class DiaDepartamento extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DiaDepartamento
-     */
+    private List<Departamento> departamentoList;
+
     public DiaDepartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+    }
+
+    public DiaDepartamento(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList) {
+        this(parent, modal);
+        this.departamentoList = departamentoList;
+        modelTableDescripcionDepartamentoo.setDepartamentoList(departamentoList);
+        modelTableDescripcionDepartamentoo.cargarModelo();
     }
 
     /**
@@ -284,15 +283,15 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private void btnModificarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDepartamentoActionPerformed
         int a = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea modificar");
         Departamento departamentoMolde = new Departamento(txtNombre.getText(), Integer.parseInt(txtNumeroEmpleados.getText()),
-                Integer.parseInt(txtNumeroMaximoEmpleados.getText()), Integer.parseInt(txtVacaciones.getText()));        
+                Integer.parseInt(txtNumeroMaximoEmpleados.getText()), Integer.parseInt(txtVacaciones.getText()));
         int fila = modelTableDescripcionDepartamento.getSelectedRow();
-        modelTableDescripcionDepartamentoo.editarDepartamento(fila,departamentoMolde);
-        
+        modelTableDescripcionDepartamentoo.editarDepartamento(fila, departamentoMolde);
+
     }//GEN-LAST:event_btnModificarDepartamentoActionPerformed
 
     private void btnEliminarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepartamentoActionPerformed
         int a = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar?");
-        if(a == 0){
+        if (a == 0) {
             int fila = modelTableDescripcionDepartamento.getSelectedRow();
             modelTableDescripcionDepartamentoo.eliminarDepartamento(fila);
         }

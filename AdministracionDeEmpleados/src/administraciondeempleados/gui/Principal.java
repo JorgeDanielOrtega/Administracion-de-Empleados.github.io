@@ -1,6 +1,7 @@
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Empleado;
+import administraciondeempleados.Empresa;
 import administraciondeempleados.view.Horarios;
 import assets.colors.Palette;
 import java.awt.Image;
@@ -24,14 +25,15 @@ public class Principal extends javax.swing.JFrame {
     private JPanel buttonClicked;
     private JPanel headClicked;
     Calendar horaActual;
-    private List<Empleado> empleadoList;
+    private Empresa empresa;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        empleadoList = new LinkedList();
+        empresa = new Empresa();
+        empresa.setHoraEntrada(7, 30);
         pintarImagen(jLabel1, "src/assets/icons/user3.png");
         jLabel1.setText("Gerente");
         setLocationRelativeTo(null);
@@ -100,16 +102,15 @@ public class Principal extends javax.swing.JFrame {
                     btn_empleados.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_empleados;
-                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empleadoList);
+                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empresa.getDepartamentoList().get(0));
                     diaEmpleado.setVisible(true);
                 }
                 if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {
                     btn_departamentos.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentos;
-                    DiaDepartamento diaDepartamento = new DiaDepartamento(null, true);
+                    DiaDepartamento diaDepartamento = new DiaDepartamento(null, true,empresa.getDepartamentoList());
                     diaDepartamento.setVisible(true);
-
                 }
                 if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
                     btn_horarios.setBackground(Palette.BUTTON_CLICK);
@@ -557,6 +558,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Principal().setVisible(true);
 
             }

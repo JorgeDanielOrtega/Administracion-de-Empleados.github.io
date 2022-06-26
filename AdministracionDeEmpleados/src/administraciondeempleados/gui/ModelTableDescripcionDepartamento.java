@@ -14,47 +14,59 @@ import administraciondeempleados.Departamento;
  *
  * @author SONY VAIO
  */
-public class ModelTableDescripcionDepartamento extends DefaultTableModel{
+public class ModelTableDescripcionDepartamento extends DefaultTableModel {
 
     private List<Departamento> departamentoList;
 
     public ModelTableDescripcionDepartamento() {
-        departamentoList = new LinkedList<>();
         addColumn("Nombre");
         addColumn("Numero");
         addColumn("Numero Maximo Empleados");
         addColumn("Dias de Vacaciones");
-        
     }
-    
-    public void agregarDepartamento(Departamento departamentoAgregar){
+
+    public void cargarModelo() {
+        for (Departamento departamento : departamentoList) {
+            addRow(new Object[]{
+                departamento.getNombre(),
+                departamento.getNumero(),
+                departamento.getEmpleadosMaximos(),
+                departamento.getVacaciones()
+            });
+        }
+    }
+
+    public void agregarDepartamento(Departamento departamentoAgregar) {
         departamentoList.add(departamentoAgregar);
         addRow(new Object[]{
             departamentoAgregar.getNombre(),
             departamentoAgregar.getNumero(),
             departamentoAgregar.getEmpleadosMaximos(),
             departamentoAgregar.getVacaciones()
-    });
+        });
     }
-    public void eliminarDepartamento(int fila){
-        if(fila >=0){
+
+    public void eliminarDepartamento(int fila) {
+        if (fila >= 0) {
             departamentoList.remove(fila);
             removeRow(fila);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccionar fila");
         }
     }
-    
-    public void editarDepartamento(int fila, Departamento departamentoModificar){
-       departamentoList.get(fila).setNombre(departamentoModificar.getNombre());
-       departamentoList.get(fila).setNumero(departamentoModificar.getNumero());
-       departamentoList.get(fila).setEmpleadosMaximos(departamentoModificar.getEmpleadosMaximos());
-       departamentoList.get(fila).setVacaciones(departamentoModificar.getVacaciones());
-       setValueAt(departamentoModificar.getNombre(), fila, 0);
-       setValueAt(departamentoModificar.getNumero(), fila, 1);
-       setValueAt(departamentoModificar.getEmpleadosMaximos(), fila, 2);
-       setValueAt(departamentoModificar.getVacaciones(), fila, 3);
+
+    public void editarDepartamento(int fila, Departamento departamentoModificar) {
+        departamentoList.get(fila).setNombre(departamentoModificar.getNombre());
+        departamentoList.get(fila).setNumero(departamentoModificar.getNumero());
+        departamentoList.get(fila).setEmpleadosMaximos(departamentoModificar.getEmpleadosMaximos());
+        departamentoList.get(fila).setVacaciones(departamentoModificar.getVacaciones());
+        setValueAt(departamentoModificar.getNombre(), fila, 0);
+        setValueAt(departamentoModificar.getNumero(), fila, 1);
+        setValueAt(departamentoModificar.getEmpleadosMaximos(), fila, 2);
+        setValueAt(departamentoModificar.getVacaciones(), fila, 3);
     }
-    
-    
+
+    public void setDepartamentoList(List<Departamento> departamentoList) {
+        this.departamentoList = departamentoList;
+    }
 }
