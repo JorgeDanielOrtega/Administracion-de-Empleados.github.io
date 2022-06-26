@@ -1,13 +1,19 @@
 package administraciondeempleados.gui;
 
+import administraciondeempleados.Contrato;
+import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.Empresa;
+import administraciondeempleados.Gerente;
+import administraciondeempleados.Puesto;
+import administraciondeempleados.Rol;
 import administraciondeempleados.view.Horarios;
 import assets.colors.Palette;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Icon;
@@ -26,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     private JPanel headClicked;
     Calendar horaActual;
     private Empresa empresa;
+    private Gerente gerente;
 
     /**
      * Creates new form Principal
@@ -41,7 +48,8 @@ public class Principal extends javax.swing.JFrame {
         headClicked = new JPanel();
         this.horaActual = Calendar.getInstance();
         menuGerente.setVisible(true);
-        menuEmpleado.setVisible(false);
+        menuEmpleado.setVisible(true);
+        gerente = new Gerente(empresa, "d", "d", "d", new Puesto("d"), new Rol("d"), new Departamento("d", 1, 1), new Contrato(true), "d", "d", "d", "d", 'm', "d", "d", new Date(2022, 6, 26));
         cargarComponentes();
         mouseEvents();
     }
@@ -89,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_buscar.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_buscar;
-                    Busqueda bus = new Busqueda();
+                    Busqueda bus = new Busqueda(empresa);
                     bus.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     bus.setLocation(0, 0);
                     background.removeAll();
@@ -116,7 +124,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_horarios.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_horarios;
-                    Horarios horarios = new Horarios();
+                    Horarios horarios = new Horarios(gerente);
                     horarios.setVisible(true);
 
                 }
@@ -145,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_departamentoEmpleado.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentoEmpleado;
-                    DepartamentoGUi depa = new DepartamentoGUi();
+                    DepartamentoGUi depa = new DepartamentoGUi(empresa.getDepartamentoList().get(0)); //error porque falta agregarle a la crud de empleado que ingrese un departamento
                     depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     depa.setLocation(0, 0);
                     background.removeAll();
