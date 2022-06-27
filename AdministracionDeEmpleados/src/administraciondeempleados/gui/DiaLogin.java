@@ -2,6 +2,7 @@ package administraciondeempleados.gui;
 
 import java.awt.Color;
 import administraciondeempleados.Cuenta;
+import administraciondeempleados.Departamento;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Empresa;
 
@@ -9,9 +10,7 @@ public class DiaLogin extends javax.swing.JDialog {
 
     private Cuenta cuenta;
     private Empresa empresa;
-    
     private java.awt.Frame parent;
-    
     private int xPos, yPos;
     
     public DiaLogin(java.awt.Frame parent, boolean modal) {
@@ -20,6 +19,15 @@ public class DiaLogin extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         this.parent = parent;
         parent.setVisible(false);
+    }
+    
+    public DiaLogin(java.awt.Frame parent, boolean modal, Empresa empresa) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
+        parent.setVisible(false);
+        this.empresa = empresa;
     }
     
     public void llenarCampos(){
@@ -312,7 +320,7 @@ public class DiaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_lbBarraSuperiorMousePressed
 
     private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
-        if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
+        if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("1234") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
             obtenerCuenta();
             parent.setVisible(true);
             this.dispose();
@@ -334,30 +342,24 @@ public class DiaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_pnlBackgroundMouseClicked
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
-            if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
-            obtenerCuenta();
-            parent.setVisible(true);
-            this.dispose();
-            }else{
-            JOptionPane.showMessageDialog(null, "Datos incorrectos");
-            }
-        }
+        
     }//GEN-LAST:event_formKeyPressed
 
     private void lbRecuperarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbRecuperarContraseñaMouseClicked
-        for(int i = 0; i <= empresa.getDepartamentoList().size(); i++){
-            empresa.getDepartamentoList().get(i);
-            System.out.println(empresa.getDepartamentoList().get(i));
-            for(int j = 0; j <= empresa.getDepartamentoList().get(i).getTrabajadorList().size(); i++){
-                empresa.getDepartamentoList().get(i).getTrabajadorList().get(j);
-                System.out.println(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j));
-                if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
-                    empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).setPassword("LaMejorEmpresa");
-                    JOptionPane.showMessageDialog(this, "Su nueva contraseña es: \"LaMejorEmpresa\"\nRecuerde cambiarla");
-                    break;
+        if(!txtUsuario.getText().equals("Nombre de usuario") && !txtUsuario.getText().isEmpty()){
+            for(int i = 0; i <= empresa.getDepartamentoList().size(); i++){
+                empresa.getDepartamentoList().get(i);
+                for(int j = 0; j <= empresa.getDepartamentoList().get(i).getTrabajadorList().size(); i++){
+                    empresa.getDepartamentoList().get(i).getTrabajadorList().get(j);
+                    if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
+                        empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).setPassword("1234");
+                        JOptionPane.showMessageDialog(this, "Su nueva contraseña es: \"1234\"\nRecuerde cambiarla");
+                        break;
+                    }
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor ingrese su usuario");
         }
     }//GEN-LAST:event_lbRecuperarContraseñaMouseClicked
 

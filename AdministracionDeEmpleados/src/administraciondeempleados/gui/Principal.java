@@ -39,13 +39,17 @@ public class Principal extends javax.swing.JFrame {
     private DiaDatosEmpresa diaDatosEmpresa;
     private Gerente gerente;
     private DiaLogin diaLogin;
+    private Departamento departamento;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        empresa = new Empresa();
+        if(empresa == null){
+            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
+            this.empresa = diaDatosEmpresa.getEmpresa();
+        }
         empresa.setHoraEntrada(7, 30);
         pintarImagen(jLabel1, "src/assets/icons/user3.png");
         jLabel1.setText("Gerente");
@@ -58,10 +62,8 @@ public class Principal extends javax.swing.JFrame {
         gerente = new Gerente(empresa, "Gerente", "admin", "admin", new Puesto("Gerente"), new Rol("Gerente"), new Departamento("Administracion", 1, 1), new Contrato(true), "Gerente", "Gerente", "Gerente", "9999999999", '/', "Ciudad", "9999999999", new Date(2022, 6, 26));
         cargarComponentes();
         mouseEvents();
-        if(empresa == null){
-            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
-            this.empresa = diaDatosEmpresa.getEmpresa();
-        }
+        empresa.getDepartamentoList().add(gerente.getDepartamento());
+        empresa.getDepartamentoList().get(0).getTrabajadorList().add(gerente);
     }
 
     private void cargarComponentes() {
@@ -603,7 +605,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEmpresaMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        diaLogin = new DiaLogin(this, true);
+        diaLogin = new DiaLogin(this, true, empresa);
         diaLogin.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
