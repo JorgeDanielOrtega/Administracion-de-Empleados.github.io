@@ -312,12 +312,12 @@ public class Perfil extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_verAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verAsistenciasActionPerformed
-        AsistenciaGUI asis = new AsistenciaGUI(null, true);
+        AsistenciaGUI asis = new AsistenciaGUI(null, true,empleado);
         asis.setVisible(true);
     }//GEN-LAST:event_btn_verAsistenciasActionPerformed
 
     private void btn_verHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verHorarioActionPerformed
-        HorarioGui h = new HorarioGui(null, true);
+        HorarioGui h = new HorarioGui(null, true,empleado.getHorario());
         h.setVisible(true);
     }//GEN-LAST:event_btn_verHorarioActionPerformed
 
