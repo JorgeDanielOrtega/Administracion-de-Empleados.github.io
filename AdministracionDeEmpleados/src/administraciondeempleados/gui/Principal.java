@@ -92,7 +92,8 @@ public class Principal extends javax.swing.JFrame {
         empleado4  = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "daniel", "1234", new Puesto("empleado"), rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
         cargarComponentes();
         mouseEvents();
-
+        empresa.getDepartamentoList().add(gerente.getDepartamento());
+        empresa.getDepartamentoList().get(0).getTrabajadorList().add(gerente);
     }
 
     private void cargarComponentes() {
@@ -614,7 +615,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        diaLogin = new DiaLogin(this, true);
+        diaLogin = new DiaLogin(this, true, empresa);
         diaLogin.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 

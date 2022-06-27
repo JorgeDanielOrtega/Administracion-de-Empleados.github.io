@@ -34,7 +34,7 @@ public abstract class Trabajador extends Persona{
         super(nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.correoPersonal = correoPersonal;
         generarCorreoEmpresarial(nombre, apellido);
-        this.usuario = correoEmpresarial;
+        this.usuario = "admin";
         this.password = password;
         this.puesto = puesto;
         this.rol = rol;
