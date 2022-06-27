@@ -2,6 +2,8 @@ package administraciondeempleados.gui;
 
 import administraciondeempleados.Empleado;
 import administraciondeempleados.view.Horarios;
+import administraciondeempleados.Empresa;
+import administraciondeempleados.gui.DiaDatosEmpresa;
 import assets.colors.Palette;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -25,6 +27,8 @@ public class Principal extends javax.swing.JFrame {
     private JPanel headClicked;
     Calendar horaActual;
     private List<Empleado> empleadoList;
+    private Empresa empresa;
+    private DiaDatosEmpresa diaDatosEmpresa;
 
     /**
      * Creates new form Principal
@@ -42,6 +46,11 @@ public class Principal extends javax.swing.JFrame {
         menuEmpleado.setVisible(false);
         cargarComponentes();
         mouseEvents();
+        if(empresa == null){
+            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
+            this.empresa = diaDatosEmpresa.getEmpresa();
+        }
+        System.out.println(empresa);
     }
 
     private void cargarComponentes() {
@@ -243,6 +252,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setIcon(icon);
         this.repaint();
 
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     /**

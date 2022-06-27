@@ -1,12 +1,14 @@
-package administraciondeempleados.view;
+package administraciondeempleados.gui;
 
 import java.awt.Color;
 import administraciondeempleados.Cuenta;
 import javax.swing.JOptionPane;
+import administraciondeempleados.Empresa;
 
 public class DiaLogin extends javax.swing.JDialog {
 
     Cuenta cuenta;
+    Empresa empresa;
     
     java.awt.Frame parent;
     
@@ -35,6 +37,14 @@ public class DiaLogin extends javax.swing.JDialog {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
     
     
@@ -219,6 +229,11 @@ public class DiaLogin extends javax.swing.JDialog {
         lbRecuperarContraseña.setFont(new java.awt.Font("Roboto Thin", 2, 14)); // NOI18N
         lbRecuperarContraseña.setText("Recuperar contraseña");
         lbRecuperarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbRecuperarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbRecuperarContraseñaMouseClicked(evt);
+            }
+        });
         pnlBackground.add(lbRecuperarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,6 +343,22 @@ public class DiaLogin extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_formKeyPressed
+
+    private void lbRecuperarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbRecuperarContraseñaMouseClicked
+        for(int i = 0; i <= empresa.getDepartamentoList().size(); i++){
+            empresa.getDepartamentoList().get(i);
+            System.out.println(empresa.getDepartamentoList().get(i));
+            for(int j = 0; j <= empresa.getDepartamentoList().get(i).getTrabajadorList().size(); i++){
+                empresa.getDepartamentoList().get(i).getTrabajadorList().get(j);
+                System.out.println(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j));
+                if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
+                    empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).setPassword("LaMejorEmpresa");
+                    JOptionPane.showMessageDialog(this, "Su nueva contraseña es: \"LaMejorEmpresa\"\nRecuerde cambiarla");
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_lbRecuperarContraseñaMouseClicked
 
     /**
      * @param args the command line arguments
