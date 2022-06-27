@@ -18,18 +18,21 @@ public class Departamento {
 
     public Departamento(){
         trabajadorList = new LinkedList<>();
+        guardarFecha();
     }
     
     public Departamento(String nombre, int numero, int empleadosMaximos) {
         this();
-        guardarFecha();
+        this.nombre = nombre;
+        this.numero = numero;
+        this.empleadosMaximos = empleadosMaximos;
     }
     
     public Departamento(String nombre, int numero, int maximoEmpleados, int vacaciones){
         this(nombre, numero, maximoEmpleados);
         this.vacaciones = vacaciones;
-        guardarFecha();
     } 
+        //guardarFecha();
     
     private void actualizarVacaciones(){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy");

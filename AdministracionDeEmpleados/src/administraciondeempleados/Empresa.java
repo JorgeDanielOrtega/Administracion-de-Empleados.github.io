@@ -22,6 +22,7 @@ public class Empresa {
         horarioList = new LinkedList<>();
         rolList = new LinkedList();
         departamentoList = new LinkedList<>();
+        this.horaEntrada = Calendar.getInstance();//quitar mas tarde
     }
     
     public Empresa(String empresa, int fundacionYear, String rubro) {

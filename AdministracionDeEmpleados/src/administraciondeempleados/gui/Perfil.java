@@ -1,5 +1,6 @@
 package administraciondeempleados.gui;
 
+import administraciondeempleados.view.HorarioGui;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.gui.AsistenciaGUI;
 

@@ -14,9 +14,14 @@ public class Horario {
     private List<DiasLaborales> diasLaborablesList;
     private List<Empleado> empleadoList;
     
-    public Horario(String tipo) {
+    public Horario() {
         empleadoList = new LinkedList();
         diasLaborablesList = new LinkedList();
+
+    }
+    
+    public Horario(String tipo) {
+        this();
         this.tipo = tipo;
     }
     public Horario(String tipo, Float horasLaborablesSemanales){

@@ -5,10 +5,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import administraciondeempleados.Empleado;
+import administraciondeempleados.Trabajador;
 
 public class ModelTableDescripcionEmpleado extends DefaultTableModel{
     
-    private List<Empleado> empleadoList;
+    private List<Trabajador> trabajadorList;
     
     public ModelTableDescripcionEmpleado() {
 //        empleadoList = new LinkedList<>();
@@ -33,7 +34,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
     }
     
     public void agregarEmpleado(Empleado empleado){
-        empleadoList.add(empleado);
+        trabajadorList.add((Trabajador)empleado);
         addRow(new Object[]{
             empleado.getNombre(),
             empleado.getApellido(),
@@ -55,7 +56,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         });
     }
     public void cargarModelo(){
-        for (Empleado empleado : empleadoList) {
+        for (Trabajador trabajador : trabajadorList) {
+            Empleado empleado = (Empleado)trabajador;
             addRow(new Object[]{
             empleado.getNombre(),
             empleado.getApellido(),
@@ -80,7 +82,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
     
     public void eliminarEmpleado(int fila){
         if (fila >= 0){
-            empleadoList.remove(fila);
+            trabajadorList.remove(fila);
             removeRow(fila);
         }else{
             JOptionPane.showMessageDialog( null, "Selecionar Fila");
@@ -92,23 +94,23 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
     }
     
     public void editarEmpleado(int fila, Empleado empleado){
-        empleadoList.get(fila).setNombre(empleado.getNombre());
-        empleadoList.get(fila).setApellido(empleado.getApellido());
-        empleadoList.get(fila).setDireccion(empleado.getDireccion());
-        empleadoList.get(fila).setEstadoCivil(empleado.getEstadoCivil());
-        empleadoList.get(fila).setCedula(empleado.getCedula());
-        empleadoList.get(fila).setSexo(empleado.getSexo());
-        empleadoList.get(fila).setCiudad(empleado.getCiudad());
-        empleadoList.get(fila).setTelefono(empleado.getTelefono());
-        empleadoList.get(fila).setFechaNacimiento(empleado.getFechaNacimiento());
-        empleadoList.get(fila).setCorreoPersonal(empleado.getCorreoPersonal());
-        empleadoList.get(fila).setCorreoEmpresarial(empleado.getCorreoEmpresarial());
-        empleadoList.get(fila).setUsuario(empleado.getUsuario());
-        empleadoList.get(fila).setPassword(empleado.getPassword());
-        empleadoList.get(fila).setPagoPorTrasferencia(empleado.isPagoPorTrasferencia());
-        empleadoList.get(fila).setRol(empleado.getRol());
-        empleadoList.get(fila).setContrato(empleado.getContrato());
-        empleadoList.get(fila).setEntradaYear(empleado.getEntradaYear());
+        trabajadorList.get(fila).setNombre(empleado.getNombre());
+        trabajadorList.get(fila).setApellido(empleado.getApellido());
+        trabajadorList.get(fila).setDireccion(empleado.getDireccion());
+        trabajadorList.get(fila).setEstadoCivil(empleado.getEstadoCivil());
+        trabajadorList.get(fila).setCedula(empleado.getCedula());
+        trabajadorList.get(fila).setSexo(empleado.getSexo());
+        trabajadorList.get(fila).setCiudad(empleado.getCiudad());
+        trabajadorList.get(fila).setTelefono(empleado.getTelefono());
+        trabajadorList.get(fila).setFechaNacimiento(empleado.getFechaNacimiento());
+        trabajadorList.get(fila).setCorreoPersonal(empleado.getCorreoPersonal());
+        trabajadorList.get(fila).setCorreoEmpresarial(empleado.getCorreoEmpresarial());
+        trabajadorList.get(fila).setUsuario(empleado.getUsuario());
+        trabajadorList.get(fila).setPassword(empleado.getPassword());
+        trabajadorList.get(fila).setPagoPorTrasferencia(empleado.isPagoPorTrasferencia());
+        trabajadorList.get(fila).setRol(empleado.getRol());
+        trabajadorList.get(fila).setContrato(empleado.getContrato());
+        ((Empleado)trabajadorList.get(fila)).setEntradaYear(empleado.getEntradaYear());
         setValueAt(empleado.getNombre(), fila, 0);
         setValueAt(empleado.getApellido(), fila, 1);
         setValueAt(empleado.getDireccion(), fila,2 );
@@ -128,12 +130,12 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         setValueAt(empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(), fila,16 );
     }
 
-    public List<Empleado> getEmpleadoList() {
-        return empleadoList;
+    public List<Trabajador> gettrabajadorList() {
+        return trabajadorList;
     }
 
-    public void setEmpleadoList(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
+    public void settrabajadorList(List<Trabajador> trabajadorList) {
+        this.trabajadorList = trabajadorList;
     }
     
     

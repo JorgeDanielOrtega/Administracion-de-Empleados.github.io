@@ -22,7 +22,7 @@ public class Gerente extends Trabajador{
             correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);
     }
     
-    //CRUD EMPRESA, crear empresa se controla desde la interfaz
+    //CRUD EMPRESA
             
     public Empresa crearEmpresa(String nombre, int fundacionYear, String rubro, String leyenda){
         Empresa empresa = new Empresa(nombre, fundacionYear, rubro);

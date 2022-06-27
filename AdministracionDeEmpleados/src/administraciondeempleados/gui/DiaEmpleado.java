@@ -7,9 +7,11 @@ package administraciondeempleados.gui;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Contrato;
+import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.EstadoCivil;
 import administraciondeempleados.Rol;
+import administraciondeempleados.Trabajador;
 import java.util.List;
 
 /**
@@ -27,18 +29,17 @@ public class DiaEmpleado extends javax.swing.JDialog {
     private Contrato contratoTemporal;
     private Date dateNacimintoTemporal;
     private Date dateEntradaTemporal;
-    private List<Empleado> empleadoList;
-    
-    
+
+
     public DiaEmpleado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
     }
-    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Empleado> empleadoList) {
+
+    public DiaEmpleado(java.awt.Frame parent, boolean modal, Departamento departamento) {
         this(parent, modal);
-        this.empleadoList = empleadoList;
-        modelTableDescripcionEmpleadoo.setEmpleadoList(empleadoList);
+        modelTableDescripcionEmpleadoo.settrabajadorList(departamento.getTrabajadorList());
         modelTableDescripcionEmpleadoo.cargarModelo();
     }
 
@@ -629,23 +630,24 @@ public class DiaEmpleado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean cambiarTextoBoolean(){
+    private boolean cambiarTextoBoolean() {
         boolean valorComboBox = (opcSi.isSelected());
         return valorComboBox;
     }
-    private int indexEstadoCivl(){
+
+    private int indexEstadoCivl() {
         int index;
         switch (comBoxEstadoCivil.getSelectedIndex()) {
             case 0:
-                index = 0; 
+                index = 0;
                 break;
-            case 1: 
+            case 1:
                 index = 1;
                 break;
             case 2:
                 index = 2;
                 break;
-            case 3: 
+            case 3:
                 index = 3;
                 break;
             default:
@@ -653,26 +655,27 @@ public class DiaEmpleado extends javax.swing.JDialog {
         }
         return index;
     }
-    
-    private char seleccionarCaracterSexo(){
+
+    private char seleccionarCaracterSexo() {
         char sexo;
-        if(opcHombre.isSelected()){
+        if (opcHombre.isSelected()) {
             sexo = 'M';
-        }else{
+        } else {
             sexo = 'F';
         }
         return sexo;
     }
-    private void llenarDates(){
-        this.dateNacimintoTemporal = new Date((Integer.parseInt(txtAnioNacimiento.getText())-1900), (Integer.parseInt(txtMesNacimiento.getText())-1), Integer.parseInt(txtDiaNacimiento.getText()));
-        this.dateEntradaTemporal = new Date((Integer.parseInt(txtAnioEntrada.getText())-1900), (Integer.parseInt(txtMesEntrada.getText())-1), Integer.parseInt(txtDiaEntrada.getText()));
+
+    private void llenarDates() {
+        this.dateNacimintoTemporal = new Date((Integer.parseInt(txtAnioNacimiento.getText()) - 1900), (Integer.parseInt(txtMesNacimiento.getText()) - 1), Integer.parseInt(txtDiaNacimiento.getText()));
+        this.dateEntradaTemporal = new Date((Integer.parseInt(txtAnioEntrada.getText()) - 1900), (Integer.parseInt(txtMesEntrada.getText()) - 1), Integer.parseInt(txtDiaEntrada.getText()));
     }
-    
+
     private void btnAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmpleadoActionPerformed
         llenarDates();
-        Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(),txtDireccion.getText(),comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
-                                txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
-                                this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
+        Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
+                txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
+                this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
                 cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal);
         modelTableDescripcionEmpleadoo.agregarEmpleado(empleadoMolde);
     }//GEN-LAST:event_btnAgregarEmpleadoActionPerformed
@@ -680,9 +683,9 @@ public class DiaEmpleado extends javax.swing.JDialog {
     private void btnModificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEmpleadoActionPerformed
         int a = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea modificar");
         llenarDates();
-        Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(),txtDireccion.getText(),comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
-                                txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
-                                this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
+        Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
+                txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
+                this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
                 cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal);
         int fila = tblTablaEmpleado.getSelectedRow();
         modelTableDescripcionEmpleadoo.editarEmpleado(fila, empleadoMolde);
@@ -690,10 +693,10 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
     private void btnEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpleadoActionPerformed
         int a = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar?");
-                if (a == 0){
-                    int fila = tblTablaEmpleado.getSelectedRow();
-                    modelTableDescripcionEmpleadoo.eliminarEmpleado(fila);
-                }
+        if (a == 0) {
+            int fila = tblTablaEmpleado.getSelectedRow();
+            modelTableDescripcionEmpleadoo.eliminarEmpleado(fila);
+        }
     }//GEN-LAST:event_btnEliminarEmpleadoActionPerformed
 
     private void txtDiaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaEntradaActionPerformed
@@ -724,9 +727,9 @@ public class DiaEmpleado extends javax.swing.JDialog {
         diaContratoTrabajador = new DiaContratoTrabajador(new Principal(), true);
         diaContratoTrabajador.setVisible(true);
         Contrato contratoModel = diaContratoTrabajador.getContrato();
-        if(contratoModel != null){
+        if (contratoModel != null) {
             this.contratoTemporal = contratoModel;
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No se ha agregado Contrato");
         }
     }//GEN-LAST:event_btnAgregarContratoActionPerformed
@@ -737,10 +740,10 @@ public class DiaEmpleado extends javax.swing.JDialog {
         setLocationRelativeTo(this);
         Rol rolModel = diaRol.obtenerRol();
 
-        if(rolModel != null){
+        if (rolModel != null) {
             rolTemporal = rolModel;
-        }else{
-            JOptionPane.showMessageDialog(this,"No hay elementos en el Rol");
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay elementos en el Rol");
         }
     }//GEN-LAST:event_btnAgregarRolActionPerformed
 

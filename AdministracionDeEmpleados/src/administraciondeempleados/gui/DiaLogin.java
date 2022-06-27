@@ -7,18 +7,19 @@ import administraciondeempleados.Empresa;
 
 public class DiaLogin extends javax.swing.JDialog {
 
-    Cuenta cuenta;
-    Empresa empresa;
+    private Cuenta cuenta;
+    private Empresa empresa;
     
-    java.awt.Frame parent;
+    private java.awt.Frame parent;
     
-    int xPos, yPos;
+    private int xPos, yPos;
     
     public DiaLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         this.parent = parent;
+        parent.setVisible(false);
     }
     
     public void llenarCampos(){
