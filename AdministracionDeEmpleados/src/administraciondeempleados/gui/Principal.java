@@ -155,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_logOut.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_logOut;
-                    diaLogin = new DiaLogin(null, true);
+                    diaLogin = new DiaLogin(null, true, empresa);
                     diaLogin.setVisible(true);
                 }
                 if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
