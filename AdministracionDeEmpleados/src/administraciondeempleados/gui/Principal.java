@@ -10,6 +10,7 @@ import administraciondeempleados.Puesto;
 import administraciondeempleados.Rol;
 import administraciondeempleados.Empresa;
 import administraciondeempleados.EstadoCivil;
+import administraciondeempleados.Horario;
 import administraciondeempleados.gui.DiaDatosEmpresa;
 import administraciondeempleados.gui.DiaLogin;
 import assets.colors.Palette;
@@ -22,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -41,12 +43,23 @@ public class Principal extends javax.swing.JFrame {
     private Gerente gerente;
     private DiaLogin diaLogin;
     private Departamento departamento;
+    private Empleado empleado;
+    private Empleado empleado2;
+    private Empleado empleado3;
+    private Empleado empleado4;
+    private Rol rolContable;
+    private Rol rolAyudante;
+    private Horario horarioMatutino;
+    private Horario horarioVespertino;
+    private Horario horarioNocturno;
+    private JFrame parent;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        parent = this;
         if (empresa == null) {
             diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
             this.empresa = diaDatosEmpresa.getEmpresa();
@@ -62,7 +75,21 @@ public class Principal extends javax.swing.JFrame {
         this.horaActual = Calendar.getInstance();
         menuGerente.setVisible(true);
         menuEmpleado.setVisible(true);
+        rolContable = new Rol("Contable");
+        rolAyudante = new Rol("ayudante");
+        horarioMatutino = new Horario("matutino", 45f);
+        horarioVespertino = new Horario("vespertino",30f);
+        horarioNocturno = new Horario("nocturno",15f);
+        empresa.getHorarioList().add(horarioMatutino);
+        empresa.getHorarioList().add(horarioVespertino);
+        empresa.getHorarioList().add(horarioNocturno);
+        empresa.getRolList().add(rolContable);
+        empresa.getRolList().add(rolAyudante);
         gerente = new Gerente(empresa, "Gerente", "admin", "admin", new Puesto("Gerente"), new Rol("Gerente"), new Departamento("Administracion", 1, 1), new Contrato(true), "Gerente", "Gerente", "Gerente", "9999999999", '/', "Ciudad", "9999999999", new Date(2022, 6, 26));
+        empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "daniel", "1234", new Puesto("administracion"), rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado2  = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "jose", "1234", new Puesto("administracion"), rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado3  = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "daniel", "1234", new Puesto("empleado"), rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado4  = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "daniel", "1234", new Puesto("empleado"), rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
         cargarComponentes();
         mouseEvents();
 
@@ -91,6 +118,11 @@ public class Principal extends javax.swing.JFrame {
         btn_buscar.setBackground(Palette.BUTTON);
 
         background.setBackground(Palette.BACKGROUND);
+
+        departamento.getTrabajadorList().add(empleado);
+        departamento.getTrabajadorList().add(empleado2);
+        departamento.getTrabajadorList().add(empleado3);
+        departamento.getTrabajadorList().add(empleado4);
     }
 
     public void mouseEvents() {
@@ -107,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
                     headClicked = head;
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = new JPanel();
-                    Perfil p = new Perfil();
+                    Perfil p = new Perfil(empleado);
                     p.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     p.setLocation(0, 0);
                     background.removeAll();
@@ -154,14 +186,14 @@ public class Principal extends javax.swing.JFrame {
                     btn_logOut.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_logOut;
-                    diaLogin = new DiaLogin(null, true);
+                    diaLogin = new DiaLogin(parent, true);
                     diaLogin.setVisible(true);
                 }
                 if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_asistencia;
-                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true);
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true,empleado.getAsistenciaList(), horaActual);
                     asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
@@ -177,8 +209,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_departamentoEmpleado.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentoEmpleado;
-                    Empleado empleado = new Empleado("jorge", "ortega", "Av. Agustin aguirre", EstadoCivil.SOLTERO, "12345678-9", 'm', "loja", "0987543", new Date(22, 06, 22), "jorged@gmai.com", "empresa@empresa.gob", "daniel", "12345", true, new Rol("Contable"), new Contrato(true), new Date(22, 06, 22), departamento);
-                    departamento.getTrabajadorList().add(empleado);
+
                     DepartamentoGUi depa = new DepartamentoGUi(empresa.getDepartamentoList().get(0)); //error porque falta agregarle a la crud de empleado que ingrese un departamento
                     depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     depa.setLocation(0, 0);
