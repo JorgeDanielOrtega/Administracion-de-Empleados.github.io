@@ -7,6 +7,9 @@ package administraciondeempleados.gui;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Puesto;
 import administraciondeempleados.Rol;
+import java.awt.Frame;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -18,13 +21,24 @@ public class DiaRol extends javax.swing.JDialog {
      * Creates new form DiaRol
      */
     private Rol rol;
+    private List<Rol> rolList;
     
     public DiaRol(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        rolList = new LinkedList<>();
 
     }
+
+    public DiaRol(java.awt.Frame parent, boolean modal, List<Rol> rolList) {
+        this(parent, modal);
+        this.rolList = rolList;
+        modelTableDescripcionRoll.setRolList(rolList);
+        modelTableDescripcionRoll.cargarModelo();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

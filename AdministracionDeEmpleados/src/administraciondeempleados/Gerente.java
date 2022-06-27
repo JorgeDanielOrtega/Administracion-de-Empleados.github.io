@@ -17,9 +17,9 @@ public class Gerente extends Trabajador{
     public Gerente(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
             String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento,
             String correoPersonal, String correoEmpresarial, String usuario, String contrasenia,
-            boolean pagoPorTransferencia, Rol rol, Contrato contrato){
+            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Departamento departamento){
             super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento, correoPersonal,
-            correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);
+            correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato, departamento);
     }
     
     //CRUD EMPRESA

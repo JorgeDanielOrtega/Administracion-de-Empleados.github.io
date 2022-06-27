@@ -19,7 +19,6 @@ public class ModelTableDescripcionRol extends DefaultTableModel{
     private List<Rol> rolList;
     
     public ModelTableDescripcionRol() {
-        rolList = new LinkedList<>();
         addColumn("Nombre");
         addColumn("Salario");
         addColumn("Puesto");
@@ -30,8 +29,18 @@ public class ModelTableDescripcionRol extends DefaultTableModel{
         addRow(new Object[]{
             rol.getNombre(),
             rol.getSalario(),
+            rol.getPuesto()
+        });
+    }
+    
+    public void cargarModelo(){
+        for(Rol rol : rolList){
+            addRow(new Object[]{
+            rol.getNombre(),
+            rol.getSalario(),
             rol.getPuesto().getNombre()
         });
+        }
     }
     
     public Rol leerRool(int fila){
@@ -55,4 +64,13 @@ public class ModelTableDescripcionRol extends DefaultTableModel{
         setValueAt(rol.getSalario(), fila, 1);
         setValueAt(rol.getPuesto().getNombre(), fila, 2);
     }
+
+    public List<Rol> getRolList() {
+        return rolList;
+    }
+
+    public void setRolList(List<Rol> rolList) {
+        this.rolList = rolList;
+    }
+    
 }

@@ -120,7 +120,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_empleados.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_empleados;
-                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empresa.getDepartamentoList().get(0));
+                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empresa.getDepartamentoList(), empresa.getRolList());
                     diaEmpleado.setVisible(true);
                 }
                 if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {

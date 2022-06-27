@@ -30,6 +30,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         addColumn("Rol");
         addColumn("Contrato");
         addColumn("Año de entrada");
+        addColumn("Departamento");
         
     }
     
@@ -52,7 +53,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             empleado.isPagoPorTrasferencia(),
             empleado.getRol(),
             empleado.getContrato(),
-            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate()
+            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
+            empleado.getDepartamento()
         });
     }
     public void cargarModelo(){
@@ -75,8 +77,9 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             empleado.isPagoPorTrasferencia(),
             empleado.getRol(),
             empleado.getContrato(),
-            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate()
-        });
+            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
+            empleado.getDepartamento()
+            });
         }
     }
     
@@ -111,6 +114,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         trabajadorList.get(fila).setRol(empleado.getRol());
         trabajadorList.get(fila).setContrato(empleado.getContrato());
         ((Empleado)trabajadorList.get(fila)).setEntradaYear(empleado.getEntradaYear());
+        trabajadorList.get(fila).setDepartamento(empleado.getDepartamento());
         setValueAt(empleado.getNombre(), fila, 0);
         setValueAt(empleado.getApellido(), fila, 1);
         setValueAt(empleado.getDireccion(), fila,2 );
@@ -128,6 +132,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         setValueAt(empleado.getRol(), fila, 14);
         setValueAt(empleado.getContrato(), fila, 15);
         setValueAt(empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(), fila,16 );
+        setValueAt(empleado.getDepartamento(), fila, 17);
     }
 
     public List<Trabajador> gettrabajadorList() {

@@ -288,7 +288,15 @@ public class DiaDepartamento extends javax.swing.JDialog {
         modelTableDescripcionDepartamentoo.editarDepartamento(fila, departamentoMolde);
 
     }//GEN-LAST:event_btnModificarDepartamentoActionPerformed
-
+    public Departamento obtenerDepartamento(){
+        int fila;
+        Departamento departamentoModel = new Departamento();
+        if( modelTableDescripcionDepartamento.getSelectedRow() >= 0){
+            fila = modelTableDescripcionDepartamento.getSelectedRow();
+            departamentoModel = modelTableDescripcionDepartamentoo.leerDepartamento(fila);
+        }
+        return departamentoModel;
+    }
     private void btnEliminarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepartamentoActionPerformed
         int a = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar?");
         if (a == 0) {
