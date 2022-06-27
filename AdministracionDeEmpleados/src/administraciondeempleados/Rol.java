@@ -75,7 +75,7 @@ public class Rol {
     public List<Trabajador> getTrabajadorList() {
         return trabajadorList;
     }
-
+    
 
     @Override
     public String toString() {

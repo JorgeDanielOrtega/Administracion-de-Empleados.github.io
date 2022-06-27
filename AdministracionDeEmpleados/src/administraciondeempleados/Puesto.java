@@ -25,4 +25,9 @@ public class Puesto {
         return rolList;
     }
 
+    @Override
+    public String toString() {
+        return  "" + nombre ;
+    }
+    
 }

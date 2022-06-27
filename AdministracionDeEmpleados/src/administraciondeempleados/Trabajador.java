@@ -48,7 +48,7 @@ public abstract class Trabajador extends Persona{
     public Trabajador(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
             char sexo, String ciudad, String telefono, Date fechaNacimiento, String correoPersonal,
             String correoEmpresarial, String usuario, String contrasenia, boolean pagoPorTransferencia,
-            Rol rol, Contrato contrato) {
+            Rol rol, Contrato contrato, Departamento departamento) {
         this(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
         this.correoPersonal = correoPersonal;
         this.correoEmpresarial = correoEmpresarial;
@@ -57,13 +57,14 @@ public abstract class Trabajador extends Persona{
         this.pagoPorTrasferencia = pagoPorTransferencia;
         this.rol = rol;
         this.contrato = contrato;
+        this.departamento = departamento;
     }
     public Trabajador(String nombre, String apellido, String direccion, EstadoCivil estadoCivil, String numeroCedula,
             char sexo, String ciudad, String telefono, Date fechaNacimiento,
             String correoPersonal, String correoEmpresarial, int vacaciones, String usuario, String contrasenia,
-            double horasExtra, boolean pagoPorTransferencia, Rol rol, Contrato contrato, Decimo decimo) {
+            double horasExtra, boolean pagoPorTransferencia, Rol rol, Contrato contrato, Departamento departamento, Decimo decimo) {
         this(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento,
-        correoPersonal, correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);
+        correoPersonal, correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato, departamento);
         this.vacaciones = vacaciones;
         this.horasExtra = horasExtra; //AQUI PERMITIR QUE INGRESE MODIFICAR
     }

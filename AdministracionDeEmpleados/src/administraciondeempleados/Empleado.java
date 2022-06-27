@@ -11,6 +11,7 @@ public class Empleado extends Trabajador {
     private Horario horario;
     private String id;
     private List<Asistencia> asistenciaList;
+    
 
 //    public Empleado(){
 //        //this.asistenciaList = new LinkedList<>();
@@ -18,9 +19,9 @@ public class Empleado extends Trabajador {
     public Empleado(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
             String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento, 
             String correoPersonal, String correoEmpresarial, String usuario, String contrasenia,
-            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Date anioEntrada) {
+            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Date anioEntrada, Departamento departamento) {
         super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento, correoPersonal,
-                correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato);       
+                correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato, departamento);       
         asistenciaList = new LinkedList<>();
         this.entradaYear = anioEntrada;
     }

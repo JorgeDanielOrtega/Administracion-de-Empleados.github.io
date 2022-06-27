@@ -19,7 +19,9 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
     private List<Departamento> departamentoList;
 
     public ModelTableDescripcionDepartamento() {
+
         departamentoList = new LinkedList();
+
         addColumn("Nombre");
         addColumn("Numero");
         addColumn("Numero Maximo Empleados");
@@ -36,7 +38,10 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
             });
         }
     }
-
+    
+    public Departamento leerDepartamento(int fila){
+        return departamentoList.get(fila);
+    }
     public void agregarDepartamento(Departamento departamentoAgregar) {
         departamentoList.add(departamentoAgregar);
         addRow(new Object[]{
