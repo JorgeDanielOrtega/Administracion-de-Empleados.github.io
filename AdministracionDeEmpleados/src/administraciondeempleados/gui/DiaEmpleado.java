@@ -401,7 +401,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
                             .addGroup(panDatosLayout.createSequentialGroup()
                                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panDatosLayout.createSequentialGroup()
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(23, 23, 23))
                                     .addGroup(panDatosLayout.createSequentialGroup()
                                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -417,9 +417,9 @@ public class DiaEmpleado extends javax.swing.JDialog {
                         .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panDatosLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(opcSi, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                                .addComponent(opcSi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(opcNo, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                                .addComponent(opcNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(321, 321, 321))
                             .addGroup(panDatosLayout.createSequentialGroup()
                                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -617,7 +617,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
             panListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -755,7 +755,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_opcSiActionPerformed
 
     private void btnAgregarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarContratoActionPerformed
-        diaContratoTrabajador = new DiaContratoTrabajador(new Principal(), true);
+        diaContratoTrabajador = new DiaContratoTrabajador(null, true);
         diaContratoTrabajador.setVisible(true);
         Contrato contratoModel = diaContratoTrabajador.getContrato();
         if (contratoModel != null) {
@@ -766,7 +766,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAgregarContratoActionPerformed
 
     private void btnAgregarRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarRolActionPerformed
-        diaRol = new DiaRol(new Principal(), true, this.rolList);
+        diaRol = new DiaRol(null, true, this.rolList);
         diaRol.setVisible(true);
         setLocationRelativeTo(this);
         Rol rolModel = diaRol.obtenerRol();
@@ -827,7 +827,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAgregarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDepartamentoActionPerformed
-        diaDepartamento = new DiaDepartamento(new Principal(), true, departamentoList );
+        diaDepartamento = new DiaDepartamento(null, true, departamentoList );
         diaDepartamento.setVisible(true);
         setLocationRelativeTo(this);
         Departamento departamentoMolde = diaDepartamento.obtenerDepartamento();

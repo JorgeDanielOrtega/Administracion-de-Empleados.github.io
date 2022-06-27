@@ -39,7 +39,7 @@ public class ModelTableBusqueda extends DefaultTableModel {
         for (Departamento departamento : empresa.getDepartamentoList()) {
             trabajadorList.addAll(departamento.getTrabajadorList());
         }
-        sortTrabajadoresList();
+        //sortTrabajadoresList();
         trabajadoresFilteredList.addAll(trabajadorList);
     }
 

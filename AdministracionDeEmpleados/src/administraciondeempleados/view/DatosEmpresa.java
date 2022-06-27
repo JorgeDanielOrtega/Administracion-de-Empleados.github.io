@@ -7,6 +7,7 @@ import javax.swing.border.SoftBevelBorder;
 import administraciondeempleados.Empresa;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Gerente;
+import administraciondeempleados.gui.DiaLogin;
 
 public class DatosEmpresa extends javax.swing.JFrame {
 
