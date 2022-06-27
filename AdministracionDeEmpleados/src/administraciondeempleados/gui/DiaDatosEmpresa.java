@@ -134,6 +134,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         txtFundacionYear = new javax.swing.JTextField();
         txtNombreEmpresa = new javax.swing.JTextField();
         txtRubroEmpresa = new javax.swing.JTextField();
+        btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,6 +227,15 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         });
         pnlBackground.add(txtRubroEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 720, 30));
 
+        btnAceptar.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
+        btnAceptar.setText("ACEPTAR");
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseClicked(evt);
+            }
+        });
+        pnlBackground.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,6 +303,11 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         this.guardarDatos();
     }//GEN-LAST:event_formMouseClicked
 
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+        this.guardarDatos();
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -336,6 +351,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel lblAnioFundacion;
     private javax.swing.JLabel lblInformacion;
     private javax.swing.JLabel lblNombre;
