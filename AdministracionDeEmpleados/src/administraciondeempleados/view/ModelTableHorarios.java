@@ -1,4 +1,6 @@
 package administraciondeempleados.view;
+
+
 import javax.swing.table.DefaultTableModel;
 import administraciondeempleados.Gerente;
 import java.util.List;

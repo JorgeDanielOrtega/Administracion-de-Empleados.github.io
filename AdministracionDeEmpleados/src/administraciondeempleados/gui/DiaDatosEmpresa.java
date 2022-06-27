@@ -1,5 +1,4 @@
-
-package administraciondeempleados.view;
+package administraciondeempleados.gui;
 
 import java.awt.Color;
 import administraciondeempleados.Cuenta;
@@ -8,56 +7,78 @@ import administraciondeempleados.Empresa;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Gerente;
 
-public class DatosEmpresa extends javax.swing.JFrame {
+public class DiaDatosEmpresa extends javax.swing.JDialog {
 
-    DiaLogin diaLogin;
-    Cuenta cuentaActual;
-    SoftBevelBorder softBevelBorder;
-    Empresa empresa;
-    Gerente gerente;
+    private DiaLogin diaLogin;
+    private Cuenta cuentaActual = new Cuenta("admin", "admin");
+    private SoftBevelBorder softBevelBorder;
+    private Empresa empresa;
+    private Gerente gerente;
+    private java.awt.Frame parent;
        
-    int xPos, yPos;
+    private int xPos, yPos;
     
-    public DatosEmpresa() {
+    public DiaDatosEmpresa(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        this.parent = parent;
         setLocationRelativeTo(null);
-        //abrirLogin();
-        
     }
     
-    public void abrirLogin(){
-        diaLogin = new DiaLogin(this, true);
-        this.setVisible(false);
-        diaLogin.setVisible(true);
-        cuentaActual = diaLogin.getCuenta();
+    public DiaDatosEmpresa(java.awt.Frame parent, boolean modal, Empresa empresa) {
+        super(parent, modal);
+        initComponents();
+        this.parent = parent;
+        if(empresa == null){
+            setValoresDefecto();
+        }else{
+            this.empresa = empresa;
+            setValoresEmpresa();
+        }
+        this.setVisible(true);
+        setLocationRelativeTo(null);        
     }
-
+    
+    private void setValoresEmpresa(){
+        txtNombreEmpresa.setText(empresa.getNombre());
+        txtFundacionYear.setText(String.valueOf(empresa.getFundacionYear()));
+        txtRubroEmpresa.setText(empresa.getRubro());
+        txtLeyendaEmpresa.setText(empresa.getLeyenda());
+    }
+    
+    private void setValoresDefecto(){
+        txtNombreEmpresa.setText("Nombre Empresa");
+        txtFundacionYear.setText("Año Fundacion");
+        txtRubroEmpresa.setText("Rubro");
+        txtLeyendaEmpresa.setText("Leyenda");
+    }
+    
     public void resetearTxt(){
         txtNombreEmpresa.setBorder(null);
-        txtNombreEmpresa.setBackground(new Color(246,246,246));
-        txtNombreEmpresa.setForeground(new Color(153,153,153));
+        txtNombreEmpresa.setBackground(new Color(125,133,151)); 
+        txtNombreEmpresa.setForeground(new Color(204,204,204));
         txtNombreEmpresa.setEditable(false);
         
         txtFundacionYear.setBorder(null);
-        txtFundacionYear.setBackground(new Color(246,246,246));
-        txtFundacionYear.setForeground(new Color(153,153,153));
+        txtFundacionYear.setBackground(new Color(125,133,151));
+        txtFundacionYear.setForeground(new Color(204,204,204));
         txtFundacionYear.setEditable(false);
         
         txtRubroEmpresa.setBorder(null);
-        txtRubroEmpresa.setBackground(new Color(246,246,246));
-        txtRubroEmpresa.setForeground(new Color(153,153,153));
+        txtRubroEmpresa.setBackground(new Color(125,133,151));
+        txtRubroEmpresa.setForeground(new Color(204,204,204));
         txtRubroEmpresa.setEditable(false);
         
         txtLeyendaEmpresa.setBorder(null);
-        txtLeyendaEmpresa.setBackground(new Color(246,246,246));
-        txtLeyendaEmpresa.setForeground(new Color(153,153,153));
+        txtLeyendaEmpresa.setBackground(new Color(125,133,151));
+        txtLeyendaEmpresa.setForeground(new Color(204,204,204));
         txtLeyendaEmpresa.setEnabled(false);            
         txtLeyendaEmpresa.setEditable(false);
     }
     
     public void crearEmpresa(){
         if(!txtNombreEmpresa.getText().equals("Nombre Empresa") && !txtFundacionYear.getText().equals("Año Fundacion") && !txtRubroEmpresa.getText().equals("Rubro") && !txtLeyendaEmpresa.getText().equals("Leyenda") && !txtNombreEmpresa.getText().isEmpty() && !txtFundacionYear.getText().isEmpty() && !txtRubroEmpresa.getText().isEmpty() && !txtLeyendaEmpresa.getText().isEmpty()){
-            this.empresa = gerente.crearEmpresa(txtNombreEmpresa.getText(), Integer.parseInt(txtFundacionYear.getText()), txtRubroEmpresa.getText(), txtLeyendaEmpresa.getText());
+            this.empresa = new Empresa(txtNombreEmpresa.getText(), Integer.parseInt(txtFundacionYear.getText()), txtRubroEmpresa.getText(), txtLeyendaEmpresa.getText());
         }
     }
     
@@ -90,13 +111,13 @@ public class DatosEmpresa extends javax.swing.JFrame {
         
         resetearTxt();
     }
-    
-    public Cuenta getCuentaActual() {
-        return cuentaActual;
+
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setCuentaActual(Cuenta cuentaActual) {
-        this.cuentaActual = cuentaActual;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
     
     @SuppressWarnings("unchecked")
@@ -104,9 +125,6 @@ public class DatosEmpresa extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
-        lbBarraSuperior = new javax.swing.JPanel();
-        pnlExit = new javax.swing.JPanel();
-        lbExit = new javax.swing.JLabel();
         lblInformacion = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblAnioFundacion = new javax.swing.JLabel();
@@ -117,95 +135,28 @@ public class DatosEmpresa extends javax.swing.JFrame {
         txtNombreEmpresa = new javax.swing.JTextField();
         txtRubroEmpresa = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(1035, 460));
-        setUndecorated(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
         });
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-        });
 
-        pnlBackground.setBackground(new java.awt.Color(246, 246, 246));
+        pnlBackground.setBackground(new java.awt.Color(125, 133, 151));
         pnlBackground.setMinimumSize(new java.awt.Dimension(1035, 460));
-        pnlBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbBarraSuperior.setBackground(new java.awt.Color(221, 221, 221));
-        lbBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                lbBarraSuperiorMouseDragged(evt);
-            }
-        });
-        lbBarraSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lbBarraSuperiorMousePressed(evt);
-            }
-        });
-
-        pnlExit.setBackground(new java.awt.Color(221, 221, 221));
-        pnlExit.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        lbExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbExit.setText("X");
-        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbExit.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlBackground.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbExitMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbExitMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbExitMouseExited(evt);
+                pnlBackgroundMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout pnlExitLayout = new javax.swing.GroupLayout(pnlExit);
-        pnlExit.setLayout(pnlExitLayout);
-        pnlExitLayout.setHorizontalGroup(
-            pnlExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-            .addGroup(pnlExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lbExit, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-        );
-        pnlExitLayout.setVerticalGroup(
-            pnlExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-            .addGroup(pnlExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(lbExit, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout lbBarraSuperiorLayout = new javax.swing.GroupLayout(lbBarraSuperior);
-        lbBarraSuperior.setLayout(lbBarraSuperiorLayout);
-        lbBarraSuperiorLayout.setHorizontalGroup(
-            lbBarraSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lbBarraSuperiorLayout.createSequentialGroup()
-                .addGap(0, 1000, Short.MAX_VALUE)
-                .addComponent(pnlExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        lbBarraSuperiorLayout.setVerticalGroup(
-            lbBarraSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lbBarraSuperiorLayout.createSequentialGroup()
-                .addComponent(pnlExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        pnlBackground.add(lbBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 40));
+        pnlBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblInformacion.setBackground(new java.awt.Color(255, 255, 255));
         lblInformacion.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         lblInformacion.setForeground(new java.awt.Color(51, 51, 51));
         lblInformacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInformacion.setText("INFORMACION");
-        pnlBackground.add(lblInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 180, 50));
+        pnlBackground.add(lblInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 180, 50));
 
         lblNombre.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblNombre.setText("Nombre:");
@@ -220,9 +171,10 @@ public class DatosEmpresa extends javax.swing.JFrame {
         pnlBackground.add(lblRubro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, 30));
 
         txtLeyendaEmpresa.setEditable(false);
-        txtLeyendaEmpresa.setBackground(new java.awt.Color(246, 246, 246));
+        txtLeyendaEmpresa.setBackground(new java.awt.Color(125, 133, 151));
         txtLeyendaEmpresa.setColumns(20);
         txtLeyendaEmpresa.setFont(new java.awt.Font("Roboto Light", 2, 18)); // NOI18N
+        txtLeyendaEmpresa.setForeground(new java.awt.Color(204, 204, 204));
         txtLeyendaEmpresa.setRows(10);
         txtLeyendaEmpresa.setText("Leyenda");
         txtLeyendaEmpresa.setEnabled(false);
@@ -236,9 +188,9 @@ public class DatosEmpresa extends javax.swing.JFrame {
         pnlBackground.add(scpLeyendaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 910, 130));
 
         txtFundacionYear.setEditable(false);
-        txtFundacionYear.setBackground(new java.awt.Color(246, 246, 246));
+        txtFundacionYear.setBackground(new java.awt.Color(125, 133, 151));
         txtFundacionYear.setFont(new java.awt.Font("Roboto", 2, 18)); // NOI18N
-        txtFundacionYear.setForeground(new java.awt.Color(153, 153, 153));
+        txtFundacionYear.setForeground(new java.awt.Color(204, 204, 204));
         txtFundacionYear.setText("Año Fundacion");
         txtFundacionYear.setBorder(null);
         txtFundacionYear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -249,9 +201,9 @@ public class DatosEmpresa extends javax.swing.JFrame {
         pnlBackground.add(txtFundacionYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 720, 30));
 
         txtNombreEmpresa.setEditable(false);
-        txtNombreEmpresa.setBackground(new java.awt.Color(246, 246, 246));
+        txtNombreEmpresa.setBackground(new java.awt.Color(125, 133, 151));
         txtNombreEmpresa.setFont(new java.awt.Font("Roboto", 2, 18)); // NOI18N
-        txtNombreEmpresa.setForeground(new java.awt.Color(153, 153, 153));
+        txtNombreEmpresa.setForeground(new java.awt.Color(204, 204, 204));
         txtNombreEmpresa.setText("Nombre Empresa");
         txtNombreEmpresa.setBorder(null);
         txtNombreEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,9 +214,9 @@ public class DatosEmpresa extends javax.swing.JFrame {
         pnlBackground.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 720, 30));
 
         txtRubroEmpresa.setEditable(false);
-        txtRubroEmpresa.setBackground(new java.awt.Color(246, 246, 246));
+        txtRubroEmpresa.setBackground(new java.awt.Color(125, 133, 151));
         txtRubroEmpresa.setFont(new java.awt.Font("Roboto", 2, 18)); // NOI18N
-        txtRubroEmpresa.setForeground(new java.awt.Color(153, 153, 153));
+        txtRubroEmpresa.setForeground(new java.awt.Color(204, 204, 204));
         txtRubroEmpresa.setText("Rubro");
         txtRubroEmpresa.setBorder(null);
         txtRubroEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,36 +242,10 @@ public class DatosEmpresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lbExitMouseClicked
-
-    private void lbExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseEntered
-        pnlExit.setBackground(Color.red);
-        lbExit.setForeground(Color.white);
-    }//GEN-LAST:event_lbExitMouseEntered
-
-    private void lbExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseExited
-        pnlExit.setBackground(new Color(221,221,221));
-        lbExit.setForeground(Color.black);
-    }//GEN-LAST:event_lbExitMouseExited
-
-    private void lbBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-
-        this.setLocation(x - xPos, y - yPos);
-    }//GEN-LAST:event_lbBarraSuperiorMouseDragged
-
-    private void lbBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBarraSuperiorMousePressed
-        xPos = evt.getX();
-        yPos = evt.getY();
-    }//GEN-LAST:event_lbBarraSuperiorMousePressed
-
     private void txtLeyendaEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLeyendaEmpresaMouseClicked
         if(cuentaActual.getCorreoEmpresarial().equals("admin")){
             txtLeyendaEmpresa.setText("");
-            txtLeyendaEmpresa.setEnabled(true);            
+            txtLeyendaEmpresa.setEnabled(true);
             txtLeyendaEmpresa.setEditable(true);
             txtLeyendaEmpresa.setBorder(softBevelBorder);
             txtLeyendaEmpresa.setBackground(Color.white);
@@ -330,7 +256,7 @@ public class DatosEmpresa extends javax.swing.JFrame {
     private void txtFundacionYearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFundacionYearMouseClicked
         if(txtFundacionYear.getText().equals("Año Fundacion")){
             if(cuentaActual.getCorreoEmpresarial().equals("admin")){
-                txtFundacionYear.setText("");          
+                txtFundacionYear.setText("");
                 txtFundacionYear.setEditable(true);
                 txtFundacionYear.setBorder(softBevelBorder);
                 txtFundacionYear.setBackground(Color.white);
@@ -359,12 +285,12 @@ public class DatosEmpresa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtRubroEmpresaMouseClicked
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        
-    }//GEN-LAST:event_formKeyPressed
+    private void pnlBackgroundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBackgroundMouseClicked
+        this.guardarDatos();
+    }//GEN-LAST:event_pnlBackgroundMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        guardarDatos();
+        this.guardarDatos();
     }//GEN-LAST:event_formMouseClicked
 
     /**
@@ -384,33 +310,37 @@ public class DatosEmpresa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaDatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaDatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaDatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaDatosEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DatosEmpresa().setVisible(true);
+                DiaDatosEmpresa dialog = new DiaDatosEmpresa(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel lbBarraSuperior;
-    private javax.swing.JLabel lbExit;
     private javax.swing.JLabel lblAnioFundacion;
     private javax.swing.JLabel lblInformacion;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRubro;
     private javax.swing.JPanel pnlBackground;
-    private javax.swing.JPanel pnlExit;
     private javax.swing.JScrollPane scpLeyendaEmpresa;
     private javax.swing.JTextField txtFundacionYear;
     private javax.swing.JTextArea txtLeyendaEmpresa;

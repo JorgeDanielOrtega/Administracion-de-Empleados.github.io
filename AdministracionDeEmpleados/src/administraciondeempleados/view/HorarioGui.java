@@ -1,4 +1,4 @@
-package administraciondeempleados.gui;
+package administraciondeempleados.view;
 
 import administraciondeempleados.DiasLaborales;
 import administraciondeempleados.Horario;
