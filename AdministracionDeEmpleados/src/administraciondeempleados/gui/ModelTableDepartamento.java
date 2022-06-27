@@ -12,7 +12,7 @@ public class ModelTableDepartamento extends DefaultTableModel {
     private Departamento departamento;
 
     public ModelTableDepartamento() {
-        //empleadoList = new LinkedList();
+        empleadoList = new LinkedList();
         addColumn("Nombres y Apellidos");
         addColumn("Rol");
         addColumn("Puesto");

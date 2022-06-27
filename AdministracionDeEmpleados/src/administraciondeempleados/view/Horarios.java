@@ -20,6 +20,7 @@ public class Horarios extends javax.swing.JFrame {
         this();
         this.gerente = gerente;
         this.horario = new Horario();
+        modelTableHorarios.cargarModelo(gerente.getEmpresa());
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +50,7 @@ public class Horarios extends javax.swing.JFrame {
         lblHorarios.setText("HORARIOS");
         pnlBackground.add(lblHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 180, 50));
 
+        tblHorarios.setModel(modelTableHorarios);
         jScrollPane1.setViewportView(tblHorarios);
 
         pnlBackground.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 920, 280));

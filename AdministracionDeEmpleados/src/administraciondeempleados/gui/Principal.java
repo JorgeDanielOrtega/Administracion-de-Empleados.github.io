@@ -9,6 +9,7 @@ import administraciondeempleados.Gerente;
 import administraciondeempleados.Puesto;
 import administraciondeempleados.Rol;
 import administraciondeempleados.Empresa;
+import administraciondeempleados.EstadoCivil;
 import administraciondeempleados.gui.DiaDatosEmpresa;
 import administraciondeempleados.gui.DiaLogin;
 import assets.colors.Palette;
@@ -39,13 +40,19 @@ public class Principal extends javax.swing.JFrame {
     private DiaDatosEmpresa diaDatosEmpresa;
     private Gerente gerente;
     private DiaLogin diaLogin;
+    private Departamento departamento;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        empresa = new Empresa();
+        if (empresa == null) {
+            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
+            this.empresa = diaDatosEmpresa.getEmpresa();
+        }
+        departamento = new Departamento("Finanzas", 1, 25);
+        empresa.getDepartamentoList().add(departamento);
         empresa.setHoraEntrada(7, 30);
         pintarImagen(jLabel1, "src/assets/icons/user3.png");
         jLabel1.setText("Gerente");
@@ -58,17 +65,22 @@ public class Principal extends javax.swing.JFrame {
         gerente = new Gerente(empresa, "Gerente", "admin", "admin", new Puesto("Gerente"), new Rol("Gerente"), new Departamento("Administracion", 1, 1), new Contrato(true), "Gerente", "Gerente", "Gerente", "9999999999", '/', "Ciudad", "9999999999", new Date(2022, 6, 26));
         cargarComponentes();
         mouseEvents();
-        if(empresa == null){
-            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
-            this.empresa = diaDatosEmpresa.getEmpresa();
-        }
+
     }
 
     private void cargarComponentes() {
-        //Realizar una condicional para cargar los componenetes de un menu u otro
+        if (!true) {
+            menuEmpleado.setVisible(true);
+            menuEmpleado.setBackground(Palette.MENU);
+            menuGerente.setVisible(false);
+            jLabel1.setText("Empleado");
+        } else {
+
+            menuGerente.setVisible(true);
+            menuGerente.setBackground(Palette.MENU);
+            menuEmpleado.setVisible(false);
+        }
         head.setBackground(Palette.HEAD);
-        menuGerente.setBackground(Palette.MENU);
-        menuEmpleado.setBackground(Palette.MENU);
         btn_empleados.setBackground(Palette.BUTTON);
         btn_departamentos.setBackground(Palette.BUTTON);
         btn_horarios.setBackground(Palette.BUTTON);
@@ -127,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_departamentos.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentos;
-                    DiaDepartamento diaDepartamento = new DiaDepartamento(null, true,empresa.getDepartamentoList());
+                    DiaDepartamento diaDepartamento = new DiaDepartamento(null, true, empresa.getDepartamentoList());
                     diaDepartamento.setVisible(true);
                 }
                 if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
@@ -142,6 +154,8 @@ public class Principal extends javax.swing.JFrame {
                     btn_logOut.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_logOut;
+                    diaLogin = new DiaLogin(null, true);
+                    diaLogin.setVisible(true);
                 }
                 if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
@@ -163,6 +177,8 @@ public class Principal extends javax.swing.JFrame {
                     btn_departamentoEmpleado.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentoEmpleado;
+                    Empleado empleado = new Empleado("jorge", "ortega", "Av. Agustin aguirre", EstadoCivil.SOLTERO, "12345678-9", 'm', "loja", "0987543", new Date(22, 06, 22), "jorged@gmai.com", "empresa@empresa.gob", "daniel", "12345", true, new Rol("Contable"), new Contrato(true), new Date(22, 06, 22), departamento);
+                    departamento.getTrabajadorList().add(empleado);
                     DepartamentoGUi depa = new DepartamentoGUi(empresa.getDepartamentoList().get(0)); //error porque falta agregarle a la crud de empleado que ingrese un departamento
                     depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     depa.setLocation(0, 0);
@@ -302,7 +318,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        background = new javax.swing.JPanel();
         menuEmpleado = new javax.swing.JPanel();
         btn_departamentoEmpleado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -310,8 +325,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         btn_logOut = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        lblEmpresa = new javax.swing.JLabel();
+        background = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -451,8 +465,6 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
-        background.setBackground(new java.awt.Color(0, 255, 102));
-
         menuEmpleado.setBackground(new java.awt.Color(255, 0, 102));
         menuEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -539,47 +551,19 @@ public class Principal extends javax.swing.JFrame {
 
         menuEmpleado.add(btn_logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(menuEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
-        lblEmpresa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblEmpresa.setText("Empresa");
-        lblEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblEmpresaMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        menuEmpleado.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
+        background.setBackground(new java.awt.Color(0, 255, 102));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(menuEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(667, Short.MAX_VALUE))
+            .addGap(0, 990, Short.MAX_VALUE)
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
 
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 990, 630));
@@ -597,10 +581,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmpresaMouseClicked
-        diaDatosEmpresa.setVisible(true);
-    }//GEN-LAST:event_lblEmpresaMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         diaLogin = new DiaLogin(this, true);
@@ -637,7 +617,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new Principal().setVisible(true);
 
             }
@@ -664,8 +644,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblEmpresa;
     private javax.swing.JPanel menuEmpleado;
     private javax.swing.JPanel menuGerente;
     // End of variables declaration//GEN-END:variables
