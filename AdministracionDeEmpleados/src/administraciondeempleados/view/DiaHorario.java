@@ -1,50 +1,105 @@
 package administraciondeempleados.view;
+
 import administraciondeempleados.Horario;
 import administraciondeempleados.DiasLaborales;
+import administraciondeempleados.Gerente;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DiaHorario extends javax.swing.JDialog {
 
-    Horario horario;
-    
+    private Horario horario;
+    private Gerente gerente;
+    int indice;
+
     public DiaHorario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        //horario = new Horario();
     }
 
-    public void generarHorario(){
+    public DiaHorario(java.awt.Frame parent, boolean modal, Gerente gerente) {
+        this(parent, modal);
+        this.gerente = gerente;
+    }
+
+    public List<DiasLaborales> recuperarComboBoxSelecionados() {
         List<DiasLaborales> diasLaboralesList = new LinkedList<>();
-        if(chbLunes.isSelected()){
+        if (chbLunes.isSelected()) {
             diasLaboralesList.add(DiasLaborales.LU);
         }
-        
-        if(chbMartes.isSelected()){
+
+        if (chbMartes.isSelected()) {
             diasLaboralesList.add(DiasLaborales.MA);
         }
-        
-        if(chbMiercoles.isSelected()){
+
+        if (chbMiercoles.isSelected()) {
             diasLaboralesList.add(DiasLaborales.MI);
         }
-        
-        if(chbJueves.isSelected()){
+
+        if (chbJueves.isSelected()) {
             diasLaboralesList.add(DiasLaborales.JU);
         }
-        
-        if(chbViernes.isSelected()){
+
+        if (chbViernes.isSelected()) {
             diasLaboralesList.add(DiasLaborales.VI);
         }
-        
-        if(chbSabado.isSelected()){
+
+        if (chbSabado.isSelected()) {
             diasLaboralesList.add(DiasLaborales.SA);
         }
-        
-        if(chbDomingo.isSelected()){
+
+        if (chbDomingo.isSelected()) {
             diasLaboralesList.add(DiasLaborales.DO);
         }
-        
-        this.horario = new Horario(txtTipo.getText(), diasLaboralesList, Float.parseFloat(txtHorasSemanales.getText()));
+        return diasLaboralesList;
+    }
+
+    public void generarHorario() {
+        this.horario = new Horario(txtTipo.getText().trim(), recuperarComboBoxSelecionados(), Float.valueOf(txtHorasSemanales.getText()));
+    }
+
+    private void rellenarDiasLaborables() {
+        List<DiasLaborales> diasLaboralesList = gerente.getEmpresa().getHorarioList().get(indice).getDiasLaborablesList();
+        for (DiasLaborales diasLaborales : diasLaboralesList) {
+            switch (diasLaborales) {
+                case LU:
+                    chbLunes.setSelected(true);
+                    break;
+                case MA:
+                    chbMartes.setSelected(true);
+                    break;
+                case MI:
+                    chbMiercoles.setSelected(true);
+                    break;
+                case JU:
+                    chbJueves.setSelected(true);
+                    break;
+                case VI:
+                    chbViernes.setSelected(true);
+                    break;
+                case SA:
+                    chbSabado.setSelected(true);
+                    break;
+                case DO:
+                    chbDomingo.setSelected(true);
+                    break;
+            }
+        }
+    }
+
+    public void completarCampos() {
+        txtTipo.setText(gerente.getEmpresa().getHorarioList().get(indice).getTipo());
+        rellenarDiasLaborables();
+        txtHorasSemanales.setText(String.valueOf(gerente.getEmpresa().getHorarioList().get(indice).getHorasLaborablesSemanales()));
+    }
+
+    public void actualizarHorario() {
+        this.horario = gerente.getEmpresa().getHorarioList().get(indice);
+        this.horario.setDiasLaborablesList(recuperarComboBoxSelecionados());
+        this.horario.setHorasLaborablesSemanales(Float.parseFloat(txtHorasSemanales.getText()));
+        this.horario.setTipo(txtTipo.getText().trim());
     }
 
     public Horario getHorario() {
@@ -54,7 +109,7 @@ public class DiaHorario extends javax.swing.JDialog {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,6 +130,7 @@ public class DiaHorario extends javax.swing.JDialog {
         chbLunes = new javax.swing.JCheckBox();
         chbMartes = new javax.swing.JCheckBox();
         chbSabado = new javax.swing.JCheckBox();
+        btn_actualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(760, 310));
@@ -125,7 +181,7 @@ public class DiaHorario extends javax.swing.JDialog {
                 btnAgregarHorarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, -1));
+        jPanel1.add(btnAgregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
@@ -180,6 +236,14 @@ public class DiaHorario extends javax.swing.JDialog {
         chbSabado.setText("Sabado");
         jPanel1.add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
 
+        btn_actualizar.setText("Actualizar");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,18 +260,27 @@ public class DiaHorario extends javax.swing.JDialog {
 
     private void btnAgregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarHorarioMouseClicked
         generarHorario();
+        gerente.getEmpresa().getHorarioList().add(horario);
         JOptionPane.showMessageDialog(this, "Horario Generado");
         this.dispose();
     }//GEN-LAST:event_btnAgregarHorarioMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        this.horario = null;
         this.dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAgregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHorarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarHorarioActionPerformed
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        actualizarHorario();
+        dispose();
+    }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
 
     /**
      * @param args the command line arguments
@@ -254,6 +327,7 @@ public class DiaHorario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarHorario;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btn_actualizar;
     private javax.swing.JCheckBox chbDomingo;
     private javax.swing.JCheckBox chbJueves;
     private javax.swing.JCheckBox chbLunes;

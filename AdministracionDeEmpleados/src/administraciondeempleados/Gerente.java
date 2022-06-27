@@ -49,10 +49,13 @@ public class Gerente extends Trabajador{
     
     //CRUD HORARIO
     
-    public Horario crearHorario(String tipo, List<DiasLaborales> diasLaborales, Float horasLaborablesSemanales){
-        Horario horario = new Horario(tipo, diasLaborales, horasLaborablesSemanales);
+//    public Horario crearHorario(String tipo, List<DiasLaborales> diasLaborales, Float horasLaborablesSemanales){
+//        Horario horario = new Horario(tipo, diasLaborales, horasLaborablesSemanales);
+//        empresa.getHorarioList().add(horario);
+//        return horario;
+//    }
+    public void insertarHorario(Horario horario){
         empresa.getHorarioList().add(horario);
-        return horario;
     }
     
     public void modificarTipoHorario(Horario horario, String tipo){

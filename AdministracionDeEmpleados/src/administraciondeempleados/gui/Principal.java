@@ -125,8 +125,8 @@ public class Principal extends javax.swing.JFrame {
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_horarios;
                     Horarios horarios = new Horarios(gerente);
+                    //horarios.setGerente(gerente);
                     horarios.setVisible(true);
-
                 }
                 if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
                     btn_logOut.setBackground(Palette.BUTTON_CLICK);

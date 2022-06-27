@@ -7,9 +7,9 @@ import administraciondeempleados.Gerente;
 public class Horarios extends javax.swing.JFrame {
 
     int xPos, yPos;
-    DiaHorario diaHorario;
-    Horario horario;
-    Gerente gerente;
+    private DiaHorario diaHorario;
+    private Horario horario;
+    private Gerente gerente;
 
     public Horarios() {
         initComponents();
@@ -141,10 +141,20 @@ public class Horarios extends javax.swing.JFrame {
                 btnEliminarHorarioMouseClicked(evt);
             }
         });
+        btnEliminarHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarHorarioActionPerformed(evt);
+            }
+        });
         pnlBackground.add(btnEliminarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 420, -1, -1));
 
         btnEditarHorario.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
         btnEditarHorario.setText("Editar Horario");
+        btnEditarHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarHorarioActionPerformed(evt);
+            }
+        });
         pnlBackground.add(btnEditarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,13 +198,10 @@ public class Horarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lbBarraSuperiorMousePressed
 
     private void btnAgregarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarHorarioMouseClicked
-        diaHorario = new DiaHorario(this, true);
-        diaHorario.setHorario(horario);
+        diaHorario = new DiaHorario(this, true, gerente);
+        //diaHorario.setGerente(gerente);
         diaHorario.setVisible(true);
-        gerente.crearHorario(horario.getTipo(), horario.getDiasLaborablesList(), horario.getHorasLaborablesSemanales());
         modelTableHorarios.cargarModelo(gerente.getEmpresa());
-        //modelTableHorarios.agregarHo
-
     }//GEN-LAST:event_btnAgregarHorarioMouseClicked
 
     private void btnEliminarHorarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarHorarioMouseClicked
@@ -204,6 +211,19 @@ public class Horarios extends javax.swing.JFrame {
     private void btnAgregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHorarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarHorarioActionPerformed
+
+    private void btnEditarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarHorarioActionPerformed
+        diaHorario = new DiaHorario(this, true, gerente);
+        diaHorario.setIndice(tblHorarios.getSelectedRow());
+        diaHorario.completarCampos();
+        diaHorario.setVisible(true);
+        modelTableHorarios.cargarModelo(gerente.getEmpresa());
+    }//GEN-LAST:event_btnEditarHorarioActionPerformed
+
+    private void btnEliminarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHorarioActionPerformed
+        gerente.getEmpresa().getHorarioList().remove(tblHorarios.getSelectedRow());
+        modelTableHorarios.cargarModelo(gerente.getEmpresa());
+    }//GEN-LAST:event_btnEliminarHorarioActionPerformed
 
     /**
      * @param args the command line arguments

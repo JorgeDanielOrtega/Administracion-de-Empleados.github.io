@@ -19,6 +19,7 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
     private List<Departamento> departamentoList;
 
     public ModelTableDescripcionDepartamento() {
+        departamentoList = new LinkedList();
         addColumn("Nombre");
         addColumn("Numero");
         addColumn("Numero Maximo Empleados");
