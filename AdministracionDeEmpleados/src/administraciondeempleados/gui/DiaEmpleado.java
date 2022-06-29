@@ -41,7 +41,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
         departamentoList = new LinkedList<>();
-        rolList = new LinkedList<>();
+        //rolList = new LinkedList<>();
     }
 
     public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList) {

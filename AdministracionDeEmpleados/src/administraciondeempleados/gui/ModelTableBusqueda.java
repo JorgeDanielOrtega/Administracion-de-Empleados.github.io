@@ -3,6 +3,7 @@ package administraciondeempleados.gui;
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.Empresa;
+import administraciondeempleados.Gerente;
 import administraciondeempleados.Trabajador;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -113,9 +114,6 @@ public class ModelTableBusqueda extends DefaultTableModel {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
-        trabajadorList.forEach(action -> {
-
-        });
     }
 
     public List<Trabajador> getTrabajadoresFilteredList() {

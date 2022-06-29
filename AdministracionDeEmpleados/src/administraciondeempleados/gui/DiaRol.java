@@ -27,7 +27,7 @@ public class DiaRol extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        rolList = new LinkedList<>();
+        //rolList = new LinkedList<>();
 
     }
 
