@@ -17,6 +17,7 @@ public class Empresa {
     private List<Rol> rolList;
     private List<Horario> horarioList;
     private Calendar horaEntrada;
+    private Gerente gerente;
 
     public Empresa(){
         horarioList = new LinkedList<>();
@@ -103,6 +104,14 @@ public class Empresa {
     public void setHoraEntrada(int hora, int minuto) {
         horaEntrada.set(Calendar.HOUR_OF_DAY, hora);
         horaEntrada.set(Calendar.MINUTE, minuto);
+    }
+
+    public Gerente getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
     
     @Override

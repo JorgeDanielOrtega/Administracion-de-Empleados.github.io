@@ -75,7 +75,7 @@ public class Horario {
          
     @Override
     public String toString() {
-        return tipo + "\n" + diasLaborablesList + " / " + horasLaborablesSemanales + "Hs";
+        return tipo;
     }
 
 }

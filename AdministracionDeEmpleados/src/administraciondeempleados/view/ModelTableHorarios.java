@@ -23,6 +23,17 @@ public class ModelTableHorarios extends DefaultTableModel{
             removeRow(0);
         }
     }
+    public void  cargarModeloEmpleado(List<Horario> horarioList){
+        limpiarTabla();
+        for (Horario horario : horarioList) {
+            addRow(new Object[]{
+            horario.getTipo(), 
+            horario.getDiasLaborablesList().toString(), 
+            String.valueOf(horario.getHorasLaborablesSemanales())
+        });
+        }
+    }
+    
     public void  cargarModelo(Empresa empresa){
         limpiarTabla();
         for (Horario horario : empresa.getHorarioList()) {
@@ -39,4 +50,7 @@ public class ModelTableHorarios extends DefaultTableModel{
         removeRow(indice);
     }
     
+    public Horario seleccionarHorario(Horario horario){
+        return horario;
+    }
 }

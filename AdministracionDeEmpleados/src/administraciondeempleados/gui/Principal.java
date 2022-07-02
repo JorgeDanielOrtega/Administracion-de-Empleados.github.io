@@ -1,6 +1,5 @@
 package administraciondeempleados.gui;
 
-import administraciondeempleados.view.Horarios;
 import administraciondeempleados.Contrato;
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
@@ -13,6 +12,7 @@ import administraciondeempleados.EstadoCivil;
 import administraciondeempleados.Horario;
 import administraciondeempleados.gui.DiaDatosEmpresa;
 import administraciondeempleados.gui.DiaLogin;
+import administraciondeempleados.view.DiaHorarios;
 import assets.colors.Palette;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -88,6 +88,7 @@ public class Principal extends javax.swing.JFrame {
         empresa.getRolList().add(rolContable);
         empresa.getRolList().add(rolAyudante);
         gerente = new Gerente(empresa, "Gerente", "admin", "admin", new Puesto("Gerente"), new Rol("Gerente"), new Departamento("Administracion", 1, 1), new Contrato(true), "Gerente", "Gerente", "Gerente", "9999999999", '/', "Ciudad", "9999999999", new Date(2022, 6, 26));
+        empresa.setGerente(gerente);
         empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "daniel", "1234", p, rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
         empleado2  = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "jose", "1234", p, rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
         empleado3  = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "daniel", "1234", p2, rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
@@ -167,7 +168,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_empleados.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_empleados;
-                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, empresa.getDepartamentoList(), empresa.getRolList());
+                    DiaEmpleado diaEmpleado = new DiaEmpleado(null, false, empresa.getDepartamentoList(), empresa.getRolList(), empresa.getHorarioList(), gerente);
                     diaEmpleado.setVisible(true);
                 }
                 if (e.getSource() == btn_departamentos && buttonClicked != btn_departamentos) {
@@ -181,9 +182,8 @@ public class Principal extends javax.swing.JFrame {
                     btn_horarios.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_horarios;
-                    Horarios horarios = new Horarios(gerente);
-                    //horarios.setGerente(gerente);
-                    horarios.setVisible(true);
+                    DiaHorarios diaHorarios = new DiaHorarios(null, true, gerente);                    //horarios.setGerente(gerente);
+                    diaHorarios.setVisible(true);
                 }
                 if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
                     btn_logOut.setBackground(Palette.BUTTON_CLICK);
