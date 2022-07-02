@@ -31,6 +31,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         addColumn("Contrato");
         addColumn("Año de entrada");
         addColumn("Departamento");
+        addColumn("Horario");
         
     }
     
@@ -54,7 +55,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             empleado.getRol(),
             empleado.getContrato(),
             empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
-            empleado.getDepartamento()
+            empleado.getDepartamento(),
+            empleado.getHorario()
         });
     }
     public void cargarModelo(){
@@ -78,7 +80,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             empleado.getRol(),
             empleado.getContrato(),
             empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
-            empleado.getDepartamento()
+            empleado.getDepartamento(),
+            empleado.getHorario()
             });
         }
     }
@@ -133,6 +136,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         setValueAt(empleado.getContrato(), fila, 15);
         setValueAt(empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(), fila,16 );
         setValueAt(empleado.getDepartamento(), fila, 17);
+        setValueAt(empleado.getHorario(), fila, 18);
     }
 
     public List<Trabajador> gettrabajadorList() {

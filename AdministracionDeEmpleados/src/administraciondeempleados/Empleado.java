@@ -19,11 +19,13 @@ public class Empleado extends Trabajador {
     public Empleado(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
             String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento, 
             String correoPersonal, String correoEmpresarial, String usuario, String contrasenia,
-            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Date anioEntrada, Departamento departamento) {
+            boolean pagoPorTransferencia, Rol rol, Contrato contrato, Date anioEntrada, Departamento departamento,
+            Horario horario) {
         super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento, correoPersonal,
                 correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato, departamento);       
         asistenciaList = new LinkedList<>();
         this.entradaYear = anioEntrada;
+        this.horario = horario;
     }
     
     public Empleado(Date entradaYear, Horario horario, String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento){

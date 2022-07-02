@@ -10,8 +10,11 @@ import administraciondeempleados.Contrato;
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.EstadoCivil;
+import administraciondeempleados.Gerente;
+import administraciondeempleados.Horario;
 import administraciondeempleados.Rol;
 import administraciondeempleados.Trabajador;
+import administraciondeempleados.view.DiaHorarios;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,16 +27,21 @@ public class DiaEmpleado extends javax.swing.JDialog {
     /**
      * Creates new form DiaEmpleado
      */
-    private DiaRol diaRol;
+   private DiaRol diaRol;
     private DiaContratoTrabajador diaContratoTrabajador;
     private DiaDepartamento diaDepartamento;
+    private DiaHorarios diaHorarios;
     private Rol rolTemporal;
     private Departamento departamentoTemporal;
     private Contrato contratoTemporal;
     private Date dateNacimintoTemporal;
     private Date dateEntradaTemporal;
+    private Horario horarioTemporal;
     private List<Departamento> departamentoList;
     private List<Rol> rolList;
+    private List<Horario> horarioList;
+    private Gerente gerente;
+
 
 
     public DiaEmpleado(java.awt.Frame parent, boolean modal) {
@@ -44,12 +52,14 @@ public class DiaEmpleado extends javax.swing.JDialog {
         //rolList = new LinkedList<>();
     }
 
-    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList) {
+    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList, List<Horario> horarioList, Gerente gerente) {
         this(parent, modal);
         modelTableDescripcionEmpleadoo.settrabajadorList(departamentoList.get(0).getTrabajadorList());
         modelTableDescripcionEmpleadoo.cargarModelo();
         this.departamentoList = departamentoList;
+        this.gerente = gerente;
         this.rolList = rolList;
+        this.horarioList = horarioList;
     }
 
     /**
@@ -111,6 +121,8 @@ public class DiaEmpleado extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btnAgregarDepartamento = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        btnAgregarHorario = new javax.swing.JButton();
         panOperaciones = new javax.swing.JPanel();
         btnAgregarEmpleado = new javax.swing.JButton();
         btnModificarEmpleado = new javax.swing.JButton();
@@ -120,7 +132,6 @@ public class DiaEmpleado extends javax.swing.JDialog {
         tblTablaEmpleado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(990, 630));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Modificación Empleados");
@@ -313,6 +324,15 @@ public class DiaEmpleado extends javax.swing.JDialog {
             }
         });
 
+        jLabel22.setText("Horario");
+
+        btnAgregarHorario.setText("+");
+        btnAgregarHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarHorarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panDatosLayout = new javax.swing.GroupLayout(panDatos);
         panDatos.setLayout(panDatosLayout);
         panDatosLayout.setHorizontalGroup(
@@ -438,7 +458,11 @@ public class DiaEmpleado extends javax.swing.JDialog {
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAgregarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(372, 372, 372))))
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(239, 239, 239))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDatosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,7 +572,9 @@ public class DiaEmpleado extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAgregarDepartamento))
+                            .addComponent(btnAgregarDepartamento)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarHorario))
                         .addGap(22, 22, 22))))
         );
 
@@ -706,7 +732,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
         Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
                 txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
                 this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
-                cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal, this.departamentoTemporal);
+                cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal, this.departamentoTemporal, this.horarioTemporal);
         modelTableDescripcionEmpleadoo.agregarEmpleado(empleadoMolde);
     }//GEN-LAST:event_btnAgregarEmpleadoActionPerformed
 
@@ -716,7 +742,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
         Empleado empleadoMolde = new Empleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), comBoxEstadoCivil.getItemAt(indexEstadoCivl()),
                 txtCedula.getText(), seleccionarCaracterSexo(), txtCiudad.getText(), txtTelefono.getText(),
                 this.dateNacimintoTemporal, txtCorreoPersonal.getText(), txtCorreoEmpresariall.getText(), txtUsuario.getText(), txtContrasenia.getText(),
-                cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal, this.departamentoTemporal);
+                cambiarTextoBoolean(), rolTemporal, contratoTemporal, this.dateEntradaTemporal, this.departamentoTemporal, this.horarioTemporal);
         int fila = tblTablaEmpleado.getSelectedRow();
         modelTableDescripcionEmpleadoo.editarEmpleado(fila, empleadoMolde);
     }//GEN-LAST:event_btnModificarEmpleadoActionPerformed
@@ -839,6 +865,19 @@ public class DiaEmpleado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnAgregarDepartamentoActionPerformed
 
+    private void btnAgregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHorarioActionPerformed
+        diaHorarios = new DiaHorarios(null, true, this.horarioList, this.gerente);
+        diaHorarios.setVisible(true);
+        setLocationRelativeTo(this);
+        Horario horarioMolde = diaHorarios.obtenerHorario();
+        if(diaHorarios.getTblHorarios().getSelectedRow() > 0){
+            horarioTemporal = horarioMolde;
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay elementos en el Horario");
+        }
+    }//GEN-LAST:event_btnAgregarHorarioActionPerformed
+    
+
     /**
      * @param args the command line arguments
      */
@@ -885,6 +924,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     private javax.swing.JButton btnAgregarContrato;
     private javax.swing.JButton btnAgregarDepartamento;
     private javax.swing.JButton btnAgregarEmpleado;
+    private javax.swing.JButton btnAgregarHorario;
     private javax.swing.JButton btnAgregarRol;
     private javax.swing.JButton btnEliminarEmpleado;
     private javax.swing.JButton btnModificarEmpleado;
@@ -905,6 +945,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
