@@ -91,17 +91,14 @@ public class DiaLogin extends javax.swing.JDialog {
                 pnlBackgroundMouseClicked(evt);
             }
         });
-        pnlBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbUsuario.setFont(new java.awt.Font("Serif", 1, 19)); // NOI18N
         lbUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbUsuario.setText("Usuario");
-        pnlBackground.add(lbUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 70, -1));
 
         lbContraseña.setFont(new java.awt.Font("Serif", 1, 19)); // NOI18N
         lbContraseña.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbContraseña.setText("Contraseña");
-        pnlBackground.add(lbContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 110, -1));
 
         txtContraseña.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
@@ -118,7 +115,6 @@ public class DiaLogin extends javax.swing.JDialog {
                 txtContraseñaActionPerformed(evt);
             }
         });
-        pnlBackground.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 190, 30));
 
         txtUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
@@ -135,7 +131,6 @@ public class DiaLogin extends javax.swing.JDialog {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        pnlBackground.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 190, 30));
 
         lbBarraSuperior.setBackground(new java.awt.Color(221, 221, 221));
         lbBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -155,7 +150,7 @@ public class DiaLogin extends javax.swing.JDialog {
         lbExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbExit.setText("X");
-        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lbExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbExitMouseClicked(evt);
@@ -198,15 +193,13 @@ public class DiaLogin extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlBackground.add(lbBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 40));
-
         pnlIngresar.setBackground(new java.awt.Color(204, 204, 204));
 
         lbIngresar.setFont(new java.awt.Font("Roboto Light", 3, 18)); // NOI18N
         lbIngresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbIngresar.setText("INGRESAR");
         lbIngresar.setToolTipText("");
-        lbIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lbIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbIngresarMouseClicked(evt);
@@ -226,36 +219,86 @@ public class DiaLogin extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlBackground.add(pnlIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 170, 40));
-
         lbNombreEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbNombreEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbNombreEmpresa.setText("NOMBRE EMPRESA");
-        pnlBackground.add(lbNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 250, -1));
-        pnlBackground.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 190, -1));
-        pnlBackground.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 190, -1));
 
         lbRecuperarContraseña.setFont(new java.awt.Font("Roboto Thin", 2, 14)); // NOI18N
         lbRecuperarContraseña.setText("Recuperar contraseña");
-        lbRecuperarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbRecuperarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lbRecuperarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbRecuperarContraseñaMouseClicked(evt);
             }
         });
-        pnlBackground.add(lbRecuperarContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
+
+        javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
+        pnlBackground.setLayout(pnlBackgroundLayout);
+        pnlBackgroundLayout.setHorizontalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbBarraSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lbNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(lbContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(lbRecuperarContraseña))
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(pnlIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnlBackgroundLayout.setVerticalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addComponent(lbBarraSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lbNombreEmpresa)
+                .addGap(41, 41, 41)
+                .addComponent(lbUsuario)
+                .addGap(5, 5, 5)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(lbContraseña)
+                .addGap(5, 5, 5)
+                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(lbRecuperarContraseña)
+                .addGap(51, 51, 51)
+                .addComponent(pnlIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

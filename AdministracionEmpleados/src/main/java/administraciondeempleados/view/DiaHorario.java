@@ -137,35 +137,28 @@ public class DiaHorario extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(246, 246, 246));
         jPanel1.setMinimumSize(new java.awt.Dimension(760, 310));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblHorarios.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         lblHorarios.setForeground(new java.awt.Color(0, 0, 0));
         lblHorarios.setText("HORARIO");
-        jPanel1.add(lblHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
 
         lblTipo.setFont(new java.awt.Font("Roboto Light", 3, 18)); // NOI18N
         lblTipo.setForeground(new java.awt.Color(0, 0, 0));
         lblTipo.setText("Tipo:");
-        jPanel1.add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         txtTipo.setBackground(new java.awt.Color(255, 255, 255));
         txtTipo.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 660, -1));
 
         lblDiasLaborables.setFont(new java.awt.Font("Roboto Light", 3, 18)); // NOI18N
         lblDiasLaborables.setForeground(new java.awt.Color(0, 0, 0));
         lblDiasLaborables.setText("Dias Laborales:");
-        jPanel1.add(lblDiasLaborables, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblHorasSemanales.setFont(new java.awt.Font("Roboto Light", 3, 18)); // NOI18N
         lblHorasSemanales.setForeground(new java.awt.Color(0, 0, 0));
         lblHorasSemanales.setText("Horas laborables semanales:");
-        jPanel1.add(lblHorasSemanales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         txtHorasSemanales.setBackground(new java.awt.Color(255, 255, 255));
         txtHorasSemanales.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(txtHorasSemanales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 460, -1));
 
         btnAgregarHorario.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregarHorario.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
@@ -181,7 +174,6 @@ public class DiaHorario extends javax.swing.JDialog {
                 btnAgregarHorarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
@@ -192,49 +184,41 @@ public class DiaHorario extends javax.swing.JDialog {
                 btnCancelarMouseClicked(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, -1, -1));
 
         chbMiercoles.setBackground(new java.awt.Color(246, 246, 246));
         chbMiercoles.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbMiercoles.setForeground(new java.awt.Color(0, 0, 0));
         chbMiercoles.setText("Miercoles");
-        jPanel1.add(chbMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
 
         chbViernes.setBackground(new java.awt.Color(246, 246, 246));
         chbViernes.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbViernes.setForeground(new java.awt.Color(0, 0, 0));
         chbViernes.setText("Viernes");
-        jPanel1.add(chbViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
         chbJueves.setBackground(new java.awt.Color(246, 246, 246));
         chbJueves.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbJueves.setForeground(new java.awt.Color(0, 0, 0));
         chbJueves.setText("Jueves");
-        jPanel1.add(chbJueves, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         chbDomingo.setBackground(new java.awt.Color(246, 246, 246));
         chbDomingo.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbDomingo.setForeground(new java.awt.Color(0, 0, 0));
         chbDomingo.setText("Domingo");
-        jPanel1.add(chbDomingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
 
         chbLunes.setBackground(new java.awt.Color(246, 246, 246));
         chbLunes.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbLunes.setForeground(new java.awt.Color(0, 0, 0));
         chbLunes.setText("Lunes");
-        jPanel1.add(chbLunes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
         chbMartes.setBackground(new java.awt.Color(246, 246, 246));
         chbMartes.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbMartes.setForeground(new java.awt.Color(0, 0, 0));
         chbMartes.setText("Martes");
-        jPanel1.add(chbMartes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
 
         chbSabado.setBackground(new java.awt.Color(246, 246, 246));
         chbSabado.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         chbSabado.setForeground(new java.awt.Color(0, 0, 0));
         chbSabado.setText("Sabado");
-        jPanel1.add(chbSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
 
         btn_actualizar.setText("Actualizar");
         btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -242,17 +226,90 @@ public class DiaHorario extends javax.swing.JDialog {
                 btn_actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 90, 30));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(lblHorarios))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblTipo)
+                .addGap(5, 5, 5)
+                .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblDiasLaborables)
+                .addGap(5, 5, 5)
+                .addComponent(chbLunes)
+                .addGap(4, 4, 4)
+                .addComponent(chbMartes)
+                .addGap(10, 10, 10)
+                .addComponent(chbMiercoles)
+                .addGap(9, 9, 9)
+                .addComponent(chbJueves)
+                .addGap(6, 6, 6)
+                .addComponent(chbViernes)
+                .addGap(3, 3, 3)
+                .addComponent(chbSabado)
+                .addGap(5, 5, 5)
+                .addComponent(chbDomingo))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(txtHorasSemanales, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblHorasSemanales)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(btnAgregarHorario)
+                .addGap(17, 17, 17)
+                .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnCancelar))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblHorarios)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTipo)
+                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDiasLaborables)
+                    .addComponent(chbLunes)
+                    .addComponent(chbMartes)
+                    .addComponent(chbMiercoles)
+                    .addComponent(chbJueves)
+                    .addComponent(chbViernes)
+                    .addComponent(chbSabado)
+                    .addComponent(chbDomingo))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtHorasSemanales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHorasSemanales))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregarHorario)
+                    .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

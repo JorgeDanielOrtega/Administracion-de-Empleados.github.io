@@ -150,26 +150,21 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 pnlBackgroundMouseClicked(evt);
             }
         });
-        pnlBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblInformacion.setBackground(new java.awt.Color(255, 255, 255));
         lblInformacion.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         lblInformacion.setForeground(new java.awt.Color(51, 51, 51));
         lblInformacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInformacion.setText("INFORMACION");
-        pnlBackground.add(lblInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 180, 50));
 
         lblNombre.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblNombre.setText("Nombre:");
-        pnlBackground.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 30));
 
         lblAnioFundacion.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblAnioFundacion.setText("Año de fundación:");
-        pnlBackground.add(lblAnioFundacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, 30));
 
         lblRubro.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblRubro.setText("Rubro:");
-        pnlBackground.add(lblRubro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, 30));
 
         txtLeyendaEmpresa.setEditable(false);
         txtLeyendaEmpresa.setBackground(new java.awt.Color(125, 133, 151));
@@ -186,8 +181,6 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         });
         scpLeyendaEmpresa.setViewportView(txtLeyendaEmpresa);
 
-        pnlBackground.add(scpLeyendaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 910, 130));
-
         txtFundacionYear.setEditable(false);
         txtFundacionYear.setBackground(new java.awt.Color(125, 133, 151));
         txtFundacionYear.setFont(new java.awt.Font("Roboto", 2, 18)); // NOI18N
@@ -199,7 +192,6 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 txtFundacionYearMouseClicked(evt);
             }
         });
-        pnlBackground.add(txtFundacionYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 720, 30));
 
         txtNombreEmpresa.setEditable(false);
         txtNombreEmpresa.setBackground(new java.awt.Color(125, 133, 151));
@@ -212,7 +204,6 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 txtNombreEmpresaMouseClicked(evt);
             }
         });
-        pnlBackground.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 720, 30));
 
         txtRubroEmpresa.setEditable(false);
         txtRubroEmpresa.setBackground(new java.awt.Color(125, 133, 151));
@@ -225,7 +216,6 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 txtRubroEmpresaMouseClicked(evt);
             }
         });
-        pnlBackground.add(txtRubroEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 720, 30));
 
         btnAceptar.setFont(new java.awt.Font("Roboto Light", 2, 14)); // NOI18N
         btnAceptar.setText("ACEPTAR");
@@ -234,19 +224,69 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 btnAceptarMouseClicked(evt);
             }
         });
-        pnlBackground.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, -1, -1));
+
+        javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
+        pnlBackground.setLayout(pnlBackgroundLayout);
+        pnlBackgroundLayout.setHorizontalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAceptar)
+                            .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(scpLeyendaEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+                                .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                                    .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblNombre)
+                                        .addComponent(lblAnioFundacion)
+                                        .addComponent(lblRubro))
+                                    .addGap(16, 16, 16)
+                                    .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtFundacionYear, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtRubroEmpresa, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtNombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))))))
+                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                        .addGap(349, 349, 349)
+                        .addComponent(lblInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlBackgroundLayout.setVerticalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAnioFundacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFundacionYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRubroEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(scpLeyendaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAceptar)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
