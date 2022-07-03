@@ -853,7 +853,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAgregarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDepartamentoActionPerformed
-        diaDepartamento = new DiaDepartamento(null, true, departamentoList );
+        diaDepartamento = new DiaDepartamento(null, true, departamentoList, rolList, horarioList, gerente );
         diaDepartamento.setVisible(true);
         setLocationRelativeTo(this);
         Departamento departamentoMolde = diaDepartamento.obtenerDepartamento();

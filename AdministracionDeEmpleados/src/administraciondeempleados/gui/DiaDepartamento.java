@@ -2,21 +2,30 @@ package administraciondeempleados.gui;
 
 import javax.swing.JOptionPane;
 import administraciondeempleados.Departamento;
+import administraciondeempleados.Gerente;
+import administraciondeempleados.Horario;
+import administraciondeempleados.Rol;
 import java.util.List;
 
 public class DiaDepartamento extends javax.swing.JDialog {
 
     private List<Departamento> departamentoList;
-
+    private List<Rol> rolList;
+    private List<Horario> horarioList;
+    private Gerente gerente;
     public DiaDepartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
     }
 
-    public DiaDepartamento(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList) {
+    public DiaDepartamento(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, 
+            List<Rol> rolList, List<Horario> horarioList, Gerente gerente) {
         this(parent, modal);
         this.departamentoList = departamentoList;
+        this.rolList = rolList;
+        this.gerente = gerente;
+        this.horarioList = horarioList;
         modelTableDescripcionDepartamentoo.setDepartamentoList(departamentoList);
         modelTableDescripcionDepartamentoo.cargarModelo();
     }
@@ -278,6 +287,11 @@ public class DiaDepartamento extends javax.swing.JDialog {
         Departamento departamentoMolde = new Departamento(txtNombre.getText(), Integer.parseInt(txtNumeroEmpleados.getText()),
                 Integer.parseInt(txtNumeroMaximoEmpleados.getText()), Integer.parseInt(txtVacaciones.getText()));
         modelTableDescripcionDepartamentoo.agregarDepartamento(departamentoMolde);
+        int a = JOptionPane.showConfirmDialog(this, "¿Desea ingresar el lider del departamento?", "Creación lider", JOptionPane.YES_NO_OPTION);
+        if(a == 0){
+            DiaEmpleado diaEmpleado = new DiaEmpleado(null, true, departamentoList, rolList, horarioList, gerente);
+            diaEmpleado.setVisible(true);
+        }
     }//GEN-LAST:event_btnAgregarDepartamentoActionPerformed
 
     private void btnModificarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDepartamentoActionPerformed
