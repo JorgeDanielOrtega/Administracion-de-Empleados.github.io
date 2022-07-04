@@ -5,11 +5,11 @@ import java.sql.*;
 public class DBConnect {
 
     Connection connection = null;
-    private String database = "pruebita";
+    private String database = "sql10503811";
     private long port = 3306;
-    private String host = "localhost";
-    private String usuario = "root";
-    private String password = "";
+    private String host = "sql10.freesqldatabase.com";
+    private String usuario = "sql10503811";
+    private String password = "UYZsIQinjY";
     String url = "jdbc:mysql://" + host + ':' + port + '/' + database;
 
     public Connection conectar() {
