@@ -41,7 +41,7 @@ public abstract class Trabajador extends Persona{
         this.departamento = departamento;
         this.contrato = contrato;
         this.vacaciones = departamento.getVacaciones();
-        this.asistencia = new LinkedList<>();
+        this.asistencia = new LinkedList();
     }
 
     

@@ -13,7 +13,7 @@ public class Rol {
     private List<Trabajador> trabajadorList;
 
     public Rol(){
-        trabajadorList = new LinkedList<>();
+        trabajadorList = new LinkedList();
     }
     
     public Rol(String nombre) { //Quitar mas tarde
@@ -29,11 +29,15 @@ public class Rol {
         this(nombre, salario);
         this.puesto = puesto;
     }
-    public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
-        this(nombre);
+     public Rol(double salario, String nombre, Puesto puesto, Departamento departamento){
+        this(nombre, salario);
         this.puesto = puesto;
-        this.departamento = departamento;
     }
+//    public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
+//        this(nombre);
+//        this.puesto = puesto;
+//        this.departamento = departamento;
+//    }
 
     //TODO hacer metodo para calcular salario
     

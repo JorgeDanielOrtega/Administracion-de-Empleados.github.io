@@ -27,13 +27,6 @@ public class ModelTableBusqueda extends DefaultTableModel {
         addColumn("Horario");
     }
 
-    private void sortTrabajadoresList() {
-        Collections.sort(trabajadorList, (o1, o2) -> {
-            int id1 = Integer.valueOf(((Empleado) o1).getId());
-            int id2 = Integer.valueOf(((Empleado) o2).getId());
-            return id1 - id2;
-        });
-    }
 
     public void llenarEmpleadoList() { //quizas problemas a la hora de conectar todo
         trabajadorList.clear();

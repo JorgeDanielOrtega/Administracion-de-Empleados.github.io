@@ -23,7 +23,7 @@ public class Empleado extends Trabajador {
             Horario horario) {
         super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento, correoPersonal,
                 correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato, departamento);       
-        asistenciaList = new LinkedList<>();
+        asistenciaList = new LinkedList();
         this.entradaYear = anioEntrada;
         this.horario = horario;
     }
@@ -32,7 +32,7 @@ public class Empleado extends Trabajador {
         super(correoPersonal, usuario, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.entradaYear = entradaYear;
         this.horario = horario;
-        this.asistenciaList = new LinkedList<>();
+        this.asistenciaList = new LinkedList();
     }
 
     public Horario getHorario() {

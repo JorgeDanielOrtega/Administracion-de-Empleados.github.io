@@ -17,7 +17,7 @@ public class Departamento {
     private List<Trabajador> trabajadorList;
 
     public Departamento(){
-        trabajadorList = new LinkedList<>();
+        trabajadorList = new LinkedList();
         guardarFecha();
     }
     

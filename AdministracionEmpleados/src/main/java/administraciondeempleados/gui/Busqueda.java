@@ -1,12 +1,21 @@
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Empresa;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import prueb.DBConnect;
 
 public class Busqueda extends javax.swing.JPanel {
 
     private Empresa empresa;
+    private DBConnect dbConnect;
+    private Connection connection;
+    private String sql;
+    private PreparedStatement ps;
+    private ResultSet result;
     DefaultComboBoxModel modelComboDepartamento;
     DefaultComboBoxModel modelComboRol;
     DefaultComboBoxModel modelComboHorario;
@@ -41,11 +50,11 @@ public class Busqueda extends javax.swing.JPanel {
         modelTableBusqueda = new administraciondeempleados.gui.ModelTableBusqueda();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBusqueda = new javax.swing.JTable();
-        cmb_departamento = new javax.swing.JComboBox<>();
+        cmb_departamento = new javax.swing.JComboBox();
         txt_busqueda = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
-        cmb_horario = new javax.swing.JComboBox<>();
-        cmb_rol = new javax.swing.JComboBox<>();
+        cmb_horario = new javax.swing.JComboBox();
+        cmb_rol = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         btn_limpiarBusqueda = new javax.swing.JButton();
 
@@ -81,7 +90,7 @@ public class Busqueda extends javax.swing.JPanel {
 
         cmb_departamento.setBackground(new java.awt.Color(204, 204, 204));
         cmb_departamento.setForeground(new java.awt.Color(51, 51, 51));
-        cmb_departamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Departamento", "Item 2", "Item 3", "Item 4" }));
+        cmb_departamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Departamento", "Item 2", "Item 3", "Item 4" }));
         cmb_departamento.setBorder(null);
 
         txt_busqueda.setBackground(new java.awt.Color(204, 204, 204));
@@ -102,12 +111,12 @@ public class Busqueda extends javax.swing.JPanel {
 
         cmb_horario.setBackground(new java.awt.Color(204, 204, 204));
         cmb_horario.setForeground(new java.awt.Color(51, 51, 51));
-        cmb_horario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horario", "Item 2", "Item 3", "Item 4" }));
+        cmb_horario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Horario", "Item 2", "Item 3", "Item 4" }));
         cmb_horario.setBorder(null);
 
         cmb_rol.setBackground(new java.awt.Color(204, 204, 204));
         cmb_rol.setForeground(new java.awt.Color(51, 51, 51));
-        cmb_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rol", "Item 2", "Item 3", "Item 4" }));
+        cmb_rol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rol", "Item 2", "Item 3", "Item 4" }));
         cmb_rol.setBorder(null);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -170,6 +179,21 @@ public class Busqueda extends javax.swing.JPanel {
 
     private void cargaModeloDepartamento() {
         modelComboDepartamento.addElement(null);
+//        try {
+//            connection = dbConnect.conectar();
+//            sql = "SELECT nombre FROM Departamentos";
+//            ps = connection.prepareStatement(sql);
+//            result = ps.executeQuery();
+//            while (result.next()) {                
+//                String nombre = result.getString("nombre");
+//                modelComboDepartamento.addElement();
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "No se pudo obtener departamentos");
+//        } finally {
+//            dbConnect.desconectar();
+//        }
+        
         modelComboDepartamento.addAll(empresa.getDepartamentoList());
         cmb_departamento.setModel(modelComboDepartamento);
     }

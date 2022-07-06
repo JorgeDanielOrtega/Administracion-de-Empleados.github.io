@@ -9,7 +9,7 @@ public class Puesto {
     private List<Rol> rolList;
 
     public Puesto(String nombre) {
-        rolList = new LinkedList<>();
+        rolList = new LinkedList();
         this.nombre = nombre;
     }
 

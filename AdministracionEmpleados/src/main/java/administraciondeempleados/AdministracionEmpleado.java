@@ -10,7 +10,7 @@ public class AdministracionEmpleado {
     
 
     public AdministracionEmpleado(){
-        depatamentoList = new LinkedList<>();
+        depatamentoList = new LinkedList();
     }
     
     
