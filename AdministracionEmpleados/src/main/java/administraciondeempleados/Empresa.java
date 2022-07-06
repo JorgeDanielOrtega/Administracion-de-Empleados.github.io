@@ -40,10 +40,7 @@ public class Empresa {
         departamentoList = new LinkedList();
         dbConnect = new DBConnect();
         this.horaEntrada = Calendar.getInstance();//quitar mas tarde
-        cargarListas();
-        System.out.println(horarioList);
-        System.out.println(rolList);
-        System.out.println(departamentoList);
+
     }
 
     public Empresa(String nombre, int fundacionYear, String rubro) {
@@ -59,7 +56,7 @@ public class Empresa {
         this.leyenda = leyenda;
     }
 
-    private void cargarListas() {
+    public void cargarListas() {
         cargarDepartamentoList();
         cargarRolList();
         cargarHorarioList();

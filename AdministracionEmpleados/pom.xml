@@ -32,6 +32,4 @@
         <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>administraciondeempleados.gui.Principal</exec.mainClass>
     </properties>
-    
-   
 </project>

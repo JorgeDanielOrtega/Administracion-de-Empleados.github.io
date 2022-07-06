@@ -67,6 +67,10 @@ public class Principal extends javax.swing.JFrame {
             diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
             this.empresa = diaDatosEmpresa.getEmpresa();
         }
+        empresa.cargarListas(); //metodo para cargar las listas desde la base de datos
+        System.out.println(empresa.getHorarioList());
+        System.out.println(empresa.getRolList());
+        System.out.println(empresa.getDepartamentoList());
         departamento = new Departamento("Finanzas", 1, 25);
         empresa.getDepartamentoList().add(departamento);
         empresa.setHoraEntrada(7, 30);
@@ -80,13 +84,13 @@ public class Principal extends javax.swing.JFrame {
         menuEmpleado.setVisible(true);
         Puesto p = new Puesto("administracion");
         Puesto p2 = new Puesto("empleado");
-        rolContable = new Rol(2,"Contable", p, departamento);
-        rolAyudante = new Rol(2,"ayudante", p, departamento);
+        rolContable = new Rol(2, "Contable", p, departamento);
+        rolAyudante = new Rol(2, "ayudante", p, departamento);
         horarioMatutino = new Horario("matutino", 45f);
         horarioVespertino = new Horario("vespertino", 30f);
         horarioNocturno = new Horario("nocturno", 15f);
-       // empresa.getHorarioList().add(horarioMatutino);
-       // empresa.getHorarioList().add(horarioVespertino);
+        // empresa.getHorarioList().add(horarioMatutino);
+        // empresa.getHorarioList().add(horarioVespertino);
         //empresa.getHorarioList().add(horarioNocturno);
         empresa.getRolList().add(rolContable);
         empresa.getRolList().add(rolAyudante);
