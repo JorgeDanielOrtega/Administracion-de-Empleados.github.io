@@ -9,5 +9,6 @@ package administraciondeempleados;
  * @author SONY VAIO
  */
 public enum EstadoCivil {
-    SOLTERO, CASADO, DIVORSIADO, UNION_LIBRE;
+    SOLTERO, CASADO, DIVORCIADO, UNION_LIBRE;
+    // corregido la s por la c
 }

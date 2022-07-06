@@ -17,6 +17,7 @@ public class Rol {
     }
     
     public Rol(String nombre) { //Quitar mas tarde
+        this();
         this.nombre = nombre;
     }
     
@@ -30,8 +31,8 @@ public class Rol {
         this.puesto = puesto;
     }
      public Rol(double salario, String nombre, Puesto puesto, Departamento departamento){
-        this(nombre, salario);
-        this.puesto = puesto;
+        this(salario, nombre, puesto);
+        this.departamento = departamento;
     }
 //    public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
 //        this(nombre);

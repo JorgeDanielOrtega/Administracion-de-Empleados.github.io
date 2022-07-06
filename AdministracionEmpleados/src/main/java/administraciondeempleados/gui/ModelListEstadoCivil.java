@@ -17,7 +17,7 @@ public class ModelListEstadoCivil extends DefaultComboBoxModel<EstadoCivil>{
     public ModelListEstadoCivil() {
         addElement(EstadoCivil.CASADO);
         addElement(EstadoCivil.SOLTERO);
-        addElement(EstadoCivil.DIVORSIADO);
+        addElement(EstadoCivil.DIVORCIADO); //corregido la s por la c
         addElement(EstadoCivil.UNION_LIBRE);
     }
     

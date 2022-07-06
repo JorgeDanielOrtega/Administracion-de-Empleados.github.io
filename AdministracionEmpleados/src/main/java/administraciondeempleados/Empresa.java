@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -60,6 +61,146 @@ public class Empresa {
         cargarDepartamentoList();
         cargarRolList();
         cargarHorarioList();
+        cargarTrabajadoresList();
+    }
+
+    private Departamento retornarDepartamento(long idDepartamento) {
+        try {
+            String consulta = "SELECT nombre FROM Departamentos WHERE id = " + idDepartamento;
+            PreparedStatement pst = connection.prepareStatement(consulta);
+            ResultSet resultS = pst.executeQuery();
+            while (resultS.next()) {
+                String nombreDepa = resultS.getString("nombre");
+                for (Departamento departamento : departamentoList) {
+                    if (departamento.getNombre().equals(nombreDepa)) {
+                        return departamento;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("hubo un error al retornar departamento con id" + e.getMessage());
+        }
+        return null;
+    }
+
+    private Horario retornarHorario(long idHorario) {
+        try {
+            String consulta = "SELECT tipo FROM Horarios  WHERE id = " + idHorario;
+            PreparedStatement pst = connection.prepareStatement(consulta);
+            ResultSet resultS = pst.executeQuery();
+            while (resultS.next()) {
+                String tipo = resultS.getString("tipo");
+                for (Horario horario : horarioList) {
+                    if (horario.getTipo().equals(tipo)) {
+                        return horario;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("hubo un error al retornar horario con id" + e.getMessage());
+        }
+        return null;
+    }
+
+    private Rol retornarRol(long idRol) {
+        try {
+            String consulta = "SELECT nombre FROM Roles WHERE id = " + idRol;
+            PreparedStatement pst = connection.prepareStatement(consulta);
+            ResultSet resultS = pst.executeQuery();
+            while (resultS.next()) {
+                String nombreRol = resultS.getString("nombre");
+                for (Rol rol : rolList) {
+                    if (rol.getNombre().equals(nombreRol)) {
+                        return rol;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("hubo un error al retornar rol con id" + e.getMessage());
+        }
+        return null;
+    }
+
+    private Contrato retornarContrato(long idEmpleado) {
+        try {
+            String consulta = "SELECT * FROM Contratos WHERE id_empleado = " + idEmpleado;
+            PreparedStatement pst = connection.prepareStatement(consulta);
+            ResultSet resultS = pst.executeQuery();
+            while (resultS.next()) {
+                boolean tieneContrato = resultS.getInt("tiene_contrato") == 1;
+                double tiempoContrato = resultS.getDouble("tiempo_contrato");
+                Date fechaLimite = resultS.getDate("fecha_limite");
+                return new Contrato(tieneContrato, tiempoContrato, fechaLimite);
+            }
+        } catch (Exception e) {
+            System.out.println("hubo un error al retornar contrato con id" + e.getMessage());
+        }
+        return null;
+    }
+
+    private EstadoCivil retornarEstadoCivil(String estado) {
+        switch (estado) {
+            case "CASADO":
+                return EstadoCivil.CASADO;
+            case "SOLTERO":
+                return EstadoCivil.SOLTERO;
+            case "UNION_LIBRE":
+                return EstadoCivil.UNION_LIBRE;
+            case "DIVORCIADO":
+                return EstadoCivil.DIVORCIADO;
+
+            default:
+                System.out.println("se selecciono en default");
+                break;
+        }
+        return null;
+    }
+
+    private void cargarTrabajadoresList() {
+        try {
+            connection = dbConnect.conectar();
+            sql = "SELECT * FROM Empleados WHERE  fecha_nacimiento != '0000-00-00' AND anio_entrada != '0000-00-00'";
+            ps = connection.prepareStatement(sql);
+            result = ps.executeQuery();
+            while (result.next()) {
+                long id = result.getLong("id");
+                String cedula = result.getString("cedula");
+                String nombres = result.getString("nombres");
+                String apellidos = result.getString("apellidos");
+                String direccion = result.getString("direccion");
+                String estadoCivil = result.getString("estado_civil");
+                char sexo = result.getString("sexo").charAt(0); //quizas
+                String ciudad = result.getString("ciudad");
+                String telefono = result.getString("telefono");
+                Date fecha_nacimiento = result.getDate("fecha_nacimiento");
+                Date anio_entrada = result.getDate("anio_entrada");
+                String correoEmpresarial = result.getString("correo_empresarial");
+                String correoPersonal = result.getString("correo_personal");
+                String usuario = result.getString("usuario");
+                String contrasenia = result.getString("contrasenia");
+                boolean pagoTransferencia = result.getInt("pago_por_transferencia") == 1;
+                //boolean gerente = result.getInt("gerente") == 1;
+                long idHorario = result.getLong("id_horario");
+                long idDepartamento = result.getLong("id_departamento");
+                long idRol = result.getLong("id_rol");
+                Contrato contrato = retornarContrato(id);
+
+                Departamento depa = retornarDepartamento(idDepartamento);
+                Horario horario = retornarHorario(idHorario);
+                Rol rol = retornarRol(idRol);
+                Empleado e = new Empleado(nombres, apellidos, direccion, retornarEstadoCivil(estadoCivil), cedula, sexo, ciudad, telefono, fecha_nacimiento, correoPersonal, correoEmpresarial, usuario, contrasenia, pagoTransferencia, rol, contrato, anio_entrada, depa, horario);
+                
+                depa.getTrabajadorList().add(e);
+                horario.getEmpleadoList().add(e);
+                rol.getTrabajadorList().add(e);
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo cargar el trabajadorList");
+            System.err.println("hubo un error trabajador" + e.getMessage());
+        } finally {
+            dbConnect.desconectar();
+        }
     }
 
     private void cargarDepartamentoList() {
@@ -171,7 +312,7 @@ public class Empresa {
                 String tipo = result.getString("tipo");
                 long id = result.getLong("id");
                 float horasSemanales = result.getFloat("horas_semanales");
-                horarioList.add(new Horario(tipo, retornarDiasLaborablesList(id), horasSemanales));              
+                horarioList.add(new Horario(tipo, retornarDiasLaborablesList(id), horasSemanales));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el horariolist");
