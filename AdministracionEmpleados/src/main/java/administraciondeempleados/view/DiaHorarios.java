@@ -27,8 +27,11 @@ public class DiaHorarios extends javax.swing.JDialog {
     private Horario horario;
     private Gerente gerente;
     private List<Horario> horarioList;
-
-
+    private DBConnect dbConnect;
+    private Connection connection;
+    private String sql;
+    private PreparedStatement ps;
+    private ResultSet result;
 
     /**
      * Creates new form DiaHorarios
@@ -47,6 +50,7 @@ public class DiaHorarios extends javax.swing.JDialog {
         this.gerente = gerente;
         this.horario = new Horario();
         modelTableHorarios.cargarModelo(gerente.getEmpresa());
+        dbConnect = new DBConnect();
     }
 
     public DiaHorarios(java.awt.Frame parent, boolean modal, List<Horario> horarioList, Gerente gerente) {
@@ -176,8 +180,43 @@ public class DiaHorarios extends javax.swing.JDialog {
         //modelTableHorarios.getSelectedValue();
     }//GEN-LAST:event_btnEliminarHorarioMouseClicked
 
+    private long retornarID(String tipo) {
+        long id = 0;
+        try {
+           String query = "SELECT id FROM Horarios WHERE tipo='" + tipo + "' GROUP BY id";
+            ps = connection.prepareStatement(query);
+            result = ps.executeQuery();
+            while (result.next()) {
+                id = result.getLong("id");
+            }
+            System.out.println(id);
+            return id;
+        } catch (Exception e) {
+            System.out.println("no se puedo retornar el id" + e.getMessage());
+        }
+        return 0;
+    }
+
+    private void eliminarHorarioDB(Horario horario) {
+        try {
+            connection = dbConnect.conectar();
+            sql = "DELETE FROM Horarios WHERE id="+retornarID(horario.getTipo());
+            ps = connection.prepareStatement(sql);
+            ps.execute();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede eliminar el horario");
+            System.out.println("error al eliminar horario " + e.getMessage());
+        } finally {
+            dbConnect.desconectar();
+        }
+    }
+
+
     private void btnEliminarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHorarioActionPerformed
-        gerente.getEmpresa().getHorarioList().remove(tblHorarios.getSelectedRow());
+        Horario horario = gerente.getEmpresa().getHorarioList().get(tblHorarios.getSelectedRow());
+        eliminarHorarioDB(horario);
+        gerente.getEmpresa().getHorarioList().remove(horario);
         modelTableHorarios.cargarModelo(gerente.getEmpresa());
     }//GEN-LAST:event_btnEliminarHorarioActionPerformed
 
