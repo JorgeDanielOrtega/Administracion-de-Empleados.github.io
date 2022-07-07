@@ -180,11 +180,11 @@ public abstract class Trabajador extends Persona{
         this.decimo = decimo;
     }
 
-    public List<Asistencia> getAsistencia() {
+    public List<Asistencia> getAsistenciaList() {
         return asistencia;
     }
 
-    public void setAsistencia(List<Asistencia> asistencia) {
+    public void setAsistenciaList(List<Asistencia> asistencia) {
         this.asistencia = asistencia;
     }
     

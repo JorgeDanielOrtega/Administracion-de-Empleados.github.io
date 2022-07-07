@@ -34,7 +34,7 @@ public class Perfil extends javax.swing.JPanel {
         lbl_correoPersonal.setText(empleado.getCorreoPersonal());
         lbl_usuario.setText(empleado.getUsuario());
         lbl_rol.setText(empleado.getRol().getNombre());
-        lbl_puesto.setText(empleado.getPuesto().getNombre());
+        lbl_puesto.setText(empleado.getRol().getPuesto().getNombre());
         lbl_departamento.setText(empleado.getDepartamento().getNombre());
         lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
     }

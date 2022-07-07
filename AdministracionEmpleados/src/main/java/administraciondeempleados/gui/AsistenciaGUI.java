@@ -2,19 +2,19 @@ package administraciondeempleados.gui;
 
 import administraciondeempleados.Asistencia;
 import administraciondeempleados.Empleado;
-import java.util.List;
+import administraciondeempleados.EstadoAsistencia;
+import java.sql.Connection;
+
 
 public class AsistenciaGUI extends javax.swing.JDialog {
 
-    /**
-     * Creates new form AsistenciaGUI
-     */
+
     public AsistenciaGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
     }
-    
+
     public AsistenciaGUI(java.awt.Frame parent, boolean modal, Empleado empleado) {
         this(parent, modal);
         modelTableAsistencia.setEmpleado(empleado);

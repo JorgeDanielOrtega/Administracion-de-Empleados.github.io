@@ -189,11 +189,10 @@ public class Empresa {
                 Horario horario = retornarHorario(idHorario);
                 Rol rol = retornarRol(idRol);
                 Empleado e = new Empleado(nombres, apellidos, direccion, retornarEstadoCivil(estadoCivil), cedula, sexo, ciudad, telefono, fecha_nacimiento, correoPersonal, correoEmpresarial, usuario, contrasenia, pagoTransferencia, rol, contrato, anio_entrada, depa, horario);
-                
+                e.setId(String.valueOf(id));
                 depa.getTrabajadorList().add(e);
                 horario.getEmpleadoList().add(e);
                 rol.getTrabajadorList().add(e);
-                
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el trabajadorList");
@@ -212,7 +211,7 @@ public class Empresa {
             while (result.next()) {
                 String nombreDepa = result.getString("nombre");
                 int numero = result.getInt("numero");
-                int maxEmpleados = result.getInt("maximo_empleados");
+               int maxEmpleados = result.getInt("maximo_empleados");
                 int vacaciones = result.getInt("vacaciones");
                 departamentoList.add(new Departamento(nombreDepa, numero, maxEmpleados, vacaciones));
             }

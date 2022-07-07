@@ -107,7 +107,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void cargarComponentes() {
-        if (!true) {
+        if (true) {
             menuEmpleado.setVisible(true);
             menuEmpleado.setBackground(Palette.MENU);
             menuGerente.setVisible(false);
@@ -130,10 +130,11 @@ public class Principal extends javax.swing.JFrame {
 
         background.setBackground(Palette.BACKGROUND);
 
-        departamento.getTrabajadorList().add(empleado);
-        departamento.getTrabajadorList().add(empleado2);
-        departamento.getTrabajadorList().add(empleado3);
-        departamento.getTrabajadorList().add(empleado4);
+        //se comentaron porque al no tener id, da error en el filtrado, mas tarde quitar
+//        departamento.getTrabajadorList().add(empleado);
+//        departamento.getTrabajadorList().add(empleado2);
+//        departamento.getTrabajadorList().add(empleado3);
+//        departamento.getTrabajadorList().add(empleado4);
     }
 
     public void mouseEvents() {
@@ -150,7 +151,8 @@ public class Principal extends javax.swing.JFrame {
                     headClicked = head;
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = new JPanel();
-                    Perfil p = new Perfil(empleado);
+
+                    Perfil p = new Perfil((Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0));
                     p.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     p.setLocation(0, 0);
                     background.removeAll();
@@ -207,7 +209,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_asistencia;
-                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, empleado.getAsistenciaList(), horaActual);
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), horaActual);
                     asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
@@ -352,6 +354,8 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        head = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         menuGerente = new javax.swing.JPanel();
         btn_empleados = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -361,8 +365,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        head = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         menuEmpleado = new javax.swing.JPanel();
         btn_departamentoEmpleado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -377,6 +379,32 @@ public class Principal extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(125, 133, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        head.setForeground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("        jLabel1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(40, 15));
+
+        javax.swing.GroupLayout headLayout = new javax.swing.GroupLayout(head);
+        head.setLayout(headLayout);
+        headLayout.setHorizontalGroup(
+            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headLayout.createSequentialGroup()
+                .addGap(276, 276, 276)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addGap(276, 276, 276))
+        );
+        headLayout.setVerticalGroup(
+            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(545, 545, 545))
+        );
+
+        jPanel1.add(head, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
 
         menuGerente.setBackground(new java.awt.Color(255, 0, 102));
         menuGerente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -482,30 +510,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuGerente.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 270, 50));
 
-        head.setForeground(new java.awt.Color(204, 204, 204));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("        jLabel1");
-        jLabel1.setPreferredSize(new java.awt.Dimension(40, 15));
-
-        javax.swing.GroupLayout headLayout = new javax.swing.GroupLayout(head);
-        head.setLayout(headLayout);
-        headLayout.setHorizontalGroup(
-            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        headLayout.setVerticalGroup(
-            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
-        );
-
-        menuGerente.add(head, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 110));
+        jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
         menuEmpleado.setBackground(new java.awt.Color(255, 0, 102));
         menuEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -593,7 +598,7 @@ public class Principal extends javax.swing.JFrame {
 
         menuEmpleado.add(btn_logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
-        menuGerente.add(menuEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
+        jPanel1.add(menuEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
         background.setBackground(new java.awt.Color(0, 255, 102));
 
@@ -608,29 +613,13 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(menuGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(menuGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1266, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

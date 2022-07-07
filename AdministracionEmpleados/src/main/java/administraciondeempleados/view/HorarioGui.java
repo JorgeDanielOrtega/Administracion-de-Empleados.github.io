@@ -78,12 +78,12 @@ public class HorarioGui extends javax.swing.JDialog {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_tipoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_horasSemanales, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_diasLaborables, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_tipoHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(lbl_diasLaborables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_horasSemanales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel3))
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_aceptar)
@@ -113,10 +113,10 @@ public class HorarioGui extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void llenarDiasLaborales() {
-        String  diasLaborales = "";
+        String diasLaborales = "";
         lbl_diasLaborables.setText("");
         for (DiasLaborales dia : horario.getDiasLaborablesList()) {
-            diasLaborales += dia.toString();
+            diasLaborales += dia.toString() + ' ';
         }
         lbl_diasLaborables.setText(diasLaborales);
     }

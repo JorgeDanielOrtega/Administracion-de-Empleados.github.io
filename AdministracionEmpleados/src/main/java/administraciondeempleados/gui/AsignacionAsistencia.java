@@ -1,13 +1,21 @@
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Asistencia;
+import administraciondeempleados.Empleado;
 import administraciondeempleados.EstadoAsistencia;
+import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
+import javax.swing.JOptionPane;
+import prueb.DBConnect;
 
 public class AsignacionAsistencia extends javax.swing.JDialog {
 
@@ -15,7 +23,13 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
     private List<Asistencia> asistenciaList;
     private Calendar horaEntrada;
     private Calendar horaActual;
-   
+    private Empleado empleado;
+    private DBConnect dBConnect;
+    private Connection connection;
+    private String sql;
+    private PreparedStatement ps;
+    private ResultSet result;
+
     /**
      * Creates new form AsistenciaGUI
      */
@@ -25,12 +39,14 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
         buttonGroup = new ButtonGroup();
         this.horaActual = Calendar.getInstance();
+        this.dBConnect = new DBConnect();
     }
 
-    public AsignacionAsistencia(java.awt.Frame parent, boolean modal, List<Asistencia> asistenciaList, Calendar horaEntrada) {
+    public AsignacionAsistencia(java.awt.Frame parent, boolean modal, Empleado empleado, Calendar horaEntrada) {
         this(parent, modal);
         addElementostoButtonGroup();
-        this.asistenciaList = asistenciaList;
+        this.empleado = empleado;
+        this.asistenciaList = empleado.getAsistenciaList();
         this.horaEntrada = horaEntrada;
         desactivarPresente();
     }
@@ -42,15 +58,15 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
     }
 
     private void desactivarPresente() {
-        boolean desactivarPresente = horaEntrada.get(Calendar.MINUTE) < horaActual.get(Calendar.MINUTE) 
-                && horaActual.get(Calendar.MINUTE) < (horaEntrada.get(Calendar.MINUTE) + TIMEMPO_ESPERA); 
+        boolean desactivarPresente = horaEntrada.get(Calendar.MINUTE) < horaActual.get(Calendar.MINUTE)
+                && horaActual.get(Calendar.MINUTE) < (horaEntrada.get(Calendar.MINUTE) + TIMEMPO_ESPERA);
         if (!desactivarPresente) {
             rbt_presente.setEnabled(false); //configurar la activacion de nuevo mas tarde
-        }else{
+        } else {
             rbt_presente.setEnabled(true);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,24 +155,51 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     //IMPLEMENTAR METODO para que guarde el estado de lo marcado, y que se pueda modificar, y no se agregue otro elemento a la asistenciaList
-    
-    
-    
     private EstadoAsistencia recuperarEstado() { //quizas
         String estado = "";
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
-                estado = button.getText(); 
+                estado = button.getText();
                 return EstadoAsistencia.valueOf(button.getName());
             }
         }
         return null;
     }
 
+    private void subirAsistencia(Asistencia asistencia) {
+        try {
+            connection = dBConnect.conectar();
+            sql = "INSERT INTO Asistencias (fecha, id_empleado,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
+            ps = connection.prepareStatement(sql);
+            Date fecha = new Date(asistencia.getFecha().get(Calendar.YEAR)-1900,
+                    asistencia.getFecha().get(Calendar.MONTH),
+                    asistencia.getFecha().get(Calendar.DAY_OF_MONTH));
+            Time time = new Time(
+                    asistencia.getHora().get(Calendar.HOUR_OF_DAY),
+                    asistencia.getHora().get(Calendar.MINUTE),
+                    asistencia.getHora().get(Calendar.SECOND));
+            
+            ps.setDate(1, fecha);
+            ps.setLong(2, Long.valueOf(empleado.getId()));
+            ps.setTime(3, time);
+            ps.setString(4, asistencia.getDiaSemana());
+            ps.setString(5, asistencia.getEstado().toString().toLowerCase());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "hubo un error a la hora de subir la asistencia");
+            System.out.println("erro en subir asistencia " + e.getMessage());
+        } finally {
+            dBConnect.desconectar();
+        }
+    }
+
     private void btn_marcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_marcarActionPerformed
         Asistencia asistencia = new Asistencia(recuperarEstado());
+        asistencia.asignarDatosFecha();
         asistenciaList.add(asistencia);
+        subirAsistencia(asistencia);
         dispose();
     }//GEN-LAST:event_btn_marcarActionPerformed
 
