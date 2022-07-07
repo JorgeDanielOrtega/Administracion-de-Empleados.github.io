@@ -3,23 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package administraciondeempleados.view;
+
 import java.awt.Color;
 import administraciondeempleados.Horario;
 import administraciondeempleados.Gerente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import prueb.DBConnect;
+
 /**
  *
  * @author SONY VAIO
  */
 public class DiaHorarios extends javax.swing.JDialog {
+
     int xPos, yPos;
     private DiaHorario diaHorario;
     private Horario horario;
     private Gerente gerente;
     private List<Horario> horarioList;
+
+
+
     /**
      * Creates new form DiaHorarios
      */
@@ -27,20 +37,18 @@ public class DiaHorarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-     
+
 //    public Horarios() {
 //        initComponents();
 //        setLocationRelativeTo(this);
 //    }
-
-    
     public DiaHorarios(java.awt.Frame parent, boolean modal, Gerente gerente) {
         this(parent, modal);
         this.gerente = gerente;
         this.horario = new Horario();
         modelTableHorarios.cargarModelo(gerente.getEmpresa());
     }
-    
+
     public DiaHorarios(java.awt.Frame parent, boolean modal, List<Horario> horarioList, Gerente gerente) {
         this(parent, modal);
         this.horarioList = horarioList;
@@ -172,11 +180,11 @@ public class DiaHorarios extends javax.swing.JDialog {
         gerente.getEmpresa().getHorarioList().remove(tblHorarios.getSelectedRow());
         modelTableHorarios.cargarModelo(gerente.getEmpresa());
     }//GEN-LAST:event_btnEliminarHorarioActionPerformed
-    
-    public Horario obtenerHorario(){
-        if(tblHorarios.getSelectedRow() >= 0){
+
+    public Horario obtenerHorario() {
+        if (tblHorarios.getSelectedRow() >= 0) {
             horario = gerente.getEmpresa().getHorarioList().get(tblHorarios.getSelectedRow());
-        }        
+        }
         return horario;
     }
     private void btnEditarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarHorarioActionPerformed

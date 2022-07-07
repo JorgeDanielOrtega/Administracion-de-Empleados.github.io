@@ -3,19 +3,30 @@ package administraciondeempleados.view;
 import administraciondeempleados.Horario;
 import administraciondeempleados.DiasLaborales;
 import administraciondeempleados.Gerente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import prueb.DBConnect;
 
 public class DiaHorario extends javax.swing.JDialog {
 
     private Horario horario;
     private Gerente gerente;
     int indice;
+    private DBConnect dbConnect;
+    private Connection connection;
+    private String sql;
+    private PreparedStatement ps;
+    private ResultSet result;
 
     public DiaHorario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        dbConnect = new DBConnect();
         //horario = new Horario();
     }
 
@@ -56,8 +67,43 @@ public class DiaHorario extends javax.swing.JDialog {
         return diasLaboralesList;
     }
 
+    private void subirDiasLaborales(List<DiasLaborales> diasLaboralesList, long id) {
+        try {
+            //Connection con = dbConnect.conectar();
+            String query = " INSERT INTO Horarios_Dias_Laborables (id_dias_Laborables, id_horarios) VALUES (?,?);";
+            for (DiasLaborales diasLaborales : diasLaboralesList) {
+                PreparedStatement p = connection.prepareStatement(query);
+                p.setLong(1, diasLaborales.getDiaLaboral());
+                p.setLong(2, id);
+                p.executeUpdate();
+            }
+        } catch (Exception e) {
+            System.out.println("error a la hora de subir dias laborables " + e.getMessage());
+        }
+    }
+
     public void generarHorario() {
-        this.horario = new Horario(txtTipo.getText().trim(), recuperarComboBoxSelecionados(), Float.valueOf(txtHorasSemanales.getText()));
+        List<DiasLaborales> diasLaboralesList = recuperarComboBoxSelecionados();
+        this.horario = new Horario(txtTipo.getText().trim(), diasLaboralesList, Float.valueOf(txtHorasSemanales.getText()));
+        long id = 0;
+        try {
+            connection = dbConnect.conectar();
+            sql = "INSERT INTO Horarios (tipo,horas_semanales) VALUES (?,?)";
+            ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, horario.getTipo());
+            ps.setFloat(2, horario.getHorasLaborablesSemanales());
+            ps.executeUpdate();
+            result = ps.getGeneratedKeys();
+            while (result.next()) {
+                id = result.getLong(1);
+            }
+            subirDiasLaborales(diasLaboralesList, id);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no se pudo subir el horario");
+            System.out.println("erro en horario xd " + e.getMessage());
+        } finally {
+            dbConnect.desconectar();
+        }
     }
 
     private void rellenarDiasLaborables() {
