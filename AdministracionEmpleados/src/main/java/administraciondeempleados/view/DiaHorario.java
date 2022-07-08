@@ -141,54 +141,11 @@ public class DiaHorario extends javax.swing.JDialog {
         txtHorasSemanales.setText(String.valueOf(gerente.getEmpresa().getHorarioList().get(indice).getHorasLaborablesSemanales()));
     }
 
-    private void eliminarDiasLaboralesDB(long id) {
-        try {
-            String query = "DELETE FROM Horarios_Dias_Laborables WHERE id_horarios =" + id;
-            PreparedStatement p = connection.prepareStatement(query);
-            p.execute();
-        } catch (Exception e) {
-            System.out.println("error al eliminar dias laborales " + e.getMessage());
-        }
-    }
-
-    private long retornarId(Horario horario) {
-        try {
-            connection = dbConnect.conectar();
-            String query = "SELECT id FROM Horarios WHERE tipo='" + horario.getTipo() + "';";
-            PreparedStatement p = connection.prepareStatement(query);
-            result = p.executeQuery();
-            while (result.next()) {
-                return result.getLong("id");
-            }
-        } catch (Exception e) {
-            System.out.println("error al retornar id " + e.getMessage());
-        }
-        return 0;
-    }
-
-    private void actualizarHorarioDB(long id) {
-        try {
-            eliminarDiasLaboralesDB(id);
-            subirDiasLaborales(recuperarComboBoxSelecionados(), id);
-            sql = "  UPDATE Horarios SET tipo='" + horario.getTipo()
-                    + "',horas_semanales=" + horario.getHorasLaborablesSemanales()
-                    + " WHERE id =" + id + ";";
-            ps = connection.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("no se puedo acualizar el horario " + e.getMessage());
-        } finally {
-            dbConnect.desconectar();
-        }
-    }
-
     public void actualizarHorario() {
         this.horario = gerente.getEmpresa().getHorarioList().get(indice);
-        long id = retornarId(horario);
         this.horario.setDiasLaborablesList(recuperarComboBoxSelecionados());
         this.horario.setHorasLaborablesSemanales(Float.parseFloat(txtHorasSemanales.getText()));
         this.horario.setTipo(txtTipo.getText().trim());
-        actualizarHorarioDB(id);
     }
 
     public Horario getHorario() {
@@ -489,5 +446,4 @@ public class DiaHorario extends javax.swing.JDialog {
     private javax.swing.JTextField txtHorasSemanales;
     private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
-
 }
