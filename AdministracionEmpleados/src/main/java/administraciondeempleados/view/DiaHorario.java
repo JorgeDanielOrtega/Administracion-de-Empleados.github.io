@@ -184,9 +184,11 @@ public class DiaHorario extends javax.swing.JDialog {
 
     public void actualizarHorario() {
         this.horario = gerente.getEmpresa().getHorarioList().get(indice);
+        long id = retornarId(horario);
         this.horario.setDiasLaborablesList(recuperarComboBoxSelecionados());
         this.horario.setHorasLaborablesSemanales(Float.parseFloat(txtHorasSemanales.getText()));
         this.horario.setTipo(txtTipo.getText().trim());
+        actualizarHorarioDB(id);
     }
 
     public Horario getHorario() {
