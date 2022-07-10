@@ -107,7 +107,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void cargarComponentes() {
-        if (!true) {
+        if (true) {
             menuEmpleado.setVisible(true);
             menuEmpleado.setBackground(Palette.MENU);
             menuGerente.setVisible(false);

@@ -6,7 +6,6 @@ import administraciondeempleados.EstadoAsistencia;
 import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import java.sql.PreparedStatement;
@@ -170,7 +169,7 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
     private void subirAsistencia(Asistencia asistencia) {
         try {
             connection = dBConnect.conectar();
-            sql = "INSERT INTO Asistencias (fecha, id_empleado,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO \"Asistencias\" (fecha, id_empleado,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
             ps = connection.prepareStatement(sql);
             Date fecha = new Date(asistencia.getFecha().get(Calendar.YEAR)-1900,
                     asistencia.getFecha().get(Calendar.MONTH),

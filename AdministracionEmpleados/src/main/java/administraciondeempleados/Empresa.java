@@ -1,6 +1,5 @@
 package administraciondeempleados;
 
-import com.google.protobuf.ByteString;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,28 +63,11 @@ public class Empresa {
         cargarTrabajadoresList();
     }
 
-    private Departamento retornarDepartamento(long idDepartamento) {
-        try {
-            String consulta = "SELECT nombre FROM Departamentos WHERE id = " + idDepartamento;
-            PreparedStatement pst = connection.prepareStatement(consulta);
-            ResultSet resultS = pst.executeQuery();
-            while (resultS.next()) {
-                String nombreDepa = resultS.getString("nombre");
-                for (Departamento departamento : departamentoList) {
-                    if (departamento.getNombre().equals(nombreDepa)) {
-                        return departamento;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("hubo un error al retornar departamento con id" + e.getMessage());
-        }
-        return null;
-    }
+    
 
     private Horario retornarHorario(long idHorario) {
         try {
-            String consulta = "SELECT tipo FROM Horarios  WHERE id = " + idHorario;
+            String consulta = "SELECT tipo FROM \"Horarios\"  WHERE id = " + idHorario;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -104,7 +86,7 @@ public class Empresa {
 
     private Rol retornarRol(long idRol) {
         try {
-            String consulta = "SELECT nombre FROM Roles WHERE id = " + idRol;
+            String consulta = "SELECT nombre FROM \"Roles\" WHERE id = " + idRol;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -123,7 +105,7 @@ public class Empresa {
 
     private Contrato retornarContrato(long idEmpleado) {
         try {
-            String consulta = "SELECT * FROM Contratos WHERE id_empleado = " + idEmpleado;
+            String consulta = "SELECT * FROM \"Contratos\" WHERE id_empleado = " + idEmpleado;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -155,11 +137,29 @@ public class Empresa {
         }
         return null;
     }
+    private Departamento retornarDepartamento(long idDepartamento) {
+        try {
+            String consulta = "SELECT nombre FROM \"Departamentos\" WHERE id = " + idDepartamento;
+            PreparedStatement pst = connection.prepareStatement(consulta);
+            ResultSet resultS = pst.executeQuery();
+            while (resultS.next()) {
+                String nombreDepa = resultS.getString("nombre");
+                for (Departamento departamento : departamentoList) {
+                    if (departamento.getNombre().equals(nombreDepa)) {
+                        return departamento;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("hubo un error al retornar departamento con id" + e.getMessage());
+        }
+        return null;
+    }
 
     private void cargarTrabajadoresList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM Empleados WHERE  fecha_nacimiento != '0000-00-00' AND anio_entrada != '0000-00-00'";
+            sql = "SELECT * FROM \"Empleados\" WHERE fecha_nacimiento notnull and anio_entrada notnull and id_horario notnull and id_rol notnull and id_departamento notnull;";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -205,13 +205,13 @@ public class Empresa {
     private void cargarDepartamentoList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM Departamentos";
+            sql = "SELECT * FROM \"Departamentos\"";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
                 String nombreDepa = result.getString("nombre");
                 int numero = result.getInt("numero");
-               int maxEmpleados = result.getInt("maximo_empleados");
+                int maxEmpleados = result.getInt("maximo_empleados");
                 int vacaciones = result.getInt("vacaciones");
                 departamentoList.add(new Departamento(nombreDepa, numero, maxEmpleados, vacaciones));
             }
@@ -235,8 +235,8 @@ public class Empresa {
     private void cargarRolList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT r.salario, r.nombre AS 'Rol', p.nombre AS 'Puesto', "
-                    + "d.nombre AS 'Departamento' FROM Roles r, Puestos p, Departamentos d";
+            sql = "SELECT r.salario, r.nombre AS Rol, p.nombre AS Puesto, \n"
+                    + "d.nombre AS Departamento FROM \"Roles\" r, \"Puestos\" p, \"Departamentos\" d ";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -260,9 +260,9 @@ public class Empresa {
             //quizas haya problemas con los objetos, dado que se utiliza en dos metodos, y puede haber perdida de consultas
             connection = dbConnect.conectar();
             List<DiasLaborales> diasLaborablesList = new LinkedList();
-            sql = "SELECT dia FROM Dias_Laborables WHERE id IN  "
-                    + "(SELECT hd.id_dias_Laborables FROM Horarios h INNER JOIN"
-                    + " Horarios_Dias_Laborables hd ON " + id + " = hd.id_horarios)";
+            sql = "SELECT dia FROM \"Dias_Laborables\" WHERE id IN  \n" +
+"                    (SELECT hd.id_dias_Laborables FROM \"Horarios\" h INNER JOIN\n" +
+"                     \"Horarios_Dias_Laborables\" hd ON "+ id + "= hd.id_horarios);";
             ps = connection.prepareStatement(sql);
             ResultSet resultS = ps.executeQuery();
             while (resultS.next()) {
@@ -304,7 +304,7 @@ public class Empresa {
     private void cargarHorarioList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM Horarios ";
+            sql = "SELECT * FROM \"Horarios\"";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
