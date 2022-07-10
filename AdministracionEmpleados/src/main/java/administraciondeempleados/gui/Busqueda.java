@@ -11,11 +11,6 @@ import prueb.DBConnect;
 public class Busqueda extends javax.swing.JPanel {
 
     private Empresa empresa;
-    private DBConnect dbConnect;
-    private Connection connection;
-    private String sql;
-    private PreparedStatement ps;
-    private ResultSet result;
     DefaultComboBoxModel modelComboDepartamento;
     DefaultComboBoxModel modelComboRol;
     DefaultComboBoxModel modelComboHorario;
@@ -179,21 +174,6 @@ public class Busqueda extends javax.swing.JPanel {
 
     private void cargaModeloDepartamento() {
         modelComboDepartamento.addElement(null);
-//        try {
-//            connection = dbConnect.conectar();
-//            sql = "SELECT nombre FROM Departamentos";
-//            ps = connection.prepareStatement(sql);
-//            result = ps.executeQuery();
-//            while (result.next()) {                
-//                String nombre = result.getString("nombre");
-//                modelComboDepartamento.addElement();
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "No se pudo obtener departamentos");
-//        } finally {
-//            dbConnect.desconectar();
-//        }
-        
         modelComboDepartamento.addAll(empresa.getDepartamentoList());
         cmb_departamento.setModel(modelComboDepartamento);
     }

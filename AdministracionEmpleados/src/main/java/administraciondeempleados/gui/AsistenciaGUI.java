@@ -1,9 +1,6 @@
 package administraciondeempleados.gui;
 
-import administraciondeempleados.Asistencia;
 import administraciondeempleados.Empleado;
-import administraciondeempleados.EstadoAsistencia;
-import java.sql.Connection;
 
 
 public class AsistenciaGUI extends javax.swing.JDialog {

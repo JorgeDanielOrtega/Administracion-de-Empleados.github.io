@@ -5,7 +5,7 @@ import administraciondeempleados.Empleado;
 import administraciondeempleados.gui.AsistenciaGUI;
 
 public class Perfil extends javax.swing.JPanel {
-    
+
     private Empleado empleado;
 
     /**
@@ -13,15 +13,15 @@ public class Perfil extends javax.swing.JPanel {
      */
     public Perfil() {
         initComponents();
-        
+
     }
-    
+
     public Perfil(Empleado empleado) {
         this();
         this.empleado = empleado;
         llenarCampos();
     }
-    
+
     private void llenarCampos() {
         lbl_identificacion.setText(empleado.getCedula());
         lbl_nombre.setText(empleado.getNombre());
@@ -36,7 +36,12 @@ public class Perfil extends javax.swing.JPanel {
         lbl_rol.setText(empleado.getRol().getNombre());
         lbl_puesto.setText(empleado.getRol().getPuesto().getNombre());
         lbl_departamento.setText(empleado.getDepartamento().getNombre());
-        lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
+        if (empleado.getContrato() != null) {
+            lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
+        } else {
+            lbl_contrato.setText("No tiene");
+
+        }
     }
 
     /**
@@ -312,12 +317,12 @@ public class Perfil extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_verAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verAsistenciasActionPerformed
-        AsistenciaGUI asis = new AsistenciaGUI(null, true,empleado);
+        AsistenciaGUI asis = new AsistenciaGUI(null, true, empleado);
         asis.setVisible(true);
     }//GEN-LAST:event_btn_verAsistenciasActionPerformed
 
     private void btn_verHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verHorarioActionPerformed
-        HorarioGui h = new HorarioGui(null, true,empleado.getHorario());
+        HorarioGui h = new HorarioGui(null, true, empleado.getHorario());
         h.setVisible(true);
     }//GEN-LAST:event_btn_verHorarioActionPerformed
 
