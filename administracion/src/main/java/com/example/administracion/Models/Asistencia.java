@@ -24,8 +24,8 @@ public class Asistencia {
     private String estado; // EstadoAsistencia
     @Column(name = "dia_semana")
     private String diaSemana;
-    @Column(name = "id_empleado")
-    private Long idEmpleado;
+    @Column(name = "id_trabajador")
+    private Long idTrabajador;
 
     // public Asistencia() {
     // fecha = Calendar.getInstance();
@@ -156,11 +156,11 @@ public class Asistencia {
     }
 
     public Long getIdEmpleado() {
-        return idEmpleado;
+        return idTrabajador;
     }
 
     public void setIdEmpleado(Long idEmpleado) {
-        this.idEmpleado = idEmpleado;
+        this.idTrabajador = idEmpleado;
     }
 
     // @Override //quitar mas tarde
