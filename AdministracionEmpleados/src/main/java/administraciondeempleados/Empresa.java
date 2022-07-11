@@ -159,7 +159,10 @@ public class Empresa {
     private void cargarTrabajadoresList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM \"Empleados\" WHERE fecha_nacimiento notnull and anio_entrada notnull and id_horario notnull and id_rol notnull and id_departamento notnull;";
+            sql = "select * from (select * from \"Trabajador\" t inner join "
+                    + " \"Persona\" p on t.id_persona = p.id) as todo where "
+                    + "fecha_nacimiento notnull and anio_entrada notnull and id_horario notnull "
+                    + "and id_rol notnull and id_departamento notnull;";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {

@@ -107,7 +107,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void cargarComponentes() {
-        if (!true) {
+        if (true) {
             menuEmpleado.setVisible(true);
             menuEmpleado.setBackground(Palette.MENU);
             menuGerente.setVisible(false);
@@ -209,7 +209,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_asistencia;
-                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), horaActual);
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), empresa.getHoraEntrada());
                     asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
