@@ -1,6 +1,7 @@
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Contrato;
+import administraciondeempleados.Cuenta;
 import administraciondeempleados.Departamento;
 import administraciondeempleados.Empleado;
 import administraciondeempleados.Empresa;
@@ -56,6 +57,7 @@ public class Principal extends javax.swing.JFrame {
     private Horario horarioVespertino;
     private Horario horarioNocturno;
     private JFrame parent;
+    private Cuenta cuenta;
 
     /**
      * Creates new form Principal
@@ -63,10 +65,39 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         parent = this;
+        
         if (empresa == null) {
-            diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa);
-            this.empresa = diaDatosEmpresa.getEmpresa();
+            //valores por defecto para la ejecucion por primera vez
+            empresa = new Empresa("Nombre", 9999, "Leyenda", "Rubro");
+            Puesto puesto = new Puesto("Gerente");
+            Rol rol = new Rol("Gerente");
+            Departamento departamento = new Departamento("Administración", 1, 1);
+            gerente = new Gerente(empresa, "Correo@Personal", "admin", puesto, rol, departamento, new Contrato(true), "Gerente", "Gerente", "Direccion", "9999999999", '/', "Ciudad", "9999999999", new Date());
+            departamento.getTrabajadorList().add(gerente);
+            empresa.getGerenteList().add(gerente);
+            empresa.getDepartamentoList().add(departamento);
+            empresa.getRolList().add(rol);
+            
+            //datos de prueba, eliminar despues
+            Departamento departamento1 = new Departamento("Limpieza", 1, 1);
+            Empleado empleado69 = new Empleado(new Date(), horarioMatutino, "CorreoPersonal", "empleado", new Puesto("limpieza"), new Rol("Empleado"), departamento1, new Contrato(true), "Empleado", "Empleado", "Direccion", "999999999", '/', "Ciudad", "9999999999", new Date());
+            departamento1.getTrabajadorList().add(empleado69);
+            empresa.getDepartamentoList().add(departamento1);
+            
+            
+            diaLogin = new DiaLogin(this, true, empresa);
+            diaLogin.setVisible(true);
+            this.cuenta = diaLogin.getCuenta();
+            diaLogin.dispose();
+            cargarComponentes();
+        }else{
+            diaLogin = new DiaLogin(this, true, empresa);
+            diaLogin.setVisible(true);
+            this.cuenta = diaLogin.getCuenta();
+            diaLogin.dispose();
+            cargarComponentes();
         }
+        
         empresa.cargarListas(); //metodo para cargar las listas desde la base de datos
         System.out.println(empresa.getHorarioList());
         System.out.println(empresa.getRolList());
@@ -94,26 +125,20 @@ public class Principal extends javax.swing.JFrame {
         //empresa.getHorarioList().add(horarioNocturno);
         empresa.getRolList().add(rolContable);
         empresa.getRolList().add(rolAyudante);
-        gerente = new Gerente(empresa, "Gerente", "admin", "admin", new Puesto("Gerente"), new Rol("Gerente"), new Departamento("Administracion", 1, 1), new Contrato(true), "Gerente", "Gerente", "Gerente", "9999999999", '/', "Ciudad", "9999999999", new Date(2022, 6, 26));
-        empresa.setGerente(gerente);
-        empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "daniel", "1234", p, rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado2 = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "jose", "1234", p, rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado3 = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "daniel", "1234", p2, rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado4 = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "daniel", "1234", p2, rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
-        cargarComponentes();
+        empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado2 = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado3 = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+        empleado4 = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
         mouseEvents();
-        empresa.getDepartamentoList().add(gerente.getDepartamento());
-        //empresa.getDepartamentoList().get(0).getTrabajadorList().add(gerente);
     }
 
     private void cargarComponentes() {
-        if (!true) {
+        if (this.cuenta.getRol().getNombre().equals("Empleado")) {
             menuEmpleado.setVisible(true);
             menuEmpleado.setBackground(Palette.MENU);
             menuGerente.setVisible(false);
             jLabel1.setText("Empleado");
         } else {
-
             menuGerente.setVisible(true);
             menuGerente.setBackground(Palette.MENU);
             menuEmpleado.setVisible(false);
@@ -122,11 +147,14 @@ public class Principal extends javax.swing.JFrame {
         btn_empleados.setBackground(Palette.BUTTON);
         btn_departamentos.setBackground(Palette.BUTTON);
         btn_horarios.setBackground(Palette.BUTTON);
+        btn_logOutGerente.setBackground(Palette.BUTTON);
+        btn_empresa.setBackground(Palette.BUTTON);
 
-        btn_logOut.setBackground(Palette.BUTTON);
+        btn_logOutEmpleado.setBackground(Palette.BUTTON);
         btn_asistencia.setBackground(Palette.BUTTON);
         btn_departamentoEmpleado.setBackground(Palette.BUTTON);
         btn_buscar.setBackground(Palette.BUTTON);
+        btn_empresa1.setBackground(Palette.BUTTON);
 
         background.setBackground(Palette.BACKGROUND);
 
@@ -198,10 +226,10 @@ public class Principal extends javax.swing.JFrame {
                     DiaHorarios diaHorarios = new DiaHorarios(null, true, gerente);                    //horarios.setGerente(gerente);
                     diaHorarios.setVisible(true);
                 }
-                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
-                    btn_logOut.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_logOutEmpleado && buttonClicked != btn_logOutEmpleado) {
+                    btn_logOutEmpleado.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
-                    buttonClicked = btn_logOut;
+                    buttonClicked = btn_logOutEmpleado;
                     diaLogin = new DiaLogin(null, true, empresa);
                     diaLogin.setVisible(true);
                 }
@@ -260,8 +288,8 @@ public class Principal extends javax.swing.JFrame {
                     btn_horarios.setBackground(Palette.BUTTON_CLICK);
                 }
 
-                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
-                    btn_logOut.setBackground(Palette.BUTTON_CLICK);
+                if (e.getSource() == btn_logOutEmpleado && buttonClicked != btn_logOutEmpleado) {
+                    btn_logOutEmpleado.setBackground(Palette.BUTTON_CLICK);
                 }
                 if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
@@ -294,8 +322,8 @@ public class Principal extends javax.swing.JFrame {
                 if (e.getSource() == btn_horarios && buttonClicked != btn_horarios) {
                     btn_horarios.setBackground(Palette.BUTTON);
                 }
-                if (e.getSource() == btn_logOut && buttonClicked != btn_logOut) {
-                    btn_logOut.setBackground(Palette.BUTTON);
+                if (e.getSource() == btn_logOutEmpleado && buttonClicked != btn_logOutEmpleado) {
+                    btn_logOutEmpleado.setBackground(Palette.BUTTON);
                 }
                 if (e.getSource() == btn_asistencia && buttonClicked != btn_asistencia) {
                     btn_asistencia.setBackground(Palette.BUTTON);
@@ -312,7 +340,7 @@ public class Principal extends javax.swing.JFrame {
         btn_empleados.addMouseListener(m);
         btn_departamentos.addMouseListener(m);
         btn_horarios.addMouseListener(m);
-        btn_logOut.addMouseListener(m);
+        btn_logOutEmpleado.addMouseListener(m);
         btn_asistencia.addMouseListener(m);
         btn_departamentoEmpleado.addMouseListener(m);
         head.addMouseListener(m);
@@ -365,12 +393,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btn_buscar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        btn_empresa = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        btn_logOutGerente = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         menuEmpleado = new javax.swing.JPanel();
         btn_departamentoEmpleado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        btn_empresa1 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         btn_asistencia = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        btn_logOut = new javax.swing.JPanel();
+        btn_logOutEmpleado = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         background = new javax.swing.JPanel();
 
@@ -393,9 +427,9 @@ public class Principal extends javax.swing.JFrame {
         headLayout.setHorizontalGroup(
             headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headLayout.createSequentialGroup()
-                .addGap(276, 276, 276)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                .addGap(276, 276, 276))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
         headLayout.setVerticalGroup(
             headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,7 +467,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuGerente.add(btn_empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 270, 50));
+        menuGerente.add(btn_empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 270, 50));
 
         btn_departamentos.setBackground(new java.awt.Color(51, 0, 204));
 
@@ -459,7 +493,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuGerente.add(btn_departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 270, 50));
+        menuGerente.add(btn_departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 270, 50));
 
         btn_horarios.setBackground(new java.awt.Color(51, 255, 255));
 
@@ -485,7 +519,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuGerente.add(btn_horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 270, 50));
+        menuGerente.add(btn_horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 270, 50));
 
         btn_buscar.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -508,7 +542,69 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        menuGerente.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 270, 50));
+        menuGerente.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 270, 50));
+
+        btn_empresa.setBackground(new java.awt.Color(255, 0, 204));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Empresa");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btn_empresaLayout = new javax.swing.GroupLayout(btn_empresa);
+        btn_empresa.setLayout(btn_empresaLayout);
+        btn_empresaLayout.setHorizontalGroup(
+            btn_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empresaLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        btn_empresaLayout.setVerticalGroup(
+            btn_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empresaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuGerente.add(btn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
+
+        btn_logOutGerente.setBackground(new java.awt.Color(255, 0, 204));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Log out");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btn_logOutGerenteLayout = new javax.swing.GroupLayout(btn_logOutGerente);
+        btn_logOutGerente.setLayout(btn_logOutGerenteLayout);
+        btn_logOutGerenteLayout.setHorizontalGroup(
+            btn_logOutGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutGerenteLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        btn_logOutGerenteLayout.setVerticalGroup(
+            btn_logOutGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutGerenteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuGerente.add(btn_logOutGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, -1, -1));
 
         jPanel1.add(menuGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 630));
 
@@ -539,7 +635,38 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuEmpleado.add(btn_departamentoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
+        menuEmpleado.add(btn_departamentoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
+
+        btn_empresa1.setBackground(new java.awt.Color(255, 0, 204));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Empresa");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btn_empresa1Layout = new javax.swing.GroupLayout(btn_empresa1);
+        btn_empresa1.setLayout(btn_empresa1Layout);
+        btn_empresa1Layout.setHorizontalGroup(
+            btn_empresa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empresa1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        btn_empresa1Layout.setVerticalGroup(
+            btn_empresa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_empresa1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        menuEmpleado.add(btn_empresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
         btn_asistencia.setBackground(new java.awt.Color(204, 255, 0));
 
@@ -565,9 +692,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuEmpleado.add(btn_asistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
+        menuEmpleado.add(btn_asistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
-        btn_logOut.setBackground(new java.awt.Color(255, 0, 204));
+        btn_logOutEmpleado.setBackground(new java.awt.Color(255, 0, 204));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -579,24 +706,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout btn_logOutLayout = new javax.swing.GroupLayout(btn_logOut);
-        btn_logOut.setLayout(btn_logOutLayout);
-        btn_logOutLayout.setHorizontalGroup(
-            btn_logOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_logOutLayout.createSequentialGroup()
+        javax.swing.GroupLayout btn_logOutEmpleadoLayout = new javax.swing.GroupLayout(btn_logOutEmpleado);
+        btn_logOutEmpleado.setLayout(btn_logOutEmpleadoLayout);
+        btn_logOutEmpleadoLayout.setHorizontalGroup(
+            btn_logOutEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutEmpleadoLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
-        btn_logOutLayout.setVerticalGroup(
-            btn_logOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_logOutLayout.createSequentialGroup()
+        btn_logOutEmpleadoLayout.setVerticalGroup(
+            btn_logOutEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_logOutEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        menuEmpleado.add(btn_logOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
+        menuEmpleado.add(btn_logOutEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
 
         jPanel1.add(menuEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 630));
 
@@ -610,7 +737,7 @@ public class Principal extends javax.swing.JFrame {
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
 
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, 630));
@@ -632,7 +759,43 @@ public class Principal extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         diaLogin = new DiaLogin(this, true, empresa);
         diaLogin.setVisible(true);
+        this.cuenta = diaLogin.getCuenta();
+        diaLogin.dispose();
+        cargarComponentes();
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        diaLogin = new DiaLogin(this, true, empresa);
+        diaLogin.setVisible(true);
+        this.cuenta = diaLogin.getCuenta();
+        diaLogin.dispose();
+        cargarComponentes();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa, this.cuenta);
+        
+        if(!this.empresa.getNombre().equals(diaDatosEmpresa.getEmpresa().getNombre())){
+            this.empresa.setNombre(diaDatosEmpresa.getEmpresa().getNombre());
+        }
+        
+        if(!this.empresa.getRubro().equals(diaDatosEmpresa.getEmpresa().getRubro())){
+            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
+        }
+        
+        if(!this.empresa.getLeyenda().equals(diaDatosEmpresa.getEmpresa().getLeyenda())){
+            this.empresa.setLeyenda(diaDatosEmpresa.getEmpresa().getLeyenda());
+        }
+        
+        if(!String.valueOf(this.empresa.getFundacionYear()).equals(String.valueOf(diaDatosEmpresa.getEmpresa().getFundacionYear()))){
+            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
+        }
+        
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa, this.cuenta);
+    }//GEN-LAST:event_jLabel14MouseClicked
 
     /**
      * @param args the command line arguments
@@ -678,13 +841,19 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel btn_departamentoEmpleado;
     private javax.swing.JPanel btn_departamentos;
     private javax.swing.JPanel btn_empleados;
+    private javax.swing.JPanel btn_empresa;
+    private javax.swing.JPanel btn_empresa1;
     private javax.swing.JPanel btn_horarios;
-    private javax.swing.JPanel btn_logOut;
+    private javax.swing.JPanel btn_logOutEmpleado;
+    private javax.swing.JPanel btn_logOutGerente;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JPanel head;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

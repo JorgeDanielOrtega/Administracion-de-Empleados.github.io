@@ -27,8 +27,8 @@ public class Empleado extends Trabajador {
     }
 
     //eliminar este contructor o cambiar el cumpleanios por anio entrada
-    public Empleado(Date entradaYear, Horario horario, String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
-        super(correoPersonal, usuario, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
+    public Empleado(Date entradaYear, Horario horario, String correoPersonal, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
+        super(correoPersonal, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.entradaYear = entradaYear;
         this.horario = horario;
         this.asistenciaList = new LinkedList();

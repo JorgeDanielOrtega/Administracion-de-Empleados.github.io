@@ -32,13 +32,14 @@ public class Empresa {
     private List<Rol> rolList;
     private List<Horario> horarioList;
     private Calendar horaEntrada;
-    private Gerente gerente;
+    private List<Gerente> gerenteList;
 
     // implementar el metodo en el dialog datos empresa, para que los datos se envien directamente a la bd
     public Empresa() {
         horarioList = new LinkedList();
         rolList = new LinkedList();
         departamentoList = new LinkedList();
+        gerenteList = new LinkedList();
         dbConnect = new DBConnect();
         this.horaEntrada = Calendar.getInstance();//quitar mas tarde
 
@@ -62,6 +63,11 @@ public class Empresa {
         cargarRolList();
         cargarHorarioList();
         cargarTrabajadoresList();
+        cargarGerenteList();
+    }
+    
+    private void cargarGerenteList(){
+        //TODO
     }
 
     private Departamento retornarDepartamento(long idDepartamento) {
@@ -388,12 +394,12 @@ public class Empresa {
         horaEntrada.set(Calendar.MINUTE, minuto);
     }
 
-    public Gerente getGerente() {
-        return gerente;
+    public List<Gerente> getGerenteList() {
+        return gerenteList;
     }
 
-    public void setGerente(Gerente gerente) {
-        this.gerente = gerente;
+    public void setGerenteList(List<Gerente> gerenteList) {
+        this.gerenteList = gerenteList;
     }
 
     @Override

@@ -30,11 +30,11 @@ public abstract class Trabajador extends Persona{
         super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
     }
     
-    public Trabajador(String correoPersonal, String usuario, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
+    public Trabajador(String correoPersonal, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
         super(nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.correoPersonal = correoPersonal;
         generarCorreoEmpresarial(nombre, apellido);
-        this.usuario = "admin";
+        this.usuario = this.correoEmpresarial;
         this.password = password;
         this.puesto = puesto;
         this.rol = rol;
@@ -81,7 +81,7 @@ public abstract class Trabajador extends Persona{
     }
     
     private void generarCorreoEmpresarial(String nombre, String apellido){
-        this.correoEmpresarial = nombre.replaceAll("\\s+", "") + "." + apellido.replaceAll("\\s+", "") + "@superEmpresa.comXD";
+        this.correoEmpresarial = nombre.replaceAll("\\s+", "") + "." + apellido.replaceAll("\\s+", "") + "@superEmpresa.com";
     }
     
     public Contrato getContrato() {

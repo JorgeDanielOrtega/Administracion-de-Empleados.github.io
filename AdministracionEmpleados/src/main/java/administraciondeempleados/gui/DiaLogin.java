@@ -5,6 +5,8 @@ import administraciondeempleados.Cuenta;
 import administraciondeempleados.Departamento;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Empresa;
+import administraciondeempleados.Rol;
+import administraciondeempleados.Trabajador;
 
 public class DiaLogin extends javax.swing.JDialog {
 
@@ -30,14 +32,23 @@ public class DiaLogin extends javax.swing.JDialog {
         this.empresa = empresa;
     }
     
-    public void llenarCampos(){
-        txtUsuario.setText(cuenta.getCorreoEmpresarial());
-        txtContraseña.setText(cuenta.getContraseña());
-        //System.out.println(cuenta);
-    }
+//    public void llenarCampos(){
+//        txtUsuario.setText(cuenta.getCorreoEmpresarial());
+//        txtContraseña.setText(cuenta.getContraseña());
+//        //System.out.println(cuenta);
+//    }
     
     public void obtenerCuenta(){
-        this.cuenta = new Cuenta(txtUsuario.getText(), String.valueOf(txtContraseña.getPassword()));
+        Rol rol = null;
+        for(int i = 0; i < empresa.getDepartamentoList().size(); i++){
+            for(int j = 0; j < empresa.getDepartamentoList().get(i).getTrabajadorList().size(); j++){
+                if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
+                    rol = empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getRol();
+                    break;
+                }
+            }
+        }
+        this.cuenta = new Cuenta(txtUsuario.getText(), String.valueOf(txtContraseña.getPassword()), rol);
     }
 
     public Cuenta getCuenta() {
@@ -363,11 +374,28 @@ public class DiaLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_lbBarraSuperiorMousePressed
 
     private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
-        if(txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("admin") || txtUsuario.getText().equals("admin") && String.valueOf(txtContraseña.getPassword()).equals("1234") || txtUsuario.getText().equals("pato") && String.valueOf(txtContraseña.getPassword()).equals("pato")){
-            obtenerCuenta();
-            parent.setVisible(true);
-            this.dispose();
-        }else{
+
+        boolean ingreso = false;
+        
+        for(int i = 0; i < empresa.getDepartamentoList().size(); i++){
+            for(int j = 0; j < empresa.getDepartamentoList().get(i).getTrabajadorList().size(); j++){
+                if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
+                    if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getPassword().equals(String.valueOf(txtContraseña.getPassword()))){
+                        ingreso = true;
+                        obtenerCuenta();
+                        parent.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    }else{
+                        ingreso = true;
+                        JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if(ingreso == false){
             JOptionPane.showMessageDialog(null, "Datos incorrectos");
         }
     }//GEN-LAST:event_lbIngresarMouseClicked
@@ -390,9 +418,9 @@ public class DiaLogin extends javax.swing.JDialog {
 
     private void lbRecuperarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbRecuperarContraseñaMouseClicked
         if(!txtUsuario.getText().equals("Nombre de usuario") && !txtUsuario.getText().isEmpty()){
-            for(int i = 0; i <= empresa.getDepartamentoList().size(); i++){
+            for(int i = 0; i < empresa.getDepartamentoList().size(); i++){
                 empresa.getDepartamentoList().get(i);
-                for(int j = 0; j <= empresa.getDepartamentoList().get(i).getTrabajadorList().size(); i++){
+                for(int j = 0; j < empresa.getDepartamentoList().get(i).getTrabajadorList().size(); i++){
                     empresa.getDepartamentoList().get(i).getTrabajadorList().get(j);
                     if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
                         empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).setPassword("1234");

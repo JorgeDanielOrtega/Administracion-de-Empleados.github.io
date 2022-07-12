@@ -6,17 +6,26 @@ import javax.swing.border.SoftBevelBorder;
 import administraciondeempleados.Empresa;
 import javax.swing.JOptionPane;
 import administraciondeempleados.Gerente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import prueb.DBConnect;
 
 public class DiaDatosEmpresa extends javax.swing.JDialog {
 
-    private DiaLogin diaLogin;
-    private Cuenta cuentaActual = new Cuenta("admin", "admin");
+    //private DiaLogin diaLogin;
+    private Cuenta cuentaActual;
     private SoftBevelBorder softBevelBorder;
     private Empresa empresa;
-    private Gerente gerente;
-    private java.awt.Frame parent;
-       
+    //private Gerente gerente;
+    private java.awt.Frame parent;   
     private int xPos, yPos;
+    
+    private DBConnect dbConnect;
+    private Connection connection;
+    private String sql;
+    private PreparedStatement ps;
+    private ResultSet result;
     
     public DiaDatosEmpresa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -25,10 +34,11 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }
     
-    public DiaDatosEmpresa(java.awt.Frame parent, boolean modal, Empresa empresa) {
+    public DiaDatosEmpresa(java.awt.Frame parent, boolean modal, Empresa empresa, Cuenta cuenta) {
         super(parent, modal);
         initComponents();
         this.parent = parent;
+        this.cuentaActual = cuenta;
         if(empresa == null){
             setValoresDefecto();
         }else{
@@ -39,6 +49,10 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
         setLocationRelativeTo(null);        
     }
     
+    private void actualizarDatosBD(){
+        //TODO
+    }
+       
     private void setValoresEmpresa(){
         txtNombreEmpresa.setText(empresa.getNombre());
         txtFundacionYear.setText(String.valueOf(empresa.getFundacionYear()));
@@ -83,33 +97,30 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }
     
     public void guardarDatos(){       
-        if(empresa == null){
-            crearEmpresa();
+        if(txtLeyendaEmpresa.getText().equals("")){
+            txtLeyendaEmpresa.setText(empresa.getLeyenda());
         }else{
-            if(txtLeyendaEmpresa.getText().equals("")){
-                txtLeyendaEmpresa.setText(empresa.getLeyenda());
-            }else{
-                empresa.setLeyenda(txtLeyendaEmpresa.getText());
-            }
+            empresa.setLeyenda(txtLeyendaEmpresa.getText());
+        }
         
-            if(txtFundacionYear.getText().equals("Año fundacion") || txtFundacionYear.getText().equals("") && empresa.getFundacionYear() != 0){
-                txtFundacionYear.setText(String.valueOf(empresa.getFundacionYear()));
-            }
+        if(txtFundacionYear.getText().equals("Año fundacion") || txtFundacionYear.getText().equals("") && empresa.getFundacionYear() != 0){
+            txtFundacionYear.setText(String.valueOf(empresa.getFundacionYear()));
+        }
         
-            if(txtNombreEmpresa.getText().equals("")){
-                txtNombreEmpresa.setText(empresa.getNombre());
-            }else{
-                empresa.setNombre(txtNombreEmpresa.getText());
-            }
+        if(txtNombreEmpresa.getText().equals("")){
+            txtNombreEmpresa.setText(empresa.getNombre());
+        }else{
+            empresa.setNombre(txtNombreEmpresa.getText());
+        }
         
-            if(txtRubroEmpresa.getText().equals("")){
-                txtRubroEmpresa.setText(empresa.getRubro());
-            }else{
-                empresa.setRubro(txtRubroEmpresa.getText());
-            }
+        if(txtRubroEmpresa.getText().equals("")){
+            txtRubroEmpresa.setText(empresa.getRubro());
+        }else{
+            empresa.setRubro(txtRubroEmpresa.getText());
         }
         
         resetearTxt();
+        this.actualizarDatosBD();
     }
 
     public Empresa getEmpresa() {
@@ -273,7 +284,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
                 .addComponent(scpLeyendaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAceptar)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,7 +304,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtLeyendaEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLeyendaEmpresaMouseClicked
-        if(cuentaActual.getCorreoEmpresarial().equals("admin")){
+        if(cuentaActual.getRol().getNombre().equals("Gerente")){
             txtLeyendaEmpresa.setText("");
             txtLeyendaEmpresa.setEnabled(true);
             txtLeyendaEmpresa.setEditable(true);
@@ -304,19 +315,17 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtLeyendaEmpresaMouseClicked
 
     private void txtFundacionYearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFundacionYearMouseClicked
-        if(txtFundacionYear.getText().equals("Año Fundacion")){
-            if(cuentaActual.getCorreoEmpresarial().equals("admin")){
-                txtFundacionYear.setText("");
-                txtFundacionYear.setEditable(true);
-                txtFundacionYear.setBorder(softBevelBorder);
-                txtFundacionYear.setBackground(Color.white);
-                txtFundacionYear.setForeground(Color.black);
-            }
+        if(cuentaActual.getRol().getNombre().equals("Gerente")){
+            txtFundacionYear.setText("");
+            txtFundacionYear.setEditable(true);
+            txtFundacionYear.setBorder(softBevelBorder);
+            txtFundacionYear.setBackground(Color.white);
+            txtFundacionYear.setForeground(Color.black);
         }
     }//GEN-LAST:event_txtFundacionYearMouseClicked
 
     private void txtNombreEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreEmpresaMouseClicked
-        if(cuentaActual.getCorreoEmpresarial().equals("admin")){
+        if(cuentaActual.getRol().getNombre().equals("Gerente")){
             txtNombreEmpresa.setText("");
             txtNombreEmpresa.setEditable(true);
             txtNombreEmpresa.setBorder(softBevelBorder);
@@ -326,7 +335,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreEmpresaMouseClicked
 
     private void txtRubroEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRubroEmpresaMouseClicked
-        if(cuentaActual.getCorreoEmpresarial().equals("admin")){
+        if(cuentaActual.getRol().getNombre().equals("Gerente")){
             txtRubroEmpresa.setText("");
             txtRubroEmpresa.setEditable(true);
             txtRubroEmpresa.setBorder(softBevelBorder);

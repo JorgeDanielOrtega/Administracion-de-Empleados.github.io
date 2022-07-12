@@ -36,6 +36,10 @@ public class Cuenta {
     public Rol getRol() {
         return rol;
     }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     
     @Override
     public String toString() {
