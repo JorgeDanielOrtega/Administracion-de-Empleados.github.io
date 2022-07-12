@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Persona")
-public abstract class Persona {
+public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -127,11 +127,11 @@ public abstract class Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Date getBirthday() {
+    public Date getAnioEntrada() {
         return anioEntrada;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setAnioEntrada(Date birthday) {
         this.anioEntrada = birthday;
     }
 

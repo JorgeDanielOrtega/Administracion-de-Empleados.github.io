@@ -1,13 +1,30 @@
 package com.example.administracion.Services;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
-	import com.example.administracion.Models.Empleado;
-	import com.example.administracion.Repositories.EmpleadoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.example.administracion.Models.Empleado;
+import com.example.administracion.Repositories.EmpleadoRepository;
 
-	@Service
-	public class EmpleadoService{
-		
+@Service
+public class EmpleadoService {
+
+	@Autowired
+	EmpleadoRepository empleadoRepository;
+	@Autowired
+	TrabajadorService trabajadorService;
+	@Autowired
+	PersonaService personaService;
+
+	public Iterable<Long> getIdTrabajador() {
+		ArrayList<Long> idTrabajadorList = new ArrayList<>();
+		for (Empleado empleado : empleadoRepository.findAll()) {
+			idTrabajadorList.add(empleado.getIdTrabajador());
+		}
+		return (Iterable<Long>) idTrabajadorList;
 	}
+
+	
+}

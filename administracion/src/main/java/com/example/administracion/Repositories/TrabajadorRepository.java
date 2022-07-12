@@ -1,13 +1,13 @@
 package com.example.administracion.Repositories;
 
-	import org.springframework.data.repository.CrudRepository;
-	import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
 
-	import com.example.administracion.Models.Trabajador;
-	
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+import com.example.administracion.Models.Trabajador;
 
-	@Repository
-	public interface TrabajadorRepository extends CrudRepository<Trabajador,Long>{
-		
-	}
+@Repository
+public interface TrabajadorRepository extends CrudRepository<Trabajador, Long> {    
+    public abstract ArrayList<Trabajador> findAllByIdDepartamento(Long idDepartamento);
+}

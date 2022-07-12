@@ -15,7 +15,7 @@ import javax.persistence.Table;
 //public abstract class Trabajador extends Persona{
 @Entity
 @Table(name = "Trabajador")
-public abstract class Trabajador {
+public class Trabajador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
