@@ -67,7 +67,7 @@ public class Empresa {
 
     private Horario retornarHorario(long idHorario) {
         try {
-            String consulta = "SELECT tipo FROM \"Horarios\"  WHERE id = " + idHorario;
+            String consulta = "SELECT tipo FROM \"horarios\"  WHERE id = " + idHorario;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -86,7 +86,7 @@ public class Empresa {
 
     private Rol retornarRol(long idRol) {
         try {
-            String consulta = "SELECT nombre FROM \"Roles\" WHERE id = " + idRol;
+            String consulta = "SELECT nombre FROM \"roles\" WHERE id = " + idRol;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -105,7 +105,7 @@ public class Empresa {
 
     private Contrato retornarContrato(long idEmpleado) {
         try {
-            String consulta = "SELECT * FROM \"Contratos\" WHERE id_empleado = " + idEmpleado;
+            String consulta = "SELECT * FROM \"contratos\" WHERE id_empleado = " + idEmpleado;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -139,7 +139,7 @@ public class Empresa {
     }
     private Departamento retornarDepartamento(long idDepartamento) {
         try {
-            String consulta = "SELECT nombre FROM \"Departamentos\" WHERE id = " + idDepartamento;
+            String consulta = "SELECT nombre FROM \"departamentos\" WHERE id = " + idDepartamento;
             PreparedStatement pst = connection.prepareStatement(consulta);
             ResultSet resultS = pst.executeQuery();
             while (resultS.next()) {
@@ -159,8 +159,8 @@ public class Empresa {
     private void cargarTrabajadoresList() {
         try {
             connection = dbConnect.conectar();
-            sql = "select * from (select * from \"Trabajador\" t inner join "
-                    + " \"Persona\" p on t.id_persona = p.id) as todo where "
+            sql = "select * from (select * from \"trabajador\" t inner join "
+                    + " \"persona\" p on t.id_persona = p.id) as todo where "
                     + "fecha_nacimiento notnull and anio_entrada notnull and id_horario notnull "
                     + "and id_rol notnull and id_departamento notnull;";
             ps = connection.prepareStatement(sql);
@@ -208,7 +208,7 @@ public class Empresa {
     private void cargarDepartamentoList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM \"Departamentos\"";
+            sql = "SELECT * FROM \"departamentos\"";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -239,7 +239,7 @@ public class Empresa {
         try {
             connection = dbConnect.conectar();
             sql = "SELECT r.salario, r.nombre AS Rol, p.nombre AS Puesto, \n"
-                    + "d.nombre AS Departamento FROM \"Roles\" r, \"Puestos\" p, \"Departamentos\" d ";
+                    + "d.nombre AS Departamento FROM \"roles\" r, \"puestos\" p, \"departamentos\" d ";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -263,9 +263,9 @@ public class Empresa {
             //quizas haya problemas con los objetos, dado que se utiliza en dos metodos, y puede haber perdida de consultas
             connection = dbConnect.conectar();
             List<DiasLaborales> diasLaborablesList = new LinkedList();
-            sql = "SELECT dia FROM \"Dias_Laborables\" WHERE id IN  \n" +
-"                    (SELECT hd.id_dias_Laborables FROM \"Horarios\" h INNER JOIN\n" +
-"                     \"Horarios_Dias_Laborables\" hd ON "+ id + "= hd.id_horarios);";
+            sql = "SELECT dia FROM \"dias_laborables\" WHERE id IN  \n" +
+"                    (SELECT hd.id_dias_Laborables FROM \"horarios\" h INNER JOIN\n" +
+"                     \"horarios_dias_laborables\" hd ON "+ id + "= hd.id_horarios);";
             ps = connection.prepareStatement(sql);
             ResultSet resultS = ps.executeQuery();
             while (resultS.next()) {
@@ -307,7 +307,7 @@ public class Empresa {
     private void cargarHorarioList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT * FROM \"Horarios\"";
+            sql = "SELECT * FROM \"horarios\"";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
