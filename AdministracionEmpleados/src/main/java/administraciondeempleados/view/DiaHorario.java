@@ -70,7 +70,7 @@ public class DiaHorario extends javax.swing.JDialog {
     private void subirDiasLaborales(List<DiasLaborales> diasLaboralesList, long id) {
         try {
             //Connection con = dbConnect.conectar();
-            String query = " INSERT INTO \"Horarios_Dias_Laborables\" (id_dias_Laborables, id_horarios) VALUES (?,?);"; // quizas poner las comillas simples
+            String query = " INSERT INTO \"horarios_dias_laborables\" (id_dias_Laborables, id_horarios) VALUES (?,?);"; // quizas poner las comillas simples
             for (DiasLaborales diasLaborales : diasLaboralesList) {
                 PreparedStatement p = connection.prepareStatement(query);
                 p.setLong(1, diasLaborales.getDiaLaboral());
@@ -88,7 +88,7 @@ public class DiaHorario extends javax.swing.JDialog {
         long id = 0;
         try {
             connection = dbConnect.conectar();
-            sql = "INSERT INTO \"Horarios\" (tipo,horas_semanales) VALUES (?,?)";
+            sql = "INSERT INTO \"horarios\" (tipo,horas_semanales) VALUES (?,?)";
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, horario.getTipo());
             ps.setFloat(2, horario.getHorasLaborablesSemanales());
@@ -143,7 +143,7 @@ public class DiaHorario extends javax.swing.JDialog {
 
     private void eliminarDiasLaboralesDB(long id) {
         try {
-            String query = "DELETE FROM \"Horarios_Dias_Laborables\" WHERE id_horarios =" + id;
+            String query = "DELETE FROM \"horarios_dias_laborables\" WHERE id_horarios =" + id;
             PreparedStatement p = connection.prepareStatement(query);
             p.execute();
         } catch (Exception e) {
@@ -155,7 +155,7 @@ public class DiaHorario extends javax.swing.JDialog {
         try {
             eliminarDiasLaboralesDB(id);
             subirDiasLaborales(recuperarComboBoxSelecionados(), id);
-            sql = "  UPDATE \"Horarios\" SET tipo= '" + horario.getTipo()
+            sql = "  UPDATE \"horarios\" SET tipo= '" + horario.getTipo()
                     + "',horas_semanales=" + horario.getHorasLaborablesSemanales()
                     + " WHERE id =" + id + ";";
             ps = connection.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class DiaHorario extends javax.swing.JDialog {
     private long retornarId(Horario horario) {
         try {
             connection = dbConnect.conectar();
-            String query = "SELECT id FROM \"Horarios\" WHERE tipo='" + horario.getTipo() + "';";
+            String query = "SELECT id FROM \"horarios\" WHERE tipo='" + horario.getTipo() + "';";
             PreparedStatement p = connection.prepareStatement(query);
             result = p.executeQuery();
             while (result.next()) {

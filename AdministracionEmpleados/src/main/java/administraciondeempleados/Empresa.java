@@ -351,8 +351,8 @@ public class Empresa {
             connection = dbConnect.conectar();
             List<DiasLaborales> diasLaborablesList = new LinkedList();
             sql = "SELECT dia FROM \"dias_laborables\" WHERE id IN  \n" +
-"                    (SELECT hd.id_dias_laborables FROM \"horarios\" h INNER JOIN\n" +
-"                     \"horarios_dias_laborables\" hd ON "+ id + "= hd.id_horarios);";
+                    "(SELECT hd.id_dias_laborables FROM \"horarios\" h INNER JOIN\n" +
+                    "\"horarios_dias_laborables\" hd ON "+ id + "= hd.id_horarios);";
             ps = connection.prepareStatement(sql);
             ResultSet resultS = ps.executeQuery();
             while (resultS.next()) {

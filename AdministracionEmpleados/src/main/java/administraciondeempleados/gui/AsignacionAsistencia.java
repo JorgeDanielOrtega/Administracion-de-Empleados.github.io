@@ -168,7 +168,7 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
 
     private long retornarIdTrabajador() {
         try {
-            String query = "select id_trabajador from \"Empleados\" where id_trabajador = " + empleado.getId() + ";";
+            String query = "select id_trabajador from \"empleados\" where id_trabajador = " + empleado.getId() + ";";
             PreparedStatement prs = connection.prepareStatement(query);
             result = prs.executeQuery();
             while (result.next()) {
@@ -183,7 +183,7 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
     private void subirAsistencia(Asistencia asistencia) {
         try {
             connection = dBConnect.conectar();
-            sql = "INSERT INTO \"Asistencias\" (fecha, id_trabajador,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO \"asistencias\" (fecha, id_trabajador,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
             ps = connection.prepareStatement(sql);
             Date fecha = new Date(asistencia.getFecha().get(Calendar.YEAR) - 1900,
                     asistencia.getFecha().get(Calendar.MONTH),
