@@ -23,5 +23,4 @@ public class EmpleadoController {
     public ArrayList<Long> getEmpleados() {
         return (ArrayList<Long>) empleadoService.getIdTrabajador();
     }
-
 }

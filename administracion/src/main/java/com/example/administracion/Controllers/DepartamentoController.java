@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.administracion.Models.Trabajador;
 import com.example.administracion.Services.TrabajadorService;
 
 @RestController

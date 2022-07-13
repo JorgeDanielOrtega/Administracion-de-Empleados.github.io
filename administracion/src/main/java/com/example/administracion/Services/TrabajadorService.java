@@ -55,13 +55,26 @@ public class TrabajadorService {
 	}
 
 	public Map<String, Object> getTrabajadorInfo(Long id) {
-
 		Long idPersona = getTrabajadorById(id).getIdPersona();
 
 		Persona persona = personaService.getPersonaById(idPersona);
 		Trabajador trabajador = getTrabajadorById(id);
 		return getDatosEmpleado(persona, trabajador);
 	}
+
+	private Map<String, Object> getDataEmpleadosByDepartamento(Persona persona, Trabajador trabajador){
+		Map<String, Object> myMap = new HashMap<>();
+
+		//TODO hacer los metodos para que muestren el nombre de los roles, horarios y puestos
+		myMap.put("id", trabajador.getId());
+		myMap.put("nombres", persona.getNombre());
+		myMap.put("apellidos", persona.getApellido());
+		myMap.put("id_rol", trabajador.getIdRol());
+		myMap.put("id_horario", trabajador.getIdHorario());
+
+		return myMap;
+	}
+
 
 	public ArrayList<Map<String, Object>> getTrabajadorByIdDepartamento(Long idDepartamento) {
 		List<Long> ids = new LinkedList<>();
@@ -76,7 +89,8 @@ public class TrabajadorService {
 		personaList = personaService.getPersonas((Iterable<Long>) ids);
 
 		for (int i = 0; i < trabajadorList.size(); i++) {
-			trabajadorArrayListInfo.add(getDatosEmpleado(personaList.get(i), trabajadorList.get(i)));
+			trabajadorArrayListInfo.add(
+					getDatosEmpleado(personaList.get(i), trabajadorList.get(i)));
 		}
 
 		return trabajadorArrayListInfo;
