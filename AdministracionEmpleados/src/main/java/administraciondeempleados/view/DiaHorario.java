@@ -70,7 +70,7 @@ public class DiaHorario extends javax.swing.JDialog {
     private void subirDiasLaborales(List<DiasLaborales> diasLaboralesList, long id) {
         try {
             //Connection con = dbConnect.conectar();
-            String query = " INSERT INTO Horarios_Dias_Laborables (id_dias_Laborables, id_horarios) VALUES (?,?);";
+            String query = " INSERT INTO \"Horarios_Dias_Laborables\" (id_dias_Laborables, id_horarios) VALUES (?,?);"; // quizas poner las comillas simples
             for (DiasLaborales diasLaborales : diasLaboralesList) {
                 PreparedStatement p = connection.prepareStatement(query);
                 p.setLong(1, diasLaborales.getDiaLaboral());
@@ -88,7 +88,7 @@ public class DiaHorario extends javax.swing.JDialog {
         long id = 0;
         try {
             connection = dbConnect.conectar();
-            sql = "INSERT INTO Horarios (tipo,horas_semanales) VALUES (?,?)";
+            sql = "INSERT INTO \"Horarios\" (tipo,horas_semanales) VALUES (?,?)";
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, horario.getTipo());
             ps.setFloat(2, horario.getHorasLaborablesSemanales());
@@ -141,11 +141,54 @@ public class DiaHorario extends javax.swing.JDialog {
         txtHorasSemanales.setText(String.valueOf(gerente.getEmpresa().getHorarioList().get(indice).getHorasLaborablesSemanales()));
     }
 
+    private void eliminarDiasLaboralesDB(long id) {
+        try {
+            String query = "DELETE FROM \"Horarios_Dias_Laborables\" WHERE id_horarios =" + id;
+            PreparedStatement p = connection.prepareStatement(query);
+            p.execute();
+        } catch (Exception e) {
+            System.out.println("error al eliminar dias laborales " + e.getMessage());
+        }
+    }
+
+    private void actualizarHorarioDB(long id) {
+        try {
+            eliminarDiasLaboralesDB(id);
+            subirDiasLaborales(recuperarComboBoxSelecionados(), id);
+            sql = "  UPDATE \"Horarios\" SET tipo= '" + horario.getTipo()
+                    + "',horas_semanales=" + horario.getHorasLaborablesSemanales()
+                    + " WHERE id =" + id + ";";
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("no se puedo acualizar el horario " + e.getMessage());
+        } finally {
+            dbConnect.desconectar();
+        }
+    }
+
+    private long retornarId(Horario horario) {
+        try {
+            connection = dbConnect.conectar();
+            String query = "SELECT id FROM \"Horarios\" WHERE tipo='" + horario.getTipo() + "';";
+            PreparedStatement p = connection.prepareStatement(query);
+            result = p.executeQuery();
+            while (result.next()) {
+                return result.getLong("id");
+            }
+        } catch (Exception e) {
+            System.out.println("error al retornar idxdxd " + e.getMessage());
+        }
+        return 0;
+    }
+
     public void actualizarHorario() {
         this.horario = gerente.getEmpresa().getHorarioList().get(indice);
+        long id = retornarId(horario);
         this.horario.setDiasLaborablesList(recuperarComboBoxSelecionados());
         this.horario.setHorasLaborablesSemanales(Float.parseFloat(txtHorasSemanales.getText()));
         this.horario.setTipo(txtTipo.getText().trim());
+        actualizarHorarioDB(id);
     }
 
     public Horario getHorario() {

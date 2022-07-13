@@ -25,20 +25,22 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     private Connection connection;
     private String sql;
     private PreparedStatement ps;
-    private ResultSet result;
+    private int result;
     
     public DiaDatosEmpresa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        dbConnect = new DBConnect();
         this.parent = parent;
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);        
     }
     
     public DiaDatosEmpresa(java.awt.Frame parent, boolean modal, Empresa empresa, Cuenta cuenta) {
         super(parent, modal);
         initComponents();
+        dbConnect = new DBConnect();
         this.parent = parent;
-        this.cuentaActual = cuenta;
+        cuentaActual = cuenta;
         if(empresa == null){
             setValoresDefecto();
         }else{
@@ -46,11 +48,24 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
             setValoresEmpresa();
         }
         this.setVisible(true);
-        setLocationRelativeTo(null);        
+        setLocationRelativeTo(parent);    
     }
     
     private void actualizarDatosBD(){
-        //TODO
+        try{
+            connection = dbConnect.conectar();
+            sql = ("UPDATE \"empresa\" SET nombre=\'" + empresa.getNombre() + 
+                    "\',leyenda=\'" + empresa.getLeyenda() + "\',rubro=\'" + 
+                    empresa.getRubro() + "\',anio_fundacion=\'" + 
+                    empresa.getFundacionYear() + "\'WHERE id=1;");
+            ps = connection.prepareStatement(sql);
+            result = ps.executeUpdate();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar los datos de la empresa");
+            System.err.println("error en cargar empresa " + e.getMessage());
+        }finally{
+            dbConnect.desconectar();
+        }
     }
        
     private void setValoresEmpresa(){
@@ -92,7 +107,7 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     
     public void crearEmpresa(){
         if(!txtNombreEmpresa.getText().equals("Nombre Empresa") && !txtFundacionYear.getText().equals("Año Fundacion") && !txtRubroEmpresa.getText().equals("Rubro") && !txtLeyendaEmpresa.getText().equals("Leyenda") && !txtNombreEmpresa.getText().isEmpty() && !txtFundacionYear.getText().isEmpty() && !txtRubroEmpresa.getText().isEmpty() && !txtLeyendaEmpresa.getText().isEmpty()){
-            this.empresa = new Empresa(txtNombreEmpresa.getText(), Integer.parseInt(txtFundacionYear.getText()), txtRubroEmpresa.getText(), txtLeyendaEmpresa.getText());
+            this.empresa = new Empresa(txtNombreEmpresa.getText(), txtFundacionYear.getText(), txtRubroEmpresa.getText(), txtLeyendaEmpresa.getText());
         }
     }
     
@@ -103,10 +118,12 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
             empresa.setLeyenda(txtLeyendaEmpresa.getText());
         }
         
-        if(txtFundacionYear.getText().equals("Año fundacion") || txtFundacionYear.getText().equals("") && empresa.getFundacionYear() != 0){
-            txtFundacionYear.setText(String.valueOf(empresa.getFundacionYear()));
+        if(txtFundacionYear.getText().equals("")){
+            txtFundacionYear.setText(empresa.getFundacionYear());
+        }else{
+            empresa.setFundacionYear(txtFundacionYear.getText());
         }
-        
+                
         if(txtNombreEmpresa.getText().equals("")){
             txtNombreEmpresa.setText(empresa.getNombre());
         }else{
@@ -345,15 +362,17 @@ public class DiaDatosEmpresa extends javax.swing.JDialog {
     }//GEN-LAST:event_txtRubroEmpresaMouseClicked
 
     private void pnlBackgroundMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBackgroundMouseClicked
-        this.guardarDatos();
+
     }//GEN-LAST:event_pnlBackgroundMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        this.guardarDatos();
+
     }//GEN-LAST:event_formMouseClicked
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        this.guardarDatos();
+        if(cuentaActual.getRol().getNombre().equals("Gerente")){
+            this.guardarDatos();
+        }
         this.dispose();
     }//GEN-LAST:event_btnAceptarMouseClicked
 

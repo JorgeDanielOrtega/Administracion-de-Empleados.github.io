@@ -65,10 +65,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         parent = this;
-        
+        //construir empresa con datos de la base
         if (empresa == null) {
             //valores por defecto para la ejecucion por primera vez
-            empresa = new Empresa("Nombre", 9999, "Leyenda", "Rubro");
+            empresa = new Empresa("Nombre", "YYYY/MM/DD", "Leyenda", "Rubro");
             Puesto puesto = new Puesto("Gerente");
             Rol rol = new Rol("Gerente");
             Departamento departamento = new Departamento("Administración", 1, 1);
@@ -237,7 +237,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_asistencia;
-                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), horaActual);
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), empresa.getHoraEntrada());
                     asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
@@ -774,22 +774,23 @@ public class Principal extends javax.swing.JFrame {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         diaDatosEmpresa = new DiaDatosEmpresa(this, true, empresa, this.cuenta);
+        this.empresa = diaDatosEmpresa.getEmpresa();
         
-        if(!this.empresa.getNombre().equals(diaDatosEmpresa.getEmpresa().getNombre())){
-            this.empresa.setNombre(diaDatosEmpresa.getEmpresa().getNombre());
-        }
-        
-        if(!this.empresa.getRubro().equals(diaDatosEmpresa.getEmpresa().getRubro())){
-            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
-        }
-        
-        if(!this.empresa.getLeyenda().equals(diaDatosEmpresa.getEmpresa().getLeyenda())){
-            this.empresa.setLeyenda(diaDatosEmpresa.getEmpresa().getLeyenda());
-        }
-        
-        if(!String.valueOf(this.empresa.getFundacionYear()).equals(String.valueOf(diaDatosEmpresa.getEmpresa().getFundacionYear()))){
-            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
-        }
+//        if(!this.empresa.getNombre().equals(diaDatosEmpresa.getEmpresa().getNombre())){
+//            this.empresa.setNombre(diaDatosEmpresa.getEmpresa().getNombre());
+//        }
+//        
+//        if(!this.empresa.getRubro().equals(diaDatosEmpresa.getEmpresa().getRubro())){
+//            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
+//        }
+//        
+//        if(!this.empresa.getLeyenda().equals(diaDatosEmpresa.getEmpresa().getLeyenda())){
+//            this.empresa.setLeyenda(diaDatosEmpresa.getEmpresa().getLeyenda());
+//        }
+//        
+//        if(!String.valueOf(this.empresa.getFundacionYear()).equals(String.valueOf(diaDatosEmpresa.getEmpresa().getFundacionYear()))){
+//            this.empresa.setRubro(diaDatosEmpresa.getEmpresa().getRubro());
+//        }
         
     }//GEN-LAST:event_jLabel12MouseClicked
 

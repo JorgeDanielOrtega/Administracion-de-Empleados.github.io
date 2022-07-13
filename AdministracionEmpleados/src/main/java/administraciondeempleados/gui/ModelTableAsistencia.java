@@ -52,7 +52,7 @@ public class ModelTableAsistencia extends DefaultTableModel {
     private void cargarAsistenciaList() {
         try {
             connection = dBConnect.conectar();
-            sql = "SELECT * FROM Asistencias"; //agregar que seleccion todas las asistencias con el id del empleado
+            sql = "SELECT * FROM \"Asistencias\""; //agregar que seleccion todas las asistencias con el id del empleado
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {

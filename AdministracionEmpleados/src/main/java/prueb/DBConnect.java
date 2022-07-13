@@ -5,16 +5,16 @@ import java.sql.*;
 public class DBConnect {
 
     Connection connection = null;
-    private String database = "sql10503811";
-    private long port = 3306;
-    private String host = "sql10.freesqldatabase.com";
-    private String usuario = "sql10503811";
-    private String password = "UYZsIQinjY";
-    String url = "jdbc:mysql://" + host + ':' + port + '/' + database;
+    private String database = "d3iqjvqiocgmtu";
+    private long port = 5432;
+    private String host = "ec2-3-224-8-189.compute-1.amazonaws.com";
+    private String usuario = "tccfapvzvqwuqu";
+    private String password = "c95e2138da8bc17d32e87bbb0ba155ae9a1b45af30ef676a98a9ce86d1392496";
+    String url = "jdbc:postgresql://" + host + ':' + port + '/' + database;
 
     public Connection conectar() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, usuario, password);
             System.out.println("conexion EXITOSA");
         } catch (Exception e) {

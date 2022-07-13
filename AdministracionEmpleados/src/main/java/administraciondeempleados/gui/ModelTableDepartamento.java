@@ -23,10 +23,8 @@ public class ModelTableDepartamento extends DefaultTableModel {
         departamento.getTrabajadorList().forEach(trabajador -> {
             empleadoList.add((Empleado) trabajador);
         });
-        
-    }
-    
 
+    }
 
     private void limpiarTabla() {
         while (getRowCount() > 0) {
@@ -41,7 +39,7 @@ public class ModelTableDepartamento extends DefaultTableModel {
             addRow(new String[]{
                 e.getNombre() + " " + e.getApellido(),
                 e.getRol().getNombre(),
-                e.getPuesto().getNombre()
+                e.getRol().getPuesto().getNombre()
             });
         }
     }

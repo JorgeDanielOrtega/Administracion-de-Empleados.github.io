@@ -6,7 +6,6 @@ import administraciondeempleados.EstadoAsistencia;
 import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import java.sql.PreparedStatement;
@@ -167,21 +166,35 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
         return null;
     }
 
+    private long retornarIdTrabajador() {
+        try {
+            String query = "select id_trabajador from \"Empleados\" where id_trabajador = " + empleado.getId() + ";";
+            PreparedStatement prs = connection.prepareStatement(query);
+            result = prs.executeQuery();
+            while (result.next()) {
+                return result.getLong("id_trabajador");
+            }
+        } catch (Exception e) {
+            System.out.println("error al retornar el idtrabajador " + e.getMessage());
+        }
+        return 0;
+    }
+
     private void subirAsistencia(Asistencia asistencia) {
         try {
             connection = dBConnect.conectar();
-            sql = "INSERT INTO Asistencias (fecha, id_empleado,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO \"Asistencias\" (fecha, id_trabajador,hora,dia_semana,estado) VALUES (?,?,?,?,?)";
             ps = connection.prepareStatement(sql);
-            Date fecha = new Date(asistencia.getFecha().get(Calendar.YEAR)-1900,
+            Date fecha = new Date(asistencia.getFecha().get(Calendar.YEAR) - 1900,
                     asistencia.getFecha().get(Calendar.MONTH),
                     asistencia.getFecha().get(Calendar.DAY_OF_MONTH));
             Time time = new Time(
                     asistencia.getHora().get(Calendar.HOUR_OF_DAY),
                     asistencia.getHora().get(Calendar.MINUTE),
                     asistencia.getHora().get(Calendar.SECOND));
-            
+
             ps.setDate(1, fecha);
-            ps.setLong(2, Long.valueOf(empleado.getId()));
+            ps.setLong(2, Long.valueOf(retornarIdTrabajador()));
             ps.setTime(3, time);
             ps.setString(4, asistencia.getDiaSemana());
             ps.setString(5, asistencia.getEstado().toString().toLowerCase());

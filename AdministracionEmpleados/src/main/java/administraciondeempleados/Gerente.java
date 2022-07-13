@@ -8,6 +8,7 @@ public class Gerente extends Trabajador{
     
     private Empresa empresa;
     private AdministracionEmpleado adminstracionEmpleado;
+    private String id;
     
     public Gerente(Empresa empresa, String correoPersonal, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
         super(correoPersonal, password, puesto, rol, departamento, contrato, nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
@@ -24,7 +25,7 @@ public class Gerente extends Trabajador{
     
     //CRUD EMPRESA
             
-    public Empresa crearEmpresa(String nombre, int fundacionYear, String rubro, String leyenda){
+    public Empresa crearEmpresa(String nombre, String fundacionYear, String rubro, String leyenda){
         Empresa empresa = new Empresa(nombre, fundacionYear, rubro);
         empresa.setLeyenda(leyenda);
         this.empresa = empresa;
@@ -43,7 +44,7 @@ public class Gerente extends Trabajador{
         this.empresa.setLeyenda(leyenda);
     }
 
-    public void modificarAñoFundacion(int añoFundacion){
+    public void modificarAñoFundacion(String añoFundacion){
         this.empresa.setFundacionYear(añoFundacion);
     }
     
@@ -99,7 +100,15 @@ public class Gerente extends Trabajador{
     public void setAdminstracionEmpleado(AdministracionEmpleado adminstracionEmpleado) {
         this.adminstracionEmpleado = adminstracionEmpleado;
     }
-      
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     @Override
     public String toString() {
         return "Gerente{" + "empresa=" + empresa + '}';

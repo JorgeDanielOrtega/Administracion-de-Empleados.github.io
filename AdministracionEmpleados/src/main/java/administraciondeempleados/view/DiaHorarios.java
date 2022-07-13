@@ -183,7 +183,7 @@ public class DiaHorarios extends javax.swing.JDialog {
     private long retornarID(String tipo) {
         long id = 0;
         try {
-           String query = "SELECT id FROM Horarios WHERE tipo='" + tipo + "' GROUP BY id";
+            String query = "SELECT id FROM \"Horarios\" WHERE tipo='" + tipo + "' GROUP BY id";
             ps = connection.prepareStatement(query);
             result = ps.executeQuery();
             while (result.next()) {
@@ -197,10 +197,22 @@ public class DiaHorarios extends javax.swing.JDialog {
         return 0;
     }
 
+    private void eliminarIdHorario_Dias_Laborables(long id) {
+        try {
+            sql = "DELETE FROM \"Horarios_Dias_Laborables\" WHERE id_horarios= " + id + ';';
+            ps = connection.prepareStatement(sql);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println("error al eliminar el id de horario en dias laborables xd " + e.getMessage());
+        }
+    }
+
     private void eliminarHorarioDB(Horario horario) {
         try {
             connection = dbConnect.conectar();
-            sql = "DELETE FROM Horarios WHERE id="+retornarID(horario.getTipo());
+            long id  = retornarID(horario.getTipo());
+            eliminarIdHorario_Dias_Laborables(id);
+            sql = "DELETE FROM \"Horarios\" WHERE id= " + id;
             ps = connection.prepareStatement(sql);
             ps.execute();
 
