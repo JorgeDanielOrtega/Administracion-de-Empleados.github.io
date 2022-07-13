@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.administracion.Models.Horario;
 import com.example.administracion.Models.Persona;
 import com.example.administracion.Models.Trabajador;
 import com.example.administracion.Repositories.TrabajadorRepository;
@@ -20,13 +21,17 @@ public class TrabajadorService {
 	TrabajadorRepository trabajadorRepository;
 	@Autowired
 	PersonaService personaService;
+	@Autowired
+	RolService rolService;
+	@Autowired
+	HorarioService horarioService;
 
 	public ArrayList<Trabajador> getTrabajadores(Iterable<Long> ids) {
 		return (ArrayList<Trabajador>) trabajadorRepository.findAllById(ids);
 	}
 
 	public Trabajador getTrabajadorById(Long id) {
-		return (Trabajador) trabajadorRepository.findById(id).get();
+		return trabajadorRepository.findById(id).get();
 	}
 
 	public Map<String, Object> getDatosEmpleado(Persona persona, Trabajador trabajador) {
@@ -62,21 +67,29 @@ public class TrabajadorService {
 		return getDatosEmpleado(persona, trabajador);
 	}
 
-	private Map<String, Object> getDataEmpleadosByDepartamento(Persona persona, Trabajador trabajador){
+	public Horario getHorarioOfTrabajador(Long idHorario) {
+		return horarioService.getHorarioById(idHorario);
+	}
+
+	private Map<String, Object> getDataEmpleadosByDepartamento(Persona persona, Trabajador trabajador) {
 		Map<String, Object> myMap = new HashMap<>();
 
-		//TODO hacer los metodos para que muestren el nombre de los roles, horarios y puestos
+		// TODO hacer el campo puestos, quizas
+		Long idRol = trabajador.getIdRol();
+		Long idHorario = trabajador.getIdHorario();
+
 		myMap.put("id", trabajador.getId());
 		myMap.put("nombres", persona.getNombre());
 		myMap.put("apellidos", persona.getApellido());
-		myMap.put("id_rol", trabajador.getIdRol());
-		myMap.put("id_horario", trabajador.getIdHorario());
+		myMap.put("Rol", rolService.getRolById(idRol).getNombre());
+		myMap.put("Horario", getHorarioOfTrabajador(idHorario).getTipo());
 
 		return myMap;
 	}
 
-
 	public ArrayList<Map<String, Object>> getTrabajadorByIdDepartamento(Long idDepartamento) {
+		// TODO encontrar la manera de retornar el nombre del departamento
+
 		List<Long> ids = new LinkedList<>();
 		ArrayList<Persona> personaList = new ArrayList<Persona>();
 		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
@@ -90,7 +103,7 @@ public class TrabajadorService {
 
 		for (int i = 0; i < trabajadorList.size(); i++) {
 			trabajadorArrayListInfo.add(
-					getDatosEmpleado(personaList.get(i), trabajadorList.get(i)));
+					getDataEmpleadosByDepartamento(personaList.get(i), trabajadorList.get(i)));
 		}
 
 		return trabajadorArrayListInfo;

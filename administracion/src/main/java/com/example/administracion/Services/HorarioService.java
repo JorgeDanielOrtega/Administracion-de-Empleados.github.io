@@ -9,5 +9,9 @@ package com.example.administracion.Services;
 
 	@Service
 	public class HorarioService{
-		
+		@Autowired
+		HorarioRepository horarioRepository;
+		public Horario getHorarioById(Long id){
+			return horarioRepository.findById(id).get();
+		}
 	}

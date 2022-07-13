@@ -9,5 +9,11 @@ package com.example.administracion.Services;
 
 	@Service
 	public class RolService{
-		
+		@Autowired
+		RolRepository rolRepository;
+
+		public Rol getRolById(Long id){
+			return rolRepository.findById(id).get();
+		}
+
 	}
