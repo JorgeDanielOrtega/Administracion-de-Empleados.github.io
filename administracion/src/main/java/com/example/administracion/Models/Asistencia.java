@@ -155,12 +155,12 @@ public class Asistencia {
         this.estado = estado;
     }
 
-    public Long getIdEmpleado() {
+    public Long getIdTrabajador() {
         return idTrabajador;
     }
 
-    public void setIdEmpleado(Long idEmpleado) {
-        this.idTrabajador = idEmpleado;
+    public void setIdTrabajador(Long idTrabajador) {
+        this.idTrabajador = idTrabajador;
     }
 
     // @Override //quitar mas tarde

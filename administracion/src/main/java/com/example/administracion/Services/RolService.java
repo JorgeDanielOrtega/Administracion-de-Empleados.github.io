@@ -16,4 +16,8 @@ package com.example.administracion.Services;
 			return rolRepository.findById(id).get();
 		}
 
+		public Long getIdRolByNombre(String nombre){
+			return rolRepository.findByNombre(nombre).getId();
+		}
+
 	}

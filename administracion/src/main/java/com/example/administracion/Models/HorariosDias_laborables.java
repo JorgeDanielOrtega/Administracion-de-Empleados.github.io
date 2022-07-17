@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Horarios_Dias_Laborables")
+@Table(name = "horarios_dias_laborables")
 public class HorariosDias_laborables {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "id_horario")
+    @Column(name = "id_horarios")
     private Long idHorario;
     @Column(name = "id_dias_laborables")
     private Long idDiasLaborables;

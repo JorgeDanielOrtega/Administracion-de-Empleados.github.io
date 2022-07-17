@@ -1,13 +1,11 @@
 package com.example.administracion.Repositories;
 
-	import org.springframework.data.repository.CrudRepository;
-	import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-	import com.example.administracion.Models.Rol;
-	
+import com.example.administracion.Models.Rol;
 
-
-	@Repository
-	public interface RolRepository extends CrudRepository<Rol,Long>{
-		
-	}
+@Repository
+public interface RolRepository extends CrudRepository<Rol, Long> {
+	public abstract Rol findByNombre(String nombre);
+}

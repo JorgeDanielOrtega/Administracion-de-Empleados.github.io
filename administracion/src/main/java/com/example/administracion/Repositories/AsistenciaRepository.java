@@ -9,5 +9,6 @@ import com.example.administracion.Models.Asistencia;
 
 @Repository
 public interface AsistenciaRepository extends CrudRepository<Asistencia, Long> {
-		public abstract ArrayList<Asistencia> findAllByIdTrabajador(Long idTrabajador);
+	public abstract ArrayList<Asistencia> findAllByIdTrabajador(Long idTrabajador);
+		
 }

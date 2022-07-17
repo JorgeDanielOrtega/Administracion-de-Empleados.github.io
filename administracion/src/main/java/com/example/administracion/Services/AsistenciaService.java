@@ -18,5 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 		public ArrayList<Asistencia> getAsistenciasByIdTrabajador(Long idTrabajador){
 			return asistenciaRepository.findAllByIdTrabajador(idTrabajador);
 		}
+
+		public Asistencia saveAsistencia(Asistencia asistencia){
+			return asistenciaRepository.save(asistencia);
+		}
 		
 	}
