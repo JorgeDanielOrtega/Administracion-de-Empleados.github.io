@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ public class BusquedaController {
     DepartamentoService departamentoService;
 
     @GetMapping()
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ArrayList<Map<String, Object>> gett() { //Todo cambiar nombre despues
         return trabajadorService.getTrabajadorByIdDepartamento(1l);
     }

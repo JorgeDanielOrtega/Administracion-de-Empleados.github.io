@@ -68,7 +68,7 @@ public class HorarioService {
 			idDias_laborablesList.add(horarioDiasL.getIdDiasLaborables());
 		});
 
-		fullHorario.put("dias laborables", asignarDiasLaborables(idDias_laborablesList));
+		fullHorario.put("dias_laborables", asignarDiasLaborables(idDias_laborablesList));
 		fullHorario.put("id", horario.getId());
 		fullHorario.put("tipo", horario.getTipo());
 		fullHorario.put("horas_semanales", horario.getHorasLaborablesSemanales());
