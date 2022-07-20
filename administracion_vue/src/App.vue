@@ -8,7 +8,9 @@
   </nav>
   <router-view/> <!--esta etiqueta hace dinamica la pagina web (que este en rojo la etiqueta no pasa nada, es un problema de vscode por tener una version vieja typescript)-->
 
+ <!-- todo hacer un boton para que nos lleve al departamento -->
 </template>
+
 
 <style>
 #app {

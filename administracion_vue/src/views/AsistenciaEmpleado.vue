@@ -2,22 +2,16 @@
     <!-- <div>
         <p>el id xd {{ hola() }}</p>
     </div> -->
+    <!-- todo ponerle estilos a la tabla -->
     <div>
-        <DataTable :value="asistencia" :paginator="true" :rows="10"
-            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-            :rowsPerPageOptions="[10, 20, 50]" responsiveLayout="scroll"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}">
-            <Column field="diaSemana" header="Dia"></Column>
+        <DataTable :value="asistencia" :paginator="true" :rows="10" responsiveLayout="scroll" :style="{margin: '1rem'}">
             <Column field="fecha" header="Fecha"></Column>
             <Column field="hora" header="Hora"></Column>
             <Column field="estado" header="Estado"></Column>
-            <template #paginatorstart>
-                <Button type="button" icon="pi pi-refresh" class="p-button-text" />
-            </template>
-            <template #paginatorend>
-                <Button type="button" icon="pi pi-cloud" class="p-button-text" />
-            </template>
+            <Column field="diaSemana" header="Dia"></Column>
         </DataTable>
+        <router-link to="/perfil"> <Button label="Atras" icon="pi pi-check"/></router-link>
+        
     </div>
 </template>
 
@@ -30,10 +24,6 @@ export default {
     data() {
         return {
             elid: null,
-            fecha: null,
-            hora: null,
-            estado: null,
-            diaSemana: null,
             asistencia: null
         }
     },
@@ -42,18 +32,13 @@ export default {
         this.perfilService = new PerfilService();
     },
     mounted() {
-        this.perfilService.getAsistenciasEmpleadoById(3).then(response => {
-            this.fecha = response.fecha;
-            this.hora = response.hora;
-            this.estado = response.estado;
-            this.dia = response.diaSemana;
+        this.perfilService.getAsistenciasEmpleadoById(3).then(response => { // todo cambiar el id mas tarde
             this.asistencia = response;
-            console.log(response);
         });
     },
 
     methods: {
-        hola() {
+        getId() { //todo quitar mas tarde quizas
             this.elid = this.$route.params.id;
             return this.elid;
         }
@@ -62,3 +47,9 @@ export default {
 }
 
 </script>
+
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>

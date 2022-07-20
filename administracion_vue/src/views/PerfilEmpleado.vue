@@ -95,7 +95,7 @@ export default {
     },
     mounted() { //metodo que se va a ejecutar una vez el componente este montado
 
-        this.perfilService.getEmpleadoById(2).then(response => { //quitar el 2 y enviarlo en el body
+        this.perfilService.getEmpleadoById(2).then(response => { //todo quitar el 2 y enviarlo en el body
             this.perfil = response.data;
             this.nombres = this.perfil.nombres;
             this.apellidos = this.perfil.apellidos;
