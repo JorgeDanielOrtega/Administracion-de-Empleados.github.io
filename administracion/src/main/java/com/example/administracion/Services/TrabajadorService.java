@@ -95,6 +95,85 @@ public class TrabajadorService {
 		return myMap;
 	}
 
+	private Map<String, Object> getDataEmpleadosForBusqueda(Persona persona, Trabajador trabajador) {
+		Map<String, Object> myMap = new HashMap<>();
+
+		// TODO hacer el campo puestos, quizas
+		Long idRol = trabajador.getIdRol();
+		Long idHorario = trabajador.getIdHorario();
+		Long idDepartamento = trabajador.getIdDepartamento();
+
+		myMap.put("id", trabajador.getId());
+		myMap.put("nombres", persona.getNombre());
+		myMap.put("apellidos", persona.getApellido());
+		myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
+		myMap.put("rol", rolService.getRolById(idRol).getNombre());
+		myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+
+		return myMap;
+	}
+
+	private ArrayList<HashMap<String, Object>> getDataEmpleadosForBusqueda(List<Trabajador> trabajadorList) {
+		ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
+
+		Long idTrabajador;
+		Long idRol;
+		Long idHorario;
+		Long idDepartamento;
+		Persona persona;
+
+		// TODO hacer el campo puestos, quizas
+		for (Trabajador trabajador : trabajadorList) {
+
+			HashMap<String, Object> myMap = new HashMap<>();
+
+			idTrabajador = trabajador.getId();
+			idRol = trabajador.getIdRol();
+			idHorario = trabajador.getIdHorario();
+			idDepartamento = trabajador.getIdDepartamento();
+			persona = personaService.getPersonaById(trabajador.getIdPersona());
+
+			myMap.put("id", idTrabajador);
+			myMap.put("nombres", persona.getNombre());
+			myMap.put("apellidos", persona.getApellido());
+			myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
+			myMap.put("rol", rolService.getRolById(idRol).getNombre());
+			myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+
+			mapList.add(myMap);
+		}
+
+		return mapList;
+	}
+
+	public ArrayList<Map<String, Object>> getTrabajadorForBusqueda() {
+		List<Long> ids = new LinkedList<>();
+		ArrayList<Persona> personaList = new ArrayList<Persona>();
+		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
+		ArrayList<Trabajador> trabajadorList = new ArrayList<>();
+
+		for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
+			if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
+					&& trabajador.getIdRol() != null) {
+
+				trabajadorList.add(trabajador);
+			}
+		}
+
+		// todo añadir para recuperar los departamentos
+		trabajadorList.forEach(trabajador -> {
+			Long idPersona = trabajador.getIdPersona();
+			ids.add(idPersona);
+		});
+		personaList = personaService.getPersonas((Iterable<Long>) ids);
+
+		for (int i = 0; i < trabajadorList.size(); i++) {
+			trabajadorArrayListInfo.add(
+					getDataEmpleadosForBusqueda(personaList.get(i), trabajadorList.get(i)));
+		}
+		return trabajadorArrayListInfo;
+	}
+
 	public ArrayList<Map<String, Object>> getTrabajadorByIdDepartamento(Long idDepartamento) {
 		// TODO encontrar la manera de retornar el nombre del departamento
 
@@ -132,7 +211,7 @@ public class TrabajadorService {
 	public String getIdPersonaByNombresApellidos(String nombresApellidos) {
 		String sql = "SELECT p.id FROM Persona p WHERE p.nombres LIKE '%" + nombresApellidos
 				+ "%' OR p.apellidos LIKE '%" + nombresApellidos + "%'";
-				
+
 		Query query = entityManager.createQuery(sql);
 
 		return formatearidPersonaList(query.getResultList().toArray());
@@ -156,7 +235,7 @@ public class TrabajadorService {
 		return query;
 	}
 
-	public List<Trabajador> getTrabajadoresByFields(String departamento, String rol, String horario, Long id,
+	public ArrayList<Map<String, Object>> getTrabajadoresByFields(String departamento, String rol, String horario, Long id,
 			String nombreApellido) {
 		Map<String, Object> fieldsMap = new HashMap<>();
 
@@ -177,7 +256,8 @@ public class TrabajadorService {
 		}
 		Query query = entityManager.createQuery(generarQuery(fieldsMap));
 
-		return query.getResultList();
+		return getDataEmpleadosForBusqueda(query.getResultList());
+		
 	}
 
 }

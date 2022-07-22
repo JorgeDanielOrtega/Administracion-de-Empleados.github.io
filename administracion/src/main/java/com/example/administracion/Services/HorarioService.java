@@ -1,5 +1,6 @@
 package com.example.administracion.Services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,11 +23,21 @@ public class HorarioService {
 	public Horario getHorarioById(Long id) {
 		return horarioRepository.findById(id).get();
 	}
-	
-	public Long getIdHorarioByTipo(String tipo){
+
+	public Long getIdHorarioByTipo(String tipo) {
 		return horarioRepository.findByTipo(tipo).getId();
 	}
 
+	public ArrayList<HashMap<String, Object>> getNombresHorariosSinRepetir() {
+		ArrayList<HashMap<String, Object>> nombresHorarioList = new ArrayList<>();
+		for (Horario horario : (ArrayList<Horario>) horarioRepository.findAll()) {
+			HashMap<String, Object> mapTipo = new HashMap();
+			mapTipo.put("tipo", horario.getTipo());
+			nombresHorarioList.add(mapTipo);
+		}
+		
+		return  nombresHorarioList;
+	}
 
 	private List<String> asignarDiasLaborables(List<Long> idDiasLaborablesList) {
 		List<String> diasLaborablesList = new LinkedList<>();
@@ -68,13 +79,12 @@ public class HorarioService {
 			idDias_laborablesList.add(horarioDiasL.getIdDiasLaborables());
 		});
 
-		fullHorario.put("dias laborables", asignarDiasLaborables(idDias_laborablesList));
+		fullHorario.put("dias_laborables", asignarDiasLaborables(idDias_laborablesList));
 		fullHorario.put("id", horario.getId());
 		fullHorario.put("tipo", horario.getTipo());
 		fullHorario.put("horas_semanales", horario.getHorasLaborablesSemanales());
 
 		return fullHorario;
 	}
-
 
 }
