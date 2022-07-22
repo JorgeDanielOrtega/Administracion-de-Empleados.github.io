@@ -103,7 +103,7 @@ public class TrabajadorService {
 		Long idHorario = trabajador.getIdHorario();
 		Long idDepartamento = trabajador.getIdDepartamento();
 
-		myMap.put("id", trabajador.getId());
+		myMap.put("id", persona.getId());
 		myMap.put("nombres", persona.getNombre());
 		myMap.put("apellidos", persona.getApellido());
 		myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
@@ -116,10 +116,10 @@ public class TrabajadorService {
 	private ArrayList<HashMap<String, Object>> getDataEmpleadosForBusqueda(List<Trabajador> trabajadorList) {
 		ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
 
-		Long idTrabajador;
-		Long idRol;
-		Long idHorario;
-		Long idDepartamento;
+		Long idPersona;
+		Long idRol = null;
+		Long idHorario = null;
+		Long idDepartamento = null;
 		Persona persona;
 
 		// TODO hacer el campo puestos, quizas
@@ -127,20 +127,24 @@ public class TrabajadorService {
 
 			HashMap<String, Object> myMap = new HashMap<>();
 
-			idTrabajador = trabajador.getId();
+			idPersona = trabajador.getIdPersona();
 			idRol = trabajador.getIdRol();
 			idHorario = trabajador.getIdHorario();
 			idDepartamento = trabajador.getIdDepartamento();
 			persona = personaService.getPersonaById(trabajador.getIdPersona());
 
-			myMap.put("id", idTrabajador);
-			myMap.put("nombres", persona.getNombre());
-			myMap.put("apellidos", persona.getApellido());
-			myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
-			myMap.put("rol", rolService.getRolById(idRol).getNombre());
-			myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+			if (idRol != null && idDepartamento != null && idHorario != null) {
 
-			mapList.add(myMap);
+				myMap.put("id", idPersona);
+				myMap.put("nombres", persona.getNombre());
+				myMap.put("apellidos", persona.getApellido());
+				myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
+				myMap.put("rol", rolService.getRolById(idRol).getNombre());
+				myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+
+				mapList.add(myMap);
+			}
+
 		}
 
 		return mapList;
@@ -155,7 +159,6 @@ public class TrabajadorService {
 		for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
 			if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
 					&& trabajador.getIdRol() != null) {
-
 				trabajadorList.add(trabajador);
 			}
 		}
@@ -205,7 +208,7 @@ public class TrabajadorService {
 			}
 			result += idsPersona[i] + ",";
 		}
-		return "";
+		return result + "0)";
 	}
 
 	public String getIdPersonaByNombresApellidos(String nombresApellidos) {
@@ -224,7 +227,7 @@ public class TrabajadorService {
 		for (int i = 0; i < size; i++) {
 			String key = keys[i].toString();
 
-			if (key.equals("t.idPersona")) {
+			if (key.equals("t.idPersona") && fieldsMap.get(key) != "(0)") {
 				query += key + " IN " + fieldsMap.get(key);
 			} else if (i == size - 1) {
 				query += key + "=" + fieldsMap.get(key).toString();
@@ -235,7 +238,8 @@ public class TrabajadorService {
 		return query;
 	}
 
-	public ArrayList<Map<String, Object>> getTrabajadoresByFields(String departamento, String rol, String horario, Long id,
+	public ArrayList<Map<String, Object>> getTrabajadoresByFields(String departamento, String rol, String horario,
+			Long id,
 			String nombreApellido) {
 		Map<String, Object> fieldsMap = new HashMap<>();
 
@@ -257,7 +261,7 @@ public class TrabajadorService {
 		Query query = entityManager.createQuery(generarQuery(fieldsMap));
 
 		return getDataEmpleadosForBusqueda(query.getResultList());
-		
+
 	}
 
 }

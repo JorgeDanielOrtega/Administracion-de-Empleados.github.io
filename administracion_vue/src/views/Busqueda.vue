@@ -14,8 +14,9 @@
     </div>
 
     <div>
-        <DataTable :value="empleados" :paginator="true" :rows="10" responsiveLayout="scroll"
-            :style="{ margin: '1rem' }" >
+        <DataTable :value="empleados" :paginator="true" :rows="1" responsiveLayout="scroll"
+            :style="{ margin: '1rem' }">
+            
             <Column field="id" header="Id"></Column>
             <Column field="nombres" header="Nombres"></Column>
             <Column field="apellidos" header="Apellidos"></Column>
@@ -25,7 +26,6 @@
         </DataTable>
         <router-link to="/"> <Button label="Atras" /></router-link>
         <!-- todo cambiar el touter link, al principal cuando se haga -->
-
     </div>
 </template>
 
@@ -73,7 +73,8 @@ export default {
 
     methods: {
         buscar() {
-             this.selectedList.clear();
+            let regexOnlyNumber = /^[0-9]*$/;
+            this.selectedList.clear();
             if (this.selectDepartamento != null) {
                 this.selectedList.set('departamento', this.selectDepartamento.nombre)
             }
@@ -83,13 +84,18 @@ export default {
             if (this.selectRol != null) {
                 this.selectedList.set('rol', this.selectRol.nombre);
             }
+            if (this.dataUser != null && regexOnlyNumber.test(this.dataUser)) {
+                this.selectedList.set('id', this.dataUser);
+            }
+            else if (this.dataUser != null) {
+                this.selectedList.set('nombreApellido', this.dataUser);
+            }
 
             this.busquedaService.realizarBusqueda(this.selectedList).then(res => {
-                console.log(res);
-                this.empleados = res;
+                this.empleados = res;      
             });
         },
-        
+
         limpiarBusqueda() {
             this.selectDepartamento = null;
             this.selectHorario = null;
@@ -97,8 +103,8 @@ export default {
             this.dataUser = null;
             this.selectedList.clear();
             this.busquedaService.getEmpleados().then(response => {
-            this.empleados = response;
-        });
+                this.empleados = response;
+            });
         }
 
     }
@@ -107,7 +113,5 @@ export default {
 </script>
 
 <style>
-a {
-    text-decoration: none;
-}
+
 </style>
