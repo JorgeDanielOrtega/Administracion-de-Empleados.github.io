@@ -6,7 +6,7 @@
             <Column field="Horario" header="Horario"></Column>
             <Column field="Rol" header="Rol"></Column>
         </DataTable>
-        <router-link to="/"> <Button label="Atras" icon="pi pi-check" /></router-link> 
+        <router-link to="/"> <Button label="Atras" /></router-link> 
         <!-- todo cambiar el touter link, al principal cuando se haga -->
 
     </div>

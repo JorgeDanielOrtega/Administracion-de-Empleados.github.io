@@ -15,7 +15,7 @@ import javax.persistence.Table;
 // import prueb.DBConnect;
 
 @Entity
-@Table(name = "Empresa")
+@Table(name = "empresa")
 public class Empresa {
 
     // //atributos sql
@@ -33,8 +33,8 @@ public class Empresa {
     private Long idGerente;
     @Column(name = "nombre")
     private String nombre;  
-    @Column(name = "fundador")
-    private String fundador;
+    @Column(name = "leyenda")
+    private String leyenda;
     @Column(name = "anio_fundacion")
     private Date fundacionYear;
     @Column(name = "rubro")
@@ -384,11 +384,11 @@ public class Empresa {
     // }
 
     public String getLeyenda() {
-        return fundador;
+        return leyenda;
     }
 
     public void setLeyenda(String leyenda) {
-        this.fundador = leyenda;
+        this.leyenda = leyenda;
     }
 
     public Time getHoraEntrada() {
@@ -409,7 +409,43 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda=" + fundador + '}';
+        return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda=" + leyenda + '}';
+    }
+
+
+    /**
+     * @return Long return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @return Long return the idGerente
+     */
+    public Long getIdGerente() {
+        return idGerente;
+    }
+
+    /**
+     * @param idGerente the idGerente to set
+     */
+    public void setIdGerente(Long idGerente) {
+        this.idGerente = idGerente;
+    }
+
+    /**
+     * @return String return the fundador
+     */
+    public String getFundador() {
+        return leyenda;
+    }
+
+    /**
+     * @param fundador the fundador to set
+     */
+    public void setFundador(String fundador) {
+        this.leyenda = fundador;
     }
 
 }

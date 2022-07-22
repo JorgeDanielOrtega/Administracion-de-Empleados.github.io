@@ -10,7 +10,7 @@
             <Column field="estado" header="Estado"></Column>
             <Column field="diaSemana" header="Dia"></Column>
         </DataTable>
-        <router-link to="/perfil"> <Button label="Atras" icon="pi pi-check"/></router-link>
+        <router-link to="/perfil"> <Button label="Atras" /></router-link>
         
     </div>
 </template>
