@@ -19,7 +19,7 @@ public class DBConnect {
             System.out.println("conexion EXITOSA");
         } catch (Exception e) {
             System.err.println("Error:" + e.getMessage());
-            System.out.println("no se conecto");
+            System.out.println("No se conecto");
         } finally {
             return connection;
         }

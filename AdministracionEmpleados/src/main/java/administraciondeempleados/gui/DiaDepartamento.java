@@ -7,11 +7,17 @@ import java.util.List;
 public class DiaDepartamento extends javax.swing.JDialog {
 
     private List<Departamento> departamentoList;
-
+//    private DBConnect dbConnect;
+//    private Connection connection;
+//    private String sql;
+//    private ResultSet result;
+//    private PreparedStatement ps;
+    
     public DiaDepartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+//        dbConnect = new DBConnect();
     }
 
     public DiaDepartamento(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList) {
@@ -50,7 +56,6 @@ public class DiaDepartamento extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(990, 660));
 
         panDatos.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
@@ -192,7 +197,6 @@ public class DiaDepartamento extends javax.swing.JDialog {
 
         panLista.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
-        modelTableDescripcionDepartamento.setModel(modelTableDescripcionDepartamentoo);
         modelTableDescripcionDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modelTableDescripcionDepartamentoMouseClicked(evt);
@@ -213,7 +217,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
             panListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -261,7 +265,45 @@ public class DiaDepartamento extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//    private void eliminarDepartamento(long id){
+//        try {
+//            sql = "DELETE FROM \"Departamentos\"WHERE id = " + id +";";
+//            ps = connection.prepareStatement(sql);     
+//            ps.execute();
+//        } catch (Exception e) {
+//            System.out.println("Error al eliminar el id de departamento en DiaDepartamento " + e.getMessage());
+//        }
+//    }
+//
+//    private long retornarID (String tipo){
+//        long id = 0;
+//        try {
+//            String query = "SELECT id FROM\"Departamentos\"WHERE tipo='" + tipo + "' GROUP BY id";
+//            ps = connection.prepareStatement(query);
+//            result = ps.executeQuery();
+//            while(result.next()){
+//                id = result.getLong("id");
+//            }
+//            System.out.println(id);
+//            return id;
+//        } catch (Exception e) {
+//            System.out.println("No se pudo encontrar el id" + e.getMessage());
+//        }
+//        return 0;
+//    }
+//    private void eliminarDepartamentoDB(Departamento departamento){
+//        try {
+//            connection = dbConnect.conectar();
+//            long id = retornarID(departamento.getNombre());
+//            eliminarDepartamento(id);
+//            sql = "DELETE FROM \"Departamentos\" WHERE id= " + id;
+//            ps = connection.prepareStatement(sql);
+//            ps.execute();
+//        } catch (Exception e) {
+//        }finally{
+//            dbConnect.desconectar();
+//        }
+//    }
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
@@ -302,6 +344,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
         if (a == 0) {
             int fila = modelTableDescripcionDepartamento.getSelectedRow();
             modelTableDescripcionDepartamentoo.eliminarDepartamento(fila);
+            //eliminarDepartamentoDB(departamento);
         }
     }//GEN-LAST:event_btnEliminarDepartamentoActionPerformed
 

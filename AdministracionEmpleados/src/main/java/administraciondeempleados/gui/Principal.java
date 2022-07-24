@@ -58,6 +58,7 @@ public class Principal extends javax.swing.JFrame {
     private Horario horarioNocturno;
     private JFrame parent;
     private Cuenta cuenta;
+    //private ModelTableDescripcionDepartamento depa;
 
     /**
      * Creates new form Principal
@@ -68,6 +69,7 @@ public class Principal extends javax.swing.JFrame {
         //construir empresa con datos de la base
         if (empresa == null) {
             //valores por defecto para la ejecucion por primera vez
+            //depa = new ModelTableDescripcionDepartamento();
             empresa = new Empresa("Nombre", "YYYY/MM/DD", "Leyenda", "Rubro");
             Puesto puesto = new Puesto("Gerente");
             Rol rol = new Rol("Gerente");

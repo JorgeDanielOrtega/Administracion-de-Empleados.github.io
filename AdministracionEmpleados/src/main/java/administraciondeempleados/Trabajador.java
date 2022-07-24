@@ -30,7 +30,9 @@ public abstract class Trabajador extends Persona{
         super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad, telefono, fechaNacimiento);
     }
     
-    public Trabajador(String correoPersonal, String password, Puesto puesto, Rol rol, Departamento departamento, Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
+    public Trabajador(String correoPersonal, String password, Puesto puesto, Rol rol, Departamento departamento,
+           Contrato contrato, String nombre, String apellido, String direccion, String cedula, char sexo,
+           String ciudad, String telefono, Date fechaNacimiento) {
         super(nombre, apellido, direccion, cedula, sexo, ciudad, telefono, fechaNacimiento);
         this.correoPersonal = correoPersonal;
         generarCorreoEmpresarial(nombre, apellido);

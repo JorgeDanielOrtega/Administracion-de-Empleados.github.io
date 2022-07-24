@@ -263,7 +263,7 @@ public class DiaRol extends javax.swing.JDialog {
         int fila;
         if( tblTablaRol.getSelectedRow() >= 0){
             fila = tblTablaRol.getSelectedRow();
-            this.rol = modelTableDescripcionRoll.leerRool(fila);
+            this.rol = modelTableDescripcionRoll.leerRol(fila);
         }
         return this.rol;
     }
