@@ -1,60 +1,88 @@
 <template>
-    <div>
+    <div class="container grid">
         <!--todo quitar las clases de los input text quizas -->
-        <label for="nombres">Nombres:</label>
-        <InputText class="input_info" id="nombres" type="text" v-model="nombres" disabled="true" />
-        <label for="apellidos">Apellidos:</label>
-        <InputText class="input_info" id="apellidos" type="text" v-model="apellidos" disabled="true" />
-        <label for="cedula">Cedula:</label>
-        <InputText class="input_info" id="cedula" type="text" v-model="cedula" disabled="true" />
-        <label for="sexo">Sexo:</label>
-        <InputText class="input_info" id="sexo" type="text" v-model="sexo" disabled="true" />
-        <Divider class="divi"></Divider>
-        <label for="telefono">Telefono:</label>
-        <InputText class="input_info" id="telefono" type="text" v-model="telefono" disabled="true" />
-        <label for="estadoCivil">Estado Civil:</label>
-        <InputText class="input_info" id="estadoCivil" type="text" v-model="estadoCivil" disabled="true" />
-        <label for="ciudad">Ciudad:</label>
-        <InputText class="input_info" id="ciudad" type="text" v-model="ciudad" disabled="true" />
-        <label for="direccion">Direccion:</label>
-        <InputText class="input_info" id="direccion" type="text" v-model="direccion" disabled="true" />
+        <div class="container__datos grid col-25 ">
+            <label class="col" for="nombres">Nombres:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="nombres" type="text" v-model="nombres"
+                disabled="true" />
+            <label class="col" for="apellidos">Apellidos:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="apellidos" type="text" v-model="apellidos"
+                disabled="true" />
+            <label class="col" for="cedula">Cedula:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="cedula" type="text" v-model="cedula"
+                disabled="true" />
+            <label class="col" for="sexo">Sexo:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="sexo" type="text" v-model="sexo" disabled="true" />
+        </div>
+        <div class="divider"></div>
         
-        <label for="correoEmpresarial">Correo Empresarial:</label>
-        <InputText class="input_info" id="correoEmpresarial" type="text" v-model="correoEmpresarial" disabled="true" />
-        <label for="correoPersonal">Correo Personal:</label>
-        <InputText class="input_info" id="correoPersonal" type="text" v-model="correoPersonal" disabled="true" />
-        <!-- <Button label="Ver horario" class="p-button-outlined" @click="openModalHorario"></Button> -->
-        <router-link to="/perfil/2/asistencia"> <Button label="Ver asistencia" class="p-button-outlined" />
-        </router-link>
-        <!-- <Button label="Ver asistencias" class="p-button-outlined" @click=""></Button> -->
+        <div class="container__contacto grid col-25">
+            <label class="col" for="telefono">Telefono:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="telefono" type="text" v-model="telefono"
+                disabled="true" />
+            <label class="col" for="estadoCivil">Estado Civil:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="estadoCivil" type="text" v-model="estadoCivil"
+                disabled="true" />
+            <label class="col" for="ciudad">Ciudad:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="ciudad" type="text" v-model="ciudad"
+                disabled="true" />
+            <label class="col" for="direccion">Direccion:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="direccion" type="text" v-model="direccion"
+                disabled="true" />
+        </div>
+<div class="divider"></div>
+        <div class="container__datos--empresa grid col-25">
+            <label class="col" for="correoEmpresarial">Correo Empresarial:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="correoEmpresarial" type="text"
+                v-model="correoEmpresarial" disabled="true" />
+            <label class="col" for="correoPersonal">Correo Personal:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="correoPersonal" type="text" v-model="correoPersonal"
+                disabled="true" />
+        </div>
+
 
         <!-- dialog horario -->
         <Dialog header="Horario" v-model:visible="displayModalHorario"
             :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" :modal="true">
-            <label for="tipo">Tipo:</label>
-            <InputText class="input_info" id="tipo" type="text" v-model="tipoHorario" disabled="true" />
-            <label for="diasLaborablesList">Dias Laborables:</label>
-            <InputText class="input_info" id="diasLaborablesList" type="text" v-model="diasLaborablesHorarioList"
-                disabled="true" />
-            <label for="horasSemanales">Horas semanales:</label>
-            <InputText class="input_info" id="horasSemanales" type="text" v-model="horasSemanalesHorario"
-                disabled="true" />
+            <div class="grid">
 
-            <template #footer>
+                <label class="col" for="tipo">Tipo:</label>
+                <InputText class="input_info--horario col-10" id="tipo" type="text" v-model="tipoHorario"
+                    disabled="true" />
+                <label class="col" for="diasLaborablesList">Dias Laborables:</label>
+                <InputText class="input_info--horario col-10" id="diasLaborablesList" type="text"
+                    v-model="diasLaborablesHorarioList" disabled="true" />
+                <label class="col" for="horasSemanales">Horas semanales:</label>
+                <InputText class="input_info--horario col-10" id="horasSemanales" type="text"
+                    v-model="horasSemanalesHorario" disabled="true" />
+            </div>
+
+
+            <!-- <template #footer>
                 <Button label="Salir" icon="pi pi-check" @click="closeModalHorario" autofocus />
-            </template>
+            </template> -->
         </Dialog>
 
-        <!-- dialog asistencia -->
+        <!-- dialog asistencia
         <Dialog header="Asistencias" v-model:visible="displayModalAsistencia"
             :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" :modal="true">
 
             <template #footer>
                 <Button label="Salir" icon="pi pi-check" @click="closeModalAsistencia" autofocus />
             </template>
-        </Dialog>
+        </Dialog> -->
 
+    </div>
 
+    <div class="buttons flex justify-content-center gap-3">
+        <div class="button ">
+            <router-link to="/perfil/2/asistencia" class="router ">
+                <Button label="Ver asistencia" class="p-button-outlined btnAsistencia" />
+            </router-link>
+        </div>
+        <div class="button ">
+            <Button label="Ver Horario" class="p-button-outlined" @click="openModalHorario()" />
+        </div>
     </div>
 </template>
 
@@ -121,12 +149,12 @@ export default {
         closeModalHorario() {
             this.displayModalHorario = false;
         },
-        openModalAsistencia() {
-            this.displayModalAsistencia = true;
-        },
-        closeModalAsistencia() {
-            this.displayModalAsistencia = false;
-        },
+        // openModalAsistencia() {
+        //     this.displayModalAsistencia = true;
+        // },
+        // closeModalAsistencia() {
+        //     this.displayModalAsistencia = false;
+        // },
 
         getHorarioEmpleado(id) { //todo poner id mas tarde
             this.perfilService.getHorarioEmpleadoById(id).then(response => {
@@ -146,33 +174,71 @@ export default {
 </script>
 
 
-<style scoped>
+<style  scoped>
 /*TODO: agregarle un tipo de fuente a las label*/
 * {
     text-align: left;
 }
 
-/* .perfil{
-    margin-left: 50px;
-} */
+.container {
+    /* font-family: 'Roboto'; */
+    
+    margin-top: 50px;
+    margin-right: 10px;
+    margin-left: auto;
+}
 
-a {
-    text-decoration: none;
-    /* para eliminar el text decoration que genera el routerlink */
+.divider{
+    background-color: rgba(58, 58, 58, 0.158);
+    width: 85%;
+    height: 1px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+
+.container__datos {
+    margin-bottom: 20px;
+}
+
+.container__contacto {
+    margin-bottom: 20px;
+
+}
+
+.container__datos--empresa {
+    margin-bottom: 50px;
+}
+
+.btnAsistencia {
+
+}
+
+.buttons {
+    margin-bottom: 20px;
+}
+
+.router {
+    display: flex;
+    /* margin-right: 18.25rem; */
+
 }
 
 label {
-    display: block;
+    display: inline-block;
+    width: auto;
     margin-bottom: 15px;
 }
 
 .input_info {
     margin-bottom: 30px;
+    margin-right: 290px;
     width: 350px;
 }
-.divi{
-    color: red;
-    background-color: aqua;
-}
 
+.input_info--horario {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 35px;
+}
 </style>

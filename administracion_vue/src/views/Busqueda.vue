@@ -1,22 +1,26 @@
 <template>
-    <div>
-        <Dropdown v-model="selectDepartamento" :options="departamentos" optionLabel="nombre"
-            placeholder="Departamento" />
-        <Dropdown v-model="selectHorario" :options="horarios" optionLabel="tipo" placeholder="Horario" />
-        <Dropdown v-model="selectRol" :options="roles" optionLabel="nombre" placeholder="Rol" />
+    <div class="filtro flex justify-content-center gap-4">
+        <div class="campos flex gap-2">
+            <Dropdown class="dropdown" v-model="selectDepartamento" :options="departamentos" optionLabel="nombre"
+                placeholder="Departamento" />
+            <Dropdown class="dropdown" v-model="selectHorario" :options="horarios" optionLabel="tipo" placeholder="Horario" />
+            <Dropdown class="dropdown" v-model="selectRol" :options="roles" optionLabel="nombre" placeholder="Rol" />
 
-    </div>
-    <div>
-        <InputText id="dataUser" type="text" placeholder="Ingresa los nombres o el id" class="p-inputtext-sm"
-            v-model="dataUser" />
-        <Button label="Buscar" @click="buscar()" />
-        <Button label="Limpiar" @click="limpiarBusqueda()" />
+        </div>
+        <div class="campo_texto flex gap-2">
+            <InputText id="dataUser" type="text" placeholder="Ingresa los nombres o el id" class="p-inputtext-sm"
+                v-model="dataUser" />
+        </div>
+        <div class="buttons flex gap-2">
+            <Button label="Buscar" @click="buscar()" />
+            <Button label="Limpiar" @click="limpiarBusqueda()" />
+        </div>
     </div>
 
     <div>
-        <DataTable :value="empleados" :paginator="true" :rows="1" responsiveLayout="scroll"
+        <DataTable :value="empleados" :paginator="true" :rows="10" responsiveLayout="scroll"
             :style="{ margin: '1rem' }">
-            
+
             <Column field="id" header="Id"></Column>
             <Column field="nombres" header="Nombres"></Column>
             <Column field="apellidos" header="Apellidos"></Column>
@@ -92,7 +96,7 @@ export default {
             }
 
             this.busquedaService.realizarBusqueda(this.selectedList).then(res => {
-                this.empleados = res;      
+                this.empleados = res;
             });
         },
 
@@ -112,6 +116,15 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.filtro{
+    margin-bottom: 50px;
+}
 
+#dataUser{
+    width: 300px;
+}
+.dropdown{
+    width: 200px;
+}
 </style>

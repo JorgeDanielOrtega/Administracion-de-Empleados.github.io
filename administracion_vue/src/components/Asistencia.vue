@@ -1,18 +1,27 @@
 <template>
-    
+
     <Toast position="bottom-right" />
+    <div class="container flex justify-content-center ">
+        <div class="grid container_options flex align-content-center">
+            <div class="presente col-4">
+                <RadioButton  id="presente" name="estado" value="presente" v-model="selectedValue"
+                    :disabled="this.activarPresente()" />
+                <label class="col-2" for="presente">Presente</label>
+            </div>
+            <div class=" retraso col-4">
 
-    <div>
-        <RadioButton id="presente" name="estado" value="presente" v-model="selectedValue"
-            :disabled="this.activarPresente()" />
-        <label for="presente">Presente</label>
-        <RadioButton id="retraso" name="estado" value="retraso" v-model="selectedValue" />
-        <label for="retraso">Retraso</label>
-        <RadioButton id="falta_injustificada" name="estado" value="falta injustificada" v-model="selectedValue" />
-        <label for="falta_injustificada">Falta Injustificada</label>
+                <RadioButton  id="retraso" name="estado" value="retraso" v-model="selectedValue" />
+                <label class="col-2" for="retraso">Retraso</label>
+            </div>
+            <div class="falta_injustificada col-4">
+                <RadioButton  id="falta_injustificada" name="estado" value="falta injustificada"
+                    v-model="selectedValue" />
+                <label class="col-2" for="falta_injustificada">Falta Injustificada</label>
+            </div>
+        </div>
 
-        <Button label="Enviar" @click="enviar()" />
     </div>
+        <Button label="Enviar" @click="enviar()" />
 
 </template>
 
@@ -42,11 +51,17 @@ export default {
             return this.idTrabajador;
         },
         enviar() {
-            this.asistenciaService.postAsistencia(this.getIdTrabajador(), this.selectedValue).then(res => {
-                if (res.status == 200) {
-                    this.showSuccess();
-                }
-            });
+            if (this.selectedValue != null) {
+                
+                this.asistenciaService.postAsistencia(this.getIdTrabajador(), this.selectedValue).then(res => {
+                    if (res.status == 200) {
+                        this.showSuccess();
+                    }
+                });
+            } else {
+                this.showError();
+                
+            }
             this.selectedValue = null;
         },
         activarPresente() {
@@ -61,6 +76,9 @@ export default {
         showSuccess() {
             this.$toast.add({ severity: 'success', summary: 'Asistencia enviada', life: 2000 });
         },
+         showError() {
+            this.$toast.add({severity:'error', summary: 'No se ha marcado un estado', life: 2000});
+        }
     }
 }
 
@@ -68,5 +86,21 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.container{
+    margin-top: 1.875rem;
+    height: 15.625rem;
+}
+.container_options{
+    width: 43.75rem;
+    border-radius: 5px;
+    background-color: aqua;
+}
+
+Button{
+    margin-top: 3.125rem;
+    width: 150px;
+}
+
+
 </style>
