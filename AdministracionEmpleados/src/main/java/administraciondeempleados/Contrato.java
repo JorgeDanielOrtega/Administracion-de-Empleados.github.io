@@ -46,9 +46,19 @@ public class Contrato {
         this.fechaLimite = fechaLimite;
     }
     
+    public String tieneContrato(boolean tieneContrato){
+        String validacion;
+        if(tieneContrato){
+            validacion = "SI";
+        }else{
+            validacion = "NO";
+        }
+        return validacion;
+    }
+    
     @Override
     public String toString() {
-        return "" + tieneContrato  + "  "+ tiempoContrato + '}';
+        return "" + tieneContrato(this.tieneContrato);
     }
     
     

@@ -86,7 +86,6 @@ public class Principal extends javax.swing.JFrame {
             departamento1.getTrabajadorList().add(empleado69);
             empresa.getDepartamentoList().add(departamento1);
             
-            
             diaLogin = new DiaLogin(this, true, empresa);
             diaLogin.setVisible(true);
             this.cuenta = diaLogin.getCuenta();
@@ -99,13 +98,14 @@ public class Principal extends javax.swing.JFrame {
             diaLogin.dispose();
             cargarComponentes();
         }
-        
-        empresa.cargarListas(); //metodo para cargar las listas desde la base de datos
+        //++++++++++++++++++++++++IMPORTANTE
+        empresa.cargarListas(); //metodo para cargar las listas desde la base de datos IMPORTANTE
         System.out.println(empresa.getHorarioList());
         System.out.println(empresa.getRolList());
         System.out.println(empresa.getDepartamentoList());
-        departamento = new Departamento("Finanzas", 1, 25);
-        empresa.getDepartamentoList().add(departamento);
+        //System.out.println(empresa.getDepartamentoList);
+        //departamento = new Departamento("Finanzas", 1, 25);
+        //empresa.getDepartamentoList().add(departamento);
         empresa.setHoraEntrada(7, 30);
         pintarImagen(jLabel1, "src/main/java/assets/icons/user3.png");
         jLabel1.setText("Gerente");
@@ -115,22 +115,22 @@ public class Principal extends javax.swing.JFrame {
         this.horaActual = Calendar.getInstance();
         menuGerente.setVisible(true);
         menuEmpleado.setVisible(true);
-        Puesto p = new Puesto("administracion");
-        Puesto p2 = new Puesto("empleado");
-        rolContable = new Rol(2, "Contable", p, departamento);
-        rolAyudante = new Rol(2, "ayudante", p, departamento);
+        //Puesto p = new Puesto("administracion");
+        //Puesto p2 = new Puesto("empleado");
+        //rolContable = new Rol(2, "Contable", p, departamento);
+        //rolAyudante = new Rol(2, "ayudante", p, departamento);
         horarioMatutino = new Horario("matutino", 45f);
         horarioVespertino = new Horario("vespertino", 30f);
         horarioNocturno = new Horario("nocturno", 15f);
         // empresa.getHorarioList().add(horarioMatutino);
         // empresa.getHorarioList().add(horarioVespertino);
         //empresa.getHorarioList().add(horarioNocturno);
-        empresa.getRolList().add(rolContable);
-        empresa.getRolList().add(rolAyudante);
-        empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado2 = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado3 = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
-        empleado4 = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
+        //empresa.getRolList().add(rolContable);
+        //empresa.getRolList().add(rolAyudante);
+//        empleado = new Empleado(new Date(22, 2, 2), horarioMatutino, "jorge.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Jorge daniel", "ortega alburqueque", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+//        empleado2 = new Empleado(new Date(22, 2, 2), horarioMatutino, "dfdfdf.d.ortega@unl.edu.ec", "1234", p, rolContable, departamento, new Contrato(true), "Lenucio", "ortega ", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+//        empleado3 = new Empleado(new Date(22, 2, 2), horarioVespertino, "hola@unl.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "jose ", "ortega gonzalez", "Av. agustin aguirre", "1234567", 'm', "loja", "12345", new Date(22, 22, 22));
+//        empleado4 = new Empleado(new Date(22, 2, 2), horarioNocturno, "empreas@.edu.ec", "1234", p2, rolAyudante, departamento, new Contrato(true), "lucia bermeo", "VAlles", "Av. agustin aguirre", "1234567", 'f', "loja", "12345", new Date(22, 22, 22));
         mouseEvents();
     }
 

@@ -11,6 +11,9 @@ public class Rol {
     
     private Puesto puesto;
     private List<Trabajador> trabajadorList;
+    
+    private int id_puesto;
+    private int id_departamento;
 
     public Rol(){
         trabajadorList = new LinkedList();
@@ -25,7 +28,11 @@ public class Rol {
         this(nombre);
         this.salario = salario;
     }
-
+    public Rol(String nombre, double salario, int id_puesto, int id_departamento){
+        this(nombre, salario);
+        this.id_puesto = id_puesto;
+        this.id_departamento = id_departamento;
+    }
      public Rol(double salario, String nombre, Puesto puesto){
         this(nombre, salario);
         this.puesto = puesto;
@@ -34,6 +41,7 @@ public class Rol {
         this(salario, nombre, puesto);
         this.departamento = departamento;
     }
+    
 //    public Rol(String nombre, Puesto puesto, Departamento departamento) { //quizas quitar lo de puesto
 //        this(nombre);
 //        this.puesto = puesto;
@@ -79,6 +87,22 @@ public class Rol {
 
     public List<Trabajador> getTrabajadorList() {
         return trabajadorList;
+    }
+
+    public int getId_puesto() {
+        return id_puesto;
+    }
+
+    public void setId_puesto(int id_puesto) {
+        this.id_puesto = id_puesto;
+    }
+
+    public int getId_departamento() {
+        return id_departamento;
+    }
+
+    public void setId_departamento(int id_departamento) {
+        this.id_departamento = id_departamento;
     }
     
 

@@ -197,6 +197,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
 
         panLista.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
+        modelTableDescripcionDepartamento.setModel(modelTableDescripcionDepartamentoo);
         modelTableDescripcionDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 modelTableDescripcionDepartamentoMouseClicked(evt);

@@ -114,7 +114,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtContraseña.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
         txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContraseña.setText("**********");
+        txtContraseña.setText("admin");
         txtContraseña.setBorder(null);
         txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,7 +130,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setText("Nombre de usuario");
+        txtUsuario.setText("Gerente.Gerente@superEmpresa.com");
         txtUsuario.setBorder(null);
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

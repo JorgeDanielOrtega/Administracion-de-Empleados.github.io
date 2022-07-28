@@ -54,7 +54,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
     public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList, List<Horario> horarioList, Gerente gerente) {
         this(parent, modal);
-        modelTableDescripcionEmpleadoo.settrabajadorList(departamentoList.get(0).getTrabajadorList());
+        modelTableDescripcionEmpleadoo.settrabajadorList(departamentoList.get(2).getTrabajadorList());
         modelTableDescripcionEmpleadoo.cargarModelo();
         this.departamentoList = departamentoList;
         this.gerente = gerente;
@@ -159,42 +159,49 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
         jLabel10.setText("Año entrada");
 
+        txtNombre.setText("pedro");
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
 
+        txtDireccion.setText("rocafuerte");
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionActionPerformed(evt);
             }
         });
 
+        txtCedula.setText("66666");
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
             }
         });
 
+        txtCiudad.setText("Los olimpos");
         txtCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCiudadActionPerformed(evt);
             }
         });
 
+        txtCorreoPersonal.setText("pedro.piedra.com");
         txtCorreoPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoPersonalActionPerformed(evt);
             }
         });
 
+        txtUsuario.setText("pedrito");
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
 
+        txtAnioEntrada.setText("2011");
         txtAnioEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnioEntradaActionPerformed(evt);
@@ -215,24 +222,28 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
         jLabel17.setText("Rol");
 
+        txtApellido.setText("piedra");
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
             }
         });
 
+        txtTelefono.setText("00000001");
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
             }
         });
 
+        txtCorreoEmpresariall.setText("pedrito.feliz.bigban");
         txtCorreoEmpresariall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoEmpresariallActionPerformed(evt);
             }
         });
 
+        txtContrasenia.setText("rocafuerte");
         txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContraseniaActionPerformed(evt);
@@ -279,30 +290,35 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
         jLabel18.setText("Fecha nacimiento");
 
+        txtAnioNacimiento.setText("2011");
         txtAnioNacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnioNacimientoActionPerformed(evt);
             }
         });
 
+        txtMesNacimiento.setText("12");
         txtMesNacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMesNacimientoActionPerformed(evt);
             }
         });
 
+        txtDiaNacimiento.setText("12");
         txtDiaNacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiaNacimientoActionPerformed(evt);
             }
         });
 
+        txtMesEntrada.setText("4");
         txtMesEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMesEntradaActionPerformed(evt);
             }
         });
 
+        txtDiaEntrada.setText("3");
         txtDiaEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiaEntradaActionPerformed(evt);
@@ -634,17 +650,14 @@ public class DiaEmpleado extends javax.swing.JDialog {
         panLista.setLayout(panListaLayout);
         panListaLayout.setHorizontalGroup(
             panListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panListaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(panListaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
         panListaLayout.setVerticalGroup(
             panListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panListaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -662,7 +675,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(437, 437, 437)))
+                        .addGap(428, 428, 428)))
                 .addGap(290, 290, 290))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()

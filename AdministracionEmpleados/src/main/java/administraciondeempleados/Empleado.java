@@ -14,6 +14,9 @@ public class Empleado extends Trabajador {
 //    public Empleado(){
 //        //this.asistenciaList = new LinkedList<>();
 //    }
+    public Empleado(){
+    }
+    
     public Empleado(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
             String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento,
             String correoPersonal, String correoEmpresarial, String usuario, String contrasenia,

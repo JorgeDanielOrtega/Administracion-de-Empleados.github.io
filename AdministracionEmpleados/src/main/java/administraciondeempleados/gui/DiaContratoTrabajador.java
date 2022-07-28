@@ -172,10 +172,12 @@ public class DiaContratoTrabajador extends javax.swing.JDialog {
             boolean valorCombobox = (opcSi.isSelected());
             return valorCombobox;
         }
+        
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        Date fechaContrato = new Date((Integer.parseInt(txtaAnio.getText()) - 1900), (Integer.parseInt(txtMes.getText()) - 1), Integer.parseInt(txtDia.getText()));
         this.contrato = new Contrato(cambiarTextoBolean(), Double.parseDouble(txtTiempoContrato.getText()),
-            new Date(Integer.parseInt(txtDia.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
-        this.dispose();
+                        fechaContrato);
+                this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public Contrato getContrato() {

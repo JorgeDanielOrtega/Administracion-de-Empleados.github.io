@@ -246,6 +246,7 @@ public class Empresa {
     private void cargarTrabajadoresList() {
         try {
             connection = dbConnect.conectar();
+            //sql = "SELECT * FROM \"trabajador\"";
             sql = "select * from (select * from \"trabajador\" t inner join "
                     + " \"persona\" p on t.id_persona = p.id) as todo where "
                     + "fecha_nacimiento notnull and anio_entrada notnull and id_horario notnull "
@@ -268,7 +269,7 @@ public class Empresa {
                 String correoPersonal = result.getString("correo_personal");
                 String usuario = result.getString("usuario");
                 String contrasenia = result.getString("contrasenia");
-                boolean pagoTransferencia = result.getInt("pago_por_transferencia") == 1;
+                    boolean pagoTransferencia = result.getInt("pago_por_transferencia") == 1;
                 //boolean gerente = result.getInt("gerente") == 1;
                 long idHorario = result.getLong("id_horario");
                 long idDepartamento = result.getLong("id_departamento");
@@ -278,7 +279,9 @@ public class Empresa {
                 Departamento depa = retornarDepartamento(idDepartamento);
                 Horario horario = retornarHorario(idHorario);
                 Rol rol = retornarRol(idRol);
-                Empleado e = new Empleado(nombres, apellidos, direccion, retornarEstadoCivil(estadoCivil), cedula, sexo, ciudad, telefono, fecha_nacimiento, correoPersonal, correoEmpresarial, usuario, contrasenia, pagoTransferencia, rol, contrato, anio_entrada, depa, horario);
+                Empleado e = new Empleado(nombres, apellidos, direccion, retornarEstadoCivil(estadoCivil),
+                        cedula, sexo, ciudad, telefono, fecha_nacimiento, correoPersonal, correoEmpresarial,
+                        usuario, contrasenia, pagoTransferencia, rol, contrato, anio_entrada, depa, horario);
                 e.setId(String.valueOf(id));
                 depa.getTrabajadorList().add(e);
                 horario.getEmpleadoList().add(e);
@@ -325,21 +328,27 @@ public class Empresa {
     private void cargarRolList() {
         try {
             connection = dbConnect.conectar();
-            sql = "SELECT r.salario, r.nombre AS rol, p.nombre AS puesto, \n"
-                    + "d.nombre AS departamento FROM \"roles\" r, \"puestos\" p, \"departamentos\" d ";
+//            sql = "SELECT r.salario, r.nombre AS rol, p.nombre AS puesto, \n"
+//                    + "d.nombre AS departamento FROM \"roles\" r, \"puestos\" p, \"departamentos\" d ";
+              sql = "SELECT r.salario, r.nombre AS nombre_rol, p.nombre AS nombre_puesto, "
+                    + "d.nombre AS departamento FROM \"roles\" r "
+                    + "INNER JOIN \"puestos\" p "
+                    + "On r.id_puesto = p.id "
+                    + "INNER JOIN \"departamentos\" d "
+                    + "On d.id = r.id_departamento";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
                 String nombreDepa = result.getString("departamento");
                 double salario = result.getDouble("salario");
-                String nombrePuesto = result.getString("puesto");
-                String nombreRol = result.getString("rol");
+                String nombrePuesto = result.getString("nombre_puesto");
+                String nombreRol = result.getString("nombre_rol");
                 rolList.add(new Rol(salario, nombreRol, new Puesto(nombrePuesto),
                         retornarDepartamento(nombreDepa)));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el rolList");
-            System.err.println("hubo un error rol" + e.getMessage());
+            System.err.println("Hubo un error rol" + e.getMessage());
         } finally {
             dbConnect.desconectar();
         }
