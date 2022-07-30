@@ -33,7 +33,6 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
 
         departamentoList = new LinkedList();
         dbConnect = new DBConnect();
-        //validacionCarga = 0;
         addColumn("Nombre");
         addColumn("Numero");
         addColumn("Numero Maximo Empleados");
@@ -41,46 +40,32 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
     }
 
     public void cargarModelo() {
-        //if(this.validacionCarga == 0){
             try{
                 connection = dbConnect.conectar();
-//                sql = "SELECT * FROM \"departamentos\"";
-//                ps = connection.prepareStatement(sql);
-//                result = ps.executeQuery();
-//                Departamento departamentoMolde = new Departamento();
-//            while(result.next()){
-//                String nombre = result.getString("nombre");
-//                int numero = result.getInt("numero");
-//                int maximo_empleados = result.getInt("maximo_empleados");
-//                int vacaciones = result.getInt("vacaciones");
-//                departamentoMolde = new Departamento(nombre, numero, maximo_empleados, vacaciones);
-//                departamentoList.add(departamentoMolde);
-            
-            for (Departamento departamento : departamentoList) {
-                addRow(new Object[]{
-                departamento.getNombre(),
-                departamento.getNumero(),
-                departamento.getEmpleadosMaximos(),
-                departamento.getVacaciones()
-            });
-            this.validacionCarga = 1;
-            }
+                for (Departamento departamento : departamentoList) {
+                    addRow(new Object[]{
+                    departamento.getNombre(),
+                    departamento.getNumero(),
+                    departamento.getEmpleadosMaximos(),
+                    departamento.getVacaciones()
+                });
+                this.validacionCarga = 1;
+                }
             }catch(Exception e){
                 System.out.println("Hubo un error al cargar Departamentos" + e.getMessage());
                 JOptionPane.showMessageDialog(null, "Error al carfar Departamentos");
             }finally{
                 dbConnect.desconectar();
-            }
-        //}
-                
+            }                
     }
     
     public Departamento leerDepartamento(int fila){
         return departamentoList.get(fila);
     }
     
-    public void agregarDepartamento(Departamento departamentoAgregar) {
-        crearDepartamentoDB(departamentoAgregar, 1); //MODIFICAR EL ID DE EMPLERA PARA HACER ESCALABLE
+    public void agregarDepartamento(Departamento departamentoAgregar, String nombreEmpresa) {
+        long idEmpresa = retornarID("empresa", "nombre", nombreEmpresa);
+        crearDepartamentoDB(departamentoAgregar, idEmpresa); //MODIFICAR EL ID DE EMPLERA PARA HACER ESCALABLE
         departamentoList.add(departamentoAgregar);
         addRow(new Object[]{
             departamentoAgregar.getNombre(),
@@ -96,8 +81,6 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
             departamentoList.remove(fila);
             removeRow(fila);
             long idDepartemento = retornarID("departamentos", "nombre", departamento.getNombre());
-            //long idRol = retornarID("roles", "id_departamento", String.valueOf(idDepartemento));
-            //long idTrabajador = retornarID("trabajador", "id_departamento", String.valueOf(idDepartemento));
             eliminarConexionLlaveForanea("roles", "id_departamento", idDepartemento);
             eliminarConexionLlaveForanea("trabajador", "id_departamento", idDepartemento);
             eliminarDepartamentoDB(idDepartemento);
@@ -116,11 +99,12 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
             while(result.next()){
                 id = result.getLong("id");
             }
+            JOptionPane.showConfirmDialog(null, "El id de empresa es " + id);
             System.out.println(id);
             return id;
         } catch (Exception e) {
             System.out.println("No se pudo encontrar el id" + e.getMessage());
-            JOptionPane.showMessageDialog( null, "Selecionar Fila");
+            JOptionPane.showMessageDialog( null, "No se pudo encontar ID");
         }
         return 0;
     }
@@ -138,7 +122,7 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
             dbConnect.desconectar();
         }
     }
-    public void editarDepartamento(int fila, Departamento departamentoModificar) {
+    public void editarDepartamento(int fila, Departamento departamentoModificar, String nombreEmpresa) {
         departamentoList.get(fila).setNombre(departamentoModificar.getNombre());
         departamentoList.get(fila).setNumero(departamentoModificar.getNumero());
         departamentoList.get(fila).setEmpleadosMaximos(departamentoModificar.getEmpleadosMaximos());

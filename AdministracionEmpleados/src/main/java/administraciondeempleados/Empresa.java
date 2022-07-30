@@ -32,6 +32,7 @@ public class Empresa {
     private List<Horario> horarioList;
     private Calendar horaEntrada;
     private List<Gerente> gerenteList;
+    private List<Trabajador> trabajadorList;
 
     // implementar el metodo en el dialog datos empresa, para que los datos se envien directamente a la bd
     public Empresa() {
@@ -39,6 +40,7 @@ public class Empresa {
         rolList = new LinkedList();
         departamentoList = new LinkedList();
         gerenteList = new LinkedList();
+        trabajadorList = new LinkedList();
         dbConnect = new DBConnect();
         this.horaEntrada = Calendar.getInstance();//quitar mas tarde
 
@@ -269,7 +271,7 @@ public class Empresa {
                 String correoPersonal = result.getString("correo_personal");
                 String usuario = result.getString("usuario");
                 String contrasenia = result.getString("contrasenia");
-                    boolean pagoTransferencia = result.getInt("pago_por_transferencia") == 1;
+                boolean pagoTransferencia = result.getInt("pago_por_transferencia") == 1;
                 //boolean gerente = result.getInt("gerente") == 1;
                 long idHorario = result.getLong("id_horario");
                 long idDepartamento = result.getLong("id_departamento");
@@ -286,6 +288,7 @@ public class Empresa {
                 depa.getTrabajadorList().add(e);
                 horario.getEmpleadoList().add(e);
                 rol.getTrabajadorList().add(e);
+                this.trabajadorList.add(e);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el trabajadorList");
@@ -309,8 +312,8 @@ public class Empresa {
                 departamentoList.add(new Departamento(nombreDepa, numero, maxEmpleados, vacaciones));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo cargar el departamentoList");
-            System.err.println("hubo un error depaaaa" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo cargar el departamentoList (Empresa)");
+            System.err.println("hubo un error depaaaa xd" + e.getMessage());
         } finally {
             dbConnect.desconectar();
         }
@@ -493,6 +496,15 @@ public class Empresa {
         this.gerenteList = gerenteList;
     }
 
+    public List<Trabajador> getTrabajadorList() {
+        return trabajadorList;
+    }
+
+    public void setTrabajadorList(List<Trabajador> trabajadorList) {
+        this.trabajadorList = trabajadorList;
+    }
+
+    
     @Override
     public String toString() {
         return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda=" + leyenda + '}';

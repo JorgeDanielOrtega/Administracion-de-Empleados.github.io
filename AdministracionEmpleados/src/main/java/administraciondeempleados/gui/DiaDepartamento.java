@@ -7,11 +7,6 @@ import java.util.List;
 public class DiaDepartamento extends javax.swing.JDialog {
 
     private List<Departamento> departamentoList;
-//    private DBConnect dbConnect;
-//    private Connection connection;
-//    private String sql;
-//    private ResultSet result;
-//    private PreparedStatement ps;
     
     public DiaDepartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,6 +41,8 @@ public class DiaDepartamento extends javax.swing.JDialog {
         txtNumeroMaximoEmpleados = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtVacaciones = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtEmpresa = new javax.swing.JTextField();
         panOperaciones = new javax.swing.JPanel();
         btnAgregarDepartamento = new javax.swing.JButton();
         btnModificarDepartamento = new javax.swing.JButton();
@@ -91,6 +88,14 @@ public class DiaDepartamento extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setText("Empresa");
+
+        txtEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpresaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panDatosLayout = new javax.swing.GroupLayout(panDatos);
         panDatos.setLayout(panDatosLayout);
         panDatosLayout.setHorizontalGroup(
@@ -99,22 +104,28 @@ public class DiaDepartamento extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDatosLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(160, 160, 160)
+                        .addComponent(txtEmpresa))
+                    .addGroup(panDatosLayout.createSequentialGroup()
                         .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panDatosLayout.createSequentialGroup()
                                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(panDatosLayout.createSequentialGroup()
+                                        .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(108, 108, 108)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                                 .addGap(108, 108, 108)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panDatosLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(108, 108, 108)))
-                .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtNumeroEmpleados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(txtNumeroMaximoEmpleados, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtVacaciones, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre))
+                        .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtNumeroEmpleados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(txtNumeroMaximoEmpleados, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVacaciones, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre))))
                 .addGap(75, 75, 75))
         );
         panDatosLayout.setVerticalGroup(
@@ -124,27 +135,29 @@ public class DiaDepartamento extends javax.swing.JDialog {
                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDatosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDatosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                     .addComponent(txtNumeroEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDatosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                     .addComponent(txtNumeroMaximoEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panDatosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtVacaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVacaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8))
         );
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Operaciones"));
@@ -177,11 +190,11 @@ public class DiaDepartamento extends javax.swing.JDialog {
             panOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOperacionesLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(btnAgregarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnModificarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnModificarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminarDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
         panOperacionesLayout.setVerticalGroup(
@@ -218,7 +231,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
             panListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -243,12 +256,12 @@ public class DiaDepartamento extends javax.swing.JDialog {
                         .addGap(183, 183, 183))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(503, 503, 503)))))
+                        .addComponent(panLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,55 +269,17 @@ public class DiaDepartamento extends javax.swing.JDialog {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(58, 58, 58)
+                .addComponent(panDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(panLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//    private void eliminarDepartamento(long id){
-//        try {
-//            sql = "DELETE FROM \"Departamentos\"WHERE id = " + id +";";
-//            ps = connection.prepareStatement(sql);     
-//            ps.execute();
-//        } catch (Exception e) {
-//            System.out.println("Error al eliminar el id de departamento en DiaDepartamento " + e.getMessage());
-//        }
-//    }
-//
-//    private long retornarID (String tipo){
-//        long id = 0;
-//        try {
-//            String query = "SELECT id FROM\"Departamentos\"WHERE tipo='" + tipo + "' GROUP BY id";
-//            ps = connection.prepareStatement(query);
-//            result = ps.executeQuery();
-//            while(result.next()){
-//                id = result.getLong("id");
-//            }
-//            System.out.println(id);
-//            return id;
-//        } catch (Exception e) {
-//            System.out.println("No se pudo encontrar el id" + e.getMessage());
-//        }
-//        return 0;
-//    }
-//    private void eliminarDepartamentoDB(Departamento departamento){
-//        try {
-//            connection = dbConnect.conectar();
-//            long id = retornarID(departamento.getNombre());
-//            eliminarDepartamento(id);
-//            sql = "DELETE FROM \"Departamentos\" WHERE id= " + id;
-//            ps = connection.prepareStatement(sql);
-//            ps.execute();
-//        } catch (Exception e) {
-//        }finally{
-//            dbConnect.desconectar();
-//        }
-//    }
+
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
@@ -320,7 +295,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private void btnAgregarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDepartamentoActionPerformed
         Departamento departamentoMolde = new Departamento(txtNombre.getText(), Integer.parseInt(txtNumeroEmpleados.getText()),
                 Integer.parseInt(txtNumeroMaximoEmpleados.getText()), Integer.parseInt(txtVacaciones.getText()));
-        modelTableDescripcionDepartamentoo.agregarDepartamento(departamentoMolde);
+        modelTableDescripcionDepartamentoo.agregarDepartamento(departamentoMolde, String.valueOf(txtEmpresa.getText()));
     }//GEN-LAST:event_btnAgregarDepartamentoActionPerformed
 
     private void btnModificarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDepartamentoActionPerformed
@@ -328,7 +303,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
         Departamento departamentoMolde = new Departamento(txtNombre.getText(), Integer.parseInt(txtNumeroEmpleados.getText()),
                 Integer.parseInt(txtNumeroMaximoEmpleados.getText()), Integer.parseInt(txtVacaciones.getText()));
         int fila = modelTableDescripcionDepartamento.getSelectedRow();
-        modelTableDescripcionDepartamentoo.editarDepartamento(fila, departamentoMolde);
+        modelTableDescripcionDepartamentoo.editarDepartamento(fila, departamentoMolde, String.valueOf(txtEmpresa.getText()));
 
     }//GEN-LAST:event_btnModificarDepartamentoActionPerformed
     public Departamento obtenerDepartamento(){
@@ -345,7 +320,6 @@ public class DiaDepartamento extends javax.swing.JDialog {
         if (a == 0) {
             int fila = modelTableDescripcionDepartamento.getSelectedRow();
             modelTableDescripcionDepartamentoo.eliminarDepartamento(fila);
-            //eliminarDepartamentoDB(departamento);
         }
     }//GEN-LAST:event_btnEliminarDepartamentoActionPerformed
 
@@ -356,6 +330,10 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private void modelTableDescripcionDepartamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modelTableDescripcionDepartamentoMouseClicked
         btnModificarDepartamento.setEnabled(true);
     }//GEN-LAST:event_modelTableDescripcionDepartamentoMouseClicked
+
+    private void txtEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpresaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,12 +386,14 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable modelTableDescripcionDepartamento;
     private administraciondeempleados.gui.ModelTableDescripcionDepartamento modelTableDescripcionDepartamentoo;
     private javax.swing.JPanel panDatos;
     private javax.swing.JPanel panLista;
     private javax.swing.JPanel panOperaciones;
+    private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumeroEmpleados;
     private javax.swing.JTextField txtNumeroMaximoEmpleados;

@@ -52,9 +52,9 @@ public class DiaEmpleado extends javax.swing.JDialog {
         //rolList = new LinkedList<>();
     }
 
-    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList, List<Horario> horarioList, Gerente gerente) {
+    public DiaEmpleado(java.awt.Frame parent, boolean modal, List<Departamento> departamentoList, List<Rol> rolList, List<Horario> horarioList, Gerente gerente, List<Trabajador> trabajadorList) {
         this(parent, modal);
-        modelTableDescripcionEmpleadoo.settrabajadorList(departamentoList.get(2).getTrabajadorList());
+        modelTableDescripcionEmpleadoo.settrabajadorList(trabajadorList);
         modelTableDescripcionEmpleadoo.cargarModelo();
         this.departamentoList = departamentoList;
         this.gerente = gerente;
