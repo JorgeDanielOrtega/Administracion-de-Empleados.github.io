@@ -11,9 +11,6 @@ public class Empleado extends Trabajador {
     private String id;
     private List<Asistencia> asistenciaList;
 
-//    public Empleado(){
-//        //this.asistenciaList = new LinkedList<>();
-//    }
     public Empleado(){
     }
     

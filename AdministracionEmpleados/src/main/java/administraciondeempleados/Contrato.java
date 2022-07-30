@@ -7,6 +7,7 @@ public class Contrato {
     private Boolean tieneContrato;
     private Double tiempoContrato;
     private Date fechaLimite;
+    private Empleado empleado;
 
 
     public Contrato(Boolean tieneContrato) {
@@ -55,6 +56,15 @@ public class Contrato {
         }
         return validacion;
     }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+    
     
     @Override
     public String toString() {
