@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 //public class Gerente extends Trabajador{
 @Entity
-@Table(name = "Gerente")
+@Table(name = "Gerentes")
 public class Gerente {
 
     @Id

@@ -1,6 +1,7 @@
 package com.example.administracion.Services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,7 @@ import com.example.administracion.Models.Empleado;
 import com.example.administracion.Repositories.EmpleadoRepository;
 
 @Service
-public class EmpleadoService {
-
+public class EmpleadoService{
 	@Autowired
 	EmpleadoRepository empleadoRepository;
 	@Autowired

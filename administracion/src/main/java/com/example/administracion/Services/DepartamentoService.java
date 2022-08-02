@@ -22,8 +22,7 @@ public class DepartamentoService {
 	@Autowired
 	EntityManager entityManager;
 
-	public Long getIdDepartamentoByNombre(String nombre) {
-		return departamentoRepository.findByNombre(nombre).getId();
+	public Long getIdDepartamentoByNombre(String nombre) { return departamentoRepository.findByNombre(nombre).getId();
 	}
 
 	public Departamento getDepartamentoById(Long id) {
