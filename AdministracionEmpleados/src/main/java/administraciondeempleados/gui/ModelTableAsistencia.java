@@ -34,25 +34,35 @@ public class ModelTableAsistencia extends DefaultTableModel {
         addColumn("Estado");
     }
 
-    private EstadoAsistencia retornarEstado(String estado) {
-        switch (estado) {
-            case "presente":
-                return EstadoAsistencia.PRESENTE;
-            case "retraso":
-                return EstadoAsistencia.RETRASO;
-            case "falta_justificada":
-                return EstadoAsistencia.FALTA_JUSTIFICADA;
-            default:
-                System.out.println("se selecciono default en estado");
-                break;
+    public void llenarEmpleadoList() {
+        asistenciaList.clear();
+        empleado.getAsistenciaList().clear();
+        cargarAsistenciaList();
+        asistenciaList.addAll(empleado.getAsistenciaList());
+    }
+
+    public void cargarModelo() {
+        limpiarTabla();
+        asistenciaList.forEach(asistencia -> {
+            addRow(new String[]{
+                asistencia.getFechaFormated(),
+                asistencia.getHoraFormated(),
+                asistencia.getDiaSemana(),
+                asistencia.getEstado().toString()
+            });
+        });
+    }
+
+    private void limpiarTabla() {
+        while (getRowCount() > 0) {
+            removeRow(0);
         }
-        return null;
     }
 
     private void cargarAsistenciaList() {
         try {
             connection = dBConnect.conectar();
-            sql = "SELECT * FROM \"asistencias\""; //agregar que seleccion todas las asistencias con el id del empleado
+            sql = "SELECT * FROM \"asistencias\"";
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -61,16 +71,14 @@ public class ModelTableAsistencia extends DefaultTableModel {
                 EstadoAsistencia estado = retornarEstado(result.getString("estado"));
                 String diaSemana = result.getString("dia_semana");
                 int dia = fecha.getDate();
-                int mes = fecha.getMonth()+1;
-                int anio = fecha.getYear()+1900;
+                int mes = fecha.getMonth() + 1;
+                int anio = fecha.getYear() + 1900;
                 int horaMarcada = hora.getHours();
                 int minutoMarcado = hora.getMinutes();
                 int segundoMarcado = hora.getSeconds();
 
                 Calendar fecha_horaMarcada = Calendar.getInstance();
-                //Calendar horaRegistrada = Calendar.getInstance();
                 fecha_horaMarcada.set(anio, mes, dia, horaMarcada, minutoMarcado, segundoMarcado);
-                //horaRegistrada.set(anio, mes, dia, horaMarcada, minutoMarcado, segundoMarcado);
                 Asistencia a = new Asistencia(estado);
                 a.setDiaSemana(diaSemana);
                 a.setFecha(fecha_horaMarcada);
@@ -87,32 +95,20 @@ public class ModelTableAsistencia extends DefaultTableModel {
 
     }
 
-    public void llenarEmpleadoList() {
-        asistenciaList.clear();
-        empleado.getAsistenciaList().clear(); //por si acaso
-        cargarAsistenciaList();
-        asistenciaList.addAll(empleado.getAsistenciaList()); //nose si se copiaran directamente los objetos o se crean nuevos
+    private EstadoAsistencia retornarEstado(String estado) {
+
+        if (estado == "presente") {
+            return EstadoAsistencia.PRESENTE;
+        } else if (estado == "retraso") {
+            return EstadoAsistencia.RETRASO;
+        } else if (estado == "falta_justificada") {
+            return EstadoAsistencia.FALTA_JUSTIFICADA;
+        } else {
+            return EstadoAsistencia.RETRASO;
+        }
     }
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
-    }
-
-    private void limpiarTabla() {
-        while (getRowCount() > 0) {
-            removeRow(0);
-        }
-    }
-
-    public void cargarModelo() {
-        limpiarTabla();
-        asistenciaList.forEach(asistencia -> {
-            addRow(new String[]{
-                asistencia.getFechaFormated(),
-                asistencia.getHoraFormated(),
-                asistencia.getDiaSemana(),
-                asistencia.getEstado().toString()
-            });
-        });
     }
 }

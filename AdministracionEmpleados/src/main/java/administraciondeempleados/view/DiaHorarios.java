@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package administraciondeempleados.view;
 
-import java.awt.Color;
 import administraciondeempleados.Horario;
 import administraciondeempleados.Gerente;
 import java.sql.Connection;
@@ -26,7 +21,6 @@ public class DiaHorarios extends javax.swing.JDialog {
     private DiaHorario diaHorario;
     private Horario horario;
     private Gerente gerente;
-    private List<Horario> horarioList;
     private DBConnect dbConnect;
     private Connection connection;
     private String sql;
@@ -41,10 +35,6 @@ public class DiaHorarios extends javax.swing.JDialog {
         initComponents();
     }
 
-//    public Horarios() {
-//        initComponents();
-//        setLocationRelativeTo(this);
-//    }
     public DiaHorarios(java.awt.Frame parent, boolean modal, Gerente gerente) {
         this(parent, modal);
         this.gerente = gerente;
@@ -54,8 +44,7 @@ public class DiaHorarios extends javax.swing.JDialog {
     }
 
     public DiaHorarios(java.awt.Frame parent, boolean modal, List<Horario> horarioList, Gerente gerente) {
-        this(parent, modal);
-        this.horarioList = horarioList;
+        this(parent, modal);        
         this.gerente = gerente;
         this.horario = new Horario();
         modelTableHorarios.cargarModeloEmpleado(horarioList);
@@ -180,6 +169,31 @@ public class DiaHorarios extends javax.swing.JDialog {
         //modelTableHorarios.getSelectedValue();
     }//GEN-LAST:event_btnEliminarHorarioMouseClicked
 
+
+    private void btnEliminarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHorarioActionPerformed
+        Horario horario = gerente.getEmpresa().getHorarioList().get(tblHorarios.getSelectedRow());
+        eliminarHorarioDB(horario);
+        gerente.getEmpresa().getHorarioList().remove(horario);
+        modelTableHorarios.cargarModelo(gerente.getEmpresa());
+    }//GEN-LAST:event_btnEliminarHorarioActionPerformed
+
+    private void eliminarHorarioDB(Horario horario) {
+        try {
+            connection = dbConnect.conectar();
+            long id = retornarID(horario.getTipo());
+            eliminarIdHorario_Dias_Laborables(id);
+            sql = "DELETE FROM \"horarios\" WHERE id= " + id;
+            ps = connection.prepareStatement(sql);
+            ps.execute();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede eliminar el horario");
+            System.out.println("error al eliminar horario " + e.getMessage());
+        } finally {
+            dbConnect.desconectar();
+        }
+    }
+
     private long retornarID(String tipo) {
         long id = 0;
         try {
@@ -206,31 +220,6 @@ public class DiaHorarios extends javax.swing.JDialog {
             System.out.println("error al eliminar el id de horario en dias laborables xd " + e.getMessage());
         }
     }
-
-    private void eliminarHorarioDB(Horario horario) {
-        try {
-            connection = dbConnect.conectar();
-            long id  = retornarID(horario.getTipo());
-            eliminarIdHorario_Dias_Laborables(id);
-            sql = "DELETE FROM \"horarios\" WHERE id= " + id;
-            ps = connection.prepareStatement(sql);
-            ps.execute();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se puede eliminar el horario");
-            System.out.println("error al eliminar horario " + e.getMessage());
-        } finally {
-            dbConnect.desconectar();
-        }
-    }
-
-
-    private void btnEliminarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHorarioActionPerformed
-        Horario horario = gerente.getEmpresa().getHorarioList().get(tblHorarios.getSelectedRow());
-        eliminarHorarioDB(horario);
-        gerente.getEmpresa().getHorarioList().remove(horario);
-        modelTableHorarios.cargarModelo(gerente.getEmpresa());
-    }//GEN-LAST:event_btnEliminarHorarioActionPerformed
 
     public Horario obtenerHorario() {
         if (tblHorarios.getSelectedRow() >= 0) {

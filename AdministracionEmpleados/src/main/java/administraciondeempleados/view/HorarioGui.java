@@ -3,10 +3,6 @@ package administraciondeempleados.view;
 import administraciondeempleados.DiasLaborales;
 import administraciondeempleados.Horario;
 
-/**
- *
- * @author Usuario iTC
- */
 public class HorarioGui extends javax.swing.JDialog {
 
     private Horario horario;
@@ -112,6 +108,12 @@ public class HorarioGui extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void llenarCampos() {
+        lbl_tipoHorario.setText(horario.getTipo());
+        llenarDiasLaborales();
+        lbl_horasSemanales.setText(String.valueOf(horario.getHorasLaborablesSemanales()) + "horas");
+    }
+
     private void llenarDiasLaborales() {
         String diasLaborales = "";
         lbl_diasLaborables.setText("");
@@ -119,12 +121,6 @@ public class HorarioGui extends javax.swing.JDialog {
             diasLaborales += dia.toString() + ' ';
         }
         lbl_diasLaborables.setText(diasLaborales);
-    }
-
-    private void llenarCampos() {
-        lbl_tipoHorario.setText(horario.getTipo());
-        llenarDiasLaborales();
-        lbl_horasSemanales.setText(String.valueOf(horario.getHorasLaborablesSemanales()) + "horas");
     }
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed

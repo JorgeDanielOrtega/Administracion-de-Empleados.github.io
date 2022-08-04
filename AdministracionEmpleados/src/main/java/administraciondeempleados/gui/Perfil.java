@@ -40,7 +40,6 @@ public class Perfil extends javax.swing.JPanel {
             lbl_contrato.setText(String.valueOf(empleado.getContrato().getTieneContrato()));
         } else {
             lbl_contrato.setText("No tiene");
-
         }
     }
 

@@ -25,13 +25,11 @@ public class ModelTableBusqueda extends DefaultTableModel {
         addColumn("Horario");
     }
 
-
-    public void llenarEmpleadoList() { //quizas problemas a la hora de conectar todo
+    public void llenarEmpleadoList() {
         trabajadorList.clear();
         for (Departamento departamento : empresa.getDepartamentoList()) {
             trabajadorList.addAll(departamento.getTrabajadorList());
         }
-        //sortTrabajadoresList();
         trabajadoresFilteredList.addAll(trabajadorList);
     }
 
@@ -49,12 +47,6 @@ public class ModelTableBusqueda extends DefaultTableModel {
         }
     }
 
-    private void limpiarTabla() {
-        while (getRowCount() > 0) {
-            removeRow(0);
-        }
-    }
-
     public void cargarEmpleadosFiltrados() {
         limpiarTabla();
         for (Trabajador trabajador : trabajadoresFilteredList) {
@@ -69,6 +61,12 @@ public class ModelTableBusqueda extends DefaultTableModel {
         }
         trabajadoresFilteredList.clear();
         trabajadoresFilteredList.addAll(trabajadorList);
+    }
+
+    private void limpiarTabla() {
+        while (getRowCount() > 0) {
+            removeRow(0);
+        }
     }
 
     public void filtrarEmpleados(String value, String component) {
