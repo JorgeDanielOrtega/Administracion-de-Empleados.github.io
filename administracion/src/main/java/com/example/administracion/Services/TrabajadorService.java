@@ -63,6 +63,10 @@ public class TrabajadorService {
 		return myMap;
 	}
 
+	public Long getIdHorarioByIdTrabajador(Long idTrabajador) {
+		return getTrabajadorById(idTrabajador).getIdHorario();
+	}
+
 	public Map<String, Object> getTrabajadorInfo(Long id) {
 		Long idPersona = getTrabajadorById(id).getIdPersona();
 

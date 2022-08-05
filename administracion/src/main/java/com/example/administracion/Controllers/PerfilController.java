@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.administracion.Models.Asistencia;
 import com.example.administracion.Services.AsistenciaService;
-import com.example.administracion.Services.EmpleadoService;
 import com.example.administracion.Services.HorarioService;
-import com.example.administracion.Services.PersonaService;
 import com.example.administracion.Services.TrabajadorService;
 
 @RestController
@@ -22,12 +20,10 @@ import com.example.administracion.Services.TrabajadorService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PerfilController {
 
-    @Autowired
-    EmpleadoService empleadoService;
+
     @Autowired
     TrabajadorService trabajadorService;
-    @Autowired
-    PersonaService personaService;
+
     @Autowired
     AsistenciaService asistenciaService;
     @Autowired
@@ -46,7 +42,7 @@ public class PerfilController {
 
     @GetMapping("/{id}/horario")
     public Map<String, Object> getHorarioPorIdTrabajador(@PathVariable("id") Long idTrabajador) {
-        Long idHorario = trabajadorService.getTrabajadorById(idTrabajador).getIdHorario();
+        Long idHorario = trabajadorService.getIdHorarioByIdTrabajador(idTrabajador);
         return horarioService.getFullHorarioById(idHorario);
     }
 }

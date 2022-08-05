@@ -30,7 +30,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/nombres")
-    public ArrayList<HashMap<String, Object>> gett() {
+    public ArrayList<HashMap<String, Object>> getNombres() {
         return departamentoService.getAllNombreDepartamentosSinRepetir();
     }
 }
