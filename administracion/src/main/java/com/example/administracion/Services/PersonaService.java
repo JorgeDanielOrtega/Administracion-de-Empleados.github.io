@@ -1,6 +1,7 @@
 package com.example.administracion.Services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class PersonaService {
 		return (ArrayList<Persona>) personaRepository.findAllById(ids);
 	}
 
-	public Persona getPersonaById(Long id) {
-		return personaRepository.findById(id).get();
+	public Optional<Persona> getPersonaById(Long id) {
+		return personaRepository.findById(id);
 	}
 }

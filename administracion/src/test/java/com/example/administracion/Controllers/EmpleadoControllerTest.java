@@ -31,10 +31,10 @@ public class EmpleadoControllerTest {
     public void getEmpleados() {
         ArrayList<Long> ids = new ArrayList<>();    
 
-        when(empleadoService.getIdTrabajador()).thenReturn(ids);
+        when(empleadoService.getIdsTrabajador()).thenReturn(ids);
 
         ArrayList<Long> empleadoResult = empleadoController.getEmpleados();
 
-        verify(empleadoService, times(1)).getIdTrabajador();
+        verify(empleadoService, times(1)).getIdsTrabajador();
     }
 }

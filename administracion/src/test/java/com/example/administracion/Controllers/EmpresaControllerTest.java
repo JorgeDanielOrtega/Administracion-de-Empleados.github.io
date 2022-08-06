@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Time;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ public class EmpresaControllerTest {
     public void getEmpresaById() {
         Empresa empresa = new Empresa();
 
-        when(empresaService.getEmpresaById()).thenReturn(empresa);
+        when(empresaService.getEmpresaById()).thenReturn(Optional.of(empresa));
 
         Empresa empresaResult = empresaController.getEmpresaById();
 

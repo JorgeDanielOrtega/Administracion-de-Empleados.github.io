@@ -23,6 +23,6 @@ public class EmpleadoController {
 
     @GetMapping
     public ArrayList<Long> getEmpleados() {
-        return (ArrayList<Long>) empleadoService.getIdTrabajador();
+        return (ArrayList<Long>) empleadoService.getIdsTrabajador();
     }
 }

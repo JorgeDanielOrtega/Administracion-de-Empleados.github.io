@@ -21,7 +21,7 @@ public class EmpresaController {
 
     @GetMapping()
     public Empresa getEmpresaById() {
-        return empresaService.getEmpresaById();
+        return empresaService.getEmpresaById().get();
     }
 
     @GetMapping("/id")
