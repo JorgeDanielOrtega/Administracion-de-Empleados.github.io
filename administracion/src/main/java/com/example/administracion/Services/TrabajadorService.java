@@ -156,12 +156,12 @@ public class TrabajadorService {
 		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
 		ArrayList<Trabajador> trabajadorList = new ArrayList<>();
 
-		for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
-			if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
-					&& trabajador.getIdRol() != null) {
-				trabajadorList.add(trabajador);
-			}
-		}
+		//for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
+		//	if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
+		//			&& trabajador.getIdRol() != null) {
+		//		trabajadorList.add(trabajador);
+		//	}
+		//}
 
 		// todo añadir para recuperar los departamentos
 		trabajadorList.forEach(trabajador -> {
