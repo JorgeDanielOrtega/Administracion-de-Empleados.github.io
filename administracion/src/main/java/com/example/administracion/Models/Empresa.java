@@ -1,6 +1,7 @@
 package com.example.administracion.Models;
 
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 // import java.util.LinkedList;
 // import java.util.List;
@@ -36,7 +37,7 @@ public class Empresa {
     @Column(name = "leyenda")
     private String leyenda;
     @Column(name = "anio_fundacion")
-    private Date fundacionYear;
+    private String fundacionYear;
     @Column(name = "rubro")
     private String rubro;
     @Column(name = "hora_entrada")
@@ -343,12 +344,12 @@ public class Empresa {
         this.nombre = empresa;
     }
 
-    public Date getFundacionYear() {
+    public String getFundacionYear() {
         return fundacionYear;
     }
 
-    public void setFundacionYear(Date fundacionYear) {
-            this.fundacionYear = fundacionYear;
+    public void setFundacionYear(String fundacionYear) {
+        this.fundacionYear = fundacionYear;
     }
 
     public String getRubro() {
@@ -412,7 +413,6 @@ public class Empresa {
         return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda=" + leyenda + '}';
     }
 
-
     /**
      * @return Long return the id
      */
@@ -432,20 +432,6 @@ public class Empresa {
      */
     public void setIdGerente(Long idGerente) {
         this.idGerente = idGerente;
-    }
-
-    /**
-     * @return String return the fundador
-     */
-    public String getFundador() {
-        return leyenda;
-    }
-
-    /**
-     * @param fundador the fundador to set
-     */
-    public void setFundador(String fundador) {
-        this.leyenda = fundador;
     }
 
 }

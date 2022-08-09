@@ -1,12 +1,11 @@
 package com.example.administracion.Controllers;
 
 import java.sql.Time;
+import java.util.Optional;
 
+import com.example.administracion.Services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.administracion.Models.Empresa;
 import com.example.administracion.Repositories.EmpresaRepository;
@@ -17,11 +16,16 @@ import com.example.administracion.Repositories.EmpresaRepository;
 public class EmpresaController {
 
     @Autowired
-    EmpresaRepository empresaRepository;
+    EmpresaService empresaService;
 
     @GetMapping()
     public Empresa getEmpresaById() {
-        return empresaRepository.findById(1l).get();
+        return empresaService.getEmpresaById();
+    }
+
+    @PostMapping("actualizar")
+    public Empresa actualizarEmpresaDb(@RequestBody Empresa empresa){
+        return empresaService.actualizarEmpresa(empresa);
     }
 
     @GetMapping("/id")

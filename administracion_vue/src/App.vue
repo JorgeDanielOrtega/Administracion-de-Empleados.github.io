@@ -25,11 +25,12 @@ export default {
 	data() {
 		return {
 			items: [
-                {label: 'Perfil', icon: 'pi pi-user', to: '/perfil'},
+                {label: 'Login', icon: 'pi pi-user', to: '/'},
+                {label: 'Empresa', icon: 'pi pi-building', to: '/empresa'}, 
+                {label: 'Perfil', icon: 'pi pi-user-edit', to: '/perfil'},
                 {label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/2'}, //todo cambiarle el id
-                {label: 'Departamento', icon: 'pi pi-building', to: '/departamento/2'}, //todo cambiarle el id
-                {label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda'}, 
-
+                {label: 'Departamento', icon: 'pi pi-home', to: '/departamento/2'}, //todo cambiarle el id
+                {label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda'},
             ]
 		}
 	}
@@ -92,5 +93,9 @@ nav a.router-link-exact-active {
 
 a {
     text-decoration: none;
+}
+
+.login{
+    font-size: 35px;
 }
 </style>
