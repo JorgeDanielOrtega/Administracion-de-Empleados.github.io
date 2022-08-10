@@ -1,9 +1,9 @@
 <template>
     <div v-if=status>
-            <div class="container grid">
+        <div class="container grid">
             <!--todo quitar las clases de los input text quizas -->
-            <div class="container__datos grid col-25 ">
-                <label class="col" for="nombres">Nombres:</label>
+            <div class="container__datos grid col-20 ">
+                <label class="col-" for="nombres">Nombres:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="nombres" type="text" v-model="nombres"
                     disabled="true" />
                 <label class="col" for="apellidos">Apellidos:</label>
@@ -13,11 +13,12 @@
                 <InputText class="input_info p-inputtext-sm col-3" id="cedula" type="text" v-model="cedula"
                     disabled="true" />
                 <label class="col" for="sexo">Sexo:</label>
-                <InputText class="input_info p-inputtext-sm col-3" id="sexo" type="text" v-model="sexo" disabled="true" />
+                <InputText class="input_info p-inputtext-sm col-3" id="sexo" type="text" v-model="sexo"
+                    disabled="true" />
             </div>
             <div class="divider"></div>
-            
-            <div class="container__contacto grid col-25">
+
+            <div class="container__contacto grid col-20">
                 <label class="col" for="telefono">Telefono:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="telefono" type="text" v-model="telefono"
                     disabled="true" />
@@ -31,14 +32,14 @@
                 <InputText class="input_info p-inputtext-sm col-3" id="direccion" type="text" v-model="direccion"
                     disabled="true" />
             </div>
-    <div class="divider"></div>
-            <div class="container__datos--empresa grid col-25">
-                <label class="col" for="correoEmpresarial">Correo Empresarial:</label>
-                <InputText class="input_info p-inputtext-sm col-3" id="correoEmpresarial" type="text"
+            <div class="divider"></div>
+            <div class="container__datos--empresa grid col-11">
+                <label class="col-1" for="correoEmpresarial">Correo Empresarial:</label>
+                <InputText class="input_info p-inputtext-sm col" id="correoEmpresarial" type="text"
                     v-model="correoEmpresarial" disabled="true" />
-                <label class="col" for="correoPersonal">Correo Personal:</label>
-                <InputText class="input_info p-inputtext-sm col-3" id="correoPersonal" type="text" v-model="correoPersonal"
-                    disabled="true" />
+                <label class="col-1" for="correoPersonal">Correo Personal:</label>
+                <InputText class="input_info p-inputtext-sm col" id="correoPersonal" type="text"
+                    v-model="correoPersonal" disabled="true" />
             </div>
 
 
@@ -57,29 +58,13 @@
                     <InputText class="input_info--horario col-10" id="horasSemanales" type="text"
                         v-model="horasSemanalesHorario" disabled="true" />
                 </div>
-
-
-                <!-- <template #footer>
-                    <Button label="Salir" icon="pi pi-check" @click="closeModalHorario" autofocus />
-                </template> -->
             </Dialog>
-
-            <!-- dialog asistencia
-            <Dialog header="Asistencias" v-model:visible="displayModalAsistencia"
-                :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" :modal="true">
-
-                <template #footer>
-                    <Button label="Salir" icon="pi pi-check" @click="closeModalAsistencia" autofocus />
-                </template>
-            </Dialog> -->
-
         </div>
 
         <div class="buttons flex justify-content-center gap-3">
             <div class="button ">
-                <router-link to="/perfil/2/asistencia" class="router ">
-                    <Button label="Ver asistencia" class="p-button-outlined btnAsistencia" />
-                </router-link>
+                
+                <a :href="generarLink"> <Button label="Ver asistencia" class="p-button-outlined btnAsistencia" /></a>
             </div>
             <div class="button ">
                 <Button label="Ver Horario" class="p-button-outlined" @click="openModalHorario()" />
@@ -87,10 +72,10 @@
         </div>
     </div>
     <div v-else>
-      <div class="divisor"></div>
-      <label class="login"><b>Por favor relaice el LogIn</b></label>
         <div class="divisor"></div>
-      <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+        <label class="login"><b>Por favor realize el Log In</b></label>
+        <div class="divisor"></div>
+        <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
     </div>
 </template>
 
@@ -139,9 +124,14 @@ export default {
         this.perfilService = new PerfilService();
         this.loginService = new LoginService();
     },
-    mounted() { //metodo que se va a ejecutar una vez el componente este montado
+    mounted() { //metodo que se va a ejecutar una vez el componente este montado    
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
 
-        this.perfilService.getEmpleadoById(2).then(response => { //todo quitar el 2 y enviarlo en el body
+        this.perfilService.getEmpleadoById(this.getId()).then(response => {
             this.perfil = response.data;
             this.nombres = this.perfil.nombres;
             this.apellidos = this.perfil.apellidos;
@@ -153,31 +143,24 @@ export default {
             this.direccion = this.perfil.direccion;
             this.telefono = this.perfil.telefono;
             this.sexo = this.perfil.sexo;
-            console.log(this.perfil);
+            console.log(this.perfil); //todo quitar mas tarde
         });
-        this.loginService.retornarIngreso().then(response => {
-            this.login = response.data;
-            this.idLogin = this.login.id;
-            this.status = this.login.status;
-        });
+    },
+    computed: {
+        generarLink() {
+            return `http://localhost:8080/#/perfil/${this.id}/asistencia`
+        }
     },
     methods: {
         openModalHorario() {
-            this.getHorarioEmpleado(2);
+            this.getHorarioEmpleado(this.id);
             this.displayModalHorario = true;
         },
         closeModalHorario() {
             this.displayModalHorario = false;
         },
-        // openModalAsistencia() {
-        //     this.displayModalAsistencia = true;
-        // },
-        // closeModalAsistencia() {
-        //     this.displayModalAsistencia = false;
-        // },
-
-        getHorarioEmpleado(id) { //todo poner id mas tarde
-            this.perfilService.getHorarioEmpleadoById(id).then(response => {
+        getHorarioEmpleado(idE) { 
+            this.perfilService.getHorarioEmpleadoById(idE).then(response => {
                 this.tipoHorario = response.data.tipo;
                 this.diasLaborablesHorarioList = response.data.dias_laborables;
                 this.horasSemanalesHorario = response.data.horas_semanales;
@@ -187,20 +170,21 @@ export default {
                 console.log(this.horasSemanalesHorario);
             })
         },
-        redirigir(){
+        redirigir() {
             this.$router.push('/');
+        },
+        getId() {
+            this.id = this.$route.params.id;
+            return this.id;
         }
     }
-
 }
 </script>
 
 
 <style  scoped>
 /*TODO: agregarle un tipo de fuente a las label*/
-* {
-    
-}
+* {}
 
 .container {
     /* font-family: 'Roboto'; */
@@ -210,7 +194,7 @@ export default {
     margin-left: auto;
 }
 
-.divider{
+.divider {
     text-align: left;
     background-color: rgba(58, 58, 58, 0.158);
     width: 85%;
@@ -263,7 +247,7 @@ label {
     text-align: left;
     margin-bottom: 30px;
     margin-right: 290px;
-    width: 350px;
+    /* width: 300px; */
 }
 
 .input_info--horario {
@@ -273,16 +257,16 @@ label {
     height: 35px;
 }
 
-.login{
+.login {
     font-size: 35px;
     margin-bottom: 0px;
 }
 
-.divisor{
+.divisor {
     height: 25px;
 }
 
-.buttonLogin{
+.buttonLogin {
     margin-top: 0px;
 }
 </style>

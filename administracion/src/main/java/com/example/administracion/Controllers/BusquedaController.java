@@ -1,7 +1,6 @@
 package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.administracion.Models.Trabajador;
+
 import com.example.administracion.Repositories.TrabajadorRepository;
 import com.example.administracion.Services.DepartamentoService;
 import com.example.administracion.Services.TrabajadorService;
@@ -30,7 +29,7 @@ public class BusquedaController {
     @GetMapping()
     public ArrayList<Map<String, Object>> gett() { // Todo cambiar nombre despues
         return trabajadorService.getTrabajadorForBusqueda();
-        
+
     }
 
     // @GetMapping("/xd")

@@ -12,7 +12,7 @@
       <InputText class="input" id="usuario" type="text" v-model="usuario" />
       <div class="divisor"></div>
       <label class="col" for="fundacionYear">Contraseña:</label>
-      <InputText class="input" id="contrasenia" type="text" v-model="contrasenia"/>
+      <InputText class="input" id="contrasenia" type="text" v-model="contrasenia" />
     </div>
 
     <div class="buttons">
@@ -20,7 +20,7 @@
       <Button class="swal2-confirm swal2-styled" label="Ingresar" @click="ingresar()" />
     </div>
   </div>
-    
+
 </template>
 
 <script>
@@ -32,19 +32,19 @@ export default {
     return {
       usuario: null,
       contrasenia: null,
-      status: null, 
+      status: null,
       id: null,
     }
   },
   loginService: null,
-  created(){
+  created() {
     this.loginService = new LoginService();
-  }, 
+  },
   mounted() {
     this.loginService.retornarIngreso().then(response => {
-            this.login = response.data;
-            this.status = this.login.status;
-        })
+      this.login = response.data;
+      this.status = this.login.status;
+    })
   },
   methods: {
     ingresar() {
@@ -54,12 +54,12 @@ export default {
         this.contrasenia = this.login.contrasenia;
         this.status = this.login.status;
         this.id = this.login.id;
-        if(this.status){
-          this.$router.push('/perfil');
+        if (this.status) {
+          this.$router.push('/perfil/' + this.id);
         }
       });
     },
-    salir(){
+    salir() {
       this.loginService.retornarIngreso().then(response => {
         this.login = response.data;
         this.usuario = this.login.usuario;
@@ -81,26 +81,25 @@ export default {
 </script>
 
 <style>
-.datos{
-    text-align: right;
-    margin-right: 600px;
+.datos {
+  text-align: right;
+  margin-right: 600px;
 }
 
-.col{
-    font-size: 20px;
+.col {
+  font-size: 20px;
 }
 
-.buttons{
-    text-align: center;
+.buttons {
+  text-align: center;
 }
 
-.divisor{
-    height: 25px;
+.divisor {
+  height: 25px;
 }
 
-.input{
-    font-size: 18px;
+.input {
+  font-size: 18px;
 }
-
 </style>
 

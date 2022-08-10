@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 export default class AsistenciaService {
-    url = "http://localhost:8080/asistencia/"
-    urlEmpresa = "http://localhost:8080/empresa/id"
+    url = "http://localhost:8081/asistencia/"
+    urlEmpresa = "http://localhost:8081/empresa/id"
     date = new Date();
 
     getHoraEntrada() {
@@ -14,7 +14,7 @@ export default class AsistenciaService {
 
     getFecha() {
         let dia = this.date.getDate()
-        dia = dia < 10 ? "0" + (dia + 1) : (dia + 1);
+        dia = dia < 9 ? "0" + (dia + 1) : (dia + 1);
 
         let mes = (this.date.getMonth() + 1)
         mes = mes < 10 ? "0" + mes : mes;
