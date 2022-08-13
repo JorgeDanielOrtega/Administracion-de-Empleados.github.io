@@ -52,8 +52,6 @@ export default {
       this.items = this.retornarMenu()
     });
 
-    // this.imprimir();
-
   },
   methods: {
     retornarMenu() {
@@ -65,6 +63,7 @@ export default {
           { label: 'Perfil', icon: 'pi pi-user-edit', to: '/perfil/' + this.idLogin },
           { label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/' + this.idLogin },
           { label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda' },
+          { label: 'Decimo', icon: 'pi pi-credit-card', to: '/decimo' },
         ];
         return this.items;
       } else if (this.idLogin != null) {
@@ -77,9 +76,6 @@ export default {
         return this.items;
       }
 
-    },
-    imprimir() {
-      console.log(this.idLogin);
     }
   }
 
@@ -104,10 +100,6 @@ nav {
 
 }
 
-.tabMenu {
-  margin-bottom: 50px;
-  background-color: red;
-}
 
 .p-tabmenu {
   background-color: blue;
@@ -119,17 +111,6 @@ nav {
   color: blue;
 }
 
-.p-tabmenuitem {
-  background-color: red;
-  color: red;
-
-}
-
-.p-highlight {
-  background-color: red;
-  color: red;
-
-}
 
 nav a {
   font-weight: bold;

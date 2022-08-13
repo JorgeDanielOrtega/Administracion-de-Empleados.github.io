@@ -1,6 +1,7 @@
 package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,24 +12,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.administracion.Models.Asistencia;
-import com.example.administracion.Services.AsistenciaService;
+import com.example.administracion.Models.Decimo;
+import com.example.administracion.Services.DecimoService;
 
 @RestController
-@RequestMapping("/asistencia")
+@RequestMapping("/decimo")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class AsistenciaController {
+public class DecimoController {
 
     @Autowired
-    AsistenciaService asistenciaService;
+    DecimoService decimoService;
 
-    @GetMapping("/{id}")
-    public ArrayList<Asistencia> getAsistenciasByIdTrabajador(@PathVariable("id") Long id) {
-        return asistenciaService.getAsistenciasByIdTrabajador(id);
+    @GetMapping()
+    public ArrayList<Map<String, Object>> getDecimos() {
+        return decimoService.getDecimos();
     }
 
-    @PostMapping("/{id}")
-    public Asistencia saveAsistencia(@PathVariable("id") Long id, @RequestBody Asistencia asistencia) {
-        return asistenciaService.saveAsistencia(asistencia);
+    @PostMapping()
+    public Decimo saveDecimo(@RequestBody Decimo decimo) {
+        return decimoService.saveDecimo(decimo);
     }
+
 }

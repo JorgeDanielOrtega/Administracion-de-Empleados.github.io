@@ -26,5 +26,9 @@ public class EmpleadoService {
 		return (Iterable<Long>) idTrabajadorList;
 	}
 
+	public Empleado getEmpleadoById(Long id){
+		return empleadoRepository.findById(id).get();
+	}
+
 	
 }
