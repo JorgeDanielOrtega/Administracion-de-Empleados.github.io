@@ -11,10 +11,20 @@ import com.example.administracion.Services.ContratoService;
 import com.example.administracion.Services.PersonaService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 
+import com.example.administracion.Models.Empleado;
+import com.example.administracion.Repositories.EmpleadoRepository;
 import com.example.administracion.Services.EmpleadoService;
 import com.example.administracion.Services.TrabajadorService;
 
@@ -26,7 +36,11 @@ public class EmpleadoController {
     @Autowired
     EmpleadoService empleadoService;
     @Autowired
+<<<<<<< HEAD
     PersonaService personaService;
+=======
+    EmpleadoRepository empleadoRepository;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
     @Autowired
     TrabajadorService trabajadorService;
     @Autowired
@@ -115,5 +129,10 @@ public class EmpleadoController {
             return new ResponseEntity<Contrato>(contrato, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Contrato>(contrato, HttpStatus.OK);
+    }
+
+    @GetMapping("{idTrabajador}")
+    public Empleado getEmpleadoByIdTrabajador(@PathVariable("idTrabajador") Long idTrabajador) {
+        return empleadoRepository.findAllByIdTrabajador(idTrabajador);
     }
 }

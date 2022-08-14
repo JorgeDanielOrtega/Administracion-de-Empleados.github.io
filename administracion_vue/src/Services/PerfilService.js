@@ -4,14 +4,9 @@ const axios = require('axios');
 
 
 export default class PerfilService {
-    url = "http://localhost:8080/perfil/"
-    // totalVuePackages = null
+    url = "http://localhost:8081/perfil/"
     getEmpleadoById(id) {
         return axios.get(this.url + id);
-        // .then(response => {
-        //     this.totalVuePackages = response.data;
-        //     console.log(this.totalVuePackages);
-        // });
     }
 
     getHorarioEmpleadoById(id) {

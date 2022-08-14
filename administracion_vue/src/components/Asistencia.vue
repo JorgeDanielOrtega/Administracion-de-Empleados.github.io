@@ -1,33 +1,39 @@
 <template>
+    <div v-if=status>
+        <Toast position="bottom-right" />
+        <div class="container flex justify-content-center ">
+            <div class="grid container_options flex align-content-center">
+                <div class="presente col-4">
+                    <RadioButton  id="presente" name="estado" value="presente" v-model="selectedValue"
+                        :disabled="this.activarPresente()" />
+                    <label class="col-2" for="presente">Presente</label>
+                </div>
+                <div class=" retraso col-4">
 
-    <Toast position="bottom-right" />
-    <div class="container flex justify-content-center ">
-        <div class="grid container_options flex align-content-center">
-            <div class="presente col-4">
-                <RadioButton  id="presente" name="estado" value="presente" v-model="selectedValue"
-                    :disabled="this.activarPresente()" />
-                <label class="col-2" for="presente">Presente</label>
-            </div>
-            <div class=" retraso col-4">
-
-                <RadioButton  id="retraso" name="estado" value="retraso" v-model="selectedValue" />
-                <label class="col-2" for="retraso">Retraso</label>
-            </div>
-            <div class="falta_injustificada col-4">
-                <RadioButton  id="falta_injustificada" name="estado" value="falta injustificada"
-                    v-model="selectedValue" />
-                <label class="col-2" for="falta_injustificada">Falta Injustificada</label>
+                    <RadioButton  id="retraso" name="estado" value="retraso" v-model="selectedValue" />
+                    <label class="col-2" for="retraso">Retraso</label>
+                </div>
+                <div class="falta_injustificada col-4">
+                    <RadioButton  id="falta_injustificada" name="estado" value="falta injustificada"
+                        v-model="selectedValue" />
+                    <label class="col-2" for="falta_injustificada">Falta Injustificada</label>
+                </div>
             </div>
         </div>
-
-    </div>
         <Button label="Enviar" @click="enviar()" />
-
+    </div>
+    <div v-else>
+        <div class="divisor"></div>
+        <label class="login"><b>Por favor relaice el LogIn</b></label>
+        <div class="divisor"></div>
+        <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+    </div>
 </template>
 
 <script>
 
 import AsistenciaService from "../Services/AsistenciaService";
+import LoginService from "../Services/LoginService"
 
 export default {
     name: 'Aistencia',
@@ -35,15 +41,23 @@ export default {
         return {
             selectedValue: null,
             idTrabajador: null,
-            horaEntrada: null
+            horaEntrada: null,
+            status: null,
+            idLogin: null
         }
     },
     asistenciaService: null,
+    loginService: null,
     created() {
         this.asistenciaService = new AsistenciaService();
+        this.loginService = new LoginService();
     },
     mounted() {
-
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
     },
     methods: {
         getIdTrabajador() { //todo quitar mas tarde quizas
@@ -78,6 +92,9 @@ export default {
         },
          showError() {
             this.$toast.add({severity:'error', summary: 'No se ha marcado un estado', life: 2000});
+        },
+        redirigir(){
+            this.$router.push('/');
         }
     }
 }
@@ -102,5 +119,16 @@ Button{
     width: 150px;
 }
 
+.login{
+    font-size: 35px;
+}
+
+.divisor{
+    height: 25px;
+}
+
+.buttonLogin{
+    margin-top: 0px;
+}
 
 </style>

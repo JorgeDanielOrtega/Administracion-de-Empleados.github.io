@@ -163,18 +163,19 @@ public class TrabajadorService {
 		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
 		ArrayList<Trabajador> trabajadorList = new ArrayList<>();
 
-		for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
-			if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
-					&& trabajador.getIdRol() != null) {
+		for (Trabajador trabajador :  trabajadorRepository.findAll()) {
+			if (trabajador.getId() != 1l) {
 				trabajadorList.add(trabajador);
 			}
 		}
 
-		// todo añadir para recuperar los departamentos
 		trabajadorList.forEach(trabajador -> {
 			Long idPersona = trabajador.getIdPersona();
-			ids.add(idPersona);
+			if	(idPersona != 1){
+				ids.add(idPersona);
+			}
 		});
+				
 		personaList = personaService.getPersonas((Iterable<Long>) ids);
 
 		for (int i = 0; i < trabajadorList.size(); i++) {

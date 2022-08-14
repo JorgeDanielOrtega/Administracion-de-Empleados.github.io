@@ -1,10 +1,10 @@
 
 
 export default class BusquedaService {
-    url = "http://localhost:8080/busqueda"
-    urlRol = "http://localhost:8080/rol"
-    urlDepartamento = "http://localhost:8080/departamento/nombres"
-    urlHorario = "http://localhost:8080/horario"
+    url = "http://localhost:8081/busqueda"
+    urlRol = "http://localhost:8081/rol"
+    urlDepartamento = "http://localhost:8081/departamento/nombres"
+    urlHorario = "http://localhost:8081/horario"
 
 
 

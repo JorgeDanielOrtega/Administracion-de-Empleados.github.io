@@ -1,11 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+//import HomeView from '../views/Login.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'login',
+    //component: HomeView
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
     path: '/about',
@@ -16,7 +17,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/perfil', //todo mas tarde, agregarle un id
+    // path: '/perfil', //todo mas tarde, agregarle un id
+    path: '/perfil/:id', //todo mas tarde, agregarle un id
     name: 'perfil',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -61,6 +63,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Busqueda.vue')
   },
   {
+<<<<<<< HEAD
     path: '/roles',
     name: 'roles',
     component: () =>  import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Rol.vue')
@@ -81,6 +84,26 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Departamentos.vue')
   },
+=======
+    path: '/empresa',
+    name: 'empresa',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    
+    component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Empresa.vue')
+  },
+  {
+    path: '/decimo',
+    name: 'decimo',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    
+    component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Decimo.vue')
+  }
+
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 ]
 
 const router = createRouter({

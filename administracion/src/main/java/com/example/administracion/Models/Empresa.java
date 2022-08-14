@@ -1,7 +1,11 @@
 package com.example.administracion.Models;
 
 import java.sql.Time;
+<<<<<<< HEAD
 import java.time.LocalDateTime;
+=======
+import java.util.Calendar;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 import java.util.Date;
 // import java.util.LinkedList;
 // import java.util.List;
@@ -342,7 +346,11 @@ public class Empresa {
     }
 
     public void setFundacionYear(String fundacionYear) {
+<<<<<<< HEAD
             this.fundacionYear = fundacionYear;
+=======
+        this.fundacionYear = fundacionYear;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
     }
 
     public String getRubro() {
@@ -406,7 +414,6 @@ public class Empresa {
         return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda=" + leyenda + '}';
     }
 
-
     /**
      * @return Long return the id
      */
@@ -426,20 +433,6 @@ public class Empresa {
      */
     public void setIdGerente(Long idGerente) {
         this.idGerente = idGerente;
-    }
-
-    /**
-     * @return String return the fundador
-     */
-    public String getFundador() {
-        return leyenda;
-    }
-
-    /**
-     * @param fundador the fundador to set
-     */
-    public void setFundador(String fundador) {
-        this.leyenda = fundador;
     }
 
 }

@@ -10,4 +10,10 @@ import java.util.Optional;
 
 @Repository
 public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
+<<<<<<< HEAD
     public abstract Optional<Empresa> findById(Long id);}
+=======
+    public abstract Optional<Empresa> findById(Long id);
+
+}
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55

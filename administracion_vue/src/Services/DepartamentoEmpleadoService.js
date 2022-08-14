@@ -1,5 +1,5 @@
 export default class DepartamentoEmpleadoService{
-    url = "http://localhost:8080/departamento/"
+    url = "http://localhost:8081/departamento/"
 
     //considerar el await para traer los datos rapido
 

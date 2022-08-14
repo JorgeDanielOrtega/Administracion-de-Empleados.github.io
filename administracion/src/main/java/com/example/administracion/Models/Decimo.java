@@ -15,16 +15,16 @@ public class Decimo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "decimo_cuarto")
-    private Float decimoCuarto;
+    private Double decimoCuarto;
     @Column(name = "decimo_tercero")
-    private Float decimoTercero;
+    private Double decimoTercero;
     @Column(name = "fondo_reserva")
-    private Float fondoReserva;
+    private Double fondoReserva;
     @Column(name = "id_empleado")
     private Long idEmpleado;
 
-    private int parte;
-    private double porcentajeFondoReserva;
+    // private int parte;
+    // private double porcentajeFondoReserva;
 
     // private Date fechaHoy;
     // private Trabajador trabajador;
@@ -63,45 +63,45 @@ public class Decimo {
     // }
     // }
 
-    public float getDecimoCuarto() {
+    public double getDecimoCuarto() {
         return decimoCuarto;
     }
 
-    public void setDecimoCuarto(float decimoCuarto) {
+    public void setDecimoCuarto(double decimoCuarto) {
         this.decimoCuarto = decimoCuarto;
     }
 
-    public float getDecimoTercero() {
+    public double getDecimoTercero() {
         return decimoTercero;
     }
 
-    public void setDecimoTercero(float decimoTercero) {
+    public void setDecimoTercero(double decimoTercero) {
         this.decimoTercero = decimoTercero;
     }
 
-    public float getFondoReserva() {
+    public double getFondoReserva() {
         return fondoReserva;
     }
 
-    public void setFondoReserva(float fondoReserva) {
+    public void setFondoReserva(double fondoReserva) {
         this.fondoReserva = fondoReserva;
     }
 
-    public double getPorcentajeFondoReserva() {
-        return porcentajeFondoReserva;
-    }
+    // public double getPorcentajeFondoReserva() {
+    //     return porcentajeFondoReserva;
+    // }
 
-    public void setPorcentajeFondoReserva(double porcentajeFondoReserva) {
-        this.porcentajeFondoReserva = porcentajeFondoReserva;
-    }
+    // public void setPorcentajeFondoReserva(double porcentajeFondoReserva) {
+    //     this.porcentajeFondoReserva = porcentajeFondoReserva;
+    // }
 
-    public int getParte() {
-        return parte;
-    }
+    // public int getParte() {
+    //     return parte;
+    // }
 
-    public void setParte(int parte) {
-        this.parte = parte;
-    }
+    // public void setParte(int parte) {
+    //     this.parte = parte;
+    // }
 
     public Long getId() {
         return id;

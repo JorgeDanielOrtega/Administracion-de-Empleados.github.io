@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="filtro flex justify-content-center gap-4"> <!-- Class -->
         <div class="campos flex gap-2">         
             <!-- We use drop down its has label, select and options
@@ -39,11 +40,53 @@
         <!-- Router is use to bind pages-->
         <router-link to="/"> <Button label="Atras" /></router-link>
         <!-- todo cambiar el touter link, al principal cuando se haga -->
+=======
+    <div v-if=status>
+        <div class="filtro flex justify-content-center gap-4">
+            <div class="campos flex gap-2">
+                <Dropdown class="dropdown" v-model="selectDepartamento" :options="departamentos" optionLabel="nombre"
+                    placeholder="Departamento" />
+                <Dropdown class="dropdown" v-model="selectHorario" :options="horarios" optionLabel="tipo" placeholder="Horario" />
+                <Dropdown class="dropdown" v-model="selectRol" :options="roles" optionLabel="nombre" placeholder="Rol" />
+
+            </div>
+            <div class="campo_texto flex gap-2">
+                <InputText id="dataUser" type="text" placeholder="Ingresa los nombres o el id" class="p-inputtext-sm"
+                    v-model="dataUser" />
+            </div>
+            <div class="buttons flex gap-2">
+                <Button label="Buscar" @click="buscar()" />
+                <Button label="Limpiar" @click="limpiarBusqueda()" />
+            </div>
+        </div>
+
+        <div>
+            <DataTable :value="empleados" :paginator="true" :rows="10" responsiveLayout="scroll"
+                :style="{ margin: '1rem' }">
+
+                <Column field="id" header="Id"></Column>
+                <Column field="nombres" header="Nombres"></Column>
+                <Column field="apellidos" header="Apellidos"></Column>
+                <Column field="departamento" header="Departamento"></Column>
+                <Column field="horario" header="Horario"></Column>
+                <Column field="rol" header="Rol"></Column>
+            </DataTable>
+            <router-link to="/"> <Button label="Atras" /></router-link>
+            <!-- todo cambiar el touter link, al principal cuando se haga -->
+        </div>
+    </div>
+    <div v-else>
+        <div class="divisor"></div>
+        <label class="login"><b>Por favor relaice el LogIn</b></label>
+        <div class="divisor"></div>
+        <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
     </div>
 </template>
 
 <script>
 import BusquedaService from "../Services/BusquedaService";
+import LoginService from "../Services/LoginService"
 
 export default {
     name: 'Busqueda',
@@ -57,13 +100,17 @@ export default {
             selectHorario: null,
             selectRol: null,
             selectedList: null,
-            dataUser: null
+            dataUser: null,
+            status: null,
+            idLogin: null
         }
     },
     busquedaService: null,
+    loginService: null,
     created() {
         this.busquedaService = new BusquedaService();
-        this.selectedList = new Map()
+        this.selectedList = new Map();
+        this.loginService = new LoginService();
     },
     mounted() {
         this.busquedaService.getEmpleados().then(response => {
@@ -82,6 +129,11 @@ export default {
             this.horarios = response;
         });
 
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
     },
 
     methods: {
@@ -118,8 +170,10 @@ export default {
             this.busquedaService.getEmpleados().then(response => {
             this.empleados = response;
             });
+        },
+        redirigir(){
+            this.$router.push('/');
         }
-
     }
 }
 
@@ -135,5 +189,14 @@ export default {
 }
 .dropdown{
     width: 200px;
+}
+.login{
+    font-size: 35px;
+}
+.divisor{
+    height: 25px;
+}
+.buttonLogin{
+    margin-top: 0px;
 }
 </style>
