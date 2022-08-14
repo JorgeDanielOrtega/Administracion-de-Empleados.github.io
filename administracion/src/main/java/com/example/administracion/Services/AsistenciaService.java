@@ -14,6 +14,10 @@ public class AsistenciaService {
 	@Autowired
 	AsistenciaRepository asistenciaRepository;
 
+	public ArrayList<Asistencia> getAllAsistencias() {
+		return (ArrayList<Asistencia>) asistenciaRepository.findAll();
+	}
+
 	public ArrayList<Asistencia> getAsistenciasByIdTrabajador(Long idTrabajador) {
 		return asistenciaRepository.findAllByIdTrabajador(idTrabajador);
 	}

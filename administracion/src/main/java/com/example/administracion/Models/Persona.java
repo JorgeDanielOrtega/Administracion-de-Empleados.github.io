@@ -36,46 +36,20 @@ public class Persona {
     @Column(name = "anio_entrada")
     private Date anioEntrada;
 
-    // public Persona(String nombre, String apellido, String direccion, String
-    // cedula, char sexo, String ciudad, String telefono, Date fechaNacimiento) {
-    // this.nombre = nombre;
-    // this.apellido = apellido;
-    // this.direccion = direccion;
-    // this.cedula = cedula;
-    // this.sexo = sexo;
-    // this.ciudad = ciudad;
-    // this.telefono = telefono;
-    // this.fechaNacimiento = fechaNacimiento;
-    // calculcarCumpleaños();
-    // }
 
-    // public Persona(String nombre, String apellido, String direccion, EstadoCivil
-    // estadoCivil, String numeroCedula,
-    // char sexo, String ciudad, String telefono, Date fechaNacimiento){
-    // this(nombre, apellido, direccion, numeroCedula, sexo, ciudad, telefono,
-    // fechaNacimiento);
-    // this.estadoCivil = estadoCivil;
-    // }
-
-    // private void calculcarCumpleaños(){
-    // Date actual = new Date();
-    // this.birthday = new Date((actual.getYear() - 1900),
-    // this.fechaNacimiento.getMonth(), this.fechaNacimiento.getDay());
-    // }
-
-    public String getNombre() {
+    public String getNombres() {
         return nombres;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombres(String nombre) {
         this.nombres = nombre;
     }
 
-    public String getApellido() {
+    public String getApellidos() {
         return apellidos;
     }
 
-    public void setApellido(String apellido) {
+    public void setApellidos(String apellido) {
         this.apellidos = apellido;
     }
 

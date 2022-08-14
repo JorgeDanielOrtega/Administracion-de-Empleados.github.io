@@ -26,40 +26,6 @@ public class Rol {
     @Column(name = "id_puesto")
     private Long idPuesto;
 
-    // private Departamento departamento;
-    // private Puesto puesto;
-
-    // private List<Trabajador> trabajadorList;
-
-    // public Rol(){
-    // trabajadorList = new LinkedList();
-    // }
-
-    // public Rol(String nombre) { //Quitar mas tarde
-    // this();
-    // this.nombre = nombre;
-    // }
-
-    // public Rol( String nombre, double salario){
-    // this(nombre);
-    // this.salario = salario;
-    // }
-
-    // public Rol(double salario, String nombre, Puesto puesto){
-    // this(nombre, salario);
-    // this.puesto = puesto;
-    // }
-    // public Rol(double salario, String nombre, Puesto puesto, Departamento
-    // departamento){
-    // this(salario, nombre, puesto);
-    // this.departamento = departamento;
-    // }
-    // public Rol(String nombre, Puesto puesto, Departamento departamento) {
-    // //quizas quitar lo de puesto
-    // this(nombre);
-    // this.puesto = puesto;
-    // this.departamento = departamento;
-    // }
 
     // TODO hacer metodo para calcular salario
 
@@ -78,26 +44,6 @@ public class Rol {
     public void setSalario(Double salario) {
         this.salario = salario;
     }
-
-    // public Puesto getPuesto() {
-    // return puesto;
-    // }
-
-    // public void setPuesto(Puesto puesto) {
-    // this.puesto = puesto;
-    // }
-
-    // public Departamento getDepartamento() {
-    // return departamento;
-    // }
-
-    // public void setDepartamento(Departamento departamento) {
-    // this.departamento = departamento;
-    // }
-
-    // public List<Trabajador> getTrabajadorList() {
-    // return trabajadorList;
-    // }
 
     public Long getId() {
         return id;

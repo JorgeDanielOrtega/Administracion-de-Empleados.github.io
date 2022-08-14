@@ -15,6 +15,14 @@ public class RolService {
 	@Autowired
 	RolRepository rolRepository;
 
+	public Optional<Rol> obtenerRolPorId(Long id) {
+		return rolRepository.findById(id);
+	}
+
+	public ArrayList<Rol> getTodosRoles() {
+		return (ArrayList<Rol>) rolRepository.findAll();
+	}
+
 	public Optional<Rol> getRolById(Long id) {
 		return rolRepository.findById(id);
 	}
@@ -22,6 +30,10 @@ public class RolService {
 	public Long getIdRolByNombre(String nombre) {
 		return rolRepository.findByNombre(nombre).getId();
 	}
+
+	// public ArrayList<HashMap<String, Object>> getAllNombreRolSinRepetir() {
+	// 	ArrayList<HashMap<String, Object>> nombresRolList = new ArrayList<>();
+	// }
 
 	public ArrayList<HashMap<String, Object>> getAllNombreRolSinRepetir() {
 		ArrayList<HashMap<String, Object>> nombresRolList = new ArrayList<>();
@@ -33,6 +45,19 @@ public class RolService {
 		}
 
 		return nombresRolList;
+	}
+
+	public Rol guardarRol(Rol rol) {
+		return rolRepository.save(rol);
+	}
+
+	public boolean eliminarRolPorId(Long id) {
+		try {
+			this.rolRepository.deleteById(id);
+			return true;
+		} catch (Exception err) {
+			return false;
+		}
 	}
 
 }

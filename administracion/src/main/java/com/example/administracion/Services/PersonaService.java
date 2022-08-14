@@ -18,7 +18,26 @@ public class PersonaService {
 		return (ArrayList<Persona>) personaRepository.findAllById(ids);
 	}
 
+	public ArrayList<Persona> obtenerPersonas(){
+		return (ArrayList<Persona>) personaRepository.findAll();
+	}
+	// public Persona getPersonaById(Long id) {
+	// 	return personaRepository.findById(id).get();}
+
+
 	public Optional<Persona> getPersonaById(Long id) {
 		return personaRepository.findById(id);
+
+	}
+	public Persona guardarPersona(Persona persona){
+		return personaRepository.save(persona);
+	}
+	public boolean eliminarPersonaPorId(Long id){
+		try{
+			this.personaRepository.deleteById(id);
+			return true;
+		}catch (Exception err){
+			return false;
+		}
 	}
 }
