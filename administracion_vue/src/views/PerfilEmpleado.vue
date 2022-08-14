@@ -7,7 +7,7 @@
                 disabled="true" />
             <label class="col" for="apellidos">Apellidos:</label>
             <InputText class="input_info p-inputtext-sm col-3" id="apellidos" type="text" v-model="apellidos"
-                disabled="true" />
+                disabled="false" />
             <label class="col" for="cedula">Cedula:</label>
             <InputText class="input_info p-inputtext-sm col-3" id="cedula" type="text" v-model="cedula"
                 disabled="true" />
@@ -221,7 +221,6 @@ export default {
 .router {
     display: flex;
     /* margin-right: 18.25rem; */
-
 }
 
 label {

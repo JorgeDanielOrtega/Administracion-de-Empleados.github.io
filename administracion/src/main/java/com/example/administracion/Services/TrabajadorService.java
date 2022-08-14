@@ -1,10 +1,6 @@
 package com.example.administracion.Services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -34,10 +30,23 @@ public class TrabajadorService {
 	EntityManager entityManager;
 
 	// TODO refactorizarlo los hasmap, y cambiarlos por list, utilizando las queries
+	public Trabajador getTrabajorById(Long id){
+		return trabajadorRepository.findById(id).get();
+	}
+	public Boolean eliminarTrabajadorPorId(Long id){
+		try{
+			this.trabajadorRepository.deleteById(id);
+			return true;
+		}catch (Exception err){
+			return false;
+		}
+	}
 	public ArrayList<Trabajador> getTrabajadores(Iterable<Long> ids) {
 		return (ArrayList<Trabajador>) trabajadorRepository.findAllById(ids);
 	}
-
+	public ArrayList<Trabajador> obtenerTodosTrabajadores(){
+		return (ArrayList<Trabajador>) trabajadorRepository.findAll();
+	}
 	public Trabajador getTrabajadorById(Long id) {
 		return trabajadorRepository.findById(id).get();
 	}
@@ -57,7 +66,7 @@ public class TrabajadorService {
 		myMap.put("fecha_nacimiento", persona.getFechaNacimiento().toString());
 		myMap.put("anio_entrada", persona.getAnioEntrada().toString());
 		myMap.put("correo_personal", trabajador.getCorreoPersonal());
-		myMap.put("correo_empresarial", trabajador.getCorreoEmpresarial());
+		myMap.put("correo_empresarial", trabajador.getCorreoe());
 		myMap.put("usuario", trabajador.getUsuario());
 		myMap.put("contrasenia", trabajador.getPassword());
 		myMap.put("id_departamento", trabajador.getIdDepartamento());
@@ -144,9 +153,7 @@ public class TrabajadorService {
 
 				mapList.add(myMap);
 			}
-
 		}
-
 		return mapList;
 	}
 
@@ -262,6 +269,9 @@ public class TrabajadorService {
 
 		return getDataEmpleadosForBusqueda(query.getResultList());
 
+	}
+	public Trabajador guardarTrabajador(Trabajador trabajador){
+		return trabajadorRepository.save(trabajador);
 	}
 
 }

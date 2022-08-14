@@ -6,8 +6,21 @@ package com.example.administracion.Services;
 	import com.example.administracion.Models.Empresa;
 	import com.example.administracion.Repositories.EmpresaRepository;
 
+	import java.util.ArrayList;
+	import java.util.Optional;
 
-	@Service
+
+@Service
 	public class EmpresaService{
-		
+		@Autowired
+		EmpresaRepository empresaRepository;
+
+		public ArrayList<Empresa> obtenerEmpresas(){
+
+			return (ArrayList<Empresa>) empresaRepository.findAll();
+		}
+		public Optional<Empresa> obtenerEmpresaId (Long id){
+
+			return empresaRepository.findById(id);
+		}
 	}

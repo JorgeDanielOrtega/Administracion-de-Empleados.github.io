@@ -59,8 +59,28 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     
     component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Busqueda.vue')
-  }
-
+  },
+  {
+    path: '/roles',
+    name: 'roles',
+    component: () =>  import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Rol.vue')
+  },
+  {
+    path: '/empleado',
+    name: 'empleado',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Empleado.vue')
+  },
+  {
+    path: '/departamentos',
+    name: 'departamentos',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "asistenciaEmpleado" */ '../views/Departamentos.vue')
+  },
 ]
 
 const router = createRouter({

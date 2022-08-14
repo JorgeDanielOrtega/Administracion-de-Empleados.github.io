@@ -2,7 +2,10 @@ package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
 
+import com.example.administracion.Models.Departamento;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,10 @@ public class AsistenciaController {
     @Autowired
     AsistenciaService asistenciaService;
 
+    @GetMapping("/all")
+    public ArrayList<Asistencia> getAllAsistencias(){
+        return asistenciaService.getAllAsistencias();
+    }
     @GetMapping("/{id}")
     public ArrayList<Asistencia> getAsistenciasByIdTrabajador(@PathVariable("id") Long id) {
         return asistenciaService.getAsistenciasByIdTrabajador(id);
@@ -30,5 +37,10 @@ public class AsistenciaController {
     @PostMapping("/{id}") //TODO queda pendiente mandarle el id por el body desde el front end, o algo asi  
     public Asistencia saveAsistencia(@PathVariable("id") Long id, @RequestBody Asistencia asistencia) {
         return asistenciaService.saveAsistencia(asistencia);
+    }
+    @PostMapping(value = "/guardarAsistencia")
+    public ResponseEntity<Asistencia> guardarAsistencia (@RequestBody Asistencia asistencia) {
+        Asistencia obj = asistenciaService.saveAsistencia(asistencia);
+        return new ResponseEntity<Asistencia>(obj, HttpStatus.OK);
     }
 }

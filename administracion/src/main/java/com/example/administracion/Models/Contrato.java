@@ -16,7 +16,7 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "tiene_contrato")
-    private Boolean tieneContrato; // quizas cambiar a integer
+    private Integer tieneContrato; // quizas cambiar a integer
     @Column(name = "tiempo_contrato")
     private Double tiempoContrato;
     @Column(name = "fecha_limite")
@@ -24,20 +24,6 @@ public class Contrato {
     @Column(name = "id_empleado")
     private Long idEmpleado;
 
-    // public Contrato(Boolean tieneContrato) {
-    // this.tieneContrato = tieneContrato;
-    // }
-
-    // public Contrato(Boolean tieneContrato, Date fechaLimite) {
-    // this(tieneContrato);
-    // this.fechaLimite = fechaLimite;
-    // }
-
-    // public Contrato(Boolean tieneContrato, Double tiempoContrato, Date
-    // fechaLimite) {
-    // this(tieneContrato, fechaLimite);
-    // this.tiempoContrato = tiempoContrato;
-    // }
 
     // TODO hacer metodo para el calculo del metodo
 
@@ -49,11 +35,11 @@ public class Contrato {
         this.id = id;
     }
 
-    public Boolean getTieneContrato() {
+    public Integer getTieneContrato() {
         return tieneContrato;
     }
 
-    public void setTieneContrato(Boolean tieneContrato) {
+    public void setTieneContrato(Integer tieneContrato) {
         this.tieneContrato = tieneContrato;
     }
 

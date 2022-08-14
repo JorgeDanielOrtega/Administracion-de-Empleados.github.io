@@ -25,17 +25,20 @@ export default {
 	data() {
 		return {
 			items: [
+
                 {label: 'Perfil', icon: 'pi pi-user', to: '/perfil'},
                 {label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/2'}, //todo cambiarle el id
                 {label: 'Departamento', icon: 'pi pi-building', to: '/departamento/2'}, //todo cambiarle el id
                 {label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda'}, 
+                {label: 'Rol', icon:'pi pi-tablet', to: '/roles'},
+                {label:"Empleados", icon: "pi pi-user", to:'/empleado'},
+                {label: 'Departamentos', icon: 'pi pi-table', to: '/departamentos'}, 
 
             ]
 		}
 	}
 }
 </script>
-
 
 <style>
 #app {
@@ -50,7 +53,6 @@ export default {
 nav {
   /* padding: 30px; */
   padding: 10px;
-  
 }
 
 .tabMenu{
@@ -76,7 +78,6 @@ nav {
 .p-highlight{
   background-color: red;
   color: red;
-
 }
 
 nav a {

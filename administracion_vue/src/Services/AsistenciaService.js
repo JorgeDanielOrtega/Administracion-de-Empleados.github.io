@@ -51,5 +51,4 @@ export default class AsistenciaService {
         }
         return axios.post(this.url + idA, asistencia);
     }
-
 }
