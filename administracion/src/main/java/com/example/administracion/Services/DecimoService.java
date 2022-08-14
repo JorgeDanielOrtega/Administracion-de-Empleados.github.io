@@ -54,8 +54,10 @@ public class DecimoService {
 
 	private String getNombresApellidosTrabajadorById(Long idEmpleado) {
 		Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
-		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador());
-		Persona persona = personaService.getPersonaById(trabajador.getIdPersona());
+		// Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador());
+		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador()).get();
+		// Persona persona = personaService.getPersonaById(trabajador.getIdPersona());
+		Persona persona = personaService.getPersonaById(trabajador.getIdPersona()).get();
 		return persona.getNombres() + " " + persona.getApellidos();
 	}
 
@@ -76,17 +78,17 @@ public class DecimoService {
 		return decimoRepository.save(decimo);
 	}
 
-	private Double calcularDecimoTercero(Double salario) {
-		return salario / MESES;
-	}
+	// private Double calcularDecimoTercero(Double salario) {
+	// 	return salario / MESES;
+	// }
 
-	private Double calcularDecimoCuarto(Long idTrabajador) {
-		int totalAsistencias = asistenciaService.getAsistenciasByIdTrabajador(idTrabajador).size();
-		return (SUELDO_BASICO / DIAS_LABORALES) * totalAsistencias;
-	}
+	// private Double calcularDecimoCuarto(Long idTrabajador) {
+	// 	int totalAsistencias = asistenciaService.getAsistenciasByIdTrabajador(idTrabajador).size();
+	// 	return (SUELDO_BASICO / DIAS_LABORALES) * totalAsistencias;
+	// }
 
-	private Double calcularFondoReserva(Double salario) {
-		return salario * PORCENTAJE_FONDO_RESERVA;
-	}
+	// private Double calcularFondoReserva(Double salario) {
+	// 	return salario * PORCENTAJE_FONDO_RESERVA;
+	// }
 
 }
