@@ -11,9 +11,6 @@ public class Empleado extends Trabajador {
     private String id;
     private List<Asistencia> asistenciaList;
 
-//    public Empleado(){
-//        //this.asistenciaList = new LinkedList<>();
-//    }
     public Empleado(){
     }
     
@@ -71,7 +68,7 @@ public class Empleado extends Trabajador {
 
     @Override
     public String toString() {
-        return "Empleado{" + "entradaYear=" + entradaYear + ", horario=" + horario + ", id=" + id + ", asistenciaList=" + asistenciaList + "nombre: " + super.getNombre() + " rol: " + super.getRol() + " puesto: " + super.getRol().getPuesto().getNombre() + '}';
+        return "Empleado{" + "entradaYear=" + entradaYear + ", horario=" + horario + ", id=" + id + ", asistenciaList=" + asistenciaList + "nombre: " + super.getNombre() + " rol: " + super.getRol() + " puesto: " + super.getRol().getPuesto().getNombre() + '}' + super.toString();
     }
 
 }

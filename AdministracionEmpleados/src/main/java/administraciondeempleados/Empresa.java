@@ -60,14 +60,20 @@ public class Empresa {
 
     public void cargarListas() {
         cargarDepartamentoList();
+        //System.out.println(this.departamentoList);
         cargarRolList();
+        //System.out.println(this.rolList);
         cargarHorarioList();
+        //System.out.println(this.horarioList);
         cargarTrabajadoresList();
+        //System.out.println(this.trabajadorList);
         cargarGerenteList();
+        System.out.println(this.gerenteList);
         cargarEmpresa();
+        //System.out.println(this);
     }
     
-    private void cargarEmpresa(){
+    public void cargarEmpresa(){
         try{
             connection = dbConnect.conectar();
             sql = "SELECT * FROM empresa";
