@@ -7,6 +7,7 @@ import com.example.administracion.Repositories.TrabajadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Service
@@ -19,7 +20,7 @@ public class LoginService {
 
     public Login verificarDatos(Login login){
         boolean estado = false;
-        LinkedList<Trabajador> trabajadores = obtenerTrabajadores();
+        ArrayList<Trabajador>  trabajadores = obtenerTrabajadores();
         for (int i = 0; i < trabajadores.size(); i++){
             if(trabajadores.get(i).getUsuario().equals(login.getUsuario())) {
                 if (trabajadores.get(i).getPassword().equals(login.getContrasenia())) {
@@ -42,10 +43,10 @@ public class LoginService {
         return login;
     }
 
-    private LinkedList<Trabajador> obtenerTrabajadores(){
-        LinkedList<Trabajador> trabajadorList = new LinkedList<>();
+    private ArrayList<Trabajador> obtenerTrabajadores(){
+        ArrayList<Trabajador> trabajadorList = new ArrayList<>();
         for (int i = 0; i < trabajadorRepository.count(); i++){
-            trabajadorList.add(trabajadorRepository.findAll().get(i));
+            trabajadorList.add(((ArrayList<Trabajador>)(trabajadorRepository.findAll())).get(i));
         }
         return trabajadorList;
     }

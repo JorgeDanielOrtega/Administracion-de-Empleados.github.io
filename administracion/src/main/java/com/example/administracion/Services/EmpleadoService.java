@@ -56,7 +56,6 @@ public class EmpleadoService {
 		return horarioService.getHorarioById(idHorario);
 	}
 
-<<<<<<< HEAD
 	public ArrayList<HashMap<String, Object>> getTodosEmpleados(){
 		ArrayList<HashMap<String, Object>> mapList = new ArrayList<>();
 
@@ -81,8 +80,8 @@ public class EmpleadoService {
 					idPuesto = rol.getIdPuesto();
 					if (idRol != null && idDepartamento != null && idHorario != null) {
 						myMap.put("id", idEmpleado);
-						myMap.put("nombres", persona.getNombre());
-						myMap.put("apellidos", persona.getApellido());
+						myMap.put("nombres", persona.getNombres());
+						myMap.put("apellidos", persona.getApellidos());
 						myMap.put("usuario", trabajador.getUsuario());
 						myMap.put("cedula", persona.getCedula());
 						myMap.put("telefono", persona.getCedula());
@@ -101,11 +100,8 @@ public class EmpleadoService {
 	public Empleado guardarEmpleado(Empleado empleado){
 		return empleadoRepository.save(empleado);
 	}
-=======
 	public Empleado getEmpleadoById(Long id){
 		return empleadoRepository.findById(id).get();
 	}
-
->>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 	
 }

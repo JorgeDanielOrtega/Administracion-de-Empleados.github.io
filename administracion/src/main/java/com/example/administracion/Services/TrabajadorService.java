@@ -55,8 +55,8 @@ public class TrabajadorService {
 		Map<String, Object> myMap = new HashMap<>();
 
 		myMap.put("id", trabajador.getId());
-		myMap.put("nombres", persona.getNombre());
-		myMap.put("apellidos", persona.getApellido());
+		myMap.put("nombres", persona.getNombres());
+		myMap.put("apellidos", persona.getApellidos());
 		myMap.put("direccion", persona.getDireccion());
 		myMap.put("estado_civil", persona.getEstadoCivil());
 		myMap.put("cedula", persona.getCedula());
@@ -96,8 +96,8 @@ public class TrabajadorService {
 		Long idHorario = trabajador.getIdHorario();
 
 		myMap.put("id", trabajador.getId());
-		myMap.put("nombres", persona.getNombre());
-		myMap.put("apellidos", persona.getApellido());
+		myMap.put("nombres", persona.getNombres());
+		myMap.put("apellidos", persona.getApellidos());
 		myMap.put("Rol", rolService.getRolById(idRol).getNombre());
 		myMap.put("Horario", getHorarioOfTrabajador(idHorario).getTipo());
 
@@ -113,8 +113,8 @@ public class TrabajadorService {
 		Long idDepartamento = trabajador.getIdDepartamento();
 
 		myMap.put("id", persona.getId());
-		myMap.put("nombres", persona.getNombre());
-		myMap.put("apellidos", persona.getApellido());
+		myMap.put("nombres", persona.getNombres());
+		myMap.put("apellidos", persona.getApellidos());
 		myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
 		myMap.put("rol", rolService.getRolById(idRol).getNombre());
 		myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
@@ -145,8 +145,8 @@ public class TrabajadorService {
 			if (idRol != null && idDepartamento != null && idHorario != null) {
 
 				myMap.put("id", idPersona);
-				myMap.put("nombres", persona.getNombre());
-				myMap.put("apellidos", persona.getApellido());
+				myMap.put("nombres", persona.getNombres());
+				myMap.put("apellidos", persona.getApellidos());
 				myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
 				myMap.put("rol", rolService.getRolById(idRol).getNombre());
 				myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());

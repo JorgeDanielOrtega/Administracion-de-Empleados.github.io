@@ -11,7 +11,7 @@
   <!-- </nav> -->
 
   <!-- <TabMenu class="tabMenu" :model="retornarMenu()" /> -->
-  <TabMenu class="tabMenu" :model="this.items" />
+  <TabMenu class="tabMenu" :model="retornarMenu()" />
 
 
 

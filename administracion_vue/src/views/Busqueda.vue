@@ -1,7 +1,7 @@
 <template>
-<<<<<<< HEAD
-    <div class="filtro flex justify-content-center gap-4"> <!-- Class -->
-        <div class="campos flex gap-2">         
+    <!-- <<<<<<< HEAD -->
+    <!-- <div class="filtro flex justify-content-center gap-4">  -->
+        <!-- <div class="campos flex gap-2">          -->
             <!-- We use drop down its has label, select and options
             label creates a input and can use for for associaate with the id attribute
             select cotains two atributes : name and id (if we had used for in label the id shall have the same value it could have another
@@ -9,19 +9,19 @@
              option = it contains one or more options each option has it own item
              IPORTANT v-model is a form to create two-ways to connect data binding betwenn a value in our teplate and
              value in our data property-->
-            <Dropdown class="dropdown" v-model="selectDepartamento" :options="departamentos" optionLabel="nombre"
+            <!-- <Dropdown class="dropdown" v-model="selectDepartamento" :options="departamentos" optionLabel="nombre"
                 placeholder="Departamento" />
             <Dropdown class="dropdown" v-model="selectHorario" :options="horarios" optionLabel="tipo" placeholder="Horario" />
             <Dropdown class="dropdown" v-model="selectRol" :options="roles" optionLabel="nombre" placeholder="Rol" />
         </div>
-        <div class="campo_texto flex gap-2">
+        <div class="campo_texto flex gap-2"> -->
             <!-- We sould use class in every object that we want to add -->
-            <InputText id="dataUser" type="text" placeholder="Ingresa los nombres o el id" class="p-inputtext-sm"
+            <!-- <InputText id="dataUser" type="text" placeholder="Ingresa los nombres o el id" class="p-inputtext-sm"
                 v-model="dataUser" />
         </div>
-        <div class="buttons flex gap-2">
+        <div class="buttons flex gap-2"> -->
             <!-- Click is a avent to directional a specific action -->
-            <Button label="Buscar" @click="buscar()" />
+            <!-- <Button label="Buscar" @click="buscar()" />
             <Button label="Limpiar" @click="limpiarBusqueda()" />
         </div>
     </div>
@@ -36,11 +36,11 @@
             <Column field="departamento" header="Departamento"></Column>
             <Column field="horario" header="Horario"></Column>
             <Column field="rol" header="Rol"></Column>
-        </DataTable>
+        </DataTable> -->
         <!-- Router is use to bind pages-->
-        <router-link to="/"> <Button label="Atras" /></router-link>
+        <!-- <router-link to="/"> <Button label="Atras" /></router-link> -->
         <!-- todo cambiar el touter link, al principal cuando se haga -->
-=======
+<!-- ======= -->
     <div v-if=status>
         <div class="filtro flex justify-content-center gap-4">
             <div class="campos flex gap-2">
@@ -80,7 +80,7 @@
         <label class="login"><b>Por favor relaice el LogIn</b></label>
         <div class="divisor"></div>
         <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
->>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
+<!-- >>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55 -->
     </div>
 </template>
 

@@ -56,7 +56,7 @@ public class DecimoService {
 		Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
 		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador());
 		Persona persona = personaService.getPersonaById(trabajador.getIdPersona());
-		return persona.getNombre() + " " + persona.getApellido();
+		return persona.getNombres() + " " + persona.getApellidos();
 	}
 
 	// public Decimo saveDecimo(Long idTrabajador) {

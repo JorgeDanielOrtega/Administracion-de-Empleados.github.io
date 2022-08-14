@@ -12,9 +12,19 @@ package com.example.administracion.Services;
 
 @Service
 	public class EmpresaService{
-<<<<<<< HEAD
+// <<<<<<< HEAD
+// 		@Autowired
+// 		EmpresaRepository empresaRepository;
+
+		
+
+
 		@Autowired
 		EmpresaRepository empresaRepository;
+
+		public Empresa getEmpresaById() {
+			return empresaRepository.findById(1l).get();
+		}
 
 		public ArrayList<Empresa> obtenerEmpresas(){
 
@@ -23,13 +33,6 @@ package com.example.administracion.Services;
 		public Optional<Empresa> obtenerEmpresaId (Long id){
 
 			return empresaRepository.findById(id);
-=======
-
-		@Autowired
-		EmpresaRepository empresaRepository;
-
-		public Empresa getEmpresaById() {
-			return empresaRepository.findById(1l).get();
 		}
 
 		public Empresa actualizarEmpresa(Empresa empresa){
@@ -49,6 +52,5 @@ package com.example.administracion.Services;
 			}
 
 			return empresaRepository.save(empresa);
->>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 		}
 	}

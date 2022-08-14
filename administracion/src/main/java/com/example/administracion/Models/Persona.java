@@ -16,9 +16,9 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nombres")
-    private String nombre;
+    private String nombres;
     @Column(name = "apellidos")
-    private String apellido;
+    private String apellidos;
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "estado_civil")
@@ -37,20 +37,20 @@ public class Persona {
     private Date anioEntrada;
 
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombre) {
+        this.nombres = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellido) {
+        this.apellidos = apellido;
     }
 
     public String getDireccion() {
@@ -127,7 +127,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + '}';
+        return "nombre=" + nombres + ", apellido=" + apellidos + ", cedula=" + cedula + '}';
     }
 
     /**

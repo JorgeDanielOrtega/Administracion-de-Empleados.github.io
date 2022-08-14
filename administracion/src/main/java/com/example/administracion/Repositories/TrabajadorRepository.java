@@ -14,6 +14,7 @@ public interface TrabajadorRepository extends CrudRepository<Trabajador, Long> {
 
     public abstract ArrayList<Trabajador> findAllByIdDepartamento(Long idDepartamento);
 
-    public abstract LinkedList<Trabajador> findAll();
+    // public abstract LinkedList<Trabajador> findAll();
+    // public abstract ArrayList<Trabajador> findAll();
 
 }

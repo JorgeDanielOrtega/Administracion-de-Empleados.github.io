@@ -24,36 +24,41 @@ public class DepartamentoController {
     @Autowired
     DepartamentoService departamentoService;
 
-    //    @GetMapping( path = "nombre/{idDepartamento}")
-    //    public ArrayList<Map<String, Object>> getEmpleadosByDepartamento(@PathVariable("idDepartamento") Long idDepartamento) {
-    //        return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
-    //    }
+    // @GetMapping( path = "nombre/{idDepartamento}")
+    // public ArrayList<Map<String, Object>>
+    // getEmpleadosByDepartamento(@PathVariable("idDepartamento") Long
+    // idDepartamento) {
+    // return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
+    // }
 
     @GetMapping("")
-    public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre(){
+    public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
         return departamentoService.getAllNombreDepartamentosSinRepetir();
     }
+
     @GetMapping("/all")
-    public ArrayList<Departamento> obtenerTodosDepartamentos(){
+    public ArrayList<Departamento> obtenerTodosDepartamentos() {
 
         return departamentoService.getTodosDepartamentos();
     }
+
     @GetMapping(path = "/{id}")
-    public Optional<Departamento> obtenerDepartementoId(@PathVariable("id") Long id){
+    public Optional<Departamento> obtenerDepartementoId(@PathVariable("id") Long id) {
         return departamentoService.obtenerDepartamentoBarraBusqueda(id);
     }
 
     @PostMapping(value = "/guardar")
-        public ResponseEntity<Departamento> guardar (@RequestBody Departamento departamento) {
-            Departamento obj = departamentoService.guardarDepartamento(departamento);
-            return new ResponseEntity<Departamento>(obj, HttpStatus.OK);
-        }
+    public ResponseEntity<Departamento> guardar(@RequestBody Departamento departamento) {
+        Departamento obj = departamentoService.guardarDepartamento(departamento);
+        return new ResponseEntity<Departamento>(obj, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/eliminar/{id}")
-    public ResponseEntity<Departamento> eliminar(@PathVariable Long id){
+    public ResponseEntity<Departamento> eliminar(@PathVariable Long id) {
         Departamento departamento = departamentoService.getDepartamentoById(id);
-        if(departamento != null){
+        if (departamento != null) {
             departamentoService.eliminarDepartamento(id);
-        }else{
+        } else {
             return new ResponseEntity<Departamento>(departamento, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<Departamento>(departamento, HttpStatus.OK);
