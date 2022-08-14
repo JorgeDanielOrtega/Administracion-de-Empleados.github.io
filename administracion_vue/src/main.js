@@ -13,6 +13,7 @@ import Dropdown from 'primevue/dropdown';
 import TabMenu from 'primevue/tabmenu';
 import Divider from 'primevue/divider';
 import Card from 'primevue/card';
+import Menubar from 'primevue/menubar';
 
 import '/node_modules/primeflex/primeflex.css';             // prime flex
 
@@ -42,6 +43,7 @@ app.component('Toast', Toast);
 app.component('TabMenu', TabMenu);
 app.component('Dropdown', Dropdown);
 app.component('Divider', Divider);
+app.component('Menubar', Menubar);
 
 
 app.mount('#app'); //muy importante poner esto al final

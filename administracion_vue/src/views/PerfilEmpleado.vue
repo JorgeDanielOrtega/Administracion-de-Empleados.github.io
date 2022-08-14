@@ -1,10 +1,62 @@
 <template>
+<<<<<<< HEAD
+    <div class="container grid">
+        <!--todo quitar las clases de los input text quizas -->
+        <div class="container__datos grid col-25 ">
+            <label class="col" for="nombres">Nombres:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="nombres" type="text" v-model="nombres"
+                disabled="true" />
+            <label class="col" for="apellidos">Apellidos:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="apellidos" type="text" v-model="apellidos"
+                disabled="false" />
+            <label class="col" for="cedula">Cedula:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="cedula" type="text" v-model="cedula"
+                disabled="true" />
+            <label class="col" for="sexo">Sexo:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="sexo" type="text" v-model="sexo" disabled="true" />
+        </div>
+        <div class="divider"></div>
+        
+        <div class="container__contacto grid col-25">
+            <label class="col" for="telefono">Telefono:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="telefono" type="text" v-model="telefono"
+                disabled="true" />
+            <label class="col" for="estadoCivil">Estado Civil:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="estadoCivil" type="text" v-model="estadoCivil"
+                disabled="true" />
+            <label class="col" for="ciudad">Ciudad:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="ciudad" type="text" v-model="ciudad"
+                disabled="true" />
+            <label class="col" for="direccion">Direccion:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="direccion" type="text" v-model="direccion"
+                disabled="true" />
+        </div>
+<div class="divider"></div>
+        <div class="container__datos--empresa grid col-25">
+            <label class="col" for="correoEmpresarial">Correo Empresarial:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="correoEmpresarial" type="text"
+                v-model="correoEmpresarial" disabled="true" />
+            <label class="col" for="correoPersonal">Correo Personal:</label>
+            <InputText class="input_info p-inputtext-sm col-3" id="correoPersonal" type="text" v-model="correoPersonal"
+                disabled="true" />
+        </div>
+
+
+        <!-- dialog horario -->
+        <Dialog header="Horario" v-model:visible="displayModalHorario"
+            :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" :modal="true">
+            <div class="grid">
+
+                <label class="col" for="tipo">Tipo:</label>
+                <InputText class="input_info--horario col-10" id="tipo" type="text" v-model="tipoHorario"
+=======
     <div v-if=status>
         <div class="container grid">
             <!--todo quitar las clases de los input text quizas -->
             <div class="container__datos grid col-20 ">
                 <label class="col-" for="nombres">Nombres:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="nombres" type="text" v-model="nombres"
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
                     disabled="true" />
                 <label class="col" for="apellidos">Apellidos:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="apellidos" type="text" v-model="apellidos"
@@ -233,7 +285,6 @@ export default {
     text-align: left;
     display: flex;
     /* margin-right: 18.25rem; */
-
 }
 
 label {

@@ -6,8 +6,18 @@ package com.example.administracion.Services;
 	import com.example.administracion.Models.Gerente;
 	import com.example.administracion.Repositories.GerenteRepository;
 
+	import java.util.ArrayList;
 
-	@Service
+
+@Service
 	public class GerenteService{
-		
+		@Autowired
+		GerenteRepository gerenteRepository;
+		public Gerente guardarGerente (Gerente gerente){
+			return gerenteRepository.save(gerente);
+		}
+		public ArrayList<Gerente> obtenerGerentes(){
+
+			return (ArrayList<Gerente>) gerenteRepository.findAll();
+		}
 	}

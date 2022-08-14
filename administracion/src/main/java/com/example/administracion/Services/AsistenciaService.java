@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 		@Autowired
 		AsistenciaRepository asistenciaRepository;
 
+		public ArrayList<Asistencia> getAllAsistencias(){
+			return (ArrayList<Asistencia>) asistenciaRepository.findAll();
+		}
 		public ArrayList<Asistencia> getAsistenciasByIdTrabajador(Long idTrabajador){
 			return asistenciaRepository.findAllByIdTrabajador(idTrabajador);
 		}

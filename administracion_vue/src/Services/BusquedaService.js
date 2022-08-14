@@ -6,22 +6,8 @@ export default class BusquedaService {
     urlDepartamento = "http://localhost:8081/departamento/nombres"
     urlHorario = "http://localhost:8081/horario"
 
-    realizarBusqueda(valores) {
-        let filtros = '';
-        valores.forEach((value, key) => {
-            filtros += key + '=' + value + '&';
-        });
 
-        return new Promise((resolve) => {
-            fetch(this.url + "/by?" + filtros)
-                .then((res) => {
-                    resolve(res.json());
-                })
-                .catch((err) => {
-                    console.log("Fetch Error!!!", err);
-                });
-        });
-    }
+
 
     getEmpleados() {
         return new Promise((resolve) => {

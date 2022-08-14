@@ -30,14 +30,6 @@ export default {
       status: null,
       idLogin: null,
       items: null,
-      // items: [
-      //   { label: 'Login', icon: 'pi pi-user', to: '/' },
-      //   { label: 'Empresa', icon: 'pi pi-building', to: '/empresa' },
-      //   { label: 'Perfil', icon: 'pi pi-user-edit', to: '/perfil' },
-      //   { label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/2' }, //todo cambiarle el id
-      //   { label: 'Departamento', icon: 'pi pi-home', to: '/departamento/2' }, //todo cambiarle el id
-      //   { label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda' },
-      // ]
     }
   },
   loginService: null,
@@ -83,7 +75,6 @@ export default {
 }
 </script>
 
-
 <style>
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
@@ -95,9 +86,7 @@ export default {
 }
 
 nav {
-  /* padding: 30px; */
   padding: 10px;
-
 }
 
 
@@ -120,7 +109,6 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-  /* text-decoration: none; */
 }
 
 a {

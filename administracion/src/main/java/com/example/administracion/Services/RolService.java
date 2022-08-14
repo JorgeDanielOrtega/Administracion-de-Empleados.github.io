@@ -2,6 +2,7 @@ package com.example.administracion.Services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,13 @@ public class RolService {
 	public Rol getRolById(Long id) {
 		return rolRepository.findById(id).get();
 	}
+	public Optional<Rol> obtenerRolPorId(Long id){
+		return rolRepository.findById(id);
+	}
+	public ArrayList<Rol> getTodosRoles(){
+		return (ArrayList<Rol>) rolRepository.findAll();
+	}
+
 
 	public Long getIdRolByNombre(String nombre) {
 		return rolRepository.findByNombre(nombre).getId();
@@ -34,4 +42,16 @@ public class RolService {
 		return nombresRolList;
 	}
 
+	public Rol guardarRol (Rol rol){
+		return rolRepository.save(rol);
+	}
+
+	public boolean eliminarRolPorId(Long id){
+		try{
+			this.rolRepository.deleteById(id);
+			return true;
+		}catch(Exception err){
+			return false;
+		}
+	}
 }

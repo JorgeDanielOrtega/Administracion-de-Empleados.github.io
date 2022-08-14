@@ -3,6 +3,7 @@ package com.example.administracion.Controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.administracion.Models.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +22,9 @@ public class HorarioController {
     @GetMapping
     public ArrayList<HashMap<String, Object>> getNombresHorario() {
         return horarioService.getNombresHorariosSinRepetir();
+    }
+    @GetMapping("/all")
+    public ArrayList<Horario> getAllHorarios(){
+        return horarioService.getTodosHorarios();
     }
 }

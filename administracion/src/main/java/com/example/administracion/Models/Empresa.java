@@ -1,7 +1,11 @@
 package com.example.administracion.Models;
 
 import java.sql.Time;
+<<<<<<< HEAD
+import java.time.LocalDateTime;
+=======
 import java.util.Calendar;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
 import java.util.Date;
 // import java.util.LinkedList;
 // import java.util.List;
@@ -19,13 +23,6 @@ import javax.persistence.Table;
 @Table(name = "empresa")
 public class Empresa {
 
-    // //atributos sql
-    // private DBConnect dbConnect;
-    // private Connection connection;
-    // private String sql;
-    // private PreparedStatement ps;
-    // private ResultSet result;
-
     //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,13 +38,13 @@ public class Empresa {
     @Column(name = "rubro")
     private String rubro;
     @Column(name = "hora_entrada")
-    private Time horaEntrada;
+    private LocalDateTime horaEntrada;
 
 
-    //relaciones
-    // private List<Departamento> departamentoList;
-    // private List<Rol> rolList;
-    // private List<Horario> horarioList;
+        //relaciones
+        // private List<Departamento> departamentoList;
+        // private List<Rol> rolList;
+        // private List<Horario> horarioList;
 
     // implementar el metodo en el dialog datos empresa, para que los datos se envien directamente a la bd
     // public Empresa() {
@@ -349,7 +346,11 @@ public class Empresa {
     }
 
     public void setFundacionYear(String fundacionYear) {
+<<<<<<< HEAD
+            this.fundacionYear = fundacionYear;
+=======
         this.fundacionYear = fundacionYear;
+>>>>>>> ffbccdb8b09493137b92efaa9ae21f08588a8f55
     }
 
     public String getRubro() {
@@ -392,11 +393,11 @@ public class Empresa {
         this.leyenda = leyenda;
     }
 
-    public Time getHoraEntrada() {
+    public LocalDateTime getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(Time hora) {
+    public void setHoraEntrada(LocalDateTime hora) {
         horaEntrada = hora; //quizas 
     }
 
