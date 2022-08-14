@@ -23,7 +23,7 @@ public class Trabajador {
     @Column(name = "correo_personal")
     private String correoPersonal;
     @Column(name = "correo_empresarial")
-    private String correoe;
+    private String correoEmpresarial;
     @Column(name = "vacaciones")
     private Integer vacaciones;
     @Column(name = "usuario")
@@ -52,8 +52,8 @@ public class Trabajador {
         return correoPersonal;
     }
 
-    public String getCorreoe() {
-        return correoe;
+    public String getCorreoEmpresarial() {
+        return correoEmpresarial;
     }
 
     public String getUsuario() {
@@ -68,8 +68,8 @@ public class Trabajador {
         this.correoPersonal = correoPersonal;
     }
 
-    public void setCorreoe(String correoe) {
-        this.correoe = correoe;
+    public void setCorreoEmpresarial(String correoEmpresarial) {
+        this.correoEmpresarial = correoEmpresarial;
     }
 
     public void setUsuario(String usuario) {
@@ -140,4 +140,6 @@ public class Trabajador {
     public Long getIdContrato(){return idContrato;}
 
     public void setIdContrato (Long contrato){ this.idContrato = contrato;}
+
+
 }

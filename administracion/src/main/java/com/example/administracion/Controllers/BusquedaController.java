@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.administracion.Repositories.TrabajadorRepository;
+
 import com.example.administracion.Services.DepartamentoService;
 import com.example.administracion.Services.TrabajadorService;
 
@@ -22,20 +24,12 @@ public class BusquedaController {
     @Autowired
     TrabajadorService trabajadorService;
     @Autowired
-    TrabajadorRepository t;
-    @Autowired
     DepartamentoService departamentoService;
 
-    @GetMapping()
-    public ArrayList<Map<String, Object>> gett() { // Todo cambiar nombre despues
+    public ArrayList<Map<String, Object>> getTrabajadores() { // Todo cambiar nombre despues
         return trabajadorService.getTrabajadorForBusqueda();
-
+        
     }
-
-    // @GetMapping("/xd")
-    // public String xd(@RequestParam(value = "nom") String nom){
-    // return trabajadorService.getIdPersonaByNombresApellidos(nom);
-    // }
 
     @GetMapping("/by")
     public ArrayList<Map<String, Object>> getTrabajadorPrueba(

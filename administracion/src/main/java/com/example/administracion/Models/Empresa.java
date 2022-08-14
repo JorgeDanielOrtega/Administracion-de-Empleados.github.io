@@ -31,11 +31,13 @@ public class Empresa {
     @Column(name = "leyenda")
     private String leyenda;
     @Column(name = "anio_fundacion")
-    private String fundacionYear;
+    // private String fundacionYear;
+    private Date fundacionYear;
     @Column(name = "rubro")
     private String rubro;
     @Column(name = "hora_entrada")
-    private LocalDateTime horaEntrada;
+    // private LocalDateTime horaEntrada;
+    private Time horaEntrada;
 
     // relaciones
     // private List<Departamento> departamentoList;
@@ -351,13 +353,13 @@ public class Empresa {
         this.nombre = empresa;
     }
 
-    public String getFundacionYear() {
-        return fundacionYear;
-    }
+    // public String getFundacionYear() {
+    //     return fundacionYear;
+    // }
 
-    public void setFundacionYear(String fundacionYear) {
-            this.fundacionYear = fundacionYear;
-    }
+    // public void setFundacionYear(String fundacionYear) {
+    //     this.fundacionYear = fundacionYear;
+    // }
 
     public String getRubro() {
         return rubro;
@@ -399,13 +401,13 @@ public class Empresa {
         this.leyenda = leyenda;
     }
 
-    public LocalDateTime getHoraEntrada() {
+    public Time getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(LocalDateTime hora) {
-        horaEntrada = hora; // quizas
-    }
+    // public void setHoraEntrada(LocalDateTime hora) {
+    //     horaEntrada = hora; // quizas
+    // }
 
     public Long getGerente() {
         return idGerente;
@@ -440,6 +442,40 @@ public class Empresa {
      */
     public void setIdGerente(Long idGerente) {
         this.idGerente = idGerente;
+
     }
+
+    /**
+     * @return String return the fundador
+     */
+    public String getFundador() {
+        return leyenda;
+    }
+
+    /**
+     * @param fundador the fundador to set
+     */
+    public void setFundador(String fundador) {
+        this.leyenda = fundador;
+
+    }
+
+
+        /**
+     * @return String return the fundador
+     */
+    public Date getFundacionYear() {
+        return fundacionYear;
+    }
+
+    /**
+     * @param fundador the fundador to set
+     */
+    public void setFundacionYear(Date fundacionYear) {
+        this.fundacionYear = fundacionYear;
+
+    }
+
+
 
 }

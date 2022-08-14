@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class HorarioService {
 	@Autowired
 	HorariosDiasLaborablesRepository horariosDiasLaborablesRepository;
 
-	public Horario getHorarioById(Long id) {
-		return horarioRepository.findById(id).get();
+	public Optional<Horario> getHorarioById(Long id) {
+		return horarioRepository.findById(id);
 	}
 
 	public Long getIdHorarioByTipo(String tipo) {
@@ -74,8 +75,9 @@ public class HorarioService {
 	}
 
 	public Map<String, Object> getFullHorarioById(Long idHorario) {
-		Map<String, Object> fullHorario = new HashMap<>();
-		Horario horario = getHorarioById(idHorario);
+		try {
+			Map<String, Object> fullHorario = new HashMap<>();
+		Horario horario = getHorarioById(idHorario).get();
 		List<Long> idDias_laborablesList = new LinkedList<>();
 
 		horariosDiasLaborablesRepository.findAllByIdHorario(idHorario).forEach(horarioDiasL -> {
@@ -88,6 +90,10 @@ public class HorarioService {
 		fullHorario.put("horas_semanales", horario.getHorasLaborablesSemanales());
 
 		return fullHorario;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return new HashMap<String, Object>();
 	}
 
 }

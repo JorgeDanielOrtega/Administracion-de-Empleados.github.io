@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.example.administracion.Models.*;
 import com.example.administracion.Repositories.TrabajadorRepository;
+import org.hibernate.annotations.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,8 @@ public class EmpleadoService {
 			return false;
 		}
 	}
-	public Iterable<Long> getIdTrabajador() {
+
+	public Iterable<Long> getIdsTrabajador() {
 		ArrayList<Long> idTrabajadorList = new ArrayList<>();
 		for (Empleado empleado : empleadoRepository.findAll()) {
 			idTrabajadorList.add(empleado.getIdTrabajador());
@@ -53,7 +55,8 @@ public class EmpleadoService {
 		return (ArrayList<Empleado>) empleadoRepository.findAll();
 	}
 	public Horario getHorarioOfTrabajador(Long idHorario) {
-		return horarioService.getHorarioById(idHorario);
+		// return horarioService.getHorarioById(idHorario);
+		return horarioService.getHorarioById(idHorario).get();
 	}
 
 	public ArrayList<HashMap<String, Object>> getTodosEmpleados(){
@@ -75,8 +78,10 @@ public class EmpleadoService {
 					idRol = trabajador.getIdRol();
 					idHorario = trabajador.getIdHorario();
 					idDepartamento = trabajador.getIdDepartamento();
-					persona = personaService.getPersonaById(trabajador.getIdPersona());
-					Rol rol = rolService.getRolById(idRol);
+					// persona = personaService.getPersonaById(trabajador.getIdPersona());
+					persona = personaService.getPersonaById(trabajador.getIdPersona()).get();
+					// Rol rol = rolService.getRolById(idRol);
+					Rol rol = rolService.getRolById(idRol).get();
 					idPuesto = rol.getIdPuesto();
 					if (idRol != null && idDepartamento != null && idHorario != null) {
 						myMap.put("id", idEmpleado);
@@ -85,11 +90,12 @@ public class EmpleadoService {
 						myMap.put("usuario", trabajador.getUsuario());
 						myMap.put("cedula", persona.getCedula());
 						myMap.put("telefono", persona.getCedula());
-						myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
-						myMap.put("rol", rolService.getRolById(idRol).getNombre());
+						// myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
+						myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).get().getNombre());
+						// myMap.put("rol", rolService.getRolById(idRol).getNombre());
+						myMap.put("rol", rolService.getRolById(idRol).get().getNombre());
 						myMap.put("puesto", puestoService.getPuestoById(idPuesto).getNombre());
 						myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
-
 						mapList.add(myMap);
 					}
 				}
@@ -103,5 +109,5 @@ public class EmpleadoService {
 	public Empleado getEmpleadoById(Long id){
 		return empleadoRepository.findById(id).get();
 	}
-	
+
 }

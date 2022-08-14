@@ -11,3 +11,4 @@ import com.example.administracion.Models.Empresa;
 public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
     public abstract Optional<Empresa> findById(Long id);
 }
+

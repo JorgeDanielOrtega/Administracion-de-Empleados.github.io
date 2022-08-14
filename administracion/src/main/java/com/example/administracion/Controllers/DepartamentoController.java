@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.administracion.Services.DepartamentoService;
 import com.example.administracion.Services.TrabajadorService;
@@ -24,12 +29,11 @@ public class DepartamentoController {
     @Autowired
     DepartamentoService departamentoService;
 
-    // @GetMapping( path = "nombre/{idDepartamento}")
-    // public ArrayList<Map<String, Object>>
-    // getEmpleadosByDepartamento(@PathVariable("idDepartamento") Long
-    // idDepartamento) {
-    // return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
-    // }
+    @GetMapping(path = "nombre/{idDepartamento}")
+    public ArrayList<Map<String, Object>> getEmpleadosByDepartamento(
+            @PathVariable("idDepartamento") Long idDepartamento) {
+        return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
+    }
 
     @GetMapping("")
     public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
@@ -55,7 +59,8 @@ public class DepartamentoController {
 
     @GetMapping(value = "/eliminar/{id}")
     public ResponseEntity<Departamento> eliminar(@PathVariable Long id) {
-        Departamento departamento = departamentoService.getDepartamentoById(id);
+        // Departamento departamento = departamentoService.getDepartamentoById(id);
+        Departamento departamento = departamentoService.getDepartamentoById(id).get();
         if (departamento != null) {
             departamentoService.eliminarDepartamento(id);
         } else {
@@ -64,4 +69,8 @@ public class DepartamentoController {
         return new ResponseEntity<Departamento>(departamento, HttpStatus.OK);
     }
 
+    @GetMapping("/nombres")
+    public ArrayList<HashMap<String, Object>> getNombres() {
+        return departamentoService.getAllNombreDepartamentosSinRepetir();
+    }
 }

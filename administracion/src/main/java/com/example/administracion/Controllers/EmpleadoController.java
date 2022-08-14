@@ -26,7 +26,11 @@ import com.example.administracion.Services.EmpleadoService;
 import com.example.administracion.Services.TrabajadorService;
 
 @RestController
+// <<<<<<< HEAD
 @RequestMapping("/empleados")
+// =======
+// @RequestMapping("/")
+// >>>>>>> springboot_prueba
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmpleadoController {
 
@@ -87,7 +91,8 @@ public class EmpleadoController {
     }
     @GetMapping(value= "/eliminarPersona/{id}")
     public ResponseEntity<Persona> eliminarPersona(@PathVariable Long id){
-        Persona persona = personaService.getPersonaById(id);
+        // Persona persona = personaService.getPersonaById(id);
+        Persona persona = personaService.getPersonaById(id).get();
         if(persona != null){
             personaService.eliminarPersonaPorId(id);
         }else{
@@ -128,6 +133,9 @@ public class EmpleadoController {
 
     @GetMapping("{idTrabajador}")
     public Empleado getEmpleadoByIdTrabajador(@PathVariable("idTrabajador") Long idTrabajador) {
-        return empleadoRepository.findAllByIdTrabajador(idTrabajador);
+        return empleadoRepository.findAllByIdTrabajador(idTrabajador);}
+    @GetMapping
+    public ArrayList<Long> getIdEmpleados() {
+        return (ArrayList<Long>) empleadoService.getIdsTrabajador();
     }
 }

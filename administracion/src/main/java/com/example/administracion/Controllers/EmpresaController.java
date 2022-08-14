@@ -2,6 +2,7 @@ package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.sql.Time;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +17,9 @@ import com.example.administracion.Models.Empresa;
 import com.example.administracion.Repositories.EmpresaRepository;
 import com.example.administracion.Services.EmpresaService;
 
-@RestController
+import com.example.administracion.Services.EmpresaService;
+
+@RestController()
 @RequestMapping("/empresa")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmpresaController {
@@ -42,7 +45,8 @@ public class EmpresaController {
 
     @GetMapping()
     public Empresa getEmpresaById() {
-        return empresaService.getEmpresaById();
+        // return empresaService.getEmpresaById();
+        return empresaService.getEmpresaById().get();
     }
 
     @PostMapping("actualizar")
@@ -54,5 +58,11 @@ public class EmpresaController {
     // public Time getHoraEntredaEmpresa(){
     // return getEmpresaById().getHoraEntrada();
     // }
+
+
+    @GetMapping("/id")
+    public Time getHoraEntredaEmpresa(){
+        return empresaService.getHoraEntredaEmpresa();
+    }
 
 }

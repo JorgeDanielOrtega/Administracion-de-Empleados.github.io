@@ -34,6 +34,7 @@ public class AsistenciaController {
         return asistenciaService.getAsistenciasByIdTrabajador(id);
     }
 
+
     @PostMapping("/{id}")
     public Asistencia saveAsistencia(@PathVariable("id") Long id, @RequestBody Asistencia asistencia) {
         return asistenciaService.saveAsistencia(asistencia);

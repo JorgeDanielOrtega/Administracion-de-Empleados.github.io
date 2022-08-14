@@ -4,6 +4,9 @@ import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +31,9 @@ public class DepartamentoService {
 	public ArrayList<Departamento> getTodosDepartamentos(){
 		return (ArrayList<Departamento>) departamentoRepository.findAll();
 	}
-	public Departamento getDepartamentoById(Long id) {
-		return departamentoRepository.findById(id).get();
-	}
+	// public Departamento getDepartamentoById(Long id) {
+	// 	return departamentoRepository.findById(id).get();
+	// }
 	public Optional<Departamento> obtenerDepartamentoBarraBusqueda(Long id){
 		return  departamentoRepository.findById(id);
 	}
@@ -56,5 +59,21 @@ public class DepartamentoService {
 	public Departamento guardarDepartamento (Departamento departamento){
 		return departamentoRepository.save(departamento);
 	}
+
+	public Optional<Departamento> getDepartamentoById(Long id) {
+		return departamentoRepository.findById(id);
+	}
+
+	// public ArrayList<HashMap<String, Object>> getAllNombreDepartamentosSinRepetir() {
+
+	// 	ArrayList<HashMap<String, Object>> nombresDepartamentoList = new ArrayList<>();
+	// 	for (Departamento departamento : (ArrayList<Departamento>) departamentoRepository.findAll()) {
+	// 		HashMap<String, Object> mapNombres = new HashMap();
+	// 		mapNombres.put("nombre", departamento.getNombre());
+	// 		nombresDepartamentoList.add(mapNombres);
+	// 	}
+
+	// 	return nombresDepartamentoList;
+	// }
 
 }

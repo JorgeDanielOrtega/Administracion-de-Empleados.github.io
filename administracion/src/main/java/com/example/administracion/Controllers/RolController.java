@@ -10,6 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.administracion.Services.RolService;
 
 @RestController
@@ -19,6 +25,7 @@ public class RolController {
 
     @Autowired
     RolService rolService;
+
 
     @GetMapping()
     public ArrayList<HashMap<String, Object>> getNombresRol() {
@@ -43,7 +50,8 @@ public class RolController {
     }
     @GetMapping(value = "/eliminar/{id}")
     public ResponseEntity<Rol> eliminar(@PathVariable Long id){
-        Rol rol = rolService.getRolById(id);
+        // Rol rol = rolService.getRolById(id);
+        Rol rol = rolService.getRolById(id).get();
         if(rol != null){
             rolService.eliminarRolPorId(id);
         }else{
