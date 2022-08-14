@@ -28,6 +28,9 @@ public class HorarioService {
 	public Long getIdHorarioByTipo(String tipo) {
 		return horarioRepository.findByTipo(tipo).getId();
 	}
+	public ArrayList<Horario> getTodosHorarios(){
+		return (ArrayList<Horario>) horarioRepository.findAll();
+	}
 
 	public ArrayList<HashMap<String, Object>> getNombresHorariosSinRepetir() {
 		ArrayList<HashMap<String, Object>> nombresHorarioList = new ArrayList<>();

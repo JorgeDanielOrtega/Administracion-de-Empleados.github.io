@@ -33,7 +33,7 @@ public class EmpleadoControllerTest {
 
         when(empleadoService.getIdsTrabajador()).thenReturn(ids);
 
-        ArrayList<Long> empleadoResult = empleadoController.getEmpleados();
+        ArrayList<Long> empleadoResult = empleadoController.getIdEmpleados();
 
         verify(empleadoService, times(1)).getIdsTrabajador();
     }

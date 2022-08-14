@@ -30,43 +30,6 @@ public class Departamento {
     @Column(name = "id_empresa")
     private Long idEmpresa;
 
-    // private String añoCreacion;
-    // private List<Trabajador> trabajadorList;
-
-    // public Departamento() {
-    // trabajadorList = new LinkedList();
-    // guardarFecha();
-    // }
-
-    // public Departamento(String nombre, int numero, int empleadosMaximos) {
-    // this();
-    // this.nombre = nombre;
-    // this.numero = numero;
-    // this.empleadosMaximos = empleadosMaximos;
-    // }
-
-    // public Departamento(String nombre, int numero, int maximoEmpleados, int
-    // vacaciones) {
-    // this(nombre, numero, maximoEmpleados);
-    // this.vacaciones = vacaciones;
-    // }
-    // // guardarFecha();
-
-    // private void actualizarVacaciones() {
-    // DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy");
-    // if
-    // (añoCreacion.equals(String.valueOf(Integer.parseInt(formato.format(LocalDateTime.now()))
-    // - 1))) {
-    // for (int i = 0; i <= trabajadorList.size(); i++) {
-    // trabajadorList.get(i).setVacaciones(vacaciones);
-    // }
-    // }
-    // }
-
-    // private void guardarFecha() {
-    // DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy");
-    // this.añoCreacion = formato.format(LocalDateTime.now());
-    // }
 
     public String getNombre() {
         return nombre;

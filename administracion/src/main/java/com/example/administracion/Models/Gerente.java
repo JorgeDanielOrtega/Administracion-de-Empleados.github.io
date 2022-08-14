@@ -25,29 +25,6 @@ public class Gerente {
     // private Empresa empresa;
     // private AdministracionEmpleado adminstracionEmpleado;
 
-    // public Gerente(Empresa empresa, String correoPersonal, String usuario, String
-    // password, Puesto puesto, Rol rol, Departamento departamento, Contrato
-    // contrato, String nombre, String apellido, String direccion, String cedula,
-    // char sexo, String ciudad, String telefono, Date fechaNacimiento) {
-    // super(correoPersonal, usuario, password, puesto, rol, departamento, contrato,
-    // nombre, apellido, direccion, cedula, sexo, ciudad, telefono,
-    // fechaNacimiento);
-    // this.empresa = empresa;
-    // }
-
-    // public Gerente(String nombre, String apellido, String direccion, EstadoCivil
-    // estadoCivil,
-    // String numeroCedula, char sexo, String ciudad, String telefono, Date
-    // fechaNacimiento,
-    // String correoPersonal, String correoEmpresarial, String usuario, String
-    // contrasenia,
-    // boolean pagoPorTransferencia, Rol rol, Contrato contrato, Departamento
-    // departamento){
-    // super(nombre, apellido, direccion, estadoCivil, numeroCedula, sexo, ciudad,
-    // telefono, fechaNacimiento, correoPersonal,
-    // correoEmpresarial, usuario, contrasenia, pagoPorTransferencia, rol, contrato,
-    // departamento);
-    // }
 
     // CRUD EMPRESA
 

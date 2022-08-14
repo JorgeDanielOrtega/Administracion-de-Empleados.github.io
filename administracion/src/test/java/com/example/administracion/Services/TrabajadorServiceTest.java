@@ -65,8 +65,8 @@ public class TrabajadorServiceTest {
         trabajador.setId(1l);
 
         persona = new Persona();
-        persona.setNombre("a");
-        persona.setApellido("a");
+        persona.setNombres("a");
+        persona.setApellidos("a");
         persona.setDireccion("a");
         persona.setEstadoCivil("a");
         persona.setCedula("a");
