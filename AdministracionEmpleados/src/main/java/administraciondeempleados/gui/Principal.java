@@ -67,10 +67,12 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         parent = this;
         //construir empresa con datos de la base
-        if (empresa == null) {
+        empresa = new Empresa();
+        //empresa.cargarEmpresa();
+        empresa.cargarListas();
+        if (empresa.getGerenteList().isEmpty()) {
             //valores por defecto para la ejecucion por primera vez
             //depa = new ModelTableDescripcionDepartamento();
-            empresa = new Empresa("Nombre", "YYYY/MM/DD", "Leyenda", "Rubro");
             Puesto puesto = new Puesto("Gerente");
             Rol rol = new Rol("Gerente");
             Departamento departamento = new Departamento("Administración", 1, 1);
@@ -81,10 +83,10 @@ public class Principal extends javax.swing.JFrame {
             empresa.getRolList().add(rol);
             
             //datos de prueba, eliminar despues
-            Departamento departamento1 = new Departamento("Limpieza", 1, 1);
-            Empleado empleado69 = new Empleado(new Date(), horarioMatutino, "CorreoPersonal", "empleado", new Puesto("limpieza"), new Rol("Empleado"), departamento1, new Contrato(true), "Empleado", "Empleado", "Direccion", "999999999", '/', "Ciudad", "9999999999", new Date());
-            departamento1.getTrabajadorList().add(empleado69);
-            empresa.getDepartamentoList().add(departamento1);
+//            Departamento departamento1 = new Departamento("Limpieza", 1, 1);
+//            Empleado empleado69 = new Empleado(new Date(), horarioMatutino, "CorreoPersonal", "empleado", new Puesto("limpieza"), new Rol("Empleado"), departamento1, new Contrato(true), "Empleado", "Empleado", "Direccion", "999999999", '/', "Ciudad", "9999999999", new Date());
+//            departamento1.getTrabajadorList().add(empleado69);
+//            empresa.getDepartamentoList().add(departamento1);
             
             diaLogin = new DiaLogin(this, true, empresa);
             diaLogin.setVisible(true);
@@ -99,7 +101,8 @@ public class Principal extends javax.swing.JFrame {
             cargarComponentes();
         }
         //++++++++++++++++++++++++IMPORTANTE
-        empresa.cargarListas(); //metodo para cargar las listas desde la base de datos IMPORTANTE
+        
+        //metodo para cargar las listas desde la base de datos IMPORTANTE
         System.out.println(empresa.getHorarioList());
         System.out.println(empresa.getRolList());
         System.out.println(empresa.getDepartamentoList());
