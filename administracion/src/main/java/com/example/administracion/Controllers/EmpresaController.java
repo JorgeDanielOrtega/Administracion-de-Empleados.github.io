@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.administracion.Models.Empresa;
-import com.example.administracion.Repositories.EmpresaRepository;
+import com.example.administracion.Services.EmpresaService;
 
 @RestController()
 @RequestMapping("/empresa")
@@ -17,16 +17,16 @@ import com.example.administracion.Repositories.EmpresaRepository;
 public class EmpresaController {
 
     @Autowired
-    EmpresaRepository empresaRepository;
+    EmpresaService empresaService;
 
     @GetMapping()
     public Empresa getEmpresaById() {
-        return empresaRepository.findById(1l).get();
+        return empresaService.getEmpresaById().get();
     }
 
     @GetMapping("/id")
     public Time getHoraEntredaEmpresa(){
-        return getEmpresaById().getHoraEntrada();
+        return empresaService.getHoraEntredaEmpresa();
     }
 
 }

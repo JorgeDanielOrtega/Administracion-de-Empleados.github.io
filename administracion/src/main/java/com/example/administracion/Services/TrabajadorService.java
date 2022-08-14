@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -38,45 +39,56 @@ public class TrabajadorService {
 		return (ArrayList<Trabajador>) trabajadorRepository.findAllById(ids);
 	}
 
-	public Trabajador getTrabajadorById(Long id) {
-		return trabajadorRepository.findById(id).get();
+	public Map<String, Object> getDatosEmpleado(Persona persona, Trabajador trabajador) {
+
+		try {
+			Map<String, Object> myMap = new HashMap<>();
+
+			myMap.put("id", trabajador.getId());
+			myMap.put("nombres", persona.getNombre());
+			myMap.put("apellidos", persona.getApellido());
+			myMap.put("direccion", persona.getDireccion());
+			myMap.put("estado_civil", persona.getEstadoCivil());
+			myMap.put("cedula", persona.getCedula());
+			myMap.put("ciudad", persona.getCiudad());
+			myMap.put("telefono", persona.getTelefono());
+			myMap.put("sexo", String.valueOf(persona.getSexo()));
+			myMap.put("fecha_nacimiento", persona.getFechaNacimiento().toString());
+			myMap.put("anio_entrada", persona.getAnioEntrada().toString());
+			myMap.put("correo_personal", trabajador.getCorreoPersonal());
+			myMap.put("correo_empresarial", trabajador.getCorreoEmpresarial());
+			myMap.put("usuario", trabajador.getUsuario());
+			myMap.put("contrasenia", trabajador.getPassword());
+			myMap.put("id_departamento", trabajador.getIdDepartamento());
+			myMap.put("id_rol", trabajador.getIdRol());
+			myMap.put("id_horario", trabajador.getIdHorario());
+
+			return myMap;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return new HashMap<String, Object>();
 	}
 
-	public Map<String, Object> getDatosEmpleado(Persona persona, Trabajador trabajador) {
-		Map<String, Object> myMap = new HashMap<>();
-
-		myMap.put("id", trabajador.getId());
-		myMap.put("nombres", persona.getNombre());
-		myMap.put("apellidos", persona.getApellido());
-		myMap.put("direccion", persona.getDireccion());
-		myMap.put("estado_civil", persona.getEstadoCivil());
-		myMap.put("cedula", persona.getCedula());
-		myMap.put("ciudad", persona.getCiudad());
-		myMap.put("telefono", persona.getTelefono());
-		myMap.put("sexo", String.valueOf(persona.getSexo()));
-		myMap.put("fecha_nacimiento", persona.getFechaNacimiento().toString());
-		myMap.put("anio_entrada", persona.getAnioEntrada().toString());
-		myMap.put("correo_personal", trabajador.getCorreoPersonal());
-		myMap.put("correo_empresarial", trabajador.getCorreoEmpresarial());
-		myMap.put("usuario", trabajador.getUsuario());
-		myMap.put("contrasenia", trabajador.getPassword());
-		myMap.put("id_departamento", trabajador.getIdDepartamento());
-		myMap.put("id_rol", trabajador.getIdRol());
-		myMap.put("id_horario", trabajador.getIdHorario());
-
-		return myMap;
+	public Long getIdHorarioByIdTrabajador(Long idTrabajador) {
+		return getTrabajadorById(idTrabajador).get().getIdHorario();
 	}
 
 	public Map<String, Object> getTrabajadorInfo(Long id) {
-		Long idPersona = getTrabajadorById(id).getIdPersona();
+		try {
+			Long idPersona = getTrabajadorById(id).get().getIdPersona();
 
-		Persona persona = personaService.getPersonaById(idPersona);
-		Trabajador trabajador = getTrabajadorById(id);
-		return getDatosEmpleado(persona, trabajador);
+			Persona persona = personaService.getPersonaById(idPersona).get();
+			Trabajador trabajador = getTrabajadorById(id).get();
+			return getDatosEmpleado(persona, trabajador);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new HashMap<>();
 	}
 
-	public Horario getHorarioOfTrabajador(Long idHorario) {
-		return horarioService.getHorarioById(idHorario);
+	public Optional<Trabajador> getTrabajadorById(Long id) {
+		return trabajadorRepository.findById(id);
 	}
 
 	private Map<String, Object> getDataEmpleadosByDepartamento(Persona persona, Trabajador trabajador) {
@@ -89,10 +101,43 @@ public class TrabajadorService {
 		myMap.put("id", trabajador.getId());
 		myMap.put("nombres", persona.getNombre());
 		myMap.put("apellidos", persona.getApellido());
-		myMap.put("Rol", rolService.getRolById(idRol).getNombre());
-		myMap.put("Horario", getHorarioOfTrabajador(idHorario).getTipo());
+		myMap.put("Rol", rolService.getRolById(idRol).get().getNombre());
+		myMap.put("Horario", getHorarioOfTrabajador(idHorario).get().getTipo());
 
 		return myMap;
+	}
+
+	public ArrayList<Map<String, Object>> getTrabajadorForBusqueda() {
+		try {
+			List<Long> ids = new LinkedList<>();
+			ArrayList<Persona> personaList = new ArrayList<Persona>();
+			ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
+			ArrayList<Trabajador> trabajadorList = new ArrayList<>();
+
+			for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
+				if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
+						&& trabajador.getIdRol() != null) {
+
+					trabajadorList.add(trabajador);
+				}
+			}
+
+			// todo añadir para recuperar los departamentos
+			trabajadorList.forEach(trabajador -> {
+				Long idPersona = trabajador.getIdPersona();
+				ids.add(idPersona);
+			});
+			personaList = personaService.getPersonas((Iterable<Long>) ids);
+
+			for (int i = 0; i < trabajadorList.size(); i++) {
+				trabajadorArrayListInfo.add(
+						getDataEmpleadosForBusqueda(personaList.get(i), trabajadorList.get(i)));
+			}
+			return trabajadorArrayListInfo;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return new ArrayList<>();
 	}
 
 	private Map<String, Object> getDataEmpleadosForBusqueda(Persona persona, Trabajador trabajador) {
@@ -106,11 +151,43 @@ public class TrabajadorService {
 		myMap.put("id", trabajador.getId());
 		myMap.put("nombres", persona.getNombre());
 		myMap.put("apellidos", persona.getApellido());
-		myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
-		myMap.put("rol", rolService.getRolById(idRol).getNombre());
-		myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+		myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).get().getNombre());
+		myMap.put("rol", rolService.getRolById(idRol).get().getNombre());
+		myMap.put("horario", getHorarioOfTrabajador(idHorario).get().getTipo());
 
 		return myMap;
+	}
+
+	public ArrayList<Map<String, Object>> getTrabajadoresByFields(String departamento, String rol, String horario,
+			Long id,
+			String nombreApellido) {
+
+		try {
+			Map<String, Object> fieldsMap = new HashMap<>();
+
+			if (departamento != null) {
+				fieldsMap.put("t.idDepartamento", departamentoService.getIdDepartamentoByNombre(departamento));
+			}
+			if (rol != null) {
+				fieldsMap.put("t.idRol", rolService.getIdRolByNombre(rol));
+			}
+			if (horario != null) {
+				fieldsMap.put("t.idHorario", horarioService.getIdHorarioByTipo(horario));
+			}
+			if (nombreApellido != null) {
+				fieldsMap.put("t.idPersona", getIdPersonaByNombresApellidos(nombreApellido));
+			}
+			if (id != null) {
+				fieldsMap.put("t.id", id.toString());
+			}
+			Query query = entityManager.createQuery(generarQuery(fieldsMap));
+
+			return getDataEmpleadosForBusqueda(query.getResultList());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return new ArrayList<>();
 	}
 
 	private ArrayList<HashMap<String, Object>> getDataEmpleadosForBusqueda(List<Trabajador> trabajadorList) {
@@ -131,14 +208,14 @@ public class TrabajadorService {
 			idRol = trabajador.getIdRol();
 			idHorario = trabajador.getIdHorario();
 			idDepartamento = trabajador.getIdDepartamento();
-			persona = personaService.getPersonaById(trabajador.getIdPersona());
+			persona = personaService.getPersonaById(trabajador.getIdPersona()).get();
 
 			myMap.put("id", idTrabajador);
 			myMap.put("nombres", persona.getNombre());
 			myMap.put("apellidos", persona.getApellido());
-			myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).getNombre());
-			myMap.put("rol", rolService.getRolById(idRol).getNombre());
-			myMap.put("horario", getHorarioOfTrabajador(idHorario).getTipo());
+			myMap.put("departamento", departamentoService.getDepartamentoById(idDepartamento).get().getNombre());
+			myMap.put("rol", rolService.getRolById(idRol).get().getNombre());
+			myMap.put("horario", getHorarioOfTrabajador(idHorario).get().getTipo());
 
 			mapList.add(myMap);
 		}
@@ -146,32 +223,8 @@ public class TrabajadorService {
 		return mapList;
 	}
 
-	public ArrayList<Map<String, Object>> getTrabajadorForBusqueda() {
-		List<Long> ids = new LinkedList<>();
-		ArrayList<Persona> personaList = new ArrayList<Persona>();
-		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();
-		ArrayList<Trabajador> trabajadorList = new ArrayList<>();
-
-		for (Trabajador trabajador : (ArrayList<Trabajador>) trabajadorRepository.findAll()) {
-			if (trabajador.getIdDepartamento() != null && trabajador.getIdHorario() != null
-					&& trabajador.getIdRol() != null) {
-
-				trabajadorList.add(trabajador);
-			}
-		}
-
-		// todo añadir para recuperar los departamentos
-		trabajadorList.forEach(trabajador -> {
-			Long idPersona = trabajador.getIdPersona();
-			ids.add(idPersona);
-		});
-		personaList = personaService.getPersonas((Iterable<Long>) ids);
-
-		for (int i = 0; i < trabajadorList.size(); i++) {
-			trabajadorArrayListInfo.add(
-					getDataEmpleadosForBusqueda(personaList.get(i), trabajadorList.get(i)));
-		}
-		return trabajadorArrayListInfo;
+	public Optional<Horario> getHorarioOfTrabajador(Long idHorario) {
+		return horarioService.getHorarioById(idHorario);
 	}
 
 	public ArrayList<Map<String, Object>> getTrabajadorByIdDepartamento(Long idDepartamento) {
@@ -195,6 +248,20 @@ public class TrabajadorService {
 		return trabajadorArrayListInfo;
 	}
 
+	public String getIdPersonaByNombresApellidos(String nombresApellidos) {
+		try {
+			String sql = "SELECT p.id FROM Persona p WHERE p.nombres LIKE '%" + nombresApellidos
+					+ "%' OR p.apellidos LIKE '%" + nombresApellidos + "%'";
+
+			Query query = entityManager.createQuery(sql);
+
+			return formatearidPersonaList(query.getResultList().toArray());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "1";
+	}
+
 	private String formatearidPersonaList(Object[] idsPersona) {
 		String result = "(";
 		int size = idsPersona.length;
@@ -206,15 +273,6 @@ public class TrabajadorService {
 			result += idsPersona[i] + ",";
 		}
 		return "";
-	}
-
-	public String getIdPersonaByNombresApellidos(String nombresApellidos) {
-		String sql = "SELECT p.id FROM Persona p WHERE p.nombres LIKE '%" + nombresApellidos
-				+ "%' OR p.apellidos LIKE '%" + nombresApellidos + "%'";
-
-		Query query = entityManager.createQuery(sql);
-
-		return formatearidPersonaList(query.getResultList().toArray());
 	}
 
 	private String generarQuery(Map<String, Object> fieldsMap) {
@@ -233,31 +291,6 @@ public class TrabajadorService {
 			}
 		}
 		return query;
-	}
-
-	public ArrayList<Map<String, Object>> getTrabajadoresByFields(String departamento, String rol, String horario, Long id,
-			String nombreApellido) {
-		Map<String, Object> fieldsMap = new HashMap<>();
-
-		if (departamento != null) {
-			fieldsMap.put("t.idDepartamento", departamentoService.getIdDepartamentoByNombre(departamento));
-		}
-		if (rol != null) {
-			fieldsMap.put("t.idRol", rolService.getIdRolByNombre(rol));
-		}
-		if (horario != null) {
-			fieldsMap.put("t.idHorario", horarioService.getIdHorarioByTipo(horario));
-		}
-		if (nombreApellido != null) {
-			fieldsMap.put("t.idPersona", getIdPersonaByNombresApellidos(nombreApellido));
-		}
-		if (id != null) {
-			fieldsMap.put("t.id", id.toString());
-		}
-		Query query = entityManager.createQuery(generarQuery(fieldsMap));
-
-		return getDataEmpleadosForBusqueda(query.getResultList());
-		
 	}
 
 }

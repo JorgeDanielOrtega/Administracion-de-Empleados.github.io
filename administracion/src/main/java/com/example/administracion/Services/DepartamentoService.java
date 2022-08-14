@@ -2,11 +2,7 @@ package com.example.administracion.Services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +15,12 @@ public class DepartamentoService {
 
 	@Autowired
 	DepartamentoRepository departamentoRepository;
-	@Autowired
-	EntityManager entityManager;
 
 	public Long getIdDepartamentoByNombre(String nombre) { return departamentoRepository.findByNombre(nombre).getId();
 	}
 
-	public Departamento getDepartamentoById(Long id) {
-		return departamentoRepository.findById(id).get();
+	public Optional<Departamento> getDepartamentoById(Long id) {
+		return departamentoRepository.findById(id);
 	}
 
 	public ArrayList<HashMap<String, Object>> getAllNombreDepartamentosSinRepetir() {
@@ -37,7 +31,7 @@ public class DepartamentoService {
 			mapNombres.put("nombre", departamento.getNombre());
 			nombresDepartamentoList.add(mapNombres);
 		}
-		
+
 		return nombresDepartamentoList;
 	}
 

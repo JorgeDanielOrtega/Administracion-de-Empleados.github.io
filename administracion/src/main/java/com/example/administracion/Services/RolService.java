@@ -2,6 +2,7 @@ package com.example.administracion.Services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class RolService {
 	@Autowired
 	RolRepository rolRepository;
 
-	public Rol getRolById(Long id) {
-		return rolRepository.findById(id).get();
+	public Optional<Rol> getRolById(Long id) {
+		return rolRepository.findById(id);
 	}
 
 	public Long getIdRolByNombre(String nombre) {

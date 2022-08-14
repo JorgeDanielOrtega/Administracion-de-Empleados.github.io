@@ -3,6 +3,7 @@ package com.example.administracion.Services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class EmpleadoService{
 	@Autowired
 	PersonaService personaService;
 
-	public Iterable<Long> getIdTrabajador() {
+	public Iterable<Long> getIdsTrabajador() {
+
 		ArrayList<Long> idTrabajadorList = new ArrayList<>();
 		for (Empleado empleado : empleadoRepository.findAll()) {
 			idTrabajadorList.add(empleado.getIdTrabajador());
@@ -26,5 +28,4 @@ public class EmpleadoService{
 		return (Iterable<Long>) idTrabajadorList;
 	}
 
-	
 }

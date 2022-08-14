@@ -32,8 +32,12 @@ public class EmpleadoController {
 //        return (ArrayList<Long>) empleadoService.getIdTrabajador();
 //    }
     @GetMapping()
-    public List<Persona> personaList(){
+    public List<Persona> personaList() {
         return (List<Persona>) personaService.listarPersonas();
+    }
+    @GetMapping
+    public ArrayList<Long> getEmpleados() {
+        return (ArrayList<Long>) empleadoService.getIdsTrabajador();
     }
 
 //    We could use PostMapping to save information
