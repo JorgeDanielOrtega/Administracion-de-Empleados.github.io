@@ -12,6 +12,7 @@ import Toast from 'primevue/toast';
 import Dropdown from 'primevue/dropdown';
 import TabMenu from 'primevue/tabmenu';
 import Divider from 'primevue/divider';
+import Card from 'primevue/card';
 
 import '/node_modules/primeflex/primeflex.css';             // prime flex
 
@@ -31,6 +32,7 @@ const app = createApp(App).use(router); //1
 app.use(PrimeVue); //2
 app.use(ToastService);
 app.component('InputText', InputText);
+app.component('Card', Card);
 app.component('Button', Button);
 app.component('Dialog', Dialog);
 app.component('DataTable', DataTable);

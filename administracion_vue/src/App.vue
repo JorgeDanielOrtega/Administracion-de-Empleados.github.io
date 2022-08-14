@@ -64,6 +64,7 @@ export default {
           { label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/' + this.idLogin },
           { label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda' },
           { label: 'Decimo', icon: 'pi pi-credit-card', to: '/decimo' },
+          { label: 'Pokemon', icon: 'pi pi-palette', to: '/pokemon' },
         ];
         return this.items;
       } else if (this.idLogin != null) {
@@ -72,14 +73,13 @@ export default {
           { label: 'Perfil', icon: 'pi pi-user-edit', to: '/perfil/' + this.idLogin },
           { label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/' + this.idLogin },
           { label: 'Departamento', icon: 'pi pi-home', to: '/departamento/' + this.idLogin },
+          { label: 'Pokemon', icon: 'pi pi-palette', to: '/pokemon' },
         ];
         return this.items;
       }
 
     }
   }
-
-
 }
 </script>
 
