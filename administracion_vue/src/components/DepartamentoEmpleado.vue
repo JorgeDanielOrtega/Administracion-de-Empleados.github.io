@@ -1,13 +1,14 @@
 <template>
     <div v-if=status>
         <div>
-            <DataTable :value="empleados" :paginator="true" :rows="10" responsiveLayout="scroll" :style="{margin: '1rem'}">
+            <DataTable :value="empleados" :paginator="true" :rows="10" responsiveLayout="scroll"
+                :style="{ margin: '1rem' }">
                 <Column field="nombres" header="Nombres"></Column>
                 <Column field="apellidos" header="Apellidos"></Column>
                 <Column field="Horario" header="Horario"></Column>
                 <Column field="Rol" header="Rol"></Column>
             </DataTable>
-            <router-link to="/"> <Button label="Atras" /></router-link> 
+            <router-link to="/"> <Button label="Atras" /></router-link>
             <!-- todo cambiar el touter link, al principal cuando se haga -->
         </div>
     </div>
@@ -31,7 +32,8 @@ export default {
         return {
             empleados: null,
             status: null,
-            idLogin: null
+            idLogin: null,
+            id: null
         }
     },
     departamentoService: null,
@@ -41,38 +43,48 @@ export default {
         this.loginService = new LoginService();
     },
     mounted() {
-        this.departamentoService.getEmpleadosListByDepartamento(1).then(response => { //todo cambiar el id mas tarde
+        this.obtener();
+
+        this.departamentoService.getEmpleadosListByDepartamento(this.getId()).then(response => { //todo cambiar el id mas tarde
             console.log(response);
             this.empleados = response;
         });
-        this.loginService.retornarIngreso().then(response => {
-            this.login = response.data;
-            this.idLogin = this.login.id;
-            this.status = this.login.status;
-        });
-    }, 
+
+    },
     methods: {
-        redirigir(){
+        redirigir() {
             this.$router.push('/');
+        },
+        async obtener() {
+            await this.loginService.retornarIngreso().then(response => {
+                this.login = response.data;
+                this.idLogin = this.login.id;
+                this.status = this.login.status;
+            });
+        },
+         getId() {
+            this.id = this.$route.params.id;
+            console.log('el id', this.id);
+            return this.id;
         }
     }
 }
 </script>
 
 <style>
-    a{
-        text-decoration: none;
-    }
+a {
+    text-decoration: none;
+}
 
-    .login{
+.login {
     font-size: 35px;
-    }
+}
 
-    .divisor{
-        height: 25px;
-    }
+.divisor {
+    height: 25px;
+}
 
-    .buttonLogin{
-        margin-top: 0px;
-    }
+.buttonLogin {
+    margin-top: 0px;
+}
 </style>

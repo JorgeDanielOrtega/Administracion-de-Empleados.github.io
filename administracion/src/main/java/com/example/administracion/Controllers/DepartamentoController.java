@@ -35,10 +35,10 @@ public class DepartamentoController {
         return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
     }
 
-    @GetMapping("")
-    public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
-        return departamentoService.getAllNombreDepartamentosSinRepetir();
-    }
+    // @GetMapping("")
+    // public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
+    //     return departamentoService.getAllNombreDepartamentosSinRepetir();
+    // }
 
     @GetMapping("/all")
     public ArrayList<Departamento> obtenerTodosDepartamentos() {

@@ -26,6 +26,7 @@ public class BusquedaController {
     @Autowired
     DepartamentoService departamentoService;
 
+    @GetMapping
     public ArrayList<Map<String, Object>> getTrabajadores() { // Todo cambiar nombre despues
         return trabajadorService.getTrabajadorForBusqueda();
         

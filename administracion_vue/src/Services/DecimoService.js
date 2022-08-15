@@ -23,28 +23,28 @@ export default class AsistenciaService {
     trabajadores = null
 
 
-    async actualizarDecimos(){
-        
-        let empleados = null
-        
+    async actualizarDecimos() {
 
-        await this.getDecimos().then(response=>{
+        let empleados = null
+
+
+        await this.getDecimos().then(response => {
             this.decimos = response.data//funciona
         })
         console.log('d', this.decimos);
 
-        await this.empleadoService.getEmpleados().then(response=>{
+        await this.empleadoService.getEmpleados().then(response => {
             empleados = response
 
             console.log('r', response);
         })
 
-        await this.rolService.getRoles().then(response=>{
+        await this.rolService.getRoles().then(response => {
             this.roles = response
             console.log('roles', this.roles);
         })
 
-        await this.empleadoService.getTrabajadores().then(response=>{
+        await this.empleadoService.getTrabajadores().then(response => {
             this.trabajadores = response
             console.log('trabajadores', this.trabajadores);
         })
@@ -53,22 +53,21 @@ export default class AsistenciaService {
             if (empleado.idTrabajador != null) {
                 if (this.idEmpleadoDiferente(empleado.id)) {
                     // console.log(empleado.idTrabajador);
-                    console.log(empleado.idTrabajador, this.getSalario(this.getIdRol(empleado.idTrabajador)));
                     this.saveDecimo(empleado.idTrabajador, this.getSalario(this.getIdRol(empleado.idTrabajador)))
                 }
             }
         });
     }
 
-    getIdRol(idTrabajador){
+    getIdRol(idTrabajador) {
         for (let index = 0; index < this.trabajadores.length; index++) {
             if (this.trabajadores[index].id == idTrabajador) {
                 return this.trabajadores[index].idRol
             }
         }
     }
-    
-    getSalario(idRol){
+
+    getSalario(idRol) {
         for (let index = 0; index < this.roles.length; index++) {
             if (this.roles[index].id == idRol) {
                 return this.roles[index].salario
@@ -76,15 +75,18 @@ export default class AsistenciaService {
         }
     }
 
-    idEmpleadoDiferente(idEmpleado){
+    idEmpleadoDiferente(idEmpleado) {
+        let verificador = 0
         for (let index = 0; index < this.decimos.length; index++) {
             if (this.decimos[index].idEmpleado != idEmpleado) {
-                return true
+                verificador += 1;
             }
         }
+
+        return verificador == this.decimos.length;
     }
 
-   getDecimos() { 
+    getDecimos() {
         return new Promise((resolve) => {
             resolve(axios.get(this.url));
         });
@@ -93,12 +95,12 @@ export default class AsistenciaService {
     async saveDecimo(idTrabajador, salario) {
         let id = 0
         let totalAsistencias = 0;
-        await this.getAsistenciaByIdTrabajador(idTrabajador).then(response =>{
+        await this.getAsistenciaByIdTrabajador(idTrabajador).then(response => {
             totalAsistencias = response.data.length
         });
         const decimoCuarto = (SUELDO_BASICO / DIAS_LABORALES) * totalAsistencias;
 
-        await this.getIdEmpleado(idTrabajador).then(response=>{
+        await this.getIdEmpleado(idTrabajador).then(response => {
             id = response.data.id
         });
 
