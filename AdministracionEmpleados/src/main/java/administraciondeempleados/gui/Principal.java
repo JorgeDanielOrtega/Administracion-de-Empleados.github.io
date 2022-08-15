@@ -125,7 +125,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void cargarComponentes() {
-        if (this.cuenta.getRol().getNombre().equals("Empleado")) {
+        if (!this.cuenta.getRol().getNombre().equals("Gerente")) {
             menuEmpleado.setVisible(true);
             menuEmpleado.setBackground(Palette.MENU);
             menuGerente.setVisible(false);
