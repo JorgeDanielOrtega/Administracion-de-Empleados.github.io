@@ -383,6 +383,8 @@ public class DiaLogin extends javax.swing.JDialog {
         System.out.println(empresa.getDepartamentoList());
         System.out.println("\n");
         System.out.println(empresa.getGerenteList());
+        System.out.println("Roles");
+        System.out.println(empresa.getRolList());
         
         
         for (int i = 0; i < empresa.getTrabajadorList().size(); i++) {
