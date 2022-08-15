@@ -5,12 +5,12 @@ import axios from "axios";
 export default class EmpleadoService{
     // url = "http://localhost:8080/empleados/"
     url = "http://localhost:8081/empleados/"
-    urlDepartamentos = "http://localhost:8080/departamento/all"
-    urlPuestos = "http://localhost:8080/puesto/all"
-    urlRoles = "http://localhost:8080/rol/all"
-    urlHorario = "http://localhost:8080/horario/all"
-    urlAsistenicas = "http://localhost:8080/asistencia/"
-    urlGerentes = "http://localhost:8080/gerentes/"
+    urlDepartamentos = "http://localhost:8081/departamento/all"
+    urlPuestos = "http://localhost:8081/puesto/all"
+    urlRoles = "http://localhost:8081/rol/all"
+    urlHorario = "http://localhost:8081/horario/all"
+    urlAsistenicas = "http://localhost:8081/asistencia/"
+    urlGerentes = "http://localhost:8081/gerentes/"
 
     //considerar el await para traer los datos rapido
     

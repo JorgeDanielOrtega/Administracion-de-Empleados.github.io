@@ -18,13 +18,13 @@
         <Dialog header="Crear Empleado" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
             
             <span class="p-float-label">
-                 <InputText id="nombre" type="text" v-model="persona.nombre" style="width: 100%" />
+                 <InputText id="nombre" type="text" v-model="persona.nombres" style="width: 100%" />
                 <label for="nombre">Nombres</label>
             </span>
             <br>
 
             <span class="p-float-label">
-                 <InputText id="apellido" type="text" v-model="persona.apellido" style="width: 100%" />
+                 <InputText id="apellido" type="text" v-model="persona.apellidos" style="width: 100%" />
                 <label for="apellido">Apellidos</label>
             </span>
             <br>
@@ -74,7 +74,7 @@
             </span>
             <br>
             <span class="p-float-label">
-                 <InputText id="correoEmpresarial" type="text" v-model="trabajador.correoe"  />
+                 <InputText id="correoEmpresarial" type="text" v-model="trabajador.correoEmpresarial"  />
                 <label for="correoEmpresarial">Correo empresarial</label>
             </span>
 
@@ -85,7 +85,7 @@
             </span>
             <br>
             <span class="p-float-label">
-                 <InputText id="contrasenia" type="text" v-model="trabajador.password"  />
+                 <InputText id="contrasenia" type="password" v-model="trabajador.password"  />
                 <label for="contrasenia">Contraseña</label>
             </span>
             <br>
@@ -96,7 +96,7 @@
             <br>
             <span class="p-float-label">
                  <InputText id="vacaciones" type="text" v-model="trabajador.vacaciones"  />
-                <label for="vacaciones">Telefono</label>
+                <label for="vacaciones">Vacaciones</label>
             </span>
             <br>
             <span class="p-float-label">
@@ -202,8 +202,8 @@ export default {
             },
             persona : {
                 id : null,
-                nombre : null,
-                apellido : null,
+                nombres : null,
+                apellidos : null,
                 direccion : null,
                 estadoCivil : null,
                 cedula : null,
@@ -217,7 +217,7 @@ export default {
             trabajador  : {
                 id : null,
                 correoPersonal : null,
-                correoe: null,
+                correoEmpresarial: null,
                 
                 vacaciones: null,
                 usuario: null,
@@ -296,8 +296,8 @@ export default {
             console.log(this.selectedEmpleado.nombre);
             console.log("ID EMPLEADO" + this.selectedEmpleado.id);
             this.empleado.id = this.selectedEmpleado.id;
-            this.persona.nombre = this.selectedEmpleado.nombres;
-            this.persona.apellido = this.selectedEmpleado.apellidos;
+            this.persona.nombres = this.selectedEmpleado.nombres;
+            this.persona.apellidos = this.selectedEmpleado.apellidos;
             this.persona.cedula = this.selectedEmpleado.cedula;
             this.persona.telefono = this.selectedEmpleado.telefono;
             this.persona.usuario = this.selectedEmpleado.usuario;
@@ -321,7 +321,7 @@ export default {
                         this.trabajador.id = element.id;
                         console.log("TRABAJADOR" + this.trabajador.id);
                         this.trabajador.correoPersonal = element.correoPersonal;
-                        this.trabajador.correoe = element.correoe;
+                        this.trabajador.correoEmpresarial = element.correoEmpresarial;
                         this.trabajador.usuario = element.usuario;
                         this.trabajador.password = element.password;
                         this.trabajador.formaPago = element.formaPago;
@@ -509,8 +509,8 @@ export default {
 
                     this.persona = {
                         id : null, 
-                        nombre: null,
-                        apellido : null,
+                        nombres: null,
+                        apellidos : null,
                         direccion : null,
                         estadoCivil : null,
                         cedula : null,
@@ -531,8 +531,9 @@ export default {
                 response.forEach(element => {
                     i++;
                     if( response.length === i){
+                        console.log(element.id);
                         this.trabajador.idPersona = element.id;
-                         console.log(" ID DE PERSONA " + this.trabajador.idPersona);
+                        console.log(" ID DE PERSONA " + this.trabajador.idPersona);
                     }
                 });
             });
@@ -584,7 +585,7 @@ export default {
                      this.trabajador = {
                             //id: null,
                             correoPersonal : null,
-                            correoe: null,
+                            correoEmpresarial: null,
                             usuario: null,
                             vacaciones: null,
                             password: null,

@@ -141,5 +141,21 @@ public class Trabajador {
 
     public void setIdContrato (Long contrato){ this.idContrato = contrato;}
 
-
+    @Override
+    public String toString() {
+        return "Trabajador{" +
+                "id=" + id +
+                ", correoPersonal='" + correoPersonal + '\'' +
+                ", correoEmpresarial='" + correoEmpresarial + '\'' +
+                ", vacaciones=" + vacaciones +
+                ", usuario='" + usuario + '\'' +
+                ", password='" + password + '\'' +
+                ", formaPago=" + formaPago +
+                ", idDepartamento=" + idDepartamento +
+                ", idPersona=" + idPersona +
+                ", idRol=" + idRol +
+                ", idHorario=" + idHorario +
+                ", idContrato=" + idContrato +
+                '}';
+    }
 }
