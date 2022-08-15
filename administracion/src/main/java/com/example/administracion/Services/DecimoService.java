@@ -54,8 +54,8 @@ public class DecimoService {
 
 	private String getNombresApellidosTrabajadorById(Long idEmpleado) {
 		Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
-		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador());
-		Persona persona = personaService.getPersonaById(trabajador.getIdPersona());
+		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador()).get();
+		Persona persona = personaService.getPersonaById(trabajador.getIdPersona()).get();
 		return persona.getNombres() + " " + persona.getApellidos();
 	}
 
