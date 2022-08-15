@@ -1,5 +1,5 @@
 <template>
-<!-- <<<<<<< HEAD
+    <!-- <<<<<<< HEAD
     <div class="container grid">
         todo quitar las clases de los input text quizas
         <div class="container__datos grid col-25 ">
@@ -16,8 +16,8 @@
             <InputText class="input_info p-inputtext-sm col-3" id="sexo" type="text" v-model="sexo" disabled="true" />
         </div>
         <div class="divider"></div> -->
-        
-        <!-- <div class="container__contacto grid col-25">
+
+    <!-- <div class="container__contacto grid col-25">
             <label class="col" for="telefono">Telefono:</label>
             <InputText class="input_info p-inputtext-sm col-3" id="telefono" type="text" v-model="telefono"
                 disabled="true" />
@@ -31,7 +31,7 @@
             <InputText class="input_info p-inputtext-sm col-3" id="direccion" type="text" v-model="direccion"
                 disabled="true" />
         </div> -->
-<!-- <div class="divider"></div>
+    <!-- <div class="divider"></div>
         <div class="container__datos--empresa grid col-25">
             <label class="col" for="correoEmpresarial">Correo Empresarial:</label>
             <InputText class="input_info p-inputtext-sm col-3" id="correoEmpresarial" type="text"
@@ -42,21 +42,20 @@
         </div>
  -->
 
-        <!-- dialog horario -->
-        <!-- <Dialog header="Horario" v-model:visible="displayModalHorario"
+    <!-- dialog horario -->
+    <!-- <Dialog header="Horario" v-model:visible="displayModalHorario"
             :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" :modal="true">
             <div class="grid">
 
                 <label class="col" for="tipo">Tipo:</label>
                 <InputText class="input_info--horario col-10" id="tipo" type="text" v-model="tipoHorario" -->
-<!-- ======= -->
+    <!-- ======= -->
     <div v-if=status>
         <div class="container grid">
             <!--todo quitar las clases de los input text quizas -->
             <div class="container__datos grid col-20 ">
                 <label class="col-" for="nombres">Nombres:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="nombres" type="text" v-model="nombres"
- 
                     disabled="true" />
                 <label class="col" for="apellidos">Apellidos:</label>
                 <InputText class="input_info p-inputtext-sm col-3" id="apellidos" type="text" v-model="apellidos"
@@ -115,7 +114,7 @@
 
         <div class="buttons flex justify-content-center gap-3">
             <div class="button ">
-                
+
                 <a :href="generarLink"> <Button label="Ver asistencia" class="p-button-outlined btnAsistencia" /></a>
             </div>
             <div class="button ">
@@ -183,6 +182,8 @@ export default {
             this.status = this.login.status;
         });
 
+
+
         this.perfilService.getEmpleadoById(this.getId()).then(response => {
             this.perfil = response.data;
             this.nombres = this.perfil.nombres;
@@ -195,8 +196,9 @@ export default {
             this.direccion = this.perfil.direccion;
             this.telefono = this.perfil.telefono;
             this.sexo = this.perfil.sexo;
-            console.log(this.perfil); //todo quitar mas tarde
         });
+
+        this.recargar();
     },
     computed: {
         generarLink() {
@@ -204,6 +206,10 @@ export default {
         }
     },
     methods: {
+        recargar() {
+            window.location.href = `http://localhost:8080/#/perfil/${this.getId()}`;                
+            console.log('recargado');
+        },
         openModalHorario() {
             this.getHorarioEmpleado(this.id);
             this.displayModalHorario = true;
@@ -211,7 +217,7 @@ export default {
         closeModalHorario() {
             this.displayModalHorario = false;
         },
-        getHorarioEmpleado(idE) { 
+        getHorarioEmpleado(idE) {
             this.perfilService.getHorarioEmpleadoById(idE).then(response => {
                 this.tipoHorario = response.data.tipo;
                 this.diasLaborablesHorarioList = response.data.dias_laborables;

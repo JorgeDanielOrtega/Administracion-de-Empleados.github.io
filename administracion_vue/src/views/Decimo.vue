@@ -6,7 +6,7 @@
             <Column field="decimoCuarto" header="Decimo Cuarto"></Column>
             <Column field="fondoReserva" header="Fondo Reserva"></Column>
         </DataTable>
-
+<Button class="buttonLogin" label="Eliminar" @click="eliminar()" />
     </div>
 </template>
 
@@ -36,6 +36,9 @@ export default {
 
     },
     methods: {
+        eliminar(){
+            this.decimoService.deleteDecimo(111);
+        },
         getId() {
             this.id = this.$route.params.id;
             return this.id;

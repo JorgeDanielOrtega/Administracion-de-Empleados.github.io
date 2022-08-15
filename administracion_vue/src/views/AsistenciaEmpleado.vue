@@ -9,7 +9,6 @@
             <Column field="diaSemana" header="Dia"></Column>
         </DataTable>
         <a :href="generarLink"> <Button label="Atras" class="p-button-outlined btnAsistencia" /></a>
-        <!-- <router-link to="/perfil/"> <Button label="Atras" /></router-link> -->
 
     </div>
 </template>

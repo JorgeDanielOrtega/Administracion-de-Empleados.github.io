@@ -60,26 +60,32 @@ export default {
         });
     },
     methods: {
-        getIdTrabajador() { //todo quitar mas tarde quizas
+        async yaMarcoAsistencia(){
+            let marco = await this.asistenciaService.yaMarcoAsistencia(this.getIdTrabajador())
+            return marco
+        },
+        getIdTrabajador() {
             this.idTrabajador = this.$route.params.id;
             return this.idTrabajador;
         },
         enviar() {
-            if (this.selectedValue != null) {
+            if (this.selectedValue != null && !this.yaMarcoAsistencia()) {
                 
                 this.asistenciaService.postAsistencia(this.getIdTrabajador(), this.selectedValue).then(res => {
                     if (res.status == 200) {
                         this.showSuccess();
                     }
                 });
-            } else {
-                this.showError();
+            } else if(this.yaMarcoAsistencia()){
+                this.showErrorAlredyAsistencia();
+            }
+            else {
+                this.showErrorInvalidAsistencia();
                 
             }
             this.selectedValue = null;
         },
         activarPresente() {
-            //Todo mejorar el codigo de esta funcion
             let horaActual = this.asistenciaService.getHora();
             let hora = horaActual.substring(0, 2);
             let minutos = horaActual.substring(3, 5);
@@ -90,8 +96,11 @@ export default {
         showSuccess() {
             this.$toast.add({ severity: 'success', summary: 'Asistencia enviada', life: 2000 });
         },
-         showError() {
+         showErrorInvalidAsistencia() {
             this.$toast.add({severity:'error', summary: 'No se ha marcado un estado', life: 2000});
+        },
+        showErrorAlredyAsistencia() {
+            this.$toast.add({severity:'error', summary: 'Ya se ha marcado la asistencia', life: 2000});
         },
         redirigir(){
             this.$router.push('/');

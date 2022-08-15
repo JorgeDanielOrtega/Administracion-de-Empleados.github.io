@@ -153,6 +153,7 @@
 
 <script>
 import EmpleadoService from "../Services/EmpleadoService";
+import DecimoService from "../Services/DecimoService";
 
 export default {
     name: ' ',
@@ -275,8 +276,10 @@ export default {
         }
     },
     empleadoService: null,
+    decimoService: null,
     created() { // created at momento to execute
         this.empleadoService = new EmpleadoService();
+        this.decimoService = new DecimoService();
     },
     mounted() {
         this.obtenerTodo();
@@ -385,6 +388,7 @@ export default {
             //
             console.log("CEDULA DE " + this.selectedEmpleado.cedula);
             console.log("EMPLEADO "  + this.selectedEmpleado.id);
+            this.decimoService.deleteDecimo(this.selectedEmpleado.id); // para eliminar los decimos
             await this.empleadoService.getPersonas().then( response => {
                 response.forEach(element => {
                     if(this.selectedEmpleado.cedula === element.cedula){

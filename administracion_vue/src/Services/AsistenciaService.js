@@ -4,10 +4,40 @@ export default class AsistenciaService {
     url = "http://localhost:8081/asistencia/"
     urlEmpresa = "http://localhost:8081/empresa/id"
     date = new Date();
+    marco = false
+
+    async yaMarcoAsistencia(idTrabajador) {
+        let dia = this.date.getDate();
+        let mes = this.date.getMonth() + 1;
+        let year = this.date.getFullYear();
+
+        dia = dia < 9 ? "0" + (dia + 1) : dia;
+        mes = mes < 10 ? "0" + mes : mes;
+
+        let fullFecha = year + '-' + mes + '-' + dia;
+
+        await this.getAsistencia(idTrabajador).then(response => {
+            for (let index = 0; index < response.data.length; index++) {
+                const data = response.data[index];
+                if (data.fecha == fullFecha) {
+                    this.marco = true
+                }
+                
+            }
+        })
+
+        return this.marco
+    }
+
+    getAsistencia(idTrabajador) {
+        return new Promise((resolve) => {
+            resolve(axios.get(this.url + idTrabajador));
+        });
+    }
 
     getHoraEntrada() {
         // return axios.get(this.urlEmpresa);
-        return new Promise((resolve)=>{
+        return new Promise((resolve) => {
             resolve(axios.get(this.urlEmpresa));
         });
     }
