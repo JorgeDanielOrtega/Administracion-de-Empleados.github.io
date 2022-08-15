@@ -44,6 +44,27 @@ public class RolServiceTest {
         when(rolRepository.findById(any(Long.class))).thenReturn( Optional.of(rol));
         assertNotNull(rolService.getRolById(1l));
     }
+    @Test
+    public void obtenerRolPorId() {
+        when(rolRepository.findById(any(Long.class))).thenReturn( Optional.of(rol));
+        assertNotNull(rolService.getRolById(1l));
+    }
+    @Test
+    public void getTodosRoles(){
+        ArrayList<Rol> roles = new ArrayList<>();
+        roles.add(rol);
+        when(rolRepository.findAll()).thenReturn(roles);
+        assertNotNull(rolService.getTodosRoles());
+    }
+    @Test
+    public void guardarRol(){
+        when(rolRepository.save(rol)).thenReturn(rol);
+        assertNotNull(rolService.guardarRol(rol));
+    }
+    @Test
+    public void eliminarRolPorId(){
+        assertNotNull(rolService.eliminarRolPorId(rol.getId()));
+    }
 
     @Test
     public void getIdRolByNombre() {

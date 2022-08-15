@@ -23,6 +23,12 @@ public class Contrato {
     private Date fechaLimite;
     @Column(name = "id_empleado")
     private Long idEmpleado;
+    public Contrato(){
+
+    }
+    public Contrato(long id) {
+        this.id = id;
+    }
 
 
     // TODO hacer metodo para el calculo del metodo

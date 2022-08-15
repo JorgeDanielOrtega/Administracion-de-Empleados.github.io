@@ -27,6 +27,13 @@ public class Asistencia {
     @Column(name = "id_trabajador")
     private Long idTrabajador;
 
+    public Asistencia(){
+
+    }
+    public Asistencia(long idE) {
+        this.id = idE;
+    }
+
     // public Asistencia() {
     // fecha = Calendar.getInstance();
     // hora = Calendar.getInstance();

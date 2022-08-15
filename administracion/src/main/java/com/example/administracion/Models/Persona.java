@@ -36,6 +36,13 @@ public class Persona {
     @Column(name = "anio_entrada")
     private Date anioEntrada;
 
+    public Persona(){
+
+    }
+    public Persona(long idP) {
+        this.id = idP;
+    }
+
 
     public String getNombres() {
         return nombres;

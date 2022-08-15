@@ -7,13 +7,16 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.example.administracion.Models.Asistencia;
 import com.example.administracion.Repositories.AsistenciaRepository;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class AsistenciaServiceTest {
 
     @Mock
@@ -30,6 +33,13 @@ public class AsistenciaServiceTest {
         asistencia = new Asistencia();
     }
 
+    @Test
+    public void getAllAsistencias(){
+        ArrayList<Asistencia> asistencias = new ArrayList<>();
+        asistencias.add(asistencia);
+        when(asistenciaRepository.findAll()).thenReturn(asistencias);
+        assertNotNull(asistenciaService.getAllAsistencias());
+    }
     @Test
     public void getAsistenciasByIdTrabajador() {
         ArrayList<Asistencia> asistencias = new ArrayList<>();

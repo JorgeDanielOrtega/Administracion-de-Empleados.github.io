@@ -32,7 +32,7 @@ public class Empresa {
     private String leyenda;
     @Column(name = "anio_fundacion")
     // private String fundacionYear;
-    private Date fundacionYear;
+    private Time fundacionYear;
     @Column(name = "rubro")
     private String rubro;
     @Column(name = "hora_entrada")
@@ -464,14 +464,14 @@ public class Empresa {
         /**
      * @return String return the fundador
      */
-    public Date getFundacionYear() {
+    public Time getFundacionYear() {
         return fundacionYear;
     }
 
     /**
      * @param fundador the fundador to set
      */
-    public void setFundacionYear(Date fundacionYear) {
+    public void setFundacionYear(Time fundacionYear) {
         this.fundacionYear = fundacionYear;
 
     }

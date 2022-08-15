@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
+import com.example.administracion.Models.Contrato;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -40,7 +42,27 @@ public class DepartamentoServiceTest {
         when(departamentoRepository.findByNombre(anyString())).thenReturn(departamento);
         assertSame(departamentoService.getIdDepartamentoByNombre(anyString()), null);
     }
+    @Test
+    public void eliminarDepartamento(){
+        assertNotNull(departamentoService.eliminarDepartamento(1l));
+    }
+    @Test
+    public void guardarDepartamento(){
+        Departamento depa = new Departamento((long) 1,"Turismo",12,12,12,(long)1);
+        Departamento depa2 = new Departamento((long) 1,"Turismo",12,12,12,(long)1);
+        when(departamentoRepository.save(depa)).thenReturn(depa);
+        Departamento resultado = departamentoService.guardarDepartamento(depa);
+        Assertions.assertEquals(depa.getId(), resultado.getId());
+        Assertions.assertEquals(depa.getNombre(), resultado.getNombre());
+    }
 
+    @Test
+    public void getTodosDepartamentos(){
+        ArrayList<Departamento> departamentos = new ArrayList<>();
+        departamentos.add(departamento);
+        when(departamentoRepository.findAll()).thenReturn(departamentos);
+        assertNotNull(departamentoService.getTodosDepartamentos());
+    }
     @Test
     public void getDepartamentoById() {
         when(departamentoRepository.findById(anyLong())).thenReturn(Optional.of(departamento));

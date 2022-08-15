@@ -1,14 +1,12 @@
 package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
 
 import com.example.administracion.Models.Persona;
 import com.example.administracion.Services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-=======
 import java.util.HashMap;
 
 import com.example.administracion.Models.Contrato;
@@ -22,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
->>>>>>> 4ac830cbb47f6afbf61aa0c6aea44fb50a053bc6
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,22 +32,14 @@ import com.example.administracion.Services.EmpleadoService;
 import com.example.administracion.Services.TrabajadorService;
 
 @RestController
-<<<<<<< HEAD
-@RequestMapping("/persona")
-=======
-// <<<<<<< HEAD
+//@RequestMapping("/persona")
 @RequestMapping("/empleados")
-// =======
-// @RequestMapping("/")
-// >>>>>>> springboot_prueba
->>>>>>> 4ac830cbb47f6afbf61aa0c6aea44fb50a053bc6
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmpleadoController {
 
     @Autowired
     private PersonaService personaService;
     @Autowired
-<<<<<<< HEAD
     private EmpleadoService empleadoService;
     @Autowired
     private TrabajadorService trabajadorService;
@@ -59,20 +48,19 @@ public class EmpleadoController {
 //    public ArrayList<Long> getEmpleados() {
 //        return (ArrayList<Long>) empleadoService.getIdTrabajador();
 //    }
-    @GetMapping()
-    public List<Persona> personaList() {
-        return (List<Persona>) personaService.listarPersonas();
-    }
-=======
-    PersonaService personaService;
+
+
     @Autowired
     EmpleadoRepository empleadoRepository;
-    @Autowired
-    TrabajadorService trabajadorService;
+
     @Autowired
     ContratoService contratoService;
 
+    @GetMapping()
+    public List<Persona> personaList() {
+        return (List<Persona>) personaService.listarPersonas();
 
+    }
     @GetMapping("/all")
         public ArrayList<HashMap<String, Object>> getEmpleados(){
             return empleadoService.getTodosEmpleados();
@@ -160,8 +148,8 @@ public class EmpleadoController {
 
     @GetMapping("{idTrabajador}")
     public Empleado getEmpleadoByIdTrabajador(@PathVariable("idTrabajador") Long idTrabajador) {
-        return empleadoRepository.findAllByIdTrabajador(idTrabajador);}
->>>>>>> 4ac830cbb47f6afbf61aa0c6aea44fb50a053bc6
+        return empleadoRepository.findAllByIdTrabajador(idTrabajador);
+    }
     @GetMapping
     public ArrayList<Long> getIdEmpleados() {
         return (ArrayList<Long>) empleadoService.getIdsTrabajador();

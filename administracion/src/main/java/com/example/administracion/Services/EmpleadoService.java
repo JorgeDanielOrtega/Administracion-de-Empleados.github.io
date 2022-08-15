@@ -2,12 +2,8 @@ package com.example.administracion.Services;
 
 import java.security.spec.ECPoint;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.HashMap;
->>>>>>> 4ac830cbb47f6afbf61aa0c6aea44fb50a053bc6
-
 import com.example.administracion.Models.*;
 import com.example.administracion.Repositories.TrabajadorRepository;
 import org.hibernate.annotations.Any;
@@ -55,6 +51,7 @@ public class EmpleadoService{
 		return (Iterable<Long>) idTrabajadorList;
 	}
 	public ArrayList<Empleado> obtenerEmpleadosTable(){
+
 		return (ArrayList<Empleado>) empleadoRepository.findAll();
 	}
 	public Horario getHorarioOfTrabajador(Long idHorario) {

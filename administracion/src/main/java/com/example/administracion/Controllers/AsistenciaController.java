@@ -27,14 +27,14 @@ public class AsistenciaController {
 
     @GetMapping("/all")
     public ArrayList<Asistencia> getAllAsistencias(){
+
         return asistenciaService.getAllAsistencias();
     }
     @GetMapping("/{id}")
     public ArrayList<Asistencia> getAsistenciasByIdTrabajador(@PathVariable("id") Long id) {
         return asistenciaService.getAsistenciasByIdTrabajador(id);
     }
-
-
+    
     @PostMapping("/{id}")
     public Asistencia saveAsistencia(@PathVariable("id") Long id, @RequestBody Asistencia asistencia) {
         return asistenciaService.saveAsistencia(asistencia);

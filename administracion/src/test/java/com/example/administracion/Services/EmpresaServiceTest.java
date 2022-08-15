@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,9 +33,15 @@ public class EmpresaServiceTest {
     }
 
     @Test
+    public void obtenerEmpresas(){
+        ArrayList<Empresa> empresas = new ArrayList<>();
+        empresas.add(empresa);
+        when(empresaRepository.findAll()).thenReturn(empresas);
+        assertNotNull(empresaService.obtenerEmpresas());
+    }
+    @Test
     public void getEmpresaById() {
         when(empresaRepository.findById(anyLong())).thenReturn(Optional.of(empresa));
-
         assertNotNull(empresaService.getEmpresaById());
     }
 
