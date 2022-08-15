@@ -56,6 +56,10 @@ export default {
           { label: 'Asistencia', icon: 'pi pi-fw pi-calendar', to: '/asistencia/' + this.idLogin },
           { label: 'Busqueda', icon: 'pi pi-search', to: '/busqueda' },
           { label: 'Decimo', icon: 'pi pi-credit-card', to: '/decimo' },
+          { label: 'Departamentos', icon: 'pi pi-palette', to: '/departamentosCRUD' },
+          { label: 'Roles', icon: 'pi pi-palette', to: '/rolesCRUD' },
+          { label: 'Empleados', icon: 'pi pi-palette', to: '/empleadosCRUD' },
+
           { label: 'Pokemon', icon: 'pi pi-palette', to: '/pokemon' },
         ];
         return this.items;
