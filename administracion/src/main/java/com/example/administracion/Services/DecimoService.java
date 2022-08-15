@@ -43,6 +43,7 @@ public class DecimoService {
 		ArrayList<Map<String, Object>> decimosFormat = new ArrayList<>();
 		for (Decimo decimo : decimos) {
 			Map<String, Object> mapDecimo = new HashMap<String, Object>();
+			mapDecimo.put("idEmpleado", decimo.getIdEmpleado());
 			mapDecimo.put("decimoTercero", decimo.getDecimoTercero());
 			mapDecimo.put("decimoCuarto", decimo.getDecimoCuarto());
 			mapDecimo.put("fondoReserva", decimo.getFondoReserva());

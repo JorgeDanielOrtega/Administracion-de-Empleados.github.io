@@ -27,11 +27,13 @@ export default {
         this.decimoService = new DecimoService();
     },
     mounted() {
+        this.decimoService.actualizarDecimos();
+        
         this.decimoService.getDecimos().then(response => {
             this.decimos = response.data;
             console.log(this.decimos);
         });
-        // this.decimoService.saveDecimo(2,100)
+
     },
     methods: {
         getId() {

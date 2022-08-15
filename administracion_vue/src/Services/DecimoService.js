@@ -8,12 +8,83 @@ const PORCENTAJE_FONDO_RESERVA = 0.0833
 
 
 
+import EmpleadoService from "./EmpleadoService";
+import RolService from "./RolService";
 export default class AsistenciaService {
+
+    empleadoService = new EmpleadoService();
+    rolService = new RolService();
+
     url = "http://localhost:8081/decimo"
     urlAsistencia = "http://localhost:8081/asistencia/"
-    urlEmpleado = "http://localhost:8081/"
+    urlEmpleado = "http://localhost:8081/empleados/"
+    decimos = null
+    roles = null
+    trabajadores = null
 
-    getDecimos() {
+
+    async actualizarDecimos(){
+        
+        let empleados = null
+        
+
+        await this.getDecimos().then(response=>{
+            this.decimos = response.data//funciona
+        })
+        console.log('d', this.decimos);
+
+        await this.empleadoService.getEmpleados().then(response=>{
+            empleados = response
+
+            console.log('r', response);
+        })
+
+        await this.rolService.getRoles().then(response=>{
+            this.roles = response
+            console.log('roles', this.roles);
+        })
+
+        await this.empleadoService.getTrabajadores().then(response=>{
+            this.trabajadores = response
+            console.log('trabajadores', this.trabajadores);
+        })
+
+        empleados.forEach(empleado => {
+            if (empleado.idTrabajador != null) {
+                if (this.idEmpleadoDiferente(empleado.id)) {
+                    // console.log(empleado.idTrabajador);
+                    console.log(empleado.idTrabajador, this.getSalario(this.getIdRol(empleado.idTrabajador)));
+                    this.saveDecimo(empleado.idTrabajador, this.getSalario(this.getIdRol(empleado.idTrabajador)))
+                }
+            }
+        });
+    }
+
+    getIdRol(idTrabajador){
+        for (let index = 0; index < this.trabajadores.length; index++) {
+            if (this.trabajadores[index].id == idTrabajador) {
+                return this.trabajadores[index].idRol
+            }
+        }
+    }
+    
+    getSalario(idRol){
+        for (let index = 0; index < this.roles.length; index++) {
+            if (this.roles[index].id == idRol) {
+                return this.roles[index].salario
+            }
+        }
+    }
+
+    idEmpleadoDiferente(idEmpleado){
+        for (let index = 0; index < this.decimos.length; index++) {
+            if (this.decimos[index].idEmpleado != idEmpleado) {
+                return true
+            }
+        }
+    }
+
+   getDecimos() { 
         return new Promise((resolve) => {
             resolve(axios.get(this.url));
         });

@@ -3,7 +3,8 @@
 import axios from "axios";
 
 export default class EmpleadoService{
-    url = "http://localhost:8080/empleados/"
+    // url = "http://localhost:8080/empleados/"
+    url = "http://localhost:8081/empleados/"
     urlDepartamentos = "http://localhost:8080/departamento/all"
     urlPuestos = "http://localhost:8080/puesto/all"
     urlRoles = "http://localhost:8080/rol/all"

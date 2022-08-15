@@ -3,7 +3,8 @@
 import axios from "axios";
 
 export default class RolService{
-    url = "http://localhost:8080/rol/"
+    // url = "http://localhost:8080/rol/"
+    url = "http://localhost:8081/rol/"
     urlDepartamentos = "http://localhost:8080/departamento/all"
     urlPuestos = "http://localhost:8080/puesto/all"
     urlTrabajadores = "http://localhost:8080/empleados/"
