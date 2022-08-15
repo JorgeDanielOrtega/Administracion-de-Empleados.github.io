@@ -25,6 +25,7 @@ public class Empleado {
     private Long idTrabajador;
 
 
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -42,5 +43,11 @@ public class Empleado {
     public void setIdTrabajador(Long idTrabajador) {
         this.idTrabajador = idTrabajador;
     }
-
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "id=" + id +
+                ", idTrabajador=" + idTrabajador +
+                '}';
+    }
 }

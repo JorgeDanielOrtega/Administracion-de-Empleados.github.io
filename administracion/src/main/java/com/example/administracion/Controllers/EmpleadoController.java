@@ -69,9 +69,10 @@ public class EmpleadoController {
     }
 
     @PostMapping(value = "/guardarPersona")
-    public ResponseEntity<Persona> guardarPersona (@RequestBody Persona persona){
-        Persona obj = personaService.guardarPersona(persona);
-        return new ResponseEntity<Persona>(obj, HttpStatus.OK);
+    public Persona guardarPersona (@RequestBody Persona persona){
+        return personaService.guardarPersona(persona);
+//        Persona obj = personaService.guardarPersona(persona);
+//        return new ResponseEntity<Persona>(obj, HttpStatus.OK);
     }
     @PostMapping(value = "/guardarTrabajador")
     public ResponseEntity<Trabajador> guardarTrabajador(@RequestBody Trabajador trabajador){
