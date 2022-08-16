@@ -92,6 +92,21 @@ export default class AsistenciaService {
         });
     }
 
+
+    async deleteDecimo(idEmpleado) {
+        let idDecimo = null
+        await this.getDecimos().then(response => {
+            for (let index = 0; index < response.data.length; index++) {
+                let decimo = response.data[index]
+                if (decimo.idEmpleado == idEmpleado) {
+                    idDecimo = decimo.id
+                }
+            }
+        })
+
+        return axios.delete(this.url + '/' + idDecimo)
+    }
+
     async saveDecimo(idTrabajador, salario) {
         let id = 0
         let totalAsistencias = 0;
