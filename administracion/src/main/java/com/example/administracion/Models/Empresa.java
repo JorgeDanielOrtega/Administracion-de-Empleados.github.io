@@ -32,7 +32,7 @@ public class Empresa {
     private String leyenda;
     @Column(name = "anio_fundacion")
     // private String fundacionYear;
-    private String fundacionYear;
+    private Time fundacionYear;
     @Column(name = "rubro")
     private String rubro;
     @Column(name = "hora_entrada")
@@ -345,13 +345,13 @@ public class Empresa {
     // }
     // }
 
-    //public String getNombre() {
-        //return nombre;
-    //}
+    public String getNombre() {
+        return nombre;
+    }
 
-    //public void setNombre(String empresa) {
-    //    this.nombre = empresa;
-    //}
+    public void setNombre(String empresa) {
+        this.nombre = empresa;
+    }
 
     // public String getFundacionYear() {
     //     return fundacionYear;
@@ -361,79 +361,37 @@ public class Empresa {
     //     this.fundacionYear = fundacionYear;
     // }
 
-    //public String getRubro() {
-        //return rubro;
-    //}
+    public String getRubro() {
+        return rubro;
+    }
 
-    //public void setRubro(String rubro) {
-    //    this.rubro = rubro;
-    //}
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
 
-    //public Long getId() {
-    //    return id;
-    //}
-
-    //public void setId(Long id) {
-      //  this.id = id;
-    //}
-
-    //public String getLeyenda() {
-       // return leyenda;
-    //}
-
-   // public void setLeyenda(String leyenda) {
-       // this.leyenda = leyenda;
-    //}
-
-    //public Time getHoraEntrada() {
-        //return horaEntrada;
-    //}
-
-    // public void setHoraEntrada(LocalDateTime hora) {
-    //     horaEntrada = hora; // quizas
+    // public List<Departamento> getDepartamentoList() {
+    // return departamentoList;
     // }
 
+    // public void setDepartamentoList(List<Departamento> departamentoList) {
+    // this.departamentoList = departamentoList;
+    // }
 
-    //public Long getIdGerente() {
-        //return idGerente;
-    //}
+    // public List<Rol> getRolList() {
+    // return rolList;
+    // }
 
-    //public void setIdGerente(Long idGerente) {
-       // this.idGerente = idGerente;
-    //}
+    // public void setRolList(List<Rol> rolList) {
+    // this.rolList = rolList;
+    // }
 
-    //public Date getFundacionYear() {
-        //return fundacionYear;
-    //}
+    // public List<Horario> getHorarioList() {
+    // return horarioList;
+    // }
 
-    //public void setFundacionYear(Date fundacionYear) {
-       // this.fundacionYear = fundacionYear;
-    //}
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdGerente() {
-        return idGerente;
-    }
-
-    public void setIdGerente(Long idGerente) {
-        this.idGerente = idGerente;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    // public void setHorarioList(List<Horario> horarioList) {
+    // this.horarioList = horarioList;
+    // }
 
     public String getLeyenda() {
         return leyenda;
@@ -443,28 +401,20 @@ public class Empresa {
         this.leyenda = leyenda;
     }
 
-    public String getFundacionYear() {
-        return fundacionYear;
-    }
-
-    public void setFundacionYear(String fundacionYear) {
-        this.fundacionYear = fundacionYear;
-    }
-
-    public String getRubro() {
-        return rubro;
-    }
-
-    public void setRubro(String rubro) {
-        this.rubro = rubro;
-    }
-
     public Time getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(Time horaEntrada) {
-        this.horaEntrada = horaEntrada;
+    // public void setHoraEntrada(LocalDateTime hora) {
+    //     horaEntrada = hora; // quizas
+    // }
+
+    public Long getGerente() {
+        return idGerente;
+    }
+
+    public void setGerente(Long gerente) {
+        this.idGerente = gerente;
     }
 
     @Override
@@ -472,5 +422,60 @@ public class Empresa {
         return "Empresa{" + "nombre=" + nombre + ", fundacionYear=" + fundacionYear + ", rubro=" + rubro + ", leyenda="
                 + leyenda + '}';
     }
+
+    /**
+     * @return Long return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @return Long return the idGerente
+     */
+    public Long getIdGerente() {
+        return idGerente;
+    }
+
+    /**
+     * @param idGerente the idGerente to set
+     */
+    public void setIdGerente(Long idGerente) {
+        this.idGerente = idGerente;
+
+    }
+
+    /**
+     * @return String return the fundador
+     */
+    public String getFundador() {
+        return leyenda;
+    }
+
+    /**
+     * @param fundador the fundador to set
+     */
+    public void setFundador(String fundador) {
+        this.leyenda = fundador;
+
+    }
+
+
+        /**
+     * @return String return the fundador
+     */
+    public Time getFundacionYear() {
+        return fundacionYear;
+    }
+
+    /**
+     * @param fundador the fundador to set
+     */
+    public void setFundacionYear(Time fundacionYear) {
+        this.fundacionYear = fundacionYear;
+
+    }
+
+
 
 }

@@ -24,7 +24,8 @@ public class RolService {
 	}
 
 	public Optional<Rol> getRolById(Long id) {
-		return rolRepository.findById(id);
+		return
+				rolRepository.findById(id);
 	}
 
 	public Long getIdRolByNombre(String nombre) {

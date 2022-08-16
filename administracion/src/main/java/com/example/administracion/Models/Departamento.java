@@ -30,6 +30,18 @@ public class Departamento {
     @Column(name = "id_empresa")
     private Long idEmpresa;
 
+    public Departamento() {
+    }
+
+    public Departamento(Long identificacion, String nombreD, int number, int maxEmple, int vacacionesE, Long idEmpresa) {
+        this.id = identificacion;
+        this.nombre = nombreD;
+        this.numero = number;
+        this.empleadosMaximos = maxEmple;
+        this.vacaciones = vacacionesE;
+        this.idEmpresa = idEmpresa;
+    }
+
 
     public String getNombre() {
         return nombre;
@@ -87,5 +99,6 @@ public class Departamento {
     public String toString() {
         return nombre;
     }
+
 
 }

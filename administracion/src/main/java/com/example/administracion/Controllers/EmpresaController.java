@@ -38,18 +38,18 @@ public class EmpresaController {
         return empresaService.obtenerEmpresas();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{id}")//
     public Optional<Empresa> obtenerEmpresaId(@PathVariable("id") Long id) {
         return empresaService.obtenerEmpresaId(id);
     }
 
-    @GetMapping("")
+    @GetMapping()
     public Empresa getEmpresaById() {
         // return empresaService.getEmpresaById();
         return empresaService.getEmpresaById().get();
     }
 
-    @PostMapping("/actualizar")
+    @PostMapping("actualizar")//
     public Empresa actualizarEmpresaDb(@RequestBody Empresa empresa) {
         return empresaService.actualizarEmpresa(empresa);
     }

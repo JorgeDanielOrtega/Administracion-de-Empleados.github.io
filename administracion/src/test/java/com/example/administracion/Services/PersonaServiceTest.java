@@ -34,11 +34,22 @@ public class PersonaServiceTest {
     }
 
     @Test
-    public void getPersonas() {
-        when(personaRepository.findAllById(anyIterable())).thenReturn(new ArrayList<Persona>());
-        assertNotNull(personaService.getPersonas(anyIterable()));
+    public void listarPersonas(){
+        assertNotNull(personaService.listarPersonas());
     }
-
+    @Test
+    public void getPersonas(){
+        assertNotNull(personaService.listarPersonas());
+    }
+    @Test
+    public void guardarPersona(){
+        when(personaRepository.save(persona)).thenReturn(persona);
+        assertNotNull(personaService.guardarPersona(persona));
+    }
+    @Test
+    public void eliminarPersonaPorId(){
+        assertNotNull(personaService.eliminarPersonaPorId(persona.getId()));
+    }
     @Test
     public void getPersonaById() {
         when(personaRepository.findById(anyLong())).thenReturn(Optional.of(persona));

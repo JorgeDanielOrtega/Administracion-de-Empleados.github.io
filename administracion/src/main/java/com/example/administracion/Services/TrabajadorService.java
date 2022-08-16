@@ -112,32 +112,28 @@ public class TrabajadorService {
 	private Map<String, Object> getDataEmpleadosByDepartamento(Persona persona, Trabajador trabajador) {
 		Map<String, Object> myMap = new HashMap<>();
 
+		// TODO hacer el campo puestos, quizas
 		Long idRol = trabajador.getIdRol();
 		Long idHorario = trabajador.getIdHorario();
-		
+
 		myMap.put("id", trabajador.getId());
 		myMap.put("nombres", persona.getNombres());
 		myMap.put("apellidos", persona.getApellidos());
-		myMap.put("Rol", rolService.getRolById(idRol).get().getNombre());
-		myMap.put("Horario", horarioService.getHorarioById(idHorario).get().getTipo());
-		// myMap.put("id", trabajador.getId());
-		// myMap.put("nombres", persona.getNombres());
-		// myMap.put("apellidos", persona.getApellidos());
-		// myMap.put("direccion", persona.getDireccion());
-		// myMap.put("estado_civil", persona.getEstadoCivil());
-		// myMap.put("cedula", persona.getCedula());
-		// myMap.put("ciudad", persona.getCiudad());
-		// myMap.put("telefono", persona.getTelefono());
-		// myMap.put("sexo", String.valueOf(persona.getSexo()));
-		// myMap.put("fecha_nacimiento", persona.getFechaNacimiento().toString());
-		// myMap.put("anio_entrada", persona.getAnioEntrada().toString());
-		// myMap.put("correo_personal", trabajador.getCorreoPersonal());
-		// myMap.put("correo_empresarial", trabajador.getCorreoEmpresarial());
-		// myMap.put("usuario", trabajador.getUsuario());
-		// myMap.put("contrasenia", trabajador.getPassword());
-		// myMap.put("id_departamento", trabajador.getIdDepartamento());
-		// myMap.put("id_rol", trabajador.getIdRol());
-		// myMap.put("id_horario", trabajador.getIdHorario());
+		myMap.put("direccion", persona.getDireccion());
+		myMap.put("estado_civil", persona.getEstadoCivil());
+		myMap.put("cedula", persona.getCedula());
+		myMap.put("ciudad", persona.getCiudad());
+		myMap.put("telefono", persona.getTelefono());
+		myMap.put("sexo", String.valueOf(persona.getSexo()));
+		myMap.put("fecha_nacimiento", persona.getFechaNacimiento().toString());
+		myMap.put("anio_entrada", persona.getAnioEntrada().toString());
+		myMap.put("correo_personal", trabajador.getCorreoPersonal());
+		myMap.put("correo_empresarial", trabajador.getCorreoEmpresarial());
+		myMap.put("usuario", trabajador.getUsuario());
+		myMap.put("contrasenia", trabajador.getPassword());
+		myMap.put("id_departamento", trabajador.getIdDepartamento());
+		myMap.put("id_rol", trabajador.getIdRol());
+		myMap.put("id_horario", trabajador.getIdHorario());
 
 
 		return myMap;
@@ -348,6 +344,8 @@ public class TrabajadorService {
 	}
 
 	public ArrayList<Map<String, Object>> getTrabajadorByIdDepartamento(Long idDepartamento) {
+		// TODO encontrar la manera de retornar el nombre del departamento
+
 		List<Long> ids = new LinkedList<>();
 		ArrayList<Persona> personaList = new ArrayList<Persona>();
 		ArrayList<Map<String, Object>> trabajadorArrayListInfo = new ArrayList<>();

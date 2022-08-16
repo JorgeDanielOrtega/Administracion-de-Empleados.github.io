@@ -1,8 +1,10 @@
 package com.example.administracion.Services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import com.example.administracion.Models.Empleado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ import com.example.administracion.Repositories.PersonaRepository;
 public class PersonaService {
 	@Autowired
 	PersonaRepository personaRepository;
+
+	public List<Persona> listarPersonas() {
+		return (List<Persona>) personaRepository.findAll();
+	}
 
 	public ArrayList<Persona> getPersonas(Iterable<Long> ids) {
 		return (ArrayList<Persona>) personaRepository.findAllById(ids);
@@ -26,6 +32,7 @@ public class PersonaService {
 
 
 	public Optional<Persona> getPersonaById(Long id) {
+
 		return personaRepository.findById(id);
 
 	}
@@ -40,4 +47,9 @@ public class PersonaService {
 			return false;
 		}
 	}
+//	public long guardarPersona(Persona p){
+//
+//	}
+//	public void eliminar(Long id);
+//}
 }

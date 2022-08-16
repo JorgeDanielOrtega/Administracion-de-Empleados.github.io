@@ -8,6 +8,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import java.nio.file.Watchable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,6 +85,10 @@ public class TrabajadorServiceTest {
     }
 
     @Test
+    public void obtenerTodosTrabajadores(){
+        assertNotNull(trabajadorService.obtenerTodosTrabajadores());
+    }
+    @Test
     public void getDatosEmpleado() {
         assertNotNull(trabajadorService.getDatosEmpleado(persona, trabajador));
     }
@@ -137,6 +142,15 @@ public class TrabajadorServiceTest {
     public void getIdPersonaByNombresApellidos() {
         when(entityManager.createQuery(anyString())).thenReturn(any(Query.class));
         assertNotNull(trabajadorService.getIdPersonaByNombresApellidos("jo"));
+    }
+    @Test
+    public void guardarTrabajador(){
+        when(trabajadorRepository.save(trabajador)).thenReturn(trabajador);
+        assertNotNull(trabajadorService.guardarTrabajador(trabajador));
+    }
+    @Test
+    public void eliminarTrabajador(){
+        assertNotNull(trabajadorService.eliminarTrabajadorPorId(trabajador.getId()));
     }
 
 }

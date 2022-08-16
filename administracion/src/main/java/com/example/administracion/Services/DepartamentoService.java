@@ -25,8 +25,7 @@ public class DepartamentoService {
 	EntityManager entityManager;
 
 
-	public Long getIdDepartamentoByNombre(String nombre) {
-		return departamentoRepository.findByNombre(nombre).getId();
+	public Long getIdDepartamentoByNombre(String nombre) { return departamentoRepository.findByNombre(nombre).getId();
 	}
 	public ArrayList<Departamento> getTodosDepartamentos(){
 		return (ArrayList<Departamento>) departamentoRepository.findAll();

@@ -7,7 +7,11 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.example.administracion.Models.Departamento;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +20,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.administracion.Services.DepartamentoService;
 import com.example.administracion.Services.TrabajadorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartamentoControllerTest {
@@ -49,6 +56,48 @@ public class DepartamentoControllerTest {
 
         verify(departamentoService, times(1)).getAllNombreDepartamentosSinRepetir();
     }
+    @Test
+    public void obtenerTodosDepartamentos(){
+        ArrayList<Departamento> departamentos = new ArrayList<>();
+        when(departamentoService.getTodosDepartamentos()).thenReturn(departamentos);
+        ArrayList<Departamento> departamentosResult = departamentoController.obtenerTodosDepartamentos();
+        verify(departamentoService, times(1)).getTodosDepartamentos();
+    }
+
+    @Test
+    public void guardar(){
+        Departamento depa = new Departamento((long) 1,"Turismo",12,12,12,(long)1);
+        when(departamentoService.guardarDepartamento(depa)).thenReturn(depa);
+        ResponseEntity<Departamento> resulDepa = departamentoController.guardar(depa);
+        verify(departamentoService, times(1)).guardarDepartamento(depa);
+    }
+//    @Test
+//    public void eliminar(){
+//        //Departamento depa = new Departamento((long) 1,"Turismo",12,12,12,(long)1);
+//        Departamento depa = departamentoService.getDepartamentoById(1L).get();
+////        if(verificacion == true){
+////            Departamento depa = departamentoService.getDepartamentoById(1L).get();
+////        }
+////        if(depa != null){
+////            when(departamentoService.eliminarDepartamento(1l)).thenReturn(true);
+////        }else{
+////            ResponseEntity<Departamento> result = new ResponseEntity<Departamento>(depa, HttpStatus.INTERNAL_SERVER_ERROR);
+////        }
+//        ResponseEntity<Departamento> result = departamentoController.eliminar(1l);
+//        verify(departamentoService, times(1)).eliminarDepartamento(1l);
+//    }
+    @Test
+    public void eliminar(){
+        Departamento depa = new Departamento((long) 1,"Turismo",12,12,12,(long)1);
+        if(depa != null){
+            departamentoService.eliminarDepartamento(depa.getId());
+            //assertEquals(null, depa.getId());
+        }else{
+            ResponseEntity<Departamento> result = new ResponseEntity<Departamento>(depa, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        verify(departamentoService, times(1)).eliminarDepartamento(depa.getId());
+    }
+
 
 
 }

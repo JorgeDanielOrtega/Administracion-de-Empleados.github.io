@@ -35,10 +35,10 @@ public class DepartamentoController {
         return trabajadorService.getTrabajadorByIdDepartamento(idDepartamento);
     }
 
-    // @GetMapping("")
-    // public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
-    //     return departamentoService.getAllNombreDepartamentosSinRepetir();
-    // }
+    @GetMapping("") //NO HAY
+    public ArrayList<HashMap<String, Object>> obtenetUsuariosPorNombre() {
+        return departamentoService.getAllNombreDepartamentosSinRepetir();
+    }
 
     @GetMapping("/all")
     public ArrayList<Departamento> obtenerTodosDepartamentos() {
@@ -46,12 +46,12 @@ public class DepartamentoController {
         return departamentoService.getTodosDepartamentos();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{id}") //NO HAY
     public Optional<Departamento> obtenerDepartementoId(@PathVariable("id") Long id) {
         return departamentoService.obtenerDepartamentoBarraBusqueda(id);
     }
 
-    @PostMapping(value = "/guardar")
+    @PostMapping(value = "/guardar") //
     public ResponseEntity<Departamento> guardar(@RequestBody Departamento departamento) {
         Departamento obj = departamentoService.guardarDepartamento(departamento);
         return new ResponseEntity<Departamento>(obj, HttpStatus.OK);
@@ -59,8 +59,7 @@ public class DepartamentoController {
 
     @GetMapping(value = "/eliminar/{id}")
     public ResponseEntity<Departamento> eliminar(@PathVariable Long id) {
-        // Departamento departamento = departamentoService.getDepartamentoById(id);
-        Departamento departamento = departamentoService.getDepartamentoById(id).get();
+        Departamento departamento = departamentoService.getDepartamentoById(id).    get();
         if (departamento != null) {
             departamentoService.eliminarDepartamento(id);
         } else {

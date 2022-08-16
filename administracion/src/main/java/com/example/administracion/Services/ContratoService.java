@@ -15,7 +15,7 @@ package com.example.administracion.Services;
 	ContratoRepository contratoRepository;
 	public Contrato getIdContrato (Long id){
 		return contratoRepository.findById(id).get();
-	}
+	}//
 	public boolean eliminarContratoPorId(Long id){
 		try{
 			contratoRepository.deleteById(id);

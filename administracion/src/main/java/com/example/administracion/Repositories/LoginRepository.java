@@ -1,3 +1,4 @@
+
 package com.example.administracion.Repositories;
 
 import com.example.administracion.Models.Login;
@@ -9,4 +10,5 @@ import java.util.LinkedList;
 @Repository
 public interface LoginRepository extends CrudRepository<Login, Long> {
     public abstract LinkedList<Login> findAll();
+
 }

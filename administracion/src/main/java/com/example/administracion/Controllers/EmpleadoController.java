@@ -1,6 +1,12 @@
 package com.example.administracion.Controllers;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.example.administracion.Models.Persona;
+import com.example.administracion.Services.PersonaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import java.util.HashMap;
 
 import com.example.administracion.Models.Contrato;
@@ -26,26 +32,35 @@ import com.example.administracion.Services.EmpleadoService;
 import com.example.administracion.Services.TrabajadorService;
 
 @RestController
-// <<<<<<< HEAD
+//@RequestMapping("/persona")
 @RequestMapping("/empleados")
-// =======
-// @RequestMapping("/")
-// >>>>>>> springboot_prueba
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmpleadoController {
 
     @Autowired
-    EmpleadoService empleadoService;
+    private PersonaService personaService;
     @Autowired
-    PersonaService personaService;
+    private EmpleadoService empleadoService;
+    @Autowired
+    private TrabajadorService trabajadorService;
+
+//    @GetMapping() //To know what operation shall execute when recive method get
+//    public ArrayList<Long> getEmpleados() {
+//        return (ArrayList<Long>) empleadoService.getIdTrabajador();
+//    }
+
+
     @Autowired
     EmpleadoRepository empleadoRepository;
-    @Autowired
-    TrabajadorService trabajadorService;
+
     @Autowired
     ContratoService contratoService;
 
+    @GetMapping()
+    public List<Persona> personaList() {
+        return (List<Persona>) personaService.listarPersonas();
 
+    }
     @GetMapping("/all")
         public ArrayList<HashMap<String, Object>> getEmpleados(){
             return empleadoService.getTodosEmpleados();
@@ -69,10 +84,9 @@ public class EmpleadoController {
     }
 
     @PostMapping(value = "/guardarPersona")
-    public Persona guardarPersona (@RequestBody Persona persona){
-        return personaService.guardarPersona(persona);
-//        Persona obj = personaService.guardarPersona(persona);
-//        return new ResponseEntity<Persona>(obj, HttpStatus.OK);
+    public ResponseEntity<Persona> guardarPersona (@RequestBody Persona persona){
+        Persona obj = personaService.guardarPersona(persona);
+        return new ResponseEntity<Persona>(obj, HttpStatus.OK);
     }
     @PostMapping(value = "/guardarTrabajador")
     public ResponseEntity<Trabajador> guardarTrabajador(@RequestBody Trabajador trabajador){
@@ -134,9 +148,18 @@ public class EmpleadoController {
 
     @GetMapping("{idTrabajador}")
     public Empleado getEmpleadoByIdTrabajador(@PathVariable("idTrabajador") Long idTrabajador) {
-        return empleadoRepository.findAllByIdTrabajador(idTrabajador);}
+        return empleadoRepository.findAllByIdTrabajador(idTrabajador);
+    }
     @GetMapping
     public ArrayList<Long> getIdEmpleados() {
         return (ArrayList<Long>) empleadoService.getIdsTrabajador();
     }
+
+//    We could use PostMapping to save information
+//    @GetMapping("/listar")
+//    public String listar(Model model){
+//        List<Persona> personas = personaService.listarPersonas();
+//        model.addAttribute("personas", personas);
+//        return "index";
+//    }
 }

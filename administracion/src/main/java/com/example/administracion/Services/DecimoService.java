@@ -43,8 +43,6 @@ public class DecimoService {
 		ArrayList<Map<String, Object>> decimosFormat = new ArrayList<>();
 		for (Decimo decimo : decimos) {
 			Map<String, Object> mapDecimo = new HashMap<String, Object>();
-			mapDecimo.put("id", decimo.getId());
-			mapDecimo.put("idEmpleado", decimo.getIdEmpleado());
 			mapDecimo.put("decimoTercero", decimo.getDecimoTercero());
 			mapDecimo.put("decimoCuarto", decimo.getDecimoCuarto());
 			mapDecimo.put("fondoReserva", decimo.getFondoReserva());
@@ -56,7 +54,9 @@ public class DecimoService {
 
 	private String getNombresApellidosTrabajadorById(Long idEmpleado) {
 		Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
+		// Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador());
 		Trabajador trabajador = trabajadorService.getTrabajadorById(empleado.getIdTrabajador()).get();
+		// Persona persona = personaService.getPersonaById(trabajador.getIdPersona());
 		Persona persona = personaService.getPersonaById(trabajador.getIdPersona()).get();
 		return persona.getNombres() + " " + persona.getApellidos();
 	}
@@ -76,10 +76,6 @@ public class DecimoService {
 	// }
 	public Decimo saveDecimo(Decimo decimo) {
 		return decimoRepository.save(decimo);
-	}
-
-	public void deleteDecimoById(Long id){
-		decimoRepository.deleteById(id);
 	}
 
 	// private Double calcularDecimoTercero(Double salario) {
