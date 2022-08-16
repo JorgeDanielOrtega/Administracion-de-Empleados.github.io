@@ -2,6 +2,7 @@
     <div>
         <Toast />
         <Menubar :model="items" />
+        
         <DataTable :value="empleados" v-model:selection="selectedEmpleado" selectionMode="single" dataKey="id" responsiveLayout="scroll" :rows="10" >
         <!-- <DataTable :value="empleados" :paginator="true" :rows="10"  :selectionMode="single" :selection.sync="selectedEmpleado"   v-model:selection="selectedEmpleado"   dataKey="id"  > -->
             <Column field="id" header="Id"></Column>
@@ -34,10 +35,8 @@
                 <label for="direccion">Direccion</label>
             </span>
             <br>
-            <span class="p-float-label">
-                 <InputText id="estadoCivil" type="text" v-model="persona.estadoCivil" style="width: 100%"/>
-                <label for="estadoCivil">Estado Civil</label>
-            </span>
+                <label for="estadoCivil">Estado Civil</label><br><br>
+                <SelectButton v-model="persona.estadoCivil" :options="estadosCiviles"   aria-labelledby="single"/>
             <br>
             <span class="p-float-label">
                  <InputText id="cedula" type="text" v-model="persona.cedula"  />
@@ -62,12 +61,15 @@
 
             <label for="fechaNacimiento">Fecha de nacimiento</label>
             <br>
-            <input type="date"  id="fechaNacimiento"  v-model="persona.fechaNacimiento"  />
-            <br><br>
+            <div class="field col-20 md:col-20">
+                <Calendar id="icon1" v-model="persona.fechaNacimiento" :showIcon="true" />
+            </div>
             <label for="anioEntrada">Año de entrada</label>
             <br>
-             <input type="date" name="anioEntrada" min="2000-01-01"  v-model="persona.anioEntrada"  />
-            <br><br>
+            <div class="field col-20 md:col-20">
+                <Calendar id="icon" v-model="persona.anioEntrada" :showIcon="true" />
+            </div>
+            
             <span class="p-float-label">
                  <InputText id="correoPersonal" type="text" v-model="trabajador.correoPersonal"  />
                 <label for="correoPersonal">Correo personal</label>
@@ -85,7 +87,7 @@
             </span>
             <br>
             <span class="p-float-label">
-                 <InputText id="contrasenia" type="password" v-model="trabajador.password"  />
+                <Password v-model="trabajador.password" />
                 <label for="contrasenia">Contraseña</label>
             </span>
             <br>
@@ -103,7 +105,9 @@
                 <label for="rol">Rol</label>
             </span>
             <br>
-            <Button label="Crear Contrato" icon="pi pi-tag" @click="mostrarModalContrato" class="p-button-text"/>
+            <label>Contrato </label><br><br>
+            <Button icon="pi pi-user" @click="mostrarModalContrato" class="p-button-rounded p-button-info" />
+            <!-- <Button label="Crear Contrato" icon="pi pi-tag" @click="mostrarModalContrato" class="p-button-text"/> -->
             <br>
             <br>
             <span class="p-float-label">
@@ -128,7 +132,6 @@
                     <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="1">Si
                     <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="0">No
             <br><br>
-
             <span class="p-float-label">
                     <InputText id="tiempoContrato" type="text" v-model="contrato.tiempoContrato"  style="width: 100%" />
                     <label for="tiempoContrato">Tiempo del contrato</label>
@@ -136,8 +139,9 @@
             <br>
             <label for="fechaLimite">Fecha limite</label>
             <br>
-            <input type="date"  id="fechaLimite"  v-model="contrato.fechaLimite"  />
-            <br><br>
+            <div class="field col-20 md:col-20">
+                <Calendar id="icon" v-model="contrato.fechaLimite" :showIcon="true" />
+            </div>
             <template #footer>
                     <Button label="Guardar" icon="pi pi-check" @click="guardarContrato" class="p-button-text"/>
                     <Button label="Cancelar" icon="pi pi-times" @click="closeModalContrato" autofocus />
@@ -162,6 +166,7 @@ export default {
             nombreRol: null,
             tipoHorario: null,
             idContrato: null,
+            estadosCiviles : [ 'SOLTERO', 'CASADO',  'VIUDO', 'UNION LIBRE' ],
             selectedEmpleado : {
                 idPersona:null,
                 nombres : null,
@@ -203,7 +208,7 @@ export default {
                 nombres : null,
                 apellidos : null,
                 direccion : null,
-                estadoCivil : null,
+                estadoCivil : 'Off',
                 cedula : null,
                 sexo : null,
                 ciudad : null,
@@ -256,7 +261,7 @@ export default {
                     }
                 },
                  {
-                    label : 'Eliminar  Llaves foraneas',
+                    label : 'Eliminar relaciones',
                     icon : 'pi pi-key',
                     command: () => {
                         if(this.selectedEmpleado.id == null){
@@ -336,6 +341,7 @@ export default {
                         this.persona.direccion = element.direccion;
                         this.persona.estadoCivil = element.estadoCivil;
                         this.persona.sexo = element.sexo;
+                        this.persona.vacaciones = element.vacaciones;
                         this.persona.ciudad = element.ciudad;
                         this.persona.fechaNacimiento = element.fechaNacimiento;
                         this.persona.anioEntrada = element.anioEntrada;
@@ -357,7 +363,6 @@ export default {
                     }
                 });
             });
-            console.log("TREEE " + this.trabajador.id);
             await this.empleadoService.getContratos().then(response => {
                 response.forEach(element => {
                     if(this.trabajador.idContrato === element.id){
@@ -525,17 +530,7 @@ export default {
                     }
                 });
             });
-            //CONTRATO)
-            // await this.empleadoService.getTrabajadores().then(response =>{
-            //     response.forEach(element => {
-            //         if(this.selectedEmpleado.idContrato === element.idContrato){ 
-            //             console.log("ID CONTRATO = " + this.selectedEmpleado.idContrato);
-            //             element.idContrato = null;
-            //             console.log("POST- ELEMENT ID = " + element.idContrato)
-            //             this.empleadoService.guardarTrabajador(element);
-            //         }
-            //     });
-            // });
+
              this.$toast.add({
                             severity:'info',
                             summary: 'AVISO',

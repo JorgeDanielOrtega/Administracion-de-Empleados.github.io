@@ -17,11 +17,10 @@
                 <label for="nombre">Nombre</label>
             </span>
             <br>
-            <span class="p-float-label">
-                 <InputText id="salario" type="text" v-model="rol.salario" style="width: 100%" />
+            <div class="field col-12 md:col-3">
                 <label for="salario">Salario</label>
-            </span>
-            <br>
+                <InputNumber inputId="salario" v-model="rol.salario" showButtons mode="currency" currency="USD"  :minFractionDigits="2" :maxFractionDigits="2"/>
+            </div>
             <span class="p-float-label">
                  <InputText id="puesto" type="text" v-model="nombrePuesto" style="width: 100%" />
                 <label for="puesto"> Puesto</label>
@@ -97,7 +96,7 @@ export default {
                 },
 
                 {
-                    label : 'Eliminar  Llaves foraneas',
+                    label : 'Eliminar relaciones',
                     icon : 'pi pi-key',
                     command: () => {
                         if(this.selectedRol.nombre == null){
