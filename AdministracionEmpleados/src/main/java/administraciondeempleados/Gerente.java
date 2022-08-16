@@ -111,7 +111,7 @@ public class Gerente extends Trabajador{
     
     @Override
     public String toString() {
-        return "Gerente{" + "empresa=" + empresa + '}';
+        return "Gerente" + super.toString();
     }
 
 }

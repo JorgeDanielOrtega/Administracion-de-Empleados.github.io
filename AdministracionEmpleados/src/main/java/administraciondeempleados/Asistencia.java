@@ -24,42 +24,32 @@ public class Asistencia {
         asignarFecha();
     }
 
-    private String retornarDia(String dia) {
-        switch (dia) {
-            case "LU":
-                return "Lunes";
-
-            case "MA":
-                return "Martes";
-
-            case "MI":
-                return "Miercoles";
-
-            case "JU":
-                return "Jueves";
-
-            case "VI":
-                return "Viernes";
-
-            case "SA":
-                return "Sabado";
-
-            case "DO":
-                return "Domingo";
-
-            default:
-                System.out.println("se selecciono en default");
-                break;
-        }
-        return null;
-    }
-
     private void asignarDia() {
         int dia = fecha.get(Calendar.DAY_OF_WEEK) - 1;
         for (DiasLaborales value : DiasLaborales.values()) {
             if (value.ordinal() == dia) {
                 diaSemana = retornarDia(value.toString());
             }
+        }
+    }
+
+    private String retornarDia(String dia) {
+        if (dia == "LU") {
+            return "Lunes";
+        } else if (dia == "MA") {
+            return "Martes";
+        } else if (dia == "MI") {
+            return "Miercoles";
+        } else if (dia == "JU") {
+            return "Jueves";
+        } else if (dia == "VI") {
+            return "Viernes";
+        } else if (dia == "SA") {
+            return "Sabado";
+        } else if (dia == "DO") {
+            return "Domingo";
+        } else {
+            return "Default";
         }
     }
 
@@ -117,7 +107,7 @@ public class Asistencia {
         return estado;
     }
 
-    @Override //quitar mas tarde
+    @Override 
     public String toString() {
         return "Asistencia{" + "fecha=" + fecha.get(Calendar.DATE) + ", hora=" + hora.get(Calendar.SECOND) + ", estado=" + estado + ", diaSemana=" + diaSemana + '}';
     }

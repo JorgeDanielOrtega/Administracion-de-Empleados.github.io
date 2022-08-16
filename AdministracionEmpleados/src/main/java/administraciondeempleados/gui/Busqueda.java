@@ -1,12 +1,8 @@
 package administraciondeempleados.gui;
 
 import administraciondeempleados.Empresa;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import prueb.DBConnect;
 
 public class Busqueda extends javax.swing.JPanel {
 

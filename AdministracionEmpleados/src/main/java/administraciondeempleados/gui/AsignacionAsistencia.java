@@ -153,7 +153,6 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    //IMPLEMENTAR METODO para que guarde el estado de lo marcado, y que se pueda modificar, y no se agregue otro elemento a la asistenciaList
     private EstadoAsistencia recuperarEstado() { //quizas
         String estado = "";
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
@@ -163,7 +162,7 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
                 return EstadoAsistencia.valueOf(button.getName());
             }
         }
-        return null;
+        return EstadoAsistencia.RETRASO;
     }
 
     private long retornarIdTrabajador() {
@@ -179,6 +178,15 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
         }
         return 0;
     }
+
+
+    private void btn_marcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_marcarActionPerformed
+        Asistencia asistencia = new Asistencia(recuperarEstado());
+        asistencia.asignarDatosFecha();
+        asistenciaList.add(asistencia);
+        subirAsistencia(asistencia);
+        dispose();
+    }//GEN-LAST:event_btn_marcarActionPerformed
 
     private void subirAsistencia(Asistencia asistencia) {
         try {
@@ -207,14 +215,6 @@ public class AsignacionAsistencia extends javax.swing.JDialog {
             dBConnect.desconectar();
         }
     }
-
-    private void btn_marcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_marcarActionPerformed
-        Asistencia asistencia = new Asistencia(recuperarEstado());
-        asistencia.asignarDatosFecha();
-        asistenciaList.add(asistencia);
-        subirAsistencia(asistencia);
-        dispose();
-    }//GEN-LAST:event_btn_marcarActionPerformed
 
     /**
      * @param args the command line arguments

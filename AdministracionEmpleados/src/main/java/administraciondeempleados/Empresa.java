@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import prueb.DBConnect;
 
 public class Empresa {
@@ -61,14 +60,20 @@ public class Empresa {
 
     public void cargarListas() {
         cargarDepartamentoList();
+        //System.out.println(this.departamentoList);
         cargarRolList();
+        //System.out.println(this.rolList);
         cargarHorarioList();
+        //System.out.println(this.horarioList);
         cargarTrabajadoresList();
+        //System.out.println(this.trabajadorList);
         cargarGerenteList();
+        System.out.println(this.gerenteList);
         cargarEmpresa();
+        //System.out.println(this);
     }
     
-    private void cargarEmpresa(){
+    public void cargarEmpresa(){
         try{
             connection = dbConnect.conectar();
             sql = "SELECT * FROM empresa";
@@ -150,7 +155,7 @@ public class Empresa {
         }catch (Exception e){
             System.out.println("Error al retornar la empresa");
         }
-        return null;
+        return new Empresa();
     }
     
     private Horario retornarHorario(long idHorario) {
@@ -331,8 +336,6 @@ public class Empresa {
     private void cargarRolList() {
         try {
             connection = dbConnect.conectar();
-//            sql = "SELECT r.salario, r.nombre AS rol, p.nombre AS puesto, \n"
-//                    + "d.nombre AS departamento FROM \"roles\" r, \"puestos\" p, \"departamentos\" d ";
               sql = "SELECT r.salario, r.nombre AS nombre_rol, p.nombre AS nombre_puesto, "
                     + "d.nombre AS departamento FROM \"roles\" r "
                     + "INNER JOIN \"puestos\" p "
@@ -359,7 +362,6 @@ public class Empresa {
 
     private List<DiasLaborales> retornarDiasLaborablesList(long id) {
         try {
-            //quizas haya problemas con los objetos, dado que se utiliza en dos metodos, y puede haber perdida de consultas
             connection = dbConnect.conectar();
             List<DiasLaborales> diasLaborablesList = new LinkedList();
             sql = "SELECT dia FROM \"dias_laborables\" WHERE id IN  \n" +
@@ -400,7 +402,7 @@ public class Empresa {
         } catch (Exception e) {
             System.err.println("hubo un error dias" + e.getMessage());
         }
-        return null;
+        return new LinkedList<DiasLaborales>();
     }
 
     private void cargarHorarioList() {

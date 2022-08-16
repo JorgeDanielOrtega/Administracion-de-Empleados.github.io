@@ -114,7 +114,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtContraseña.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
         txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContraseña.setText("admin");
+        txtContraseña.setText("**********");
         txtContraseña.setBorder(null);
         txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,7 +130,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setText("Gerente.Gerente@superEmpresa.com");
+        txtUsuario.setText("Nombre de usuario");
         txtUsuario.setBorder(null);
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -376,11 +376,37 @@ public class DiaLogin extends javax.swing.JDialog {
     private void lbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIngresarMouseClicked
 
         boolean ingreso = false;
+        System.out.println("Trabajadores");
+        System.out.println(empresa.getTrabajadorList());
+        System.out.println("\n");
+        System.out.println("Departamentos");
+        System.out.println(empresa.getDepartamentoList());
+        System.out.println("\n");
+        System.out.println(empresa.getGerenteList());
+        System.out.println("Roles");
+        System.out.println(empresa.getRolList());
         
-        for(int i = 0; i < empresa.getDepartamentoList().size(); i++){
-            for(int j = 0; j < empresa.getDepartamentoList().get(i).getTrabajadorList().size(); j++){
-                if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
-                    if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getPassword().equals(String.valueOf(txtContraseña.getPassword()))){
+        
+        for (int i = 0; i < empresa.getTrabajadorList().size(); i++) {
+            if(empresa.getTrabajadorList().get(i).getUsuario().equals(txtUsuario.getText())){
+                if(empresa.getTrabajadorList().get(i).getPassword().equals(String.valueOf(txtContraseña.getPassword()))){
+                    ingreso = true;
+                    obtenerCuenta();
+                    parent.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                }else{
+                    ingreso = true;
+                    JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                    break;
+                }
+            }
+        }
+        
+        if(ingreso == false){
+            for (int i = 0; i < empresa.getGerenteList().size(); i++) {
+                if(empresa.getGerenteList().get(i).getUsuario().equals(txtUsuario.getText())){
+                    if(empresa.getGerenteList().get(i).getPassword().equals(String.valueOf(txtContraseña.getPassword()))){
                         ingreso = true;
                         obtenerCuenta();
                         parent.setVisible(true);
@@ -394,6 +420,28 @@ public class DiaLogin extends javax.swing.JDialog {
                 }
             }
         }
+        
+        if(ingreso == false){
+            for(int i = 0; i < empresa.getDepartamentoList().size(); i++){
+                System.out.println(empresa.getDepartamentoList().get(i));
+                for(int j = 0; j < empresa.getDepartamentoList().get(i).getTrabajadorList().size(); j++){
+                        System.out.println(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j));
+                    if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getUsuario().equals(txtUsuario.getText())){
+                        if(empresa.getDepartamentoList().get(i).getTrabajadorList().get(j).getPassword().equals(String.valueOf(txtContraseña.getPassword()))){
+                            ingreso = true;
+                            obtenerCuenta();
+                            parent.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                        }else{
+                            ingreso = true;
+                            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+                            break;
+                        }
+                    }
+                }
+            }
+        }      
         
         if(ingreso == false){
             JOptionPane.showMessageDialog(null, "Datos incorrectos");
