@@ -36,28 +36,32 @@ public class ModelTableBusqueda extends DefaultTableModel {
     public void cargarModelo() {
         limpiarTabla();
         for (Trabajador trabajador : trabajadorList) {
-            Empleado empleado = (Empleado) trabajador;
-            addRow(new String[]{
-                empleado.getId(),
-                empleado.getNombre() + " " + empleado.getApellido(),
-                empleado.getDepartamento().getNombre(),
-                empleado.getRol().getNombre(),
-                empleado.getHorario().getTipo()
-            });
+            if (trabajador instanceof Empleado) {
+                Empleado empleado = (Empleado) trabajador;
+                addRow(new String[]{
+                    empleado.getId(),
+                    empleado.getNombre() + " " + empleado.getApellido(),
+                    empleado.getDepartamento().getNombre(),
+                    empleado.getRol().getNombre(),
+                    empleado.getHorario().getTipo()
+                });
+            }
         }
     }
 
     public void cargarEmpleadosFiltrados() {
         limpiarTabla();
         for (Trabajador trabajador : trabajadoresFilteredList) {
-            Empleado empleado = (Empleado) trabajador;
-            addRow(new String[]{
-                empleado.getId(),
-                empleado.getNombre() + " " + empleado.getApellido(),
-                empleado.getDepartamento().getNombre(),
-                empleado.getRol().getNombre(),
-                empleado.getHorario().getTipo()
-            });
+            if (trabajador instanceof Empleado) {
+                Empleado empleado = (Empleado) trabajador;
+                addRow(new String[]{
+                    empleado.getId(),
+                    empleado.getNombre() + " " + empleado.getApellido(),
+                    empleado.getDepartamento().getNombre(),
+                    empleado.getRol().getNombre(),
+                    empleado.getHorario().getTipo()
+                });
+            }
         }
         trabajadoresFilteredList.clear();
         trabajadoresFilteredList.addAll(trabajadorList);
@@ -83,14 +87,20 @@ public class ModelTableBusqueda extends DefaultTableModel {
             }
             case "Horario" -> {
                 trabajadoresFilteredList = trabajadoresFilteredList.stream().filter(trabajador -> {
-                    Empleado e = (Empleado) trabajador;
-                    return e.getHorario().getTipo().equals(value);
+                    if (trabajador instanceof Empleado) {
+                        Empleado e = (Empleado) trabajador;
+                        return e.getHorario().getTipo().equals(value);
+                    }
+                    return false;
                 }).collect(Collectors.toList());
             }
             case "Id" -> {
                 trabajadoresFilteredList = trabajadoresFilteredList.stream().filter(trabajador -> {
-                    Empleado e = (Empleado) trabajador;
-                    return e.getId().equals(value);
+                    if (trabajador instanceof Empleado) {
+                        Empleado e = (Empleado) trabajador;
+                        return e.getId().equals(value);
+                    }
+                    return false;
                 }).collect(Collectors.toList());
             }
             case "Fullname" -> {
