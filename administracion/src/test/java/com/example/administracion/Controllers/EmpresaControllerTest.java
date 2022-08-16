@@ -7,16 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.sql.Time;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Optional;
 
-import com.example.administracion.Models.Empleado;
-=======
-import java.util.LinkedList;
-import java.util.Optional;
-
-import org.checkerframework.checker.units.qual.A;
->>>>>>> f908e9a2a46fd677166a7c78da7a9aa913602964
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,12 +28,13 @@ public class EmpresaControllerTest {
     EmpresaService empresaService;
 
     @Test
-    public void obtenerEmpresas(){
+    public void obtenerEmpresas() {
         ArrayList<Empresa> empresas = new ArrayList<>();
         when(empresaService.obtenerEmpresas()).thenReturn(empresas);
         ArrayList<Empresa> empresaResult = empresaController.obtenerEmpresas();
         verify(empresaService, times(1)).obtenerEmpresas();
     }
+
     @Test
     public void getEmpresaById() {
         Empresa empresa = new Empresa();
@@ -54,18 +47,7 @@ public class EmpresaControllerTest {
     }
 
     @Test
-    public void obtenerEmpresas(){
-        ArrayList<Empresa> empresaArrayList = new ArrayList<>();
-
-        when(empresaService.obtenerEmpresas()).thenReturn(empresaArrayList);
-
-        ArrayList<Empresa> empresasArrayListResult = empresaController.obtenerEmpresas();
-
-        verify(empresaService, times(1)).obtenerEmpresas();
-    }
-
-    @Test
-    public void obtenerEmpesaId(){
+    public void obtenerEmpesaId() {
         Empresa empresa = new Empresa();
 
         when(empresaService.obtenerEmpresaId(anyLong())).thenReturn(Optional.of(empresa));
@@ -76,7 +58,7 @@ public class EmpresaControllerTest {
     }
 
     @Test
-    public void actualizarEmpresaDb(){
+    public void actualizarEmpresaDb() {
         Empresa empresa = new Empresa();
 
         when(empresaService.actualizarEmpresa(empresa)).thenReturn(empresa);
@@ -87,7 +69,7 @@ public class EmpresaControllerTest {
     }
 
     @Test
-    public void getHoraEntredaEmpresa(){
+    public void getHoraEntredaEmpresa() {
         Time hora = new Time(1l);
 
         when(empresaService.getHoraEntredaEmpresa()).thenReturn(hora);

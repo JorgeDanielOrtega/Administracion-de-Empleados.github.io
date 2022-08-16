@@ -56,11 +56,10 @@ public class EmpleadoController {
     @Autowired
     ContratoService contratoService;
 
-    @GetMapping()
-    public List<Persona> personaList() {
-        return (List<Persona>) personaService.listarPersonas();
-
-    }
+    // @GetMapping()
+    // public List<Persona> personaList() {
+    //     return (List<Persona>) personaService.listarPersonas();
+    // }
     @GetMapping("/all")
         public ArrayList<HashMap<String, Object>> getEmpleados(){
             return empleadoService.getTodosEmpleados();

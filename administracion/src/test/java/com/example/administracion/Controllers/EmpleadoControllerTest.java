@@ -5,23 +5,23 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.example.administracion.Models.*;
-import com.example.administracion.Services.ContratoService;
-import com.example.administracion.Services.PersonaService;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import com.example.administracion.Services.EmpleadoService;
-import com.example.administracion.Services.TrabajadorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.administracion.Models.Contrato;
+import com.example.administracion.Models.Empleado;
+import com.example.administracion.Models.Persona;
+import com.example.administracion.Models.Trabajador;
+import com.example.administracion.Services.ContratoService;
+import com.example.administracion.Services.EmpleadoService;
+import com.example.administracion.Services.PersonaService;
+import com.example.administracion.Services.TrabajadorService;
 
 @ExtendWith(MockitoExtension.class)
 public class EmpleadoControllerTest {
@@ -49,13 +49,13 @@ public class EmpleadoControllerTest {
         verify(empleadoService, times(1)).getIdsTrabajador();
     }
 
-    //    @Test
-//    public void personaList(){
-//        List<Persona> personas = new List<Persona>;
-//        when(personaService.listarPersonas()).thenReturn(personas);
-//        List<Persona> personasResult = empleadoController.personaList();
-//        verify(personaService, times(1)).listarPersonas();
-//    }
+    // @Test
+    // public void personaList(){
+    // List<Persona> personas = new List<Persona>;
+    // when(personaService.listarPersonas()).thenReturn(personas);
+    // List<Persona> personasResult = empleadoController.personaList();
+    // verify(personaService, times(1)).listarPersonas();
+    // }
     @Test
     public void obtenerEmpleadosTabla() {
         ArrayList<Empleado> empleados = new ArrayList<>();
@@ -103,69 +103,77 @@ public class EmpleadoControllerTest {
         ResponseEntity<Trabajador> resultT = empleadoController.guardarTrabajador(t);
         verify(trabajadorService, times(1)).guardarTrabajador(t);
     }
+
     @Test
-    public void guardarEmpleado(){
+    public void guardarEmpleado() {
         Empleado e = new Empleado();
         when(empleadoService.guardarEmpleado(e)).thenReturn(e);
         ResponseEntity<Empleado> resultE = empleadoController.guardarEmpleado(e);
         verify(empleadoService, times(1)).guardarEmpleado(e);
     }
+
     @Test
-    public void guardarContrato(){
+    public void guardarContrato() {
         Contrato c = new Contrato();
         when(contratoService.guardarContrato(c)).thenReturn(c);
         ResponseEntity<Contrato> resultC = empleadoController.guardarContrato(c);
         verify(contratoService, times(1)).guardarContrato(c);
     }
+
     @Test
-    public void eliminarPersona(){
+    public void eliminarPersona() {
         Persona p = new Persona(1l);
-        if(p != null){
+        if (p != null) {
             personaService.eliminarPersonaPorId(p.getId());
-        }else{
+        } else {
             ResponseEntity<Persona> result = new ResponseEntity<Persona>(p, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         verify(personaService, times(1)).eliminarPersonaPorId(p.getId());
 
     }
+
     @Test
-    public void eliminarTrabajador(){
+    public void eliminarTrabajador() {
         Trabajador t = new Trabajador();
-        if( t != null){
+        if (t != null) {
             trabajadorService.eliminarTrabajadorPorId(t.getId());
-        }else{
+        } else {
             ResponseEntity<Trabajador> result = new ResponseEntity<Trabajador>(t, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         verify(trabajadorService, times(1)).eliminarTrabajadorPorId(t.getId());
     }
+
     @Test
-    public void eliminarEmpleado(){
+    public void eliminarEmpleado() {
         Empleado e = new Empleado();
-        if (e != null){
+        if (e != null) {
             empleadoService.eliminarEmpleadoPorId(e.getId());
-        }else{
-            ResponseEntity<Empleado> result = new ResponseEntity<Empleado>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            ResponseEntity<Empleado> result = new ResponseEntity<Empleado>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         verify(empleadoService, times(1)).eliminarEmpleadoPorId(e.getId());
 
     }
+
     @Test
-    public void eliminarContrato(){
+    public void eliminarContrato() {
         Contrato c = new Contrato();
-        if(c != null){
+        if (c != null) {
             contratoService.eliminarContratoPorId(c.getId());
-        }else{
+        } else {
             ResponseEntity<Contrato> result = new ResponseEntity<Contrato>(c, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         verify(contratoService, times(1)).eliminarContratoPorId(c.getId());
 
     }
+
     @Test
-    public void getEmpleadoByIdTrabajador(){
+    public void getEmpleadoByIdTrabajador() {
 
     }
+
     @Test
-    public void getIdEmpleados(){
+    public void getIdEmpleados() {
 
     }
 }
