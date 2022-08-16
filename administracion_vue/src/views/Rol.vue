@@ -1,52 +1,64 @@
 <template>
+    <div v-if=status>
+        <div>
+            <Toast />
+            <Menubar :model="items" />
+            <DataTable :value="roles" v-model:selection="selectedRol" selectionMode="single" dataKey="id" responsiveLayout="scroll" >
+                <Column field="id" header="Id"></Column>
+                <Column field="nombre" header="Nombre"></Column>
+                <Column field="salario" header="Salario"></Column>
+            </DataTable>
 
-    <div>
-        <Toast />
-        <Menubar :model="items" />
-        <DataTable :value="roles" v-model:selection="selectedRol" selectionMode="single" dataKey="id" responsiveLayout="scroll" >
-            <Column field="id" header="Id"></Column>
-            <Column field="nombre" header="Nombre"></Column>
-            <Column field="salario" header="Salario"></Column>
-        </DataTable>
 
+            <Dialog header="Rol" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
 
-        <Dialog header="Rol" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
-
-            <span class="p-float-label">
-                 <InputText id="nombre" type="text" v-model="rol.nombre"  style="width: 100%" />
-                <label for="nombre">Nombre</label>
-            </span>
-            <br>
-            <div class="field col-12 md:col-3">
-                <label for="salario">Salario</label>
-                <InputNumber inputId="salario" v-model="rol.salario" showButtons mode="currency" currency="USD"  :minFractionDigits="2" :maxFractionDigits="2"/>
-            </div>
-            <span class="p-float-label">
-                 <InputText id="puesto" type="text" v-model="nombrePuesto" style="width: 100%" />
-                <label for="puesto"> Puesto</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="departamento" type="text" v-model="nombreDepartamento" style="width: 100%" />
-                <label for="departamento"> Departamento</label>
-            </span>
-            <template #footer>
-               <!-- <Button label="Relacionar" icon="pi pi-times" @click="relacionarTablas" autofocus /> -->
-                <Button label="Guardar" icon="pi pi-check" @click="guardar"  />
-                <Button label="Cancelar" icon="pi pi-times" @click="closeModal" class="p-button-text" />
-            </template>
-         </Dialog> 
-        <!-- todo cambiar el touter link, al principal cuando se haga -->
+                <span class="p-float-label">
+                    <InputText id="nombre" type="text" v-model="rol.nombre"  style="width: 100%" />
+                    <label for="nombre">Nombre</label>
+                </span>
+                <br>
+                <div class="field col-12 md:col-3">
+                    <label for="salario">Salario</label>
+                    <InputNumber inputId="salario" v-model="rol.salario" showButtons mode="currency" currency="USD"  :minFractionDigits="2" :maxFractionDigits="2"/>
+                </div>
+                <span class="p-float-label">
+                    <InputText id="puesto" type="text" v-model="nombrePuesto" style="width: 100%" />
+                    <label for="puesto"> Puesto</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="departamento" type="text" v-model="nombreDepartamento" style="width: 100%" />
+                    <label for="departamento"> Departamento</label>
+                </span>
+                <template #footer>
+                <!-- <Button label="Relacionar" icon="pi pi-times" @click="relacionarTablas" autofocus /> -->
+                    <Button label="Guardar" icon="pi pi-check" @click="guardar"  />
+                    <Button label="Cancelar" icon="pi pi-times" @click="closeModal" class="p-button-text" />
+                </template>
+            </Dialog> 
+            <!-- todo cambiar el touter link, al principal cuando se haga -->
+        </div>
     </div>
+    <div v-else>
+            <div class="divisor"></div>
+            <label class="login"><b>Por favor relaice el LogIn</b></label>
+            <div class="divisor"></div>
+            <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+    </div> 
+    
 </template>
 
 <script>
 import RolService from "../Services/RolService";
+import LoginService from "@/Services/LoginService";
 
 export default {
     name: 'Roles',
     data() {
         return {
+            status: null,
+            idLogin: null,
+
             roles: null,
             departamentos: null,
             puestos: null,
@@ -141,11 +153,18 @@ export default {
         }
     },
     rolService: null,
+    loginService: null,
     created() { // created at momento to execute
         this.rolService = new RolService();
+        this.loginService = new LoginService();
     },
     mounted() {
         this.obtenerTodo();
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
     },
     methods: {
         async relacionarTablas(){
@@ -257,6 +276,9 @@ export default {
         closeModal(){
             this.displayModal =false;
         },
+        redirigir(){
+            this.$router.push('/');
+        }
     }
 
     }

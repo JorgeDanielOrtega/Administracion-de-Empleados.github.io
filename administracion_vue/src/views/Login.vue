@@ -9,10 +9,10 @@
 
     <div class="datos">
       <label class="col" for="nombre">Usuario:</label>
-      <InputText class="input" id="usuario" type="text" v-model="usuario" />
+      <InputText class="input" id="usuario" type="text" v-model="usuario" placeholder = "Usuario"/>
       <div class="divisor"></div>
       <label class="col" for="fundacionYear">Contraseña:</label>
-      <InputText class="input" id="contrasenia" type="text" v-model="contrasenia" />
+      <InputText class="input" id="contrasenia" type="password" v-model="contrasenia" placeholder = "Contraseña"/>
     </div>
 
     <div class="buttons">
@@ -70,8 +70,8 @@ export default {
 
       this.loginService.salir(this.login).then(response => {
         this.login = response.data;
-        this.usuario = this.login.usuario;
-        this.contrasenia = this.login.contrasenia;
+        this.usuario = null;
+        this.contrasenia = null;
         this.status = this.login.status;
         this.id = this.login.id;
       });

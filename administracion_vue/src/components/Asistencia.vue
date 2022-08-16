@@ -120,7 +120,6 @@ export default {
 .container_options{
     width: 43.75rem;
     border-radius: 5px;
-    background-color: aqua;
 }
 
 Button{
@@ -139,5 +138,4 @@ Button{
 .buttonLogin{
     margin-top: 0px;
 }
-
 </style>

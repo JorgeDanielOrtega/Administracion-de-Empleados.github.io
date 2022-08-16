@@ -1,166 +1,180 @@
-<template>      
-    <div>
-        <Toast />
-        <Menubar :model="items" />
-        
-        <DataTable :value="empleados" v-model:selection="selectedEmpleado" selectionMode="single" dataKey="id" responsiveLayout="scroll" :rows="10" >
-        <!-- <DataTable :value="empleados" :paginator="true" :rows="10"  :selectionMode="single" :selection.sync="selectedEmpleado"   v-model:selection="selectedEmpleado"   dataKey="id"  > -->
-            <Column field="id" header="Id"></Column>
-            <Column field="nombres" header="Nombres"></Column>
-            <Column field="apellidos" header="Apellidos"></Column>
-            <Column field="usuario" header="Usuario"></Column>
-            <Column field="cedula" header="Cedula"></Column>
-            <Column field="telefono" header="Telefono"></Column>
-            <Column field="departamento" header="Departamento"></Column>
-            <Column field="rol" header="Rol"></Column>
-            <Column field="puesto" header="Puesto"></Column>
-            <Column field="horario" header="Horario"></Column>
-        </DataTable>
-        <Dialog header="Empleado" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+<template>
+    <div v-if=status>
+        <div>
+            <Toast />
+            <Menubar :model="items" />
             
-            <span class="p-float-label">
-                 <InputText id="nombre" type="text" v-model="persona.nombres" style="width: 100%" />
-                <label for="nombre">Nombres</label>
-            </span>
-            <br>
+            <DataTable :value="empleados" v-model:selection="selectedEmpleado" selectionMode="single" dataKey="id" responsiveLayout="scroll" :rows="10" >
+            <!-- <DataTable :value="empleados" :paginator="true" :rows="10"  :selectionMode="single" :selection.sync="selectedEmpleado"   v-model:selection="selectedEmpleado"   dataKey="id"  > -->
+                <Column field="id" header="Id"></Column>
+                <Column field="nombres" header="Nombres"></Column>
+                <Column field="apellidos" header="Apellidos"></Column>
+                <Column field="usuario" header="Usuario"></Column>
+                <Column field="cedula" header="Cedula"></Column>
+                <Column field="telefono" header="Telefono"></Column>
+                <Column field="departamento" header="Departamento"></Column>
+                <Column field="rol" header="Rol"></Column>
+                <Column field="puesto" header="Puesto"></Column>
+                <Column field="horario" header="Horario"></Column>
+            </DataTable>
+            <Dialog header="Empleado" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+                
+                <span class="p-float-label">
+                    <InputText id="nombre" type="text" v-model="persona.nombres" style="width: 100%" />
+                    <label for="nombre">Nombres</label>
+                </span>
+                <br>
 
-            <span class="p-float-label">
-                 <InputText id="apellido" type="text" v-model="persona.apellidos" style="width: 100%" />
-                <label for="apellido">Apellidos</label>
-            </span>
-            <br>
+                <span class="p-float-label">
+                    <InputText id="apellido" type="text" v-model="persona.apellidos" style="width: 100%" />
+                    <label for="apellido">Apellidos</label>
+                </span>
+                <br>
 
-            <span class="p-float-label">
-                 <InputText id="direccion" type="text" v-model="persona.direccion" style="width: 100%" />
-                <label for="direccion">Direccion</label>
-            </span>
-            <br>
-                <label for="estadoCivil">Estado Civil</label><br><br>
-                <SelectButton v-model="persona.estadoCivil" :options="estadosCiviles"   aria-labelledby="single"/>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="cedula" type="text" v-model="persona.cedula"  />
-                <label for="cedula">Cedula</label>
-            </span>
-            <br><br>
-                <label for="sexo">Sexo</label><br><br>
-                    <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="M">Masculino
-                    <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="F">Femenino
-            <br><br>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="ciudad" type="text" v-model="persona.ciudad"  />
-                <label for="ciudad">Ciudad</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="telefono" type="text" v-model="persona.telefono"  />
-                <label for="telefono">Telefono</label>
-            </span>
-            <br>
+                <span class="p-float-label">
+                    <InputText id="direccion" type="text" v-model="persona.direccion" style="width: 100%" />
+                    <label for="direccion">Direccion</label>
+                </span>
+                <br>
+                    <label for="estadoCivil">Estado Civil</label><br><br>
+                    <SelectButton v-model="persona.estadoCivil" :options="estadosCiviles"   aria-labelledby="single"/>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="cedula" type="text" v-model="persona.cedula"  />
+                    <label for="cedula">Cedula</label>
+                </span>
+                <br><br>
+                    <label for="sexo">Sexo</label><br><br>
+                        <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="M">Masculino
+                        <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="F">Femenino
+                <br><br>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="ciudad" type="text" v-model="persona.ciudad"  />
+                    <label for="ciudad">Ciudad</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="telefono" type="text" v-model="persona.telefono"  />
+                    <label for="telefono">Telefono</label>
+                </span>
+                <br>
 
-            <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <br>
-            <div class="field col-20 md:col-20">
-                <Calendar id="icon1" v-model="persona.fechaNacimiento" :showIcon="true" />
-            </div>
-            <label for="anioEntrada">Año de entrada</label>
-            <br>
-            <div class="field col-20 md:col-20">
-                <Calendar id="icon" v-model="persona.anioEntrada" :showIcon="true" />
-            </div>
-            
-            <span class="p-float-label">
-                 <InputText id="correoPersonal" type="text" v-model="trabajador.correoPersonal"  />
-                <label for="correoPersonal">Correo personal</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="correoEmpresarial" type="text" v-model="trabajador.correoEmpresarial"  />
-                <label for="correoEmpresarial">Correo empresarial</label>
-            </span>
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <br>
+                <div class="field col-20 md:col-20">
+                    <Calendar id="icon1" v-model="persona.fechaNacimiento" :showIcon="true" />
+                </div>
+                <label for="anioEntrada">Año de entrada</label>
+                <br>
+                <div class="field col-20 md:col-20">
+                    <Calendar id="icon" v-model="persona.anioEntrada" :showIcon="true" />
+                </div>
+                
+                <span class="p-float-label">
+                    <InputText id="correoPersonal" type="text" v-model="trabajador.correoPersonal"  />
+                    <label for="correoPersonal">Correo personal</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="correoEmpresarial" type="text" v-model="trabajador.correoEmpresarial"  />
+                    <label for="correoEmpresarial">Correo empresarial</label>
+                </span>
 
-            <br>
-            <span class="p-float-label">
-                 <InputText id="usuario" type="text" v-model="trabajador.usuario"  />
-                <label for="usuario">Usuario</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                <Password v-model="trabajador.password" />
-                <label for="contrasenia">Contraseña</label>
-            </span>
-            <br>
-            <label for="tieneContrato">Pago por transferencia</label><br><br>
-                    <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="1">Si
-                    <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="0">No
-            <br><br>
-            <span class="p-float-label">
-                 <InputText id="vacaciones" type="text" v-model="trabajador.vacaciones"  />
-                <label for="vacaciones">Vacaciones</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                <InputText id="rol" type="text" v-model="nombreRol"  />
-                <label for="rol">Rol</label>
-            </span>
-            <br>
-            <label>Contrato </label><br><br>
-            <Button icon="pi pi-user" @click="mostrarModalContrato" class="p-button-rounded p-button-info" />
-            <!-- <Button label="Crear Contrato" icon="pi pi-tag" @click="mostrarModalContrato" class="p-button-text"/> -->
-            <br>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="departamento" type="text" v-model="nombreDepartamento"  />
-                <label for="pagoTransferencia">Departamento</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="horario" type="text" v-model="tipoHorario"  />
-                <label for="horario">Horario</label>
-            </span>
-            <br>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="usuario" type="text" v-model="trabajador.usuario"  />
+                    <label for="usuario">Usuario</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <Password v-model="trabajador.password" />
+                    <label for="contrasenia">Contraseña</label>
+                </span>
+                <br>
+                <label for="tieneContrato">Pago por transferencia</label><br><br>
+                        <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="1">Si
+                        <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="0">No
+                <br><br>
+                <span class="p-float-label">
+                    <InputText id="vacaciones" type="text" v-model="trabajador.vacaciones"  />
+                    <label for="vacaciones">Vacaciones</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="rol" type="text" v-model="nombreRol"  />
+                    <label for="rol">Rol</label>
+                </span>
+                <br>
+                <label>Contrato </label><br><br>
+                <Button icon="pi pi-user" @click="mostrarModalContrato" class="p-button-rounded p-button-info" />
+                <!-- <Button label="Crear Contrato" icon="pi pi-tag" @click="mostrarModalContrato" class="p-button-text"/> -->
+                <br>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="departamento" type="text" v-model="nombreDepartamento"  />
+                    <label for="pagoTransferencia">Departamento</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="horario" type="text" v-model="tipoHorario"  />
+                    <label for="horario">Horario</label>
+                </span>
+                <br>
 
-            <template #footer>
-                <Button label="Guardar" icon="pi pi-check" @click="guardarEmpleadoView" />
-                <Button label="Cancelar" icon="pi pi-times" @click="closeModal" class="p-button-text"/>
+                <template #footer>
+                    <Button label="Guardar" icon="pi pi-check" @click="guardarEmpleadoView" />
+                    <Button label="Cancelar" icon="pi pi-times" @click="closeModal" class="p-button-text"/>
 
-            </template>
-         </Dialog>
-        <Dialog header="Contrato" v-model:visible="displayModalContrato" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
-                    <label for="tieneContrato">Tiene contrato</label><br><br>
-                    <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="1">Si
-                    <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="0">No
-            <br><br>
-            <span class="p-float-label">
-                    <InputText id="tiempoContrato" type="text" v-model="contrato.tiempoContrato"  style="width: 100%" />
-                    <label for="tiempoContrato">Tiempo del contrato</label>
-            </span>
-            <br>
-            <label for="fechaLimite">Fecha limite</label>
-            <br>
-            <div class="field col-20 md:col-20">
-                <Calendar id="icon" v-model="contrato.fechaLimite" :showIcon="true" />
-            </div>
-            <template #footer>
-                    <Button label="Guardar" icon="pi pi-check" @click="guardarContrato" class="p-button-text"/>
-                    <Button label="Cancelar" icon="pi pi-times" @click="closeModalContrato" autofocus />
-            </template>
-        </Dialog>
+                </template>
+            </Dialog>
+            <Dialog header="Contrato" v-model:visible="displayModalContrato" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+                        <label for="tieneContrato">Tiene contrato</label><br><br>
+                        <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="1">Si
+                        <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="0">No
+                <br><br>
+                <span class="p-float-label">
+                        <InputText id="tiempoContrato" type="text" v-model="contrato.tiempoContrato"  style="width: 100%" />
+                        <label for="tiempoContrato">Tiempo del contrato</label>
+                </span>
+                <br>
+                <label for="fechaLimite">Fecha limite</label>
+                <br>
+                <div class="field col-20 md:col-20">
+                    <Calendar id="icon" v-model="contrato.fechaLimite" :showIcon="true" />
+                </div>
+                <template #footer>
+                        <Button label="Guardar" icon="pi pi-check" @click="guardarContrato" class="p-button-text"/>
+                        <Button label="Cancelar" icon="pi pi-times" @click="closeModalContrato" autofocus />
+                </template>
+            </Dialog>
 
-        <!-- todo cambiar el touter link, al principal cuando se haga -->
+            <!-- todo cambiar el touter link, al principal cuando se haga -->
+        </div>
     </div>
+    <div v-else>
+            <div class="divisor"></div>
+            <label class="login"><b>Por favor relaice el LogIn</b></label>
+            <div class="divisor"></div>
+            <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+    </div> 
+
+    
 </template>
 
 <script>
 import EmpleadoService from "../Services/EmpleadoService";
 import DecimoService from "../Services/DecimoService";
+import LoginService from "@/Services/LoginService";
 
 export default {
     name: ' ',
 
     data() {
         return {
+            status: null,
+            idLogin: null,
+
             empleados: null,
             nombreDepartamento: null,
             nombreRol: null,
@@ -306,12 +320,20 @@ export default {
     },
     empleadoService: null,
     decimoService: null,
+    loginService: null,
     created() { // created at momento to execute
         this.empleadoService = new EmpleadoService();
         this.decimoService = new DecimoService();
+        this.loginService = new LoginService();
     },
     mounted() {
         this.obtenerTodo();
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
+
     },
 
     methods: {
@@ -753,6 +775,9 @@ export default {
         },
         mostrarModalContrato(){
             this.displayModalContrato = true;
+        },
+        redirigir(){
+            this.$router.push('/');
         }
     }
     }

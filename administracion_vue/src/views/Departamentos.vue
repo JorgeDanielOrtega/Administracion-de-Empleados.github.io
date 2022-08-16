@@ -1,58 +1,70 @@
 <template>
+    <div v-if=status>
+        <div>
+            <Toast />
+            <Menubar :model="items" />
+            <DataTable :value="departamentos" v-model:selection="selectedDepartamento" selectionMode="single" dataKey="id" responsiveLayout="scroll" :rows="10" >
+                <Column field="id" header="Id"></Column>
+                <Column field="nombre" header="Nombre"></Column>
+                <Column field="numero" header="Numero"></Column>
+                <Column field="empleadosMaximos" header="Maximo Empleados"></Column>
+                <Column field="vacaciones" header="Vacaciones"></Column>
+            </DataTable>
+            <Dialog header="Departamento" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
 
-    <div>
-        <Toast />
-        <Menubar :model="items" />
-        <DataTable :value="departamentos" v-model:selection="selectedDepartamento" selectionMode="single" dataKey="id" responsiveLayout="scroll" :rows="10" >
-            <Column field="id" header="Id"></Column>
-            <Column field="nombre" header="Nombre"></Column>
-            <Column field="numero" header="Numero"></Column>
-            <Column field="empleadosMaximos" header="Maximo Empleados"></Column>
-            <Column field="vacaciones" header="Vacaciones"></Column>
-        </DataTable>
-        <Dialog header="Departamento" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
-
-            <span class="p-float-label">
-                 <InputText id="nombre" type="text" v-model="departamento.nombre"  style="width: 100%" />
-                <label for="nombre">Nombre</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="numero" type="text" v-model="departamento.numero" style="width: 100%" />
-                <label for="numero">Numero</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="maximoEmpleados" type="text" v-model="departamento.empleadosMaximos" style="width: 100%" />
-                <label for="maximoEmpleados">Maximo Empleados</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="vacaciones" type="text" v-model="departamento.vacaciones" style="width: 100%"/>
-                <label for="vacaciones">Vacaciones</label>
-            </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="nombreEmpresa" type="text" v-model="nombreEmpresa"  />
-                <label for="nombreEmpresa">Nombre empresa</label>
-            </span>
-            <br>
-            <template #footer>
-                <Button label="Guardar" icon="pi pi-check" @click="guardar" class="p-button-text"/>
-                <Button label="Cancelar" icon="pi pi-times" @click="closeModal" autofocus />
-            </template>
-         </Dialog>
-        <!-- todo cambiar el touter link, al principal cuando se haga -->
+                <span class="p-float-label">
+                    <InputText id="nombre" type="text" v-model="departamento.nombre"  style="width: 100%" />
+                    <label for="nombre">Nombre</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="numero" type="text" v-model="departamento.numero" style="width: 100%" />
+                    <label for="numero">Numero</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="maximoEmpleados" type="text" v-model="departamento.empleadosMaximos" style="width: 100%" />
+                    <label for="maximoEmpleados">Maximo Empleados</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="vacaciones" type="text" v-model="departamento.vacaciones" style="width: 100%"/>
+                    <label for="vacaciones">Vacaciones</label>
+                </span>
+                <br>
+                <span class="p-float-label">
+                    <InputText id="nombreEmpresa" type="text" v-model="nombreEmpresa"  />
+                    <label for="nombreEmpresa">Nombre empresa</label>
+                </span>
+                <br>
+                <template #footer>
+                    <Button label="Guardar" icon="pi pi-check" @click="guardar" class="p-button-text"/>
+                    <Button label="Cancelar" icon="pi pi-times" @click="closeModal" autofocus />
+                </template>
+            </Dialog>
+            <!-- todo cambiar el touter link, al principal cuando se haga -->
+        </div>
     </div>
+    <div v-else>
+            <div class="divisor"></div>
+            <label class="login"><b>Por favor relaice el LogIn</b></label>
+            <div class="divisor"></div>
+            <Button class="buttonLogin" label="LogIn" @click="redirigir()" />
+    </div> 
+    
 </template>
 
 <script>
 import DepartamentoService from "../Services/DepartamentoService.js";
+import LoginService from "@/Services/LoginService";
 
 export default {
     name: 'Departamentos',
     data() {
         return {
+            status: null,
+            idLogin: null,
+
             departamentos: null,
             empresas: null,
             nombreEmpresa: null,
@@ -141,13 +153,20 @@ export default {
     },
 
     departamentoService: null,
+    loginService: null,
     created() { // created at momento to execute
         this.departamentoService = new DepartamentoService();
+        this.loginService = new LoginService();
         this.nombreEmpresa = "Nombre"
     },
 
     mounted() {
         this.obtenerTodo();
+        this.loginService.retornarIngreso().then(response => {
+            this.login = response.data;
+            this.idLogin = this.login.id;
+            this.status = this.login.status;
+        });
     },
     methods: {
 
@@ -257,6 +276,9 @@ export default {
                 idEmpresa: null
             }
         },
+        redirigir(){
+            this.$router.push('/');
+        }
     }
     }
     </script>

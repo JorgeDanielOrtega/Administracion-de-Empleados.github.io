@@ -202,12 +202,12 @@ export default {
     },
     computed: {
         generarLink() {
-            return `http://localhost:8080/#/perfil/${this.id}/asistencia`
+            return `http://localhost:8082/#/perfil/${this.id}/asistencia`
         }
     },
     methods: {
         recargar() {
-            window.location.href = `http://localhost:8080/#/perfil/${this.getId()}`;                
+            window.location.href = `http://localhost:8082/#/perfil/${this.getId()}`;                
             console.log('recargado');
         },
         openModalHorario() {

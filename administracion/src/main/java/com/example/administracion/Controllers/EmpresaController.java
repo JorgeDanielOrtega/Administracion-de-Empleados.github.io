@@ -43,13 +43,13 @@ public class EmpresaController {
         return empresaService.obtenerEmpresaId(id);
     }
 
-    @GetMapping()
+    @GetMapping("")
     public Empresa getEmpresaById() {
         // return empresaService.getEmpresaById();
         return empresaService.getEmpresaById().get();
     }
 
-    @PostMapping("actualizar")
+    @PostMapping("/actualizar")
     public Empresa actualizarEmpresaDb(@RequestBody Empresa empresa) {
         return empresaService.actualizarEmpresa(empresa);
     }
