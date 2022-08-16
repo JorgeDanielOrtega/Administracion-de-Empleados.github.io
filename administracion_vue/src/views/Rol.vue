@@ -10,7 +10,7 @@
         </DataTable>
 
 
-        <Dialog header="Crear Rol" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+        <Dialog header="Rol" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
 
             <span class="p-float-label">
                  <InputText id="nombre" type="text" v-model="rol.nombre"  style="width: 100%" />
@@ -32,12 +32,11 @@
                 <label for="departamento"> Departamento</label>
             </span>
             <template #footer>
+               <!-- <Button label="Relacionar" icon="pi pi-times" @click="relacionarTablas" autofocus /> -->
                 <Button label="Guardar" icon="pi pi-check" @click="guardar"  />
                 <Button label="Cancelar" icon="pi pi-times" @click="closeModal" class="p-button-text" />
-                <Button label="Relacionar" icon="pi pi-times" @click="relacionarTablas" autofocus />
             </template>
          </Dialog> 
-         <router-link to="/"> <Button label="Atras" /></router-link>
         <!-- todo cambiar el touter link, al principal cuando se haga -->
     </div>
 </template>
@@ -84,7 +83,16 @@ export default {
                     label : 'Editar',
                     icon : 'pi pi-fw pi-pencil',
                     command : () => {
-                        this.mostrarEditModal();
+                        if(this.selectedRol.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
+                            this.mostrarEditModal();
+                        }
                     }
                 },
 
@@ -92,7 +100,16 @@ export default {
                     label : 'Eliminar  Llaves foraneas',
                     icon : 'pi pi-key',
                     command: () => {
+                        if(this.selectedRol.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
                         this.eliminarLlavesForaneas();
+                        }
                     }
                 },
 
@@ -100,7 +117,16 @@ export default {
                     label : 'Eliminar',
                     icon : 'pi pi-fw pi-trash',
                     command: () => {
+                        if(this.selectedRol.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
                         this.eliminarRol();
+                        }
                     }
                 },
                 
@@ -123,8 +149,8 @@ export default {
         this.obtenerTodo();
     },
     methods: {
-        relacionarTablas(){
-            this.rolService.obtenerJsonPuestos().then(response => {
+        async relacionarTablas(){
+            await this.rolService.obtenerJsonPuestos().then(response => {
             this.puestos = response;
             response.forEach(element => {
                 if( this.nombrePuesto === element.nombre){
@@ -133,7 +159,7 @@ export default {
                 }
             });
         });
-            this.rolService.obtenerJsonDepartamentos().then(response => {
+            await this.rolService.obtenerJsonDepartamentos().then(response => {
             this.departamentos = response;
             response.forEach(element => {
                 if( this.nombreDepartamento === element.nombre){
@@ -153,6 +179,12 @@ export default {
                     }
                 });
             });
+            this.$toast.add({
+                            severity:'info',
+                            summary: 'AVISO',
+                            detail: 'Relaciones eliinadas',
+                            life: 3000
+                        });
         },
          mostrarModal(){
             this.displayModal = true;
@@ -199,22 +231,29 @@ export default {
                 });
             }
         },
-        guardar(){
-        this.rolService.guardarRol(this.rol).then (data => {                
-                if(data.status === 200){
-                    this.obtenerTodo();
-                    this.displayModal = false;
-                    this.rol = {
-                        id: null,
-                        nombre: null,
-                        salario: null,
-                        puesto : null,
-                        idPuesto : null,
-                        idDepartamento : null,
+        async guardar(){
+            await this.relacionarTablas()
+            await this.rolService.guardarRol(this.rol).then (data => {                
+                    if(data.status === 200){
+                        this.obtenerTodo();
+                        this.displayModal = false;
+                        this.rol = {
+                            id: null,
+                            nombre: null,
+                            salario: null,
+                            puesto : null,
+                            idPuesto : null,
+                            idDepartamento : null,
+                        }
+                        this.$toast.add({
+                            severity:'success',
+                            summary: 'AVISO',
+                            detail: 'Cambios Realizados',
+                            life: 3000
+                        });
+                        this.obtenerTodo();
                     }
-                    this.obtenerTodo();
-                }
-            });
+                });
         },
         closeModal(){
             this.displayModal =false;

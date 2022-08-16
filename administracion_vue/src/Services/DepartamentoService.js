@@ -4,10 +4,10 @@ import axios from "axios";
 //import { reject } from "core-js/fn/promise";
 
 export default class DepartamentoService{
-    url = "http://localhost:8080/departamento/"
-    urlEmpresa = "http://localhost:8080/empresa/"
-    urlRoles = "http://localhost:8080/rol/"
-    urlTrabajador = "http://localhost:8080/empleados/"
+    url = "http://localhost:8081/departamento/"
+    urlEmpresa = "http://localhost:8081/empresa/"
+    urlRoles = "http://localhost:8081/rol/"
+    urlTrabajador = "http://localhost:8081/empleados/"
 
     //considerar el await para traer los datos rapido
 

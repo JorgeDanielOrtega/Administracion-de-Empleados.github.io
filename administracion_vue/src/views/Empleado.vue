@@ -15,7 +15,7 @@
             <Column field="puesto" header="Puesto"></Column>
             <Column field="horario" header="Horario"></Column>
         </DataTable>
-        <Dialog header="Crear Empleado" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+        <Dialog header="Empleado" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
             
             <span class="p-float-label">
                  <InputText id="nombre" type="text" v-model="persona.nombres" style="width: 100%" />
@@ -43,11 +43,11 @@
                  <InputText id="cedula" type="text" v-model="persona.cedula"  />
                 <label for="cedula">Cedula</label>
             </span>
-            <br>
-            <span class="p-float-label">
-                 <InputText id="sexo" type="text" v-model="persona.sexo"  />
-                <label for="sexo">Sexo</label>
-            </span>
+            <br><br>
+                <label for="sexo">Sexo</label><br><br>
+                    <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="M">Masculino
+                    <input type="radio" v-model ="persona.sexo" name="sexoTrabajador" value="F">Femenino
+            <br><br>
             <br>
             <span class="p-float-label">
                  <InputText id="ciudad" type="text" v-model="persona.ciudad"  />
@@ -89,11 +89,10 @@
                 <label for="contrasenia">Contraseña</label>
             </span>
             <br>
-            <span class="p-float-label">
-                 <InputText id="pagoTransferencia" type="text" v-model="trabajador.formaPago"  />
-                <label for="pagoTransferencia">Pago por transferencia</label>
-            </span>
-            <br>
+            <label for="tieneContrato">Pago por transferencia</label><br><br>
+                    <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="1">Si
+                    <input type="radio" v-model ="trabajador.formaPago" name="pagoPorTransferencia" value="0">No
+            <br><br>
             <span class="p-float-label">
                  <InputText id="vacaciones" type="text" v-model="trabajador.vacaciones"  />
                 <label for="vacaciones">Vacaciones</label>
@@ -124,19 +123,18 @@
 
             </template>
          </Dialog>
-        <Dialog header="Crear Contrato" v-model:visible="displayModalContrato" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
-            <span class="p-float-label">
-                    <InputText id="tieneContrato" type="text" v-model="contrato.tieneContrato"  style="width: 100%" />
-                    <label for="tieneContrato">Tiene contrato</label>
-            </span>
-            <br>
+        <Dialog header="Contrato" v-model:visible="displayModalContrato" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+                    <label for="tieneContrato">Tiene contrato</label><br><br>
+                    <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="1">Si
+                    <input type="radio" v-model ="contrato.tieneContrato" name="tieneContrato" value="0">No
+            <br><br>
 
             <span class="p-float-label">
                     <InputText id="tiempoContrato" type="text" v-model="contrato.tiempoContrato"  style="width: 100%" />
                     <label for="tiempoContrato">Tiempo del contrato</label>
             </span>
             <br>
-            <label for="fechaLimite">Fecha de nacimiento</label>
+            <label for="fechaLimite">Fecha limite</label>
             <br>
             <input type="date"  id="fechaLimite"  v-model="contrato.fechaLimite"  />
             <br><br>
@@ -146,7 +144,6 @@
             </template>
         </Dialog>
 
-        <router-link to="/"> <Button label="Atras" /></router-link>
         <!-- todo cambiar el touter link, al principal cuando se haga -->
     </div>
 </template>
@@ -245,21 +242,48 @@ export default {
                     label : 'Editar',
                     icon : 'pi pi-fw pi-pencil',
                     command : () => {
-                        this.mostrarEditModal();
+                        if(this.selectedEmpleado.id == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
+                            this.mostrarEditModal();
+                        }
                     }
                 },
                  {
                     label : 'Eliminar  Llaves foraneas',
                     icon : 'pi pi-key',
                     command: () => {
+                        if(this.selectedEmpleado.id == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
                         this.eliminarLlavesForaneas();
+                        }
                     }
                 },
                 {
                     label : 'Eliminar',
                     icon : 'pi pi-fw pi-trash',
                     command: () => {
-                        this.eliminar();
+                        if(this.selectedEmpleado.id == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
+                            this.eliminar();
+                        }
                     }
                 },
                 {
@@ -305,6 +329,7 @@ export default {
                 response.forEach(element => {
                     if(this.persona.cedula === element.cedula){
                         this.persona.id = element.id;
+                        this.trabajador.idPersona = element.id;
                         this.persona.direccion = element.direccion;
                         this.persona.estadoCivil = element.estadoCivil;
                         this.persona.sexo = element.sexo;
@@ -366,17 +391,23 @@ export default {
                     this.displayModalContrato = false;
                 }
             });
-            var i = 0;
-             await this.empleadoService.getContratos().then (response => {
+            if(this.empleado.id == null){
+                this.trabajador.id =null;
+                var i = 0;
+                await this.empleadoService.getContratos().then (response => {
                 response.forEach(element => {
                     console.log("ID ELEMENT " + element.id);
                 if( i < element.id){
                     i = element.id;
                     this.contrato.id= element.id;
+                    this.trabajador.idContrato = element.id;
                     console.log(" ID DE CONTRATO  " + this.contrato.id);
                     }
                  });
              });
+            }else{
+                this.contrato.id = this.trabajador.idContrato;
+            }
              console.log(this.contrato);
 
         },
@@ -482,24 +513,31 @@ export default {
                 response.forEach(element => {
                     if(this.selectedEmpleado.idPersona === element.idPersona){
                         console.log("ID persona = " + this.selectedEmpleado.idPersona);
+
                         element.idPersona = null;
-                        console.log("POST- ELEMENT ID = " + element.idPersona)
-                        this.empleadoService.guardarTrabajador(element);
-                    }
-                        
-                });
-            });
-            //CONTRATO
-            await this.empleadoService.getTrabajadores().then(response =>{
-                response.forEach(element => {
-                    if(this.selectedEmpleado.idContrato === element.idContrato){ 
-                        console.log("ID CONTRATO = " + this.selectedEmpleado.idContrato);
                         element.idContrato = null;
-                        console.log("POST- ELEMENT ID = " + element.idContrato)
+                        console.log("POST- ELEMENT ID = " + element.idPersona + element.idContrato);
                         this.empleadoService.guardarTrabajador(element);
                     }
                 });
             });
+            //CONTRATO)
+            // await this.empleadoService.getTrabajadores().then(response =>{
+            //     response.forEach(element => {
+            //         if(this.selectedEmpleado.idContrato === element.idContrato){ 
+            //             console.log("ID CONTRATO = " + this.selectedEmpleado.idContrato);
+            //             element.idContrato = null;
+            //             console.log("POST- ELEMENT ID = " + element.idContrato)
+            //             this.empleadoService.guardarTrabajador(element);
+            //         }
+            //     });
+            // });
+             this.$toast.add({
+                            severity:'info',
+                            summary: 'AVISO',
+                            detail: 'Llaves eliminadas',
+                            life: 3000
+                        });
 
         },
         async guardarPersona(){
@@ -526,29 +564,33 @@ export default {
 
         },
         async guardarTrabajadorView(){
-            await this.empleadoService.getPersonas().then (response => {  
+            if(this.trabajador.idPersona == null){
                 var i = 0;
+                await this.empleadoService.getPersonas().then (response => {
                 response.forEach(element => {
-                    i++;
-                    if( response.length === i){
-                        console.log(element.id);
-                        this.trabajador.idPersona = element.id;
-                        console.log(" ID DE PERSONA " + this.trabajador.idPersona);
+                    console.log("ID ELEMENT " + element.id);
+                if( i < element.id){
+                    i = element.id;
+                    this.trabajador.idPersona= element.id;
+                    console.log(" ID DE PERSONA EN TRABAJADORE  " + this.contrato.id);
                     }
-                });
-            });
+                 });
+             });
+            }
 
             if(this.trabajador.idContrato == null){
-                await this.empleadoService.getContratos().then(response => {
-                var i = 0;
+                var j = 0;
+                await this.empleadoService.getContratos().then (response => {
                 response.forEach(element => {
-                    i++;
-                    if( response.length === i){
-                        this.trabajador.idContrato = element.id;
-                         console.log(" ID DE CONTRATO " + this.trabajador.idContrato);
+                    console.log("ID ELEMENT " + element.id);
+                if( j < element.id){
+                    j = element.id;
+                    this.contrato.id= element.id;
+                    this.trabajador.idContrato = element.id;
+                    console.log(" ID DE CONTRATO  " + this.contrato.id);
                     }
-                });
-            });
+                 });
+             });
             }else{
                 console.log("ID CONTRATO = " + this.trabajador.idContrato);
             }
@@ -577,7 +619,8 @@ export default {
                 }
             });
         });
-            
+        console.log("POST TRABAJADOR");
+            console.log(this.trabajador);
             await this.empleadoService.guardarTrabajador(this.trabajador).then (data => {
                 console.log(data);
                 if(data.status === 200){
@@ -603,7 +646,6 @@ export default {
         async guardarEmpleadoView(){
             await this.guardarPersona();
             await this.guardarTrabajadorView();
-            console.log("ID PERSONA " +  this.selectedEmpleado.id);
             await this.empleadoService.getEmpleados().then( response => {
                 response.forEach(element => {
                     if(this.selectedEmpleado.id === element.id){
@@ -639,34 +681,71 @@ export default {
             
 
             await this.empleadoService.guardarEmpleado(this.empleado);
+            console.log("EMPLEAODO ID" + this.empleado.id);
             if(this.empleado.id == null){
-                this.empleadoService.getEmpleados().then (response => {  
-                    var i = 0;
-                    response.forEach(element => {
-                    i++;
-                    if( response.length === i){
-                        this.contrato.idEmpleado = element.id;
-                        console.log(" ID DE empleado  " + this.contrato.idEmpleado);
-                        this.empleadoService.guardarContrato(this.contrato); //<== UPDATE CONTRATO
-                        this.contrato = {
+                var c = 0;
+                await this.empleadoService.getEmpleados().then (response => {
+                response.forEach(element => {
+                    console.log("ID ELEMENT " + element.id);
+                if( c< element.id){
+                    c = element.id;
+                    this.contrato.idEmpleado = element.id;
+                    console.log(" ID DE CONTRATO EN TRABAJADORE  " + this.contrato.idEmpleado);
+                    }
+                 });
+             });
+            }else{
+                console.log("ID EMPLEADOO" + this.empleado.id);
+                this.contrato.idEmpleado = this.selectedEmpleado.id;
+            }
+            this.empleadoService.guardarContrato(this.contrato);
+            this.empleado = {
+                         id: null,
+                         idTrabajador : null
+            } 
+            this.contrato = {
                             id : null,
                             tieneContrato: null,
                             tiempoContrato: null,
                             fechaLimite: null,
                             idEmpleado: null,
                         }
-                    this.displayModal = false;
-                    }
-                 });
-            });
-            }else{
-                console.log("ID EMPLEADOO" + this.empleado.id);
-                this.empleado = {
-                         id: null,
-                         idTrabajador : null
-                } 
-                this.displayModal =false; 
+            this.$toast.add({
+                            severity:'success',
+                            summary: 'AVISO',
+                            detail: 'Cambios Realizados',
+                            life: 3000
+                        });
+            this.selectedEmpleado = {
+                idPersona:null,
+                nombres : null,
+                apellidos : null,
+                direccion : null,
+                estadoCivil : null, //
+                cedula : null,
+                sexo : null, //
+                ciudad : null, //
+                telefono : null,
+                fechaNacimiento : null, //
+                anioEntrada : null, //
+
+                idContrato: null,//
+                tieneContrato: null,//
+                tiempoContrato: null,//
+                fechaLimite: null,//
+                id: null,
+                correoPersonal : null,  
+                correoEmpresarial: null, 
+                vacaciones: null,
+                usuario: null,
+                password: null,
+                formaPago : null,
+                rol : null,
+                departamento : null,
+                horario : null,
+                idTrabajador : null,
             }
+         this.displayModal =false; 
 
             await this.obtenerTodo();
         },

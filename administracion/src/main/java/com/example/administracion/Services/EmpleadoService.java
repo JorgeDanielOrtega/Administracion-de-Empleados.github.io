@@ -3,6 +3,7 @@ package com.example.administracion.Services;
 import java.security.spec.ECPoint;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import com.example.administracion.Models.*;
 import com.example.administracion.Repositories.TrabajadorRepository;
@@ -85,7 +86,7 @@ public class EmpleadoService {
 				System.out.println("------");
 				System.out.println(empleadoList.get(j));
 				//leo el trabajador del 1 indice junto con el empleao del 1er indice y compare ids
-				if (trabajadorList.get(i).getId() == empleadoList.get(j).getIdTrabajador()) {
+				if (Objects.equals(trabajadorList.get(i).getId(), empleadoList.get(j).getIdTrabajador())) {
 					Empleado empleado = empleadoList.get(j);
 					Trabajador trabajador = trabajadorList.get(i);
 					idEmpleado = empleadoList.get(j).getId();

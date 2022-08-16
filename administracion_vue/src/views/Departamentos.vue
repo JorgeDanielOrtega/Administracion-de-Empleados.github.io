@@ -10,7 +10,7 @@
             <Column field="empleadosMaximos" header="Maximo Empleados"></Column>
             <Column field="vacaciones" header="Vacaciones"></Column>
         </DataTable>
-        <Dialog header="Crear Departamento" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
+        <Dialog header="Departamento" v-model:visible="displayModal" :breakpoints="{'960px': '75vw', '640px': '90vw'}"  :style="{width: '35vw'}"  :modal="true"> 
 
             <span class="p-float-label">
                  <InputText id="nombre" type="text" v-model="departamento.nombre"  style="width: 100%" />
@@ -38,11 +38,10 @@
             </span>
             <br>
             <template #footer>
-                <Button label="Guardar" icon="pi pi-times" @click="guardar" class="p-button-text"/>
-                <Button label="Cancelar" icon="pi pi-check" @click="closeModal" autofocus />
+                <Button label="Guardar" icon="pi pi-check" @click="guardar" class="p-button-text"/>
+                <Button label="Cancelar" icon="pi pi-times" @click="closeModal" autofocus />
             </template>
          </Dialog>
-         <router-link to="/perfil"> <Button label="Perfil" /></router-link>
         <!-- todo cambiar el touter link, al principal cuando se haga -->
     </div>
 </template>
@@ -85,21 +84,48 @@ export default {
                     label : 'Editar',
                     icon : 'pi pi-fw pi-pencil',
                     command: () => {
-                        this.mostrarEditModal();
+                        if(this.selectedDepartamento.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{ 
+                            this.mostrarEditModal();
+                        }
                     }
                 },
                 {
-                    label : 'Eliminar  Llaves foraneas',
+                    label : 'Eliminar  Relaciones',
                     icon : 'pi pi-key',
                     command: () => {
-                        this.eliminarLlavesForaneas();
+                        if(this.selectedDepartamento.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
+                            this.eliminarLlavesForaneas();
+                        }
                     }
                 },
                 {
                     label : 'Eliminar',
                     icon : 'pi pi-fw pi-trash',
                     command:  () => {
-                        this.eliminarDepartamento();
+                        if(this.selectedDepartamento.nombre == null){
+                            this.$toast.add({
+                            severity:'error',
+                            summary: 'AVISO',
+                            detail: 'Seleccione una fila',
+                            life: 3000
+                            });
+                        }else{
+                            this.eliminarDepartamento();
+                        }
                     }
                 },
                 {
@@ -117,6 +143,7 @@ export default {
     departamentoService: null,
     created() { // created at momento to execute
         this.departamentoService = new DepartamentoService();
+        this.nombreEmpresa = "Nombre"
     },
 
     mounted() {
@@ -144,6 +171,12 @@ export default {
                         this.departamentoService.cambiarLlaveForaneaRoles(element);
                 });
             });
+            this.$toast.add({
+                            severity:'info',
+                            summary: 'AVISO',
+                            detail: 'Llaves eliminadas',
+                            life: 3000
+                        });
         },
         obtenerTodo(){
             this.departamentoService.getDepartamentos().then(response => {
@@ -203,12 +236,26 @@ export default {
                         vacaciones : null,
                         idEmpresa: null
                     }
+                    this.$toast.add({
+                            severity:'success',
+                            summary: 'AVISO',
+                            detail: 'Cambios Realizados',
+                            life: 3000
+                        });
                     this.obtenerTodo();
                 }
             });
         },
         closeModal(){
             this.displayModal =false;
+            this.selectedDepartamento = {
+                 id: null,
+                nombre : null,
+                numero : null,
+                maximoEmpleados : null,
+                vacaciones : null,
+                idEmpresa: null
+            }
         },
     }
     }
