@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         generarLink() {
-            return `http://localhost:8080/#/perfil/${this.getId()}`
+            return `http://localhost:8082/#/perfil/${this.getId()}`
         }
     },
 
