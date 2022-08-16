@@ -21,7 +21,9 @@ public class ModelTableDepartamento extends DefaultTableModel {
     private void llenarEmpleadoList() {
         empleadoList.clear();
         departamento.getTrabajadorList().forEach(trabajador -> {
+            if (trabajador instanceof Empleado) {
             empleadoList.add((Empleado) trabajador);
+            }
         });
 
     }
