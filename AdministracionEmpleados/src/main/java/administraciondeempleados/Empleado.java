@@ -11,8 +11,8 @@ public class Empleado extends Trabajador {
     private String id;
     private List<Asistencia> asistenciaList;
 
-    public Empleado(){
-    }
+//    public Empleado(){
+//    }
     
     public Empleado(String nombre, String apellido, String direccion, EstadoCivil estadoCivil,
             String numeroCedula, char sexo, String ciudad, String telefono, Date fechaNacimiento,

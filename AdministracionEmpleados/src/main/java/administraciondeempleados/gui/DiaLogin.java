@@ -129,7 +129,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setText("Gerente.Gerente@superEmpresa.com");
+        txtUsuario.setText("Nombre de usuario");
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUsuarioMouseClicked(evt);

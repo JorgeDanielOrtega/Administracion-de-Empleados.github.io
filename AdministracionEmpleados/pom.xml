@@ -40,6 +40,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>administraciondeempleados.gui.Principal</exec.mainClass>
+        <exec.mainClass>administraciondeempleados.gui.Principal.java</exec.mainClass>
     </properties>
 </project>
