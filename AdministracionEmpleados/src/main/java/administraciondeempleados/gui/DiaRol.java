@@ -214,7 +214,7 @@ public class DiaRol extends javax.swing.JDialog {
 
         panLista.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
 
-        tblTablaRol.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
+        tblTablaRol.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         tblTablaRol.setModel(modelTableDescripcionRoll);
         tblTablaRol.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

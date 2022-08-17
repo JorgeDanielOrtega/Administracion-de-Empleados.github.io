@@ -671,7 +671,7 @@ public class DiaEmpleado extends javax.swing.JDialog {
 
         panLista.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
 
-        tblTablaEmpleado.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        tblTablaEmpleado.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         tblTablaEmpleado.setModel(modelTableDescripcionEmpleadoo);
         jScrollPane1.setViewportView(tblTablaEmpleado);
 
