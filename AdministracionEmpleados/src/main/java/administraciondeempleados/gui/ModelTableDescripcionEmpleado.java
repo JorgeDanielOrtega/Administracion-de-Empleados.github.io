@@ -44,21 +44,11 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         dbConnect = new DBConnect();
         addColumn("Nombre");
         addColumn("Apellido");
-        addColumn("Direccion");
-        addColumn("EstadoCivil");
         addColumn("Cedula");
-        addColumn("Genero");
-        addColumn("Ciudad");
         addColumn("Telefono");
         addColumn("Fecha Nacimiento");
-        addColumn("Correo personal");
-        addColumn("Correo empresarial");
         addColumn("Usuario");
-        addColumn("Contraseña");
-        addColumn("Pago por transferencia");
         addColumn("Rol");
-        addColumn("Contrato");
-        addColumn("Año de entrada");
         addColumn("Departamento");
         addColumn("Horario");
     }
@@ -73,21 +63,11 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
                     addRow(new Object[]{
                     empleado.getNombre(),
                     empleado.getApellido(),
-                    empleado.getDireccion(),
-                    empleado.getEstadoCivil(),
                     empleado.getCedula(),
-                    empleado.getSexo(),
-                    empleado.getCiudad(),
                     empleado.getTelefono(),
                     empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(),
-                    empleado.getCorreoPersonal(),
-                    empleado.getCorreoEmpresarial(),
                     empleado.getUsuario(),
-                    empleado.getPassword(),
-                    empleado.isPagoPorTrasferencia(),
                     empleado.getRol(),
-                    empleado.getContrato(),
-                    empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
                     empleado.getDepartamento(), 
                     empleado.getHorario()
                     });
@@ -107,21 +87,11 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
         addRow(new Object[]{
             empleado.getNombre(),
             empleado.getApellido(),
-            empleado.getDireccion(),
-            empleado.getEstadoCivil(),
             empleado.getCedula(),
-            empleado.getSexo(),
-            empleado.getCiudad(),
             empleado.getTelefono(),
             empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(),
-            empleado.getCorreoPersonal(),
-            empleado.getCorreoEmpresarial(),
             empleado.getUsuario(),
-            empleado.getPassword(),
-            empleado.isPagoPorTrasferencia(),
             empleado.getRol(),
-            empleado.getContrato(),
-            empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(),
             empleado.getDepartamento(),
             empleado.getHorario()
         });
@@ -164,7 +134,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             long idAsistencia = retornarID("asistencias", "id_trabajador", String.valueOf(idTrabajador));
             long idGerente = retornarID("gerentes", "id_trabajador", String.valueOf(idTrabajador));
             long idDecimos = retornarID("decimos", "id_empleado", String.valueOf(idEmpleado));
-            //PERSONA
+            JOptionPane.showMessageDialog( null, "IDE DE DECIMOS ES "+ idDecimos);
+    //PERSONA
             eliminarConexionLlaveForanea("trabajador", "id_persona", idTrabajador );
             eliminarRegistro("persona", idPersona);
             //TRABAJADOR
@@ -179,6 +150,8 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             //CONTRATO
             eliminarConexionLlaveForanea("trabajador", "id_contrato", idTrabajador);
             eliminarRegistro("contratos", idContrato);
+            //DECIMOS
+            eliminarRegistro("decimos", idDecimos);
         }else{
             JOptionPane.showMessageDialog( null, "Selecionar Fila");
         }
@@ -259,22 +232,13 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             setValueAt(empleado.getNombre(), fila, 0);
             setValueAt(empleado.getApellido(), fila, 1);
             setValueAt(empleado.getDireccion(), fila,2 );
-            setValueAt(empleado.getEstadoCivil(), fila,3 );
-            setValueAt(empleado.getCedula(), fila,4 );
-            setValueAt(empleado.getSexo(), fila,5 );
-            setValueAt(empleado.getCiudad(), fila, 6);
-            setValueAt(empleado.getTelefono(), fila, 7);
-            setValueAt(empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(), fila, 8);
-            setValueAt(empleado.getCorreoPersonal(), fila, 9);
-            setValueAt(empleado.getCorreoEmpresarial(), fila, 10);
-            setValueAt(empleado.getUsuario(), fila, 11);
-            setValueAt(empleado.getPassword(), fila,12 );
-            setValueAt(empleado.isPagoPorTrasferencia(), fila,13);
-            setValueAt(empleado.getRol(), fila, 14);
-            setValueAt(empleado.getContrato(), fila, 15);
-            setValueAt(empleado.getEntradaYear().getYear()+1900 + "-" + (empleado.getEntradaYear().getMonth()+1) + "-" + empleado.getEntradaYear().getDate(), fila,16 );
-            setValueAt(empleado.getDepartamento(), fila, 17);
-            setValueAt(empleado.getHorario(), fila, 18);
+            setValueAt(empleado.getCedula(), fila,3 );
+            setValueAt(empleado.getTelefono(), fila, 4);
+            setValueAt(empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(), fila, 5);
+            setValueAt(empleado.getUsuario(), fila, 6);
+            setValueAt(empleado.getRol(), fila, 7);
+            setValueAt(empleado.getDepartamento(), fila, 8);
+            setValueAt(empleado.getHorario(), fila, 9);
             System.out.println("Empleado == " + empleado);
             try{
                 connection = dbConnect.conectar();
@@ -455,7 +419,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
 
     private void crearTrabajadorDB(Trabajador trabajador, long id_persona, long id_horario, long id_rol, long id_departamento){
         int pagoTransferencia = (trabajador.isPagoPorTrasferencia() == true) ? 1 : 0;
-        id_contrato = 1;
+        id_contrato = 2;
         try{
             sql = "INSERT INTO \"trabajador\" (correo_personal, correo_empresarial, usuario, contrasenia, pago_por_transferencia, id_persona, id_horario, id_rol,"
                     + " id_departamento, vacaciones, id_contrato)" + " VALUES('" + trabajador.getCorreoPersonal() + "', '" + trabajador.getCorreoEmpresarial() + "', '" + trabajador.getUsuario() + "', '" +
@@ -544,6 +508,7 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
             while (result.next()){
                 id_contrato = result.getLong("id");
             }
+            JOptionPane.showMessageDialog(null, "CONTRATO CONTRUIDO CON ID " + id_contrato);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se pudo crear Contrato en DB");
             System.out.println("No se puedo crear el contrato en BD " + e.getMessage());

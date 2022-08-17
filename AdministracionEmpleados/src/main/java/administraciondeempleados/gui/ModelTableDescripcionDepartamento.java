@@ -99,7 +99,6 @@ public class ModelTableDescripcionDepartamento extends DefaultTableModel {
             while(result.next()){
                 id = result.getLong("id");
             }
-            JOptionPane.showConfirmDialog(null, "El id de empresa es " + id);
             System.out.println(id);
             return id;
         } catch (Exception e) {

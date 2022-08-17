@@ -68,7 +68,7 @@ public class Contrato {
     
     @Override
     public String toString() {
-        return "" + tieneContrato(this.tieneContrato);
+        return "SI" + tieneContrato(this.tieneContrato);
     }
     
     

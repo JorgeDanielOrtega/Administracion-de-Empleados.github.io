@@ -115,7 +115,6 @@ public class DiaLogin extends javax.swing.JDialog {
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
         txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtContraseña.setText("**********");
-        txtContraseña.setBorder(null);
         txtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtContraseñaMouseClicked(evt);
@@ -130,8 +129,7 @@ public class DiaLogin extends javax.swing.JDialog {
         txtUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setText("Nombre de usuario");
-        txtUsuario.setBorder(null);
+        txtUsuario.setText("Gerente.Gerente@superEmpresa.com");
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUsuarioMouseClicked(evt);
@@ -270,11 +268,12 @@ public class DiaLogin extends javax.swing.JDialog {
                 .addGap(80, 80, 80)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(lbRecuperarContraseña))
-            .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(pnlIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbRecuperarContraseña)
+                .addGap(98, 98, 98))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,9 +293,9 @@ public class DiaLogin extends javax.swing.JDialog {
                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(lbRecuperarContraseña)
-                .addGap(51, 51, 51)
+                .addGap(60, 60, 60)
                 .addComponent(pnlIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
