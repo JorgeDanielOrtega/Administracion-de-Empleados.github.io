@@ -172,7 +172,7 @@ public class Principal extends javax.swing.JFrame {
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = new JPanel();
 
-                    Perfil p = new Perfil((Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0));
+                    Perfil p = new Perfil((Empleado) empresa.getDepartamentoList().get(2).getTrabajadorList().get(2));
                     p.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     p.setLocation(0, 0);
                     background.removeAll();
@@ -229,7 +229,7 @@ public class Principal extends javax.swing.JFrame {
                     btn_asistencia.setBackground(Palette.BUTTON_CLICK);
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_asistencia;
-                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(0).getTrabajadorList().get(0), empresa.getHoraEntrada());
+                    AsignacionAsistencia asistencia = new AsignacionAsistencia(null, true, (Empleado) empresa.getDepartamentoList().get(2).getTrabajadorList().get(2), empresa.getHoraEntrada());
                     asistencia.setVisible(true);
 //                    Calendar horaEntrada = empresa.getHoraEntrada();
 //                    //si hay tiempo ponerle un metodo para que compruebe pasado una hora (8 si ha marcado asistencia o no, si no hay nada guardado en su asistenciaList, asignarFaltaIjustificada automaticamente
@@ -246,7 +246,7 @@ public class Principal extends javax.swing.JFrame {
                     buttonClicked.setBackground(Palette.BUTTON);
                     buttonClicked = btn_departamentoEmpleado;
 
-                    DepartamentoGUi depa = new DepartamentoGUi(empresa.getDepartamentoList().get(0)); //error porque falta agregarle a la crud de empleado que ingrese un departamento
+                    DepartamentoGUi depa = new DepartamentoGUi(empresa.getDepartamentoList().get(2)); //error porque falta agregarle a la crud de empleado que ingrese un departamento
                     depa.setSize(WIDTH_BACKGROUND, HEIGHT_BACKGROUND);
                     depa.setLocation(0, 0);
                     background.removeAll();
