@@ -231,14 +231,13 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
 
             setValueAt(empleado.getNombre(), fila, 0);
             setValueAt(empleado.getApellido(), fila, 1);
-            setValueAt(empleado.getDireccion(), fila,2 );
-            setValueAt(empleado.getCedula(), fila,3 );
-            setValueAt(empleado.getTelefono(), fila, 4);
-            setValueAt(empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(), fila, 5);
-            setValueAt(empleado.getUsuario(), fila, 6);
-            setValueAt(empleado.getRol(), fila, 7);
-            setValueAt(empleado.getDepartamento(), fila, 8);
-            setValueAt(empleado.getHorario(), fila, 9);
+            setValueAt(empleado.getCedula(), fila,2 );
+            setValueAt(empleado.getTelefono(), fila, 3);
+            setValueAt(empleado.getFechaNacimiento().getYear()+1900 + "-" + (empleado.getFechaNacimiento().getMonth()+1) + "-" + empleado.getFechaNacimiento().getDate(), fila, 4);
+            setValueAt(empleado.getUsuario(), fila, 5);
+            setValueAt(empleado.getRol(), fila, 6);
+            setValueAt(empleado.getDepartamento(), fila, 7);
+            setValueAt(empleado.getHorario(), fila, 8);
             System.out.println("Empleado == " + empleado);
             try{
                 connection = dbConnect.conectar();
@@ -262,7 +261,6 @@ public class ModelTableDescripcionEmpleado extends DefaultTableModel{
                 cambiarContratoIDTrabajador();            
             }catch(Exception e){
                 System.out.println("No se pudo  MODIFICAR EMPLEADO " + e.getMessage());
-                JOptionPane.showMessageDialog( null, "NO SE PUDO CREAR EMPLEADO PRICIPAL");
             }finally{
                 dbConnect.desconectar();
             }

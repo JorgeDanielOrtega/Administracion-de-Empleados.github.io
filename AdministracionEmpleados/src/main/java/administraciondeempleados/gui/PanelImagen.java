@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class PanelImagen extends javax.swing.JPanel {
 
-    private Image image;
+    private Image image = null;
     private Icon icon;
     public PanelImagen() {
         initComponents();   

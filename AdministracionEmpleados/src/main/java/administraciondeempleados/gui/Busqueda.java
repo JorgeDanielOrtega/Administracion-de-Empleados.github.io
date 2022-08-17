@@ -53,6 +53,7 @@ public class Busqueda extends javax.swing.JPanel {
 
         tblBusqueda.setAutoCreateRowSorter(true);
         tblBusqueda.setBackground(new java.awt.Color(204, 204, 204));
+        tblBusqueda.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         tblBusqueda.setForeground(new java.awt.Color(51, 51, 51));
         tblBusqueda.setModel(modelTableBusqueda);
         tblBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

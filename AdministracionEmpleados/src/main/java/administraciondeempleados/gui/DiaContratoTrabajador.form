@@ -41,7 +41,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel3" max="32767" attributes="0"/>
+                              <Component id="jLabel3" pref="124" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtTiempoContrato" min="-2" pref="173" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -52,15 +52,16 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtaAnio" min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Component id="txtaAnio" min="-2" pref="54" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="txtMes" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtDia" min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Component id="txtMes" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtDia" min="-2" pref="62" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="btnCancelar" max="32767" attributes="0"/>
                               </Group>
@@ -212,7 +213,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Bahnschrift" size="10" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="             aa                     mm                     dd"/>
+        <Property name="text" type="java.lang.String" value="          aa                      mm                   dd"/>
       </Properties>
     </Component>
   </SubComponents>
