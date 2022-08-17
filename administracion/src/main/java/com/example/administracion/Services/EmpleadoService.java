@@ -4,6 +4,8 @@ import java.security.spec.ECPoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
+import java.util.Objects;
+
 import com.example.administracion.Models.*;
 import com.example.administracion.Repositories.TrabajadorRepository;
 import org.hibernate.annotations.Any;
@@ -72,7 +74,7 @@ public class EmpleadoService{
 		Long idPuesto = null;
 		for(Empleado empleado : empleadoList){
 			for(Trabajador trabajador : trabajadorList){
-				if (empleado.getIdTrabajador() == trabajador.getId()){
+				if(Objects.equals(empleado.getIdTrabajador(),trabajador.getId())){
 					HashMap<String, Object> myMap = new HashMap<>();
 					idEmpleado = empleado.getId();
 					idRol = trabajador.getIdRol();

@@ -7,16 +7,13 @@ import static org.mockito.Mockito.when;
 
 import java.sql.Time;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Optional;
 
 import com.example.administracion.Models.Empleado;
-=======
 import java.util.LinkedList;
 import java.util.Optional;
 
 import org.checkerframework.checker.units.qual.A;
->>>>>>> f908e9a2a46fd677166a7c78da7a9aa913602964
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,13 +32,7 @@ public class EmpresaControllerTest {
     @Mock
     EmpresaService empresaService;
 
-    @Test
-    public void obtenerEmpresas(){
-        ArrayList<Empresa> empresas = new ArrayList<>();
-        when(empresaService.obtenerEmpresas()).thenReturn(empresas);
-        ArrayList<Empresa> empresaResult = empresaController.obtenerEmpresas();
-        verify(empresaService, times(1)).obtenerEmpresas();
-    }
+
     @Test
     public void getEmpresaById() {
         Empresa empresa = new Empresa();

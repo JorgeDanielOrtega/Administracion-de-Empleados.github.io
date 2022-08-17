@@ -150,7 +150,7 @@ public class EmpleadoController {
     public Empleado getEmpleadoByIdTrabajador(@PathVariable("idTrabajador") Long idTrabajador) {
         return empleadoRepository.findAllByIdTrabajador(idTrabajador);
     }
-    @GetMapping
+    @GetMapping("/ids")
     public ArrayList<Long> getIdEmpleados() {
         return (ArrayList<Long>) empleadoService.getIdsTrabajador();
     }

@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-<<<<<<< HEAD
-=======
 import java.sql.Time;
->>>>>>> f908e9a2a46fd677166a7c78da7a9aa913602964
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -50,13 +47,6 @@ public class EmpresaServiceTest {
         assertNotNull(empresaService.getEmpresaById());
     }
 
-    @Test
-    public void obtenerEmpresas(){
-        ArrayList<Empresa> empresaArrayList = new ArrayList<>();
-
-        when(empresaRepository.findAll()).thenReturn(empresaArrayList);
-        assertNotNull(empresaService.obtenerEmpresas());
-    }
 
     @Test
     public void obtenerEmpresaId(){
