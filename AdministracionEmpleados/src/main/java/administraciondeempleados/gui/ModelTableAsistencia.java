@@ -18,7 +18,6 @@ public class ModelTableAsistencia extends DefaultTableModel {
 
     private List<Asistencia> asistenciaList;
     private Empleado empleado;
-
     private DBConnect dBConnect;
     private Connection connection;
     private String sql;
@@ -107,7 +106,6 @@ public class ModelTableAsistencia extends DefaultTableModel {
             return EstadoAsistencia.RETRASO;
         }
     }
-
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }

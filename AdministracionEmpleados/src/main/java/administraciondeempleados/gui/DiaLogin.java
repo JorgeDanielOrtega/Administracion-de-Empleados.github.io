@@ -333,7 +333,7 @@ public class DiaLogin extends javax.swing.JDialog {
     private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
         if(txtUsuario.getText().equals("Nombre de usuario")){
             txtUsuario.setForeground(Color.black);
-            txtUsuario.setText("");
+                txtUsuario.setText("");
         }
 
         if(String.valueOf(txtContraseña.getPassword()).isEmpty()){

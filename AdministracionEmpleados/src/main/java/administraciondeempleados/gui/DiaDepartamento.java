@@ -32,6 +32,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private void initComponents() {
 
         modelTableDescripcionDepartamentoo = new administraciondeempleados.gui.ModelTableDescripcionDepartamento();
+        panelImagen1 = new administraciondeempleados.gui.PanelImagen();
         panDatos = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -127,11 +128,10 @@ public class DiaDepartamento extends javax.swing.JDialog {
                         .addGap(211, 211, 211)))
                 .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addGroup(panDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtNumeroEmpleados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                        .addComponent(txtNumeroMaximoEmpleados, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtVacaciones, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNombre)))
+                    .addComponent(txtNumeroEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addComponent(txtNumeroMaximoEmpleados)
+                    .addComponent(txtVacaciones)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(75, 75, 75))
         );
         panDatosLayout.setVerticalGroup(
@@ -219,7 +219,8 @@ public class DiaDepartamento extends javax.swing.JDialog {
 
         panLista.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 12))); // NOI18N
 
-        modelTableDescripcionDepartamento.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        modelTableDescripcionDepartamento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 1, true));
+        modelTableDescripcionDepartamento.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         modelTableDescripcionDepartamento.setModel(modelTableDescripcionDepartamentoo);
         modelTableDescripcionDepartamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -248,7 +249,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DEPARTAMENTOS");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 3, 3, 5, new java.awt.Color(255, 102, 0)));
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -431,6 +432,7 @@ public class DiaDepartamento extends javax.swing.JDialog {
     private javax.swing.JPanel panDatos;
     private javax.swing.JPanel panLista;
     private javax.swing.JPanel panOperaciones;
+    private administraciondeempleados.gui.PanelImagen panelImagen1;
     private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumeroEmpleados;

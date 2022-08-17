@@ -75,6 +75,7 @@ public class DiaHorarios extends javax.swing.JDialog {
         lblHorarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHorarios.setText("HORARIOS");
 
+        tblHorarios.setFont(new java.awt.Font("Book Antiqua", 0, 12)); // NOI18N
         tblHorarios.setModel(modelTableHorarios);
         jScrollPane1.setViewportView(tblHorarios);
 

@@ -61,7 +61,6 @@ public class Busqueda extends javax.swing.JPanel {
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setForeground(new java.awt.Color(0, 0, 0));
         setPreferredSize(new java.awt.Dimension(1035, 460));
 
         tblBusqueda.setAutoCreateRowSorter(true);
@@ -83,6 +82,11 @@ public class Busqueda extends javax.swing.JPanel {
         cmb_departamento.setForeground(new java.awt.Color(51, 51, 51));
         cmb_departamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Departamento", "Item 2", "Item 3", "Item 4" }));
         cmb_departamento.setBorder(null);
+        cmb_departamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_departamentoActionPerformed(evt);
+            }
+        });
 
         txt_busqueda.setBackground(new java.awt.Color(204, 204, 204));
         txt_busqueda.setForeground(new java.awt.Color(51, 51, 51));
@@ -112,7 +116,6 @@ public class Busqueda extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Realice una busqueda por el nombre del empleado, departamento, rol u horario");
 
         btn_limpiarBusqueda.setText("Limpiar busqueda");
@@ -234,6 +237,10 @@ public class Busqueda extends javax.swing.JPanel {
         cmb_rol.setSelectedItem(null);
         modelTableBusqueda.cargarModelo();
     }//GEN-LAST:event_btn_limpiarBusquedaActionPerformed
+
+    private void cmb_departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_departamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_departamentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
