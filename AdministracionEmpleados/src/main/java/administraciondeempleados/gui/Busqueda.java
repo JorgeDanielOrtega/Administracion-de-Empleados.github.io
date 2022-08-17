@@ -37,7 +37,6 @@ public class Busqueda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         modelTableBusqueda = new administraciondeempleados.gui.ModelTableBusqueda();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBusqueda = new javax.swing.JTable();
@@ -48,17 +47,6 @@ public class Busqueda extends javax.swing.JPanel {
         cmb_rol = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         btn_limpiarBusqueda = new javax.swing.JButton();
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -242,7 +230,6 @@ public class Busqueda extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmb_departamento;
     private javax.swing.JComboBox<String> cmb_horario;
     private javax.swing.JComboBox<String> cmb_rol;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private administraciondeempleados.gui.ModelTableBusqueda modelTableBusqueda;
